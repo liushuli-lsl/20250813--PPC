@@ -1,6 +1,6 @@
 %% BioMed_Central_Bib_Style_v1.01
 
-\begin{thebibliography}{53}
+\begin{thebibliography}{56}
 % BibTex style file: bmc-mathphys.bst (version 2.1), 2014-07-24
 \ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
 \ifx \binits  \undefined \def \binits#1{#1}\fi
@@ -238,6 +238,51 @@ IEEE/ASME Transactions on Mechatronics,
 \endbibitem
 
 %%% 14
+\bibitem[\protect\citeauthoryear{Liu et~al.}{2018-11}]{LiuEtAl_2018_Adaptiveneural}
+\begin{barticle}
+\bauthor{\bsnm{Liu}, \binits{Y.}},
+\bauthor{\bsnm{Liu}, \binits{X.}},
+\bauthor{\bsnm{Jing}, \binits{Y.}}:
+\batitle{Adaptive neural networks finite-time tracking control for non-strict feedback systems via prescribed performance}.
+\bjtitle{Information Sciences}
+\bvolume{468},
+\bfpage{29}--\blpage{46}
+(\byear{2018-11})
+\doiurl{10.1016/j.ins.2018.08.029}
+\end{barticle}
+\endbibitem
+
+%%% 15
+\bibitem[\protect\citeauthoryear{Liu et~al.}{2025}]{LiuEtAl_2025_Fuzzyadaptive}
+\begin{botherref}
+\oauthor{\bsnm{Liu}, \binits{C.}},
+\oauthor{\bsnm{Zhao}, \binits{K.}},
+\oauthor{\bsnm{Li}, \binits{J.}},
+\oauthor{\bsnm{Yang}, \binits{C.}}:
+Fuzzy adaptive predefined time control with global prescribed performance for robotic manipulator under unknown disturbance.
+IEEE Transactions on Systems, Man, and Cybernetics: Systems,
+1--14
+(2025)
+\doiurl{10.1109/TSMC.2025.3540777}
+\end{botherref}
+\endbibitem
+
+%%% 16
+\bibitem[\protect\citeauthoryear{Wang et~al.}{2022}]{WangEtAl_2022_Adaptiveactuator}
+\begin{barticle}
+\bauthor{\bsnm{Wang}, \binits{L.}},
+\bauthor{\bsnm{Qi}, \binits{R.}},
+\bauthor{\bsnm{Jiang}, \binits{B.}}:
+\batitle{Adaptive actuator fault-tolerant control for non-minimum phase air-breathing hypersonic vehicle model}.
+\bjtitle{ISA Transactions}
+\bvolume{126},
+\bfpage{47}--\blpage{64}
+(\byear{2022})
+\doiurl{10.1016/j.isatra.2021.07.032}
+\end{barticle}
+\endbibitem
+
+%%% 17
 \bibitem[\protect\citeauthoryear{Bacciotti and Rosier}{2005}]{BacciottiRosier_2005_Liapunovfunctions}
 \begin{bbook}
 \bauthor{\bsnm{Bacciotti}, \binits{A.}},
@@ -251,7 +296,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{bbook}
 \endbibitem
 
-%%% 15
+%%% 18
 \bibitem[\protect\citeauthoryear{Song and Li}{2024-11}]{SongLi_2024_Generallyapunov}
 \begin{barticle}
 \bauthor{\bsnm{Song}, \binits{Z.}},
@@ -265,7 +310,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{barticle}
 \endbibitem
 
-%%% 16
+%%% 19
 \bibitem[\protect\citeauthoryear{Liu et~al.}{2022-12}]{LiuEtAl_2022_overviewfinite}
 \begin{barticle}
 \bauthor{\bsnm{Liu}, \binits{Y.}},
@@ -282,7 +327,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{barticle}
 \endbibitem
 
-%%% 17
+%%% 20
 \bibitem[\protect\citeauthoryear{Song et~al.}{2023-07}]{SongEtAl_2023_Finitetimeadaptive}
 \begin{barticle}
 \bauthor{\bsnm{Song}, \binits{X.}},
@@ -298,7 +343,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{barticle}
 \endbibitem
 
-%%% 18
+%%% 21
 \bibitem[\protect\citeauthoryear{Polyakov}{2012-08}]{Polyakov_2012_Nonlinearfeedback}
 \begin{barticle}
 \bauthor{\bsnm{Polyakov}, \binits{A.}}:
@@ -311,7 +356,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{barticle}
 \endbibitem
 
-%%% 19
+%%% 22
 \bibitem[\protect\citeauthoryear{Zhang et~al.}{2023-07}]{ZhangEtAl_2023_Globalcomposite}
 \begin{barticle}
 \bauthor{\bsnm{Zhang}, \binits{Y.}},
@@ -326,7 +371,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{barticle}
 \endbibitem
 
-%%% 20
+%%% 23
 \bibitem[\protect\citeauthoryear{Guo et~al.}{2023-05}]{GuoEtAl_2023_Predefinedtimestability}
 \begin{barticle}
 \bauthor{\bsnm{Guo}, \binits{W.}},
@@ -343,7 +388,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{barticle}
 \endbibitem
 
-%%% 21
+%%% 24
 \bibitem[\protect\citeauthoryear{Fan et~al.}{2024-05}]{FanEtAl_2024_predefinedtime}
 \begin{barticle}
 \bauthor{\bsnm{Fan}, \binits{Y.}},
@@ -359,7 +404,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{barticle}
 \endbibitem
 
-%%% 22
+%%% 25
 \bibitem[\protect\citeauthoryear{Wang et~al.}{2022-12}]{WangEtAl_2022_Adaptivefuzzy}
 \begin{barticle}
 \bauthor{\bsnm{Wang}, \binits{Q.}},
@@ -374,7 +419,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{barticle}
 \endbibitem
 
-%%% 23
+%%% 26
 \bibitem[\protect\citeauthoryear{Sun et~al.}{2022-10}]{SunEtAl_2022_NeuralNetworkBased}
 \begin{barticle}
 \bauthor{\bsnm{Sun}, \binits{Y.}},
@@ -394,7 +439,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{barticle}
 \endbibitem
 
-%%% 24
+%%% 27
 \bibitem[\protect\citeauthoryear{Li et~al.}{2024-02}]{LiEtAl_2024_Adaptivepractical}
 \begin{barticle}
 \bauthor{\bsnm{Li}, \binits{L.}},
@@ -411,7 +456,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{barticle}
 \endbibitem
 
-%%% 25
+%%% 28
 \bibitem[\protect\citeauthoryear{Shen et~al.}{2024-08}]{ShenEtAl_2024_Predefinedtimeeventtriggered}
 \begin{barticle}
 \bauthor{\bsnm{Shen}, \binits{H.}},
@@ -428,7 +473,7 @@ IEEE/ASME Transactions on Mechatronics,
 \end{barticle}
 \endbibitem
 
-%%% 26
+%%% 29
 \bibitem[\protect\citeauthoryear{Bechlioulis and Rovithakis}{2008-06}]{BechlioulisRovithakis_2008_Prescribedperformance}
 \begin{bchapter}
 \bauthor{\bsnm{Bechlioulis}, \binits{C.P.}},
@@ -441,7 +486,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{bchapter}
 \endbibitem
 
-%%% 27
+%%% 30
 \bibitem[\protect\citeauthoryear{Bu}{2023}]{Bu_2023_Prescribedperformance}
 \begin{barticle}
 \bauthor{\bsnm{Bu}, \binits{X.}}:
@@ -454,7 +499,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 28
+%%% 31
 \bibitem[\protect\citeauthoryear{Zhang et~al.}{2024-07}]{ZhangEtAl_2024_Prescribedperformance}
 \begin{barticle}
 \bauthor{\bsnm{Zhang}, \binits{J.-X.}},
@@ -469,7 +514,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 29
+%%% 32
 \bibitem[\protect\citeauthoryear{Zhang et~al.}{2024-04}]{ZhangEtAl_2024_Lowcomplexityprescribed}
 \begin{barticle}
 \bauthor{\bsnm{Zhang}, \binits{C.-L.}},
@@ -485,7 +530,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 30
+%%% 33
 \bibitem[\protect\citeauthoryear{Zhang and Chai}{2023-10}]{ZhangChai_2023_Globalprescribed}
 \begin{barticle}
 \bauthor{\bsnm{Zhang}, \binits{J.-X.}},
@@ -496,53 +541,6 @@ pp. \bfpage{1035}--\blpage{1040}
 \bfpage{6257}--\blpage{6267}
 (\byear{2023-10})
 \doiurl{10.1109/TSMC.2023.3281982}
-\end{barticle}
-\endbibitem
-
-%%% 31
-\bibitem[\protect\citeauthoryear{Liu et~al.}{2023-09}]{LiuEtAl_2023_Reducedorderobserverbased}
-\begin{barticle}
-\bauthor{\bsnm{Liu}, \binits{G.}},
-\bauthor{\bsnm{Park}, \binits{J.H.}},
-\bauthor{\bsnm{Xu}, \binits{H.}},
-\bauthor{\bsnm{Hua}, \binits{C.}}:
-\batitle{Reduced-order observer-based output-feedback tracking control for nonlinear time-delay systems with global prescribed performance}.
-\bjtitle{IEEE Transactions on Cybernetics}
-\bvolume{53}(\bissue{9}),
-\bfpage{5560}--\blpage{5571}
-(\byear{2023-09})
-\doiurl{10.1109/TCYB.2022.3158932}
-\end{barticle}
-\endbibitem
-
-%%% 32
-\bibitem[\protect\citeauthoryear{Xie et~al.}{2024-10}]{XieEtAl_2024_Lowcomplexitytracking}
-\begin{barticle}
-\bauthor{\bsnm{Xie}, \binits{H.}},
-\bauthor{\bsnm{Jing}, \binits{Y.}},
-\bauthor{\bsnm{Zhang}, \binits{J.-X.}},
-\bauthor{\bsnm{Dimirovski}, \binits{G.M.}}:
-\batitle{Low-complexity tracking control of unknown strict-feedback systems with quantitative performance guarantees}.
-\bjtitle{IEEE Transactions on Cybernetics}
-\bvolume{54}(\bissue{10}),
-\bfpage{5887}--\blpage{5900}
-(\byear{2024-10})
-\doiurl{10.1109/TCYB.2024.3390440}
-\end{barticle}
-\endbibitem
-
-%%% 33
-\bibitem[\protect\citeauthoryear{Dimanidis et~al.}{2020-12}]{DimanidisEtAl_2020_Outputfeedback}
-\begin{barticle}
-\bauthor{\bsnm{Dimanidis}, \binits{I.S.}},
-\bauthor{\bsnm{Bechlioulis}, \binits{C.P.}},
-\bauthor{\bsnm{Rovithakis}, \binits{G.A.}}:
-\batitle{Output feedback approximation-free prescribed performance tracking control for uncertain mimo nonlinear systems}.
-\bjtitle{IEEE Transactions on Automatic Control}
-\bvolume{65}(\bissue{12}),
-\bfpage{5058}--\blpage{5069}
-(\byear{2020-12})
-\doiurl{10.1109/TAC.2020.2970003}
 \end{barticle}
 \endbibitem
 
@@ -564,21 +562,68 @@ pp. \bfpage{1035}--\blpage{1040}
 \endbibitem
 
 %%% 35
-\bibitem[\protect\citeauthoryear{Liu et~al.}{2018-11}]{LiuEtAl_2018_Adaptiveneural}
+\bibitem[\protect\citeauthoryear{Xie et~al.}{2024-10}]{XieEtAl_2024_Lowcomplexitytracking}
 \begin{barticle}
-\bauthor{\bsnm{Liu}, \binits{Y.}},
-\bauthor{\bsnm{Liu}, \binits{X.}},
-\bauthor{\bsnm{Jing}, \binits{Y.}}:
-\batitle{Adaptive neural networks finite-time tracking control for non-strict feedback systems via prescribed performance}.
-\bjtitle{Information Sciences}
-\bvolume{468},
-\bfpage{29}--\blpage{46}
-(\byear{2018-11})
-\doiurl{10.1016/j.ins.2018.08.029}
+\bauthor{\bsnm{Xie}, \binits{H.}},
+\bauthor{\bsnm{Jing}, \binits{Y.}},
+\bauthor{\bsnm{Zhang}, \binits{J.-X.}},
+\bauthor{\bsnm{Dimirovski}, \binits{G.M.}}:
+\batitle{Low-complexity tracking control of unknown strict-feedback systems with quantitative performance guarantees}.
+\bjtitle{IEEE Transactions on Cybernetics}
+\bvolume{54}(\bissue{10}),
+\bfpage{5887}--\blpage{5900}
+(\byear{2024-10})
+\doiurl{10.1109/TCYB.2024.3390440}
 \end{barticle}
 \endbibitem
 
 %%% 36
+\bibitem[\protect\citeauthoryear{Dimanidis et~al.}{2020-12}]{DimanidisEtAl_2020_Outputfeedback}
+\begin{barticle}
+\bauthor{\bsnm{Dimanidis}, \binits{I.S.}},
+\bauthor{\bsnm{Bechlioulis}, \binits{C.P.}},
+\bauthor{\bsnm{Rovithakis}, \binits{G.A.}}:
+\batitle{Output feedback approximation-free prescribed performance tracking control for uncertain mimo nonlinear systems}.
+\bjtitle{IEEE Transactions on Automatic Control}
+\bvolume{65}(\bissue{12}),
+\bfpage{5058}--\blpage{5069}
+(\byear{2020-12})
+\doiurl{10.1109/TAC.2020.2970003}
+\end{barticle}
+\endbibitem
+
+%%% 37
+\bibitem[\protect\citeauthoryear{Wang et~al.}{2024}]{WangEtAl_2024_Adaptivefaulttoleranta}
+\begin{barticle}
+\bauthor{\bsnm{Wang}, \binits{L.}},
+\bauthor{\bsnm{Qi}, \binits{R.}},
+\bauthor{\bsnm{Jiang}, \binits{B.}}:
+\batitle{Adaptive fault-tolerant optimal control for hypersonic vehicles with state constrains based on adaptive dynamic programming}.
+\bjtitle{Journal of the Franklin Institute}
+\bvolume{361}(\bissue{8}),
+\bfpage{106833}
+(\byear{2024})
+\doiurl{10.1016/j.jfranklin.2024.106833}
+\end{barticle}
+\endbibitem
+
+%%% 38
+\bibitem[\protect\citeauthoryear{Liu et~al.}{2023-09}]{LiuEtAl_2023_Reducedorderobserverbased}
+\begin{barticle}
+\bauthor{\bsnm{Liu}, \binits{G.}},
+\bauthor{\bsnm{Park}, \binits{J.H.}},
+\bauthor{\bsnm{Xu}, \binits{H.}},
+\bauthor{\bsnm{Hua}, \binits{C.}}:
+\batitle{Reduced-order observer-based output-feedback tracking control for nonlinear time-delay systems with global prescribed performance}.
+\bjtitle{IEEE Transactions on Cybernetics}
+\bvolume{53}(\bissue{9}),
+\bfpage{5560}--\blpage{5571}
+(\byear{2023-09})
+\doiurl{10.1109/TCYB.2022.3158932}
+\end{barticle}
+\endbibitem
+
+%%% 39
 \bibitem[\protect\citeauthoryear{Sui et~al.}{2022-07}]{SuiEtAl_2022_Finitetimeadaptive}
 \begin{barticle}
 \bauthor{\bsnm{Sui}, \binits{S.}},
@@ -593,7 +638,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 37
+%%% 40
 \bibitem[\protect\citeauthoryear{Sun et~al.}{2022-09}]{SunEtAl_2022_Fuzzyadaptive}
 \begin{barticle}
 \bauthor{\bsnm{Sun}, \binits{K.}},
@@ -608,7 +653,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 38
+%%% 41
 \bibitem[\protect\citeauthoryear{Song and Zhou}{2018-09}]{SongZhou_2018_NeuroadaptiveControl}
 \begin{barticle}
 \bauthor{\bsnm{Song}, \binits{Y.}},
@@ -622,7 +667,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 39
+%%% 42
 \bibitem[\protect\citeauthoryear{Gao et~al.}{2023-02}]{GaoEtAl_2023_Finitetimefaulttolerant}
 \begin{barticle}
 \bauthor{\bsnm{Gao}, \binits{Z.}},
@@ -637,7 +682,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 40
+%%% 43
 \bibitem[\protect\citeauthoryear{Li et~al.}{2023-10}]{LiEtAl_2023_Distributedfixedtime}
 \begin{barticle}
 \bauthor{\bsnm{Li}, \binits{B.}},
@@ -653,7 +698,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 41
+%%% 44
 \bibitem[\protect\citeauthoryear{Zhu et~al.}{2023-03}]{ZhuEtAl_2023_Fixedtimefuzzy}
 \begin{barticle}
 \bauthor{\bsnm{Zhu}, \binits{C.}},
@@ -669,7 +714,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 42
+%%% 45
 \bibitem[\protect\citeauthoryear{Sun et~al.}{2024}]{SunEtAl_2024_Fixedtimeprescribed}
 \begin{barticle}
 \bauthor{\bsnm{Sun}, \binits{W.}},
@@ -684,7 +729,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 43
+%%% 46
 \bibitem[\protect\citeauthoryear{Yang et~al.}{2023-11}]{YangEtAl_2023_Proximatefixedtime}
 \begin{barticle}
 \bauthor{\bsnm{Yang}, \binits{P.}},
@@ -699,7 +744,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 44
+%%% 47
 \bibitem[\protect\citeauthoryear{Wang et~al.}{2023}]{WangEtAl_2023_Predefinedtimeguaranteed}
 \begin{barticle}
 \bauthor{\bsnm{Wang}, \binits{Z.}},
@@ -714,7 +759,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 45
+%%% 48
 \bibitem[\protect\citeauthoryear{Yao et~al.}{2024-02}]{YaoEtAl_2024_Prescribedtimeprescribed}
 \begin{barticle}
 \bauthor{\bsnm{Yao}, \binits{Y.}},
@@ -731,22 +776,7 @@ pp. \bfpage{1035}--\blpage{1040}
 \end{barticle}
 \endbibitem
 
-%%% 46
-\bibitem[\protect\citeauthoryear{Liu et~al.}{2025}]{LiuEtAl_2025_Fuzzyadaptive}
-\begin{botherref}
-\oauthor{\bsnm{Liu}, \binits{C.}},
-\oauthor{\bsnm{Zhao}, \binits{K.}},
-\oauthor{\bsnm{Li}, \binits{J.}},
-\oauthor{\bsnm{Yang}, \binits{C.}}:
-Fuzzy adaptive predefined time control with global prescribed performance for robotic manipulator under unknown disturbance.
-IEEE Transactions on Systems, Man, and Cybernetics: Systems,
-1--14
-(2025)
-\doiurl{10.1109/TSMC.2025.3540777}
-\end{botherref}
-\endbibitem
-
-%%% 47
+%%% 49
 \bibitem[\protect\citeauthoryear{Bu et~al.}{2023}]{Bu_2023_Hypersonic}
 \begin{barticle}
 \bauthor{\bsnm{Bu}, \binits{X.}},
@@ -761,7 +791,7 @@ IEEE Transactions on Systems, Man, and Cybernetics: Systems,
 \end{barticle}
 \endbibitem
 
-%%% 48
+%%% 50
 \bibitem[\protect\citeauthoryear{Yao et~al.}{2024}]{Yao_2024_Flexible}
 \begin{barticle}
 \bauthor{\bsnm{Yao}, \binits{Y.}},
@@ -778,7 +808,7 @@ IEEE Transactions on Systems, Man, and Cybernetics: Systems,
 \end{barticle}
 \endbibitem
 
-%%% 49
+%%% 51
 \bibitem[\protect\citeauthoryear{Wang et~al.}{2025}]{Wang_2025_Enhanced}
 \begin{barticle}
 \bauthor{\bsnm{Wang}, \binits{Y.}},
@@ -793,7 +823,23 @@ IEEE Transactions on Systems, Man, and Cybernetics: Systems,
 \end{barticle}
 \endbibitem
 
-%%% 50
+%%% 52
+\bibitem[\protect\citeauthoryear{Wang et~al.}{2023}]{Wang_2023_Adaptive}
+\begin{barticle}
+\bauthor{\bsnm{Wang}, \binits{L.}},
+\bauthor{\bsnm{Qi}, \binits{R.}},
+\bauthor{\bsnm{Wen}, \binits{L.}},
+\bauthor{\bsnm{Jiang}, \binits{B.}}:
+\batitle{Adaptive multiple-model-based fault-tolerant control for non-minimum phase hypersonic vehicles with input saturations and error constraints}.
+\bjtitle{IEEE Transactions on Aerospace and Electronic Systems}
+\bvolume{59}(\bissue{1}),
+\bfpage{519}--\blpage{540}
+(\byear{2023})
+\doiurl{10.1109/TAES.2022.3185576}
+\end{barticle}
+\endbibitem
+
+%%% 53
 \bibitem[\protect\citeauthoryear{Eliker and Jouffroy}{2025}]{ElikerJouffroy_2025_robustquadrotor}
 \begin{barticle}
 \bauthor{\bsnm{Eliker}, \binits{K.}},
@@ -807,7 +853,7 @@ IEEE Transactions on Systems, Man, and Cybernetics: Systems,
 \end{barticle}
 \endbibitem
 
-%%% 51
+%%% 54
 \bibitem[\protect\citeauthoryear{Tee et~al.}{2009-04}]{TeeEtAl_2009_Barrierlyapunova}
 \begin{barticle}
 \bauthor{\bsnm{Tee}, \binits{K.P.}},
@@ -822,7 +868,7 @@ IEEE Transactions on Systems, Man, and Cybernetics: Systems,
 \end{barticle}
 \endbibitem
 
-%%% 52
+%%% 55
 \bibitem[\protect\citeauthoryear{Hardy et~al.}{1952}]{HardyLittlewoodPolya_1952_Inequalities}
 \begin{bbook}
 \bauthor{\bsnm{Hardy}, \binits{G.H.}},
@@ -837,7 +883,7 @@ IEEE Transactions on Systems, Man, and Cybernetics: Systems,
 \end{bbook}
 \endbibitem
 
-%%% 53
+%%% 56
 \bibitem[\protect\citeauthoryear{Tee et~al.}{2009-04}]{TeeEtAl_2009_Barrierlyapunov}
 \begin{barticle}
 \bauthor{\bsnm{Tee}, \binits{K.P.}},
