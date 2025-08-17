@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.30)  14 AUG 2025 15:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.30)  17 AUG 2025 21:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -877,7 +877,8 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \c@assumption=\count360
 \c@example=\count361
 \c@remark=\count362
-\c@definition=\count363
+\c@properties=\count363
+\c@definition=\count364
  (g:/software/texlive/2024/texmf-dist/tex/latex/cjk/texinput/UTF8/UTF8.enc
 File: UTF8.enc 2021/10/16 4.8.5
 ) (g:/software/texlive/2024/texmf-dist/tex/latex/cjk/texinput/UTF8/UTF8.chr
@@ -885,88 +886,88 @@ File: UTF8.chr 2021/10/16 4.8.5
 ) (./manuscript.aux)
 \openout1 = `manuscript.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C00/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C05/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C09/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C10/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C20/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C19/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C40/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C42/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C43/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C50/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C52/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C49/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C60/mj/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C61/mj/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C63/mj/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C64/mj/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C65/mj/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C70/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C31/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C32/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C33/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C34/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C35/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C36/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C37/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C80/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C81/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C01/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C11/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C21/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C41/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for C62/song/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C00/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C05/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C09/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C10/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C20/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C19/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C40/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C42/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C43/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C50/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C52/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C49/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C60/mj/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C61/mj/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C63/mj/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C64/mj/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C65/mj/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C70/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C31/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C32/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C33/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C34/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C35/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C36/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C37/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C80/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C81/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C01/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C11/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C21/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C41/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for C62/song/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1004,67 +1005,65 @@ LaTeX Font Info:    ... okay on input line 113.
 
 (g:/software/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count364
+\scratchcounter=\count365
 \scratchdimen=\dimen321
 \scratchbox=\box93
-\nofMPsegments=\count365
-\nofMParguments=\count366
+\nofMPsegments=\count366
+\nofMParguments=\count367
 \everyMPshowfont=\toks56
-\MPscratchCnt=\count367
+\MPscratchCnt=\count368
 \MPscratchDim=\dimen322
-\MPnumerator=\count368
-\makeMPintoPDFobject=\count369
+\MPnumerator=\count369
+\makeMPintoPDFobject=\count370
 \everyMPtoPDFconversion=\toks57
 )
-LaTeX Info: Redefining \S on input line 113.
-LaTeX Font Info:    Redeclaring symbol font `AMSa' on input line 113.
+LaTeX Info: Redefining \S on input line 114.
+LaTeX Font Info:    Redeclaring symbol font `AMSa' on input line 114.
 LaTeX Font Info:    Overwriting symbol font `AMSa' in version `normal'
-(Font)                  U/msa/m/n --> U/msa/m/n on input line 113.
+(Font)                  U/msa/m/n --> U/msa/m/n on input line 114.
 LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
-(Font)                  U/msa/m/n --> U/msa/m/n on input line 113.
-Package hyperref Info: Link coloring ON on input line 113.
+(Font)                  U/msa/m/n --> U/msa/m/n on input line 114.
+Package hyperref Info: Link coloring ON on input line 114.
  (./manuscript.out) (./manuscript.out)
 \@outlinefile=\write4
 \openout4 = `manuscript.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 113.
-Package microtype Info: Applying patch `item' on input line 113.
-Package microtype Info: Applying patch `toc' on input line 113.
-Package microtype Info: Applying patch `eqnum' on input line 113.
-Package microtype Info: Applying patch `footnote' on input line 113.
-Package microtype Info: Applying patch `verbatim' on input line 113.
+LaTeX Info: Redefining \microtypecontext on input line 114.
+Package microtype Info: Applying patch `item' on input line 114.
+Package microtype Info: Applying patch `toc' on input line 114.
+Package microtype Info: Applying patch `eqnum' on input line 114.
+Package microtype Info: Applying patch `footnote' on input line 114.
+Package microtype Info: Applying patch `verbatim' on input line 114.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 113.
+LaTeX Info: Redefining \showhyphens on input line 114.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
  (g:/software/texlive/2024/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 163.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 164.
  (g:/software/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (g:/software/texlive/2024/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 163.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 164.
  (g:/software/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (g:/software/texlive/2024/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 163.
-LaTeX Font Info:    Trying to load font information for C70+rm on input line 163.
+LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 164.
+LaTeX Font Info:    Trying to load font information for C70+rm on input line 164.
  (g:/software/texlive/2024/texmf-dist/tex/latex/ctex/fd/c70rm.fd
 File: c70rm.fd 2022/07/14 v2.5.10 Chinese font definition (CTEX)
 )
-Package CJKpunct Info: use punctuation spaces for family 'rm' with punctstyle (quanjiao) on input line 181.
-
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1074,11 +1073,15 @@ File: ctex-zhmap-windows.tex 2022/07/14 v2.5.10 Windows font map loader for pdfT
 {g:/software/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{UGBK.sfd}{Unicode.sfd}) [1
 
 ]
+Package CJKpunct Info: use punctuation spaces for family 'rm' with punctstyle (quanjiao) on input line 325.
+
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
+Package CJKpunct Info: use punctuation spaces for family 'zhkai' with punctstyle (quanjiao) on input line 418.
+
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1088,7 +1091,21 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [4]
+ [4{g:/software/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+
+Package hyperref Warning: Difference (3) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 565.
+
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 592.
+
+
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
 Package epstopdf Info: Source file: <fig1.eps>
 (epstopdf)                    date: 2025-08-05 16:02:05
 (epstopdf)                    size: 259149 bytes
@@ -1096,34 +1113,51 @@ Package epstopdf Info: Source file: <fig1.eps>
 (epstopdf)                    date: 2025-08-05 16:02:46
 (epstopdf)                    size: 82589 bytes
 (epstopdf)             Command: <repstopdf --outfile=./fig1-eps-converted-to.pdf fig1.eps>
-(epstopdf)             \includegraphics on input line 410.
+(epstopdf)             \includegraphics on input line 610.
 Package epstopdf Info: Output file is already uptodate.
-<./fig1-eps-converted-to.pdf, id=392, 596.2275pt x 171.64125pt>
+<./fig1-eps-converted-to.pdf, id=343, 596.2275pt x 171.64125pt>
 File: ./fig1-eps-converted-to.pdf Graphic file (type pdf)
 <use ./fig1-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig1-eps-converted-to.pdf  used on input line 410.
+Package pdftex.def Info: ./fig1-eps-converted-to.pdf  used on input line 610.
 (pdftex.def)             Requested size: 466.053pt x 134.16771pt.
 
 
+pdfTeX warning: pdflatex.exe (file ./fig2.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<fig2.pdf, id=347, 606.83414pt x 216.06923pt>
+File: fig2.pdf Graphic file (type pdf)
+<use fig2.pdf>
+Package pdftex.def Info: fig2.pdf  used on input line 627.
+(pdftex.def)             Requested size: 466.053pt x 165.9452pt.
+
+
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [5
+ [6
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.490 	\end{equation}
-                      <./fig1-eps-converted-to.pdf>]
+l.639 	\end{align}
+                  
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.639 	\end{align}
+                   <./fig1-eps-converted-to.pdf> <./fig2.pdf>]
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [6]
+ [7] (./manuscript.bbl
+Underfull \hbox (badness 1762) in paragraph at lines 77--86
+[]\OT1/cmr/m/n/10.53937 (+20) Spong, M.W.: An his-tor-i-cal per-spec-tive on the con-trol of robotic manip-u-la-tors. Annual Review
+ []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 2469) in paragraph at lines 77--86
+\OT1/cmr/m/n/10.53937 (+20) of Con-trol, Robotics, and Autonomous Sys-tems \OT1/cmr/bx/n/10.53937 (+20) 5\OT1/cmr/m/n/10.53937 (+20) (1), 1--31 (2022-05-03) [][]$https : / / doi . org / 10 . 1146 /
+ []
 
- [7]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
@@ -1133,466 +1167,35 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [8]
+ [8])
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [9]
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [10]
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [11]
-Package epstopdf Info: Source file: <fig3.eps>
-(epstopdf)                    date: 2025-08-06 10:00:16
-(epstopdf)                    size: 756616 bytes
-(epstopdf)             Output file: <./fig3-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-06 10:06:04
-(epstopdf)                    size: 257777 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig3-eps-converted-to.pdf fig3.eps>
-(epstopdf)             \includegraphics on input line 1421.
-Package epstopdf Info: Output file is already uptodate.
-<./fig3-eps-converted-to.pdf, id=591, 597.23805pt x 171.8681pt>
-File: ./fig3-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig3-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig3-eps-converted-to.pdf  used on input line 1421.
-(pdftex.def)             Requested size: 466.053pt x 134.1195pt.
-Package epstopdf Info: Source file: <fig4.eps>
-(epstopdf)                    date: 2025-08-06 10:00:26
-(epstopdf)                    size: 716594 bytes
-(epstopdf)             Output file: <./fig4-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-06 10:06:17
-(epstopdf)                    size: 240780 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig4-eps-converted-to.pdf fig4.eps>
-(epstopdf)             \includegraphics on input line 1428.
-Package epstopdf Info: Output file is already uptodate.
-<./fig4-eps-converted-to.pdf, id=592, 588.69937pt x 168.86789pt>
-File: ./fig4-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig4-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig4-eps-converted-to.pdf  used on input line 1428.
-(pdftex.def)             Requested size: 466.053pt x 133.68759pt.
-
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [12{g:/software/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1432 
-        <./fig3-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <fig5.eps>
-(epstopdf)                    date: 2025-08-06 10:00:26
-(epstopdf)                    size: 546420 bytes
-(epstopdf)             Output file: <./fig5-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-06 10:05:36
-(epstopdf)                    size: 195565 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig5-eps-converted-to.pdf fig5.eps>
-(epstopdf)             \includegraphics on input line 1448.
-Package epstopdf Info: Output file is already uptodate.
-<./fig5-eps-converted-to.pdf, id=717, 596.2275pt x 170.6375pt>
-File: ./fig5-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig5-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig5-eps-converted-to.pdf  used on input line 1448.
-(pdftex.def)             Requested size: 466.053pt x 133.3831pt.
-Package epstopdf Info: Source file: <fig6.eps>
-(epstopdf)                    date: 2025-08-05 16:12:16
-(epstopdf)                    size: 1756307 bytes
-(epstopdf)             Output file: <./fig6-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-05 16:15:51
-(epstopdf)                    size: 476712 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig6-eps-converted-to.pdf fig6.eps>
-(epstopdf)             \includegraphics on input line 1464.
-Package epstopdf Info: Output file is already uptodate.
-<./fig6-eps-converted-to.pdf, id=720, 590.205pt x 167.62625pt>
-File: ./fig6-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig6-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig6-eps-converted-to.pdf  used on input line 1464.
-(pdftex.def)             Requested size: 466.053pt x 132.367pt.
-Package epstopdf Info: Source file: <fig7.eps>
-(epstopdf)                    date: 2025-08-05 16:12:17
-(epstopdf)                    size: 1844964 bytes
-(epstopdf)             Output file: <./fig7-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-05 16:12:45
-(epstopdf)                    size: 507006 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig7-eps-converted-to.pdf fig7.eps>
-(epstopdf)             \includegraphics on input line 1471.
-Package epstopdf Info: Output file is already uptodate.
-<./fig7-eps-converted-to.pdf, id=721, 590.205pt x 170.6375pt>
-File: ./fig7-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig7-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig7-eps-converted-to.pdf  used on input line 1471.
-(pdftex.def)             Requested size: 466.053pt x 134.74484pt.
-
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [13
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1481 
-       
-pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1481 
-       
-pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1481 
-        <./fig4-eps-converted-to.pdf> <./fig5-eps-converted-to.pdf> <./fig6-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <fig8.eps>
-(epstopdf)                    date: 2025-08-05 16:12:17
-(epstopdf)                    size: 1102142 bytes
-(epstopdf)             Output file: <./fig8-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-05 16:12:46
-(epstopdf)                    size: 375625 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig8-eps-converted-to.pdf fig8.eps>
-(epstopdf)             \includegraphics on input line 1491.
-Package epstopdf Info: Output file is already uptodate.
-<./fig8-eps-converted-to.pdf, id=858, 596.2275pt x 166.6225pt>
-File: ./fig8-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig8-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig8-eps-converted-to.pdf  used on input line 1491.
-(pdftex.def)             Requested size: 466.053pt x 130.24469pt.
-Package epstopdf Info: Source file: <fig9.eps>
-(epstopdf)                    date: 2025-08-05 16:25:00
-(epstopdf)                    size: 1609217 bytes
-(epstopdf)             Output file: <./fig9-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-05 16:25:30
-(epstopdf)                    size: 431971 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig9-eps-converted-to.pdf fig9.eps>
-(epstopdf)             \includegraphics on input line 1519.
-Package epstopdf Info: Output file is already uptodate.
-<./fig9-eps-converted-to.pdf, id=868, 590.205pt x 170.6375pt>
-File: ./fig9-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig9-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig9-eps-converted-to.pdf  used on input line 1519.
-(pdftex.def)             Requested size: 466.053pt x 134.74484pt.
-
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [14
-pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1523 
-       
-pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1523 
-        <./fig7-eps-converted-to.pdf> <./fig8-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <fig10.eps>
-(epstopdf)                    date: 2025-08-05 16:25:01
-(epstopdf)                    size: 1646336 bytes
-(epstopdf)             Output file: <./fig10-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-05 16:25:32
-(epstopdf)                    size: 454982 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig10-eps-converted-to.pdf fig10.eps>
-(epstopdf)             \includegraphics on input line 1526.
-Package epstopdf Info: Output file is already uptodate.
-<./fig10-eps-converted-to.pdf, id=899, 590.205pt x 170.6375pt>
-File: ./fig10-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig10-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig10-eps-converted-to.pdf  used on input line 1526.
-(pdftex.def)             Requested size: 466.053pt x 134.74484pt.
-Package epstopdf Info: Source file: <fig11.eps>
-(epstopdf)                    date: 2025-08-05 16:25:01
-(epstopdf)                    size: 908969 bytes
-(epstopdf)             Output file: <./fig11-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-05 16:25:33
-(epstopdf)                    size: 299039 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig11-eps-converted-to.pdf fig11.eps>
-(epstopdf)             \includegraphics on input line 1533.
-Package epstopdf Info: Output file is already uptodate.
-<./fig11-eps-converted-to.pdf, id=900, 596.2275pt x 166.6225pt>
-File: ./fig11-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig11-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig11-eps-converted-to.pdf  used on input line 1533.
-(pdftex.def)             Requested size: 466.053pt x 130.24469pt.
-Package epstopdf Info: Source file: <fig12.eps>
-(epstopdf)                    date: 2025-08-06 11:56:27
-(epstopdf)                    size: 1623034 bytes
-(epstopdf)             Output file: <./fig12-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-06 11:57:04
-(epstopdf)                    size: 406205 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig12-eps-converted-to.pdf fig12.eps>
-(epstopdf)             \includegraphics on input line 1540.
-Package epstopdf Info: Output file is already uptodate.
-<./fig12-eps-converted-to.pdf, id=901, 590.205pt x 170.6375pt>
-File: ./fig12-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig12-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig12-eps-converted-to.pdf  used on input line 1540.
-(pdftex.def)             Requested size: 466.053pt x 134.74484pt.
-Package epstopdf Info: Source file: <fig13.eps>
-(epstopdf)                    date: 2025-08-06 11:56:27
-(epstopdf)                    size: 1647753 bytes
-(epstopdf)             Output file: <./fig13-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-06 11:57:05
-(epstopdf)                    size: 408204 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig13-eps-converted-to.pdf fig13.eps>
-(epstopdf)             \includegraphics on input line 1547.
-Package epstopdf Info: Output file is already uptodate.
-<./fig13-eps-converted-to.pdf, id=902, 593.21625pt x 170.6375pt>
-File: ./fig13-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig13-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig13-eps-converted-to.pdf  used on input line 1547.
-(pdftex.def)             Requested size: 466.053pt x 134.06528pt.
-
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [15
-pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1551 
-       
-pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1551 
-       
-pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1551 
-       
-pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1551 
-        <./fig9-eps-converted-to.pdf> <./fig10-eps-converted-to.pdf> <./fig11-eps-converted-to.pdf> <./fig12-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <fig14.eps>
-(epstopdf)                    date: 2025-08-06 11:56:28
-(epstopdf)                    size: 915914 bytes
-(epstopdf)             Output file: <./fig14-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-06 11:57:07
-(epstopdf)                    size: 302235 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig14-eps-converted-to.pdf fig14.eps>
-(epstopdf)             \includegraphics on input line 1554.
-Package epstopdf Info: Output file is already uptodate.
-<./fig14-eps-converted-to.pdf, id=948, 596.2275pt x 166.6225pt>
-File: ./fig14-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig14-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig14-eps-converted-to.pdf  used on input line 1554.
-(pdftex.def)             Requested size: 466.053pt x 130.24469pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./fig15.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<fig15.pdf, id=952, 260.55544pt x 186.6975pt>
-File: fig15.pdf Graphic file (type pdf)
-<use fig15.pdf>
-Package pdftex.def Info: fig15.pdf  used on input line 1599.
-(pdftex.def)             Requested size: 207.1329pt x 148.42094pt.
-
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [16
-pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1603 
-       
-pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1603 
-        <./fig13-eps-converted-to.pdf> <./fig14-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <fig16.eps>
-(epstopdf)                    date: 2025-08-05 16:05:14
-(epstopdf)                    size: 8426468 bytes
-(epstopdf)             Output file: <./fig16-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-05 16:05:41
-(epstopdf)                    size: 1788762 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig16-eps-converted-to.pdf fig16.eps>
-(epstopdf)             \includegraphics on input line 1623.
-Package epstopdf Info: Output file is already uptodate.
-<./fig16-eps-converted-to.pdf, id=982, 591.20876pt x 380.42125pt>
-File: ./fig16-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig16-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig16-eps-converted-to.pdf  used on input line 1623.
-(pdftex.def)             Requested size: 466.053pt x 299.89676pt.
-Package epstopdf Info: Source file: <fig17.eps>
-(epstopdf)                    date: 2025-08-05 16:05:15
-(epstopdf)                    size: 5383190 bytes
-(epstopdf)             Output file: <./fig17-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-05 16:05:43
-(epstopdf)                    size: 1795761 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig17-eps-converted-to.pdf fig17.eps>
-(epstopdf)             \includegraphics on input line 1630.
-Package epstopdf Info: Output file is already uptodate.
-<./fig17-eps-converted-to.pdf, id=983, 595.22375pt x 380.42125pt>
-File: ./fig17-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig17-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig17-eps-converted-to.pdf  used on input line 1630.
-(pdftex.def)             Requested size: 466.053pt x 297.8651pt.
-
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [17
-pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1634 
-       
-pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1634 
-        <./fig15.pdf> <./fig16-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <fig18.eps>
-(epstopdf)                    date: 2025-08-05 16:05:16
-(epstopdf)                    size: 8602941 bytes
-(epstopdf)             Output file: <./fig18-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-05 16:05:44
-(epstopdf)                    size: 1877609 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig18-eps-converted-to.pdf fig18.eps>
-(epstopdf)             \includegraphics on input line 1637.
-Package epstopdf Info: Output file is already uptodate.
-<./fig18-eps-converted-to.pdf, id=1006, 591.20876pt x 380.42125pt>
-File: ./fig18-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig18-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig18-eps-converted-to.pdf  used on input line 1637.
-(pdftex.def)             Requested size: 466.053pt x 299.89676pt.
-Package epstopdf Info: Source file: <fig19.eps>
-(epstopdf)                    date: 2025-08-05 16:05:17
-(epstopdf)                    size: 5401869 bytes
-(epstopdf)             Output file: <./fig19-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-05 16:05:46
-(epstopdf)                    size: 1727496 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig19-eps-converted-to.pdf fig19.eps>
-(epstopdf)             \includegraphics on input line 1643.
-Package epstopdf Info: Output file is already uptodate.
-<./fig19-eps-converted-to.pdf, id=1007, 598.235pt x 380.42125pt>
-File: ./fig19-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig19-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig19-eps-converted-to.pdf  used on input line 1643.
-(pdftex.def)             Requested size: 466.053pt x 296.36748pt.
-
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [18
-pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1647 
-       
-pdfTeX warning (ext4): destination with the same identifier (name{figure.17}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1647 
-        <./fig17-eps-converted-to.pdf> <./fig18-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <fig20.eps>
-(epstopdf)                    date: 2025-08-05 16:05:17
-(epstopdf)                    size: 4291318 bytes
-(epstopdf)             Output file: <./fig20-eps-converted-to.pdf>
-(epstopdf)                    date: 2025-08-05 16:05:48
-(epstopdf)                    size: 1367625 bytes
-(epstopdf)             Command: <repstopdf --outfile=./fig20-eps-converted-to.pdf fig20.eps>
-(epstopdf)             \includegraphics on input line 1650.
-Package epstopdf Info: Output file is already uptodate.
-<./fig20-eps-converted-to.pdf, id=1034, 596.2275pt x 378.41376pt>
-File: ./fig20-eps-converted-to.pdf Graphic file (type pdf)
-<use ./fig20-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig20-eps-converted-to.pdf  used on input line 1650.
-(pdftex.def)             Requested size: 466.053pt x 295.79669pt.
-
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [19
-pdfTeX warning (ext4): destination with the same identifier (name{figure.18}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1658 
-       
-pdfTeX warning (ext4): destination with the same identifier (name{figure.19}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1658 
-        <./fig19-eps-converted-to.pdf> <./fig20-eps-converted-to.pdf>] (./manuscript.bbl
-Underfull \hbox (badness 1297) in paragraph at lines 77--86
-[]\OT1/cmr/m/n/10.53937 (+20) Spong, M.W.: An his-tor-i-cal per-spec-tive on the con-trol of robotic manip-u-la-tors. Annual Review
- []
-
-
-Underfull \hbox (badness 1715) in paragraph at lines 77--86
-\OT1/cmr/m/n/10.53937 (+20) of Con-trol, Robotics, and Autonomous Sys-tems \OT1/cmr/bx/n/10.53937 (+20) 5\OT1/cmr/m/n/10.53937 (+20) (1), 1--31 (2022-05-03) [][]$https : / / doi . org / 10 . 1146 /
- []
-
-
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [20]
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [21]
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [22]
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [23])
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [24]
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [25] (./manuscript.aux)
+ [9] (./manuscript.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2022/07/14>
  ***********
 Package rerunfilecheck Info: File `manuscript.out' has not changed.
-(rerunfilecheck)             Checksum: B96517B85D11BA8D325109E620C0A263;1781.
+(rerunfilecheck)             Checksum: 4BC46F31999FBBB0BE91215EAE1132EA;1702.
  ) 
 Here is how much of TeX's memory you used:
- 32309 strings out of 473578
- 602818 string characters out of 5727715
- 1019037 words of memory out of 5000000
- 53929 multiletter control sequences out of 15000+600000
- 631801 words of font info for 406 fonts, out of 8000000 for 9000
+ 32041 strings out of 473578
+ 597412 string characters out of 5727715
+ 990758 words of memory out of 5000000
+ 53767 multiletter control sequences out of 15000+600000
+ 640576 words of font info for 413 fonts, out of 8000000 for 9000
  1151 hyphenation exceptions out of 8191
- 90i,14n,93p,2832b,751s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on manuscript.pdf (25 pages, 13933713 bytes).
+ 90i,12n,93p,2631b,750s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc
+
+pdfTeX warning: pdflatex.exe (file c:/Windows/Fonts/simsun.ttc): subfont unisong22: wrong mapping: character 14 --> 0x220E --> .notdef
+><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb>
+Output written on manuscript.pdf (9 pages, 1103429 bytes).
 PDF statistics:
- 1615 PDF objects out of 1728 (max. 8388607)
- 1050 compressed objects within 11 object streams
- 219 named destinations out of 1000 (max. 500000)
- 63996 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 1041 PDF objects out of 1200 (max. 8388607)
+ 721 compressed objects within 8 object streams
+ 88 named destinations out of 1000 (max. 500000)
+ 59783 words of extra memory for PDF output out of 61914 (max. 10000000)
 

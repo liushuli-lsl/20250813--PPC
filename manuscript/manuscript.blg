@@ -20,53 +20,50 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: sn-bibliography.bib
-Warning--I'm ignoring BacciottiRosier_2005_Liapunovfunctions's extra "doi" field
---line 923 of file sn-bibliography.bib
 sn-mathphys-num.bst [2024/07/19 v1.1  bibliography style]
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 56 entries,
+You've used 7 entries,
             7485 wiz_defined-function locations,
-            1622 strings with 25107 characters,
-and the built_in function-call counts, 321300 in all, are:
-= -- 48119
-> -- 2444
-< -- 1321
-+ -- 21016
-- -- 645
-* -- 14472
-:= -- 60103
-add.period$ -- 61
-call.type$ -- 56
-change.case$ -- 352
-chr.to.int$ -- 3650
-cite$ -- 56
-duplicate$ -- 3150
-empty$ -- 12230
-format.name$ -- 1443
-if$ -- 79484
+            1239 strings with 11271 characters,
+and the built_in function-call counts, 51986 in all, are:
+= -- 8721
+> -- 238
+< -- 115
++ -- 4542
+- -- 77
+* -- 1826
+:= -- 9448
+add.period$ -- 9
+call.type$ -- 7
+change.case$ -- 51
+chr.to.int$ -- 292
+cite$ -- 7
+duplicate$ -- 314
+empty$ -- 1403
+format.name$ -- 151
+if$ -- 13059
 int.to.chr$ -- 1
-int.to.str$ -- 110
+int.to.str$ -- 19
 missing$ -- 0
-newline$ -- 901
-num.names$ -- 280
-pop$ -- 1287
+newline$ -- 147
+num.names$ -- 35
+pop$ -- 141
 preamble$ -- 1
-purify$ -- 277
+purify$ -- 39
 quote$ -- 0
-skip$ -- 29244
+skip$ -- 5255
 stack$ -- 0
-substring$ -- 32248
-swap$ -- 1982
-text.length$ -- 788
+substring$ -- 5092
+swap$ -- 179
+text.length$ -- 106
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 2477
+type$ -- 310
 warning$ -- 0
-while$ -- 1866
+while$ -- 213
 width$ -- 0
-write$ -- 1235
-(There was 1 warning)
+write$ -- 187
