@@ -192,7 +192,7 @@ For robotic manipulators trajectory tracking with unknown dynamics, bounded dist
 \end{equation}
 where $ q, \dot{q}, \ddot{q} \in \mathbb{R}^n $ are the joint state vectors, $M(q) \in \mathbb{R}^{n\times n}$ is the inertia matrix, $C(q, \dot{q}) \in \mathbb{R}^{n\times n} $ represents the centrifugal effects, $G(q) \in \mathbb{R}^n $ represents the gravitational force, $\tau \in \mathbb{R}^n$ is the control joint input, $\Delta(q, \dot{q}, t) \in \mathbb{R}^n$ is the uncertainty and unmodeled dynamics, $d(t) \in \mathbb{R}^n$ is an external disturbance, $n$ is the number of DOF of the manipulators system.
 
-For controller design, define the state $x = [x_1^{\top},x_2^{\top}]^{\top} = [q^{\top},\dot{q}^{\top}]^{\top} \in \mathbb{R}^{2n}$. The system \cref{eq:1} can be written in the standard state space form:
+For controller design, define the state $x = [x_1,x_2] = [q,\dot{q}] \in \mathbb{R}^{2n}$. The system \cref{eq:1} can be written in the standard state space form:
 \begin{equation}
 	\left\{
 	\begin{aligned}
@@ -677,26 +677,231 @@ In the first step, a BLF is used as an energy function for the error dynamics. W
 	V_1= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{i,1}^2 z_{i,1}^2}{\rho_{i,1}^2-z_{i,1}^2}. 
 \end{equation}
 
-
-
-$$
-\boxed{\;
+求$V_1$ 的时间导数为
+$$\dot z_{i,1}= e_{2} - \dot{q}_{d}+\alpha^{f}+\zeta$$
+\begin{equation}\label{eq:25}
+	\begin{aligned}
 \dot V_1
-=\sum_{i=1}^{n}\left[
+&=\sum_{i=1}^{n}\left[
 \frac{\rho_{i,1}^4\,z_{i,1}}{\big(\rho_{i,1}^{2}-z_{i,1}^{2}\big)^{2}}\;\dot z_{i,1}
 \;-\;
 \frac{\rho_{i,1}\,z_{i,1}^{4}}{\big(\rho_{i,1}^{2}-z_{i,1}^{2}\big)^{2}}\;\dot \rho_{i,1}
-\right].\;}
-$$
+\right]\\
+&=\sum_{i=1}^{n}\left[
+\frac{\rho_{i,1}^4\,z_{i,1}}{\big(\rho_{i,1}^{2}-z_{i,1}^{2}\big)^{2}}(e_{2} -\dot{q}_{d}+\alpha^{f}+\zeta)
+\;-\;
+\frac{\rho_{i,1}\,z_{i,1}^{4}}{\big(\rho_{i,1}^{2}-z_{i,1}^{2}\big)^{2}}\;\dot \rho_{i,1}
+\right]
+\end{aligned}
+\end{equation}
+
+
+
 
 也可等价改写成提取公因子的形式：
 
-$$
+\begin{equation}\label{eq:25}
+	\begin{aligned}
 \dot V_1
 =\sum_{i=1}^{n}
 \frac{\rho_{i,1}\,z_{i,1}}{\big(\rho_{i,1}^{2}-z_{i,1}^{2}\big)^{2}}
-\Big(\rho_{i,1}^{3}\dot z_{i,1}-z_{i,1}^{3}\dot\rho_{i,1}\Big).
+\Big(\rho_{i,1}^{3}(e_{2} -\dot{q}_{d}+\alpha^{f}+\zeta)-z_{i,1}^{3}\dot\rho_{i,1}\Big)\\
+\end{aligned}
+\end{equation}
+
+
+
+
+记
+
 $$
+S_i \;\triangleq\;2V_{1,i}=\frac{\rho_{i,1}^2 z_{i,1}^2}{\rho_{i,1}^2-z_{i,1}^2},\qquad
+G_i=\frac{\rho_{i,1}^4 z_{i,1}}{(\rho_{i,1}^2-z_{i,1}^2)^2},\quad
+H_i=\frac{\rho_{i,1} z_{i,1}^4}{(\rho_{i,1}^2-z_{i,1}^2)^2}.
+$$
+
+$\dot z_{i,1}= e_{2,i}-\dot q_{d,i}+\alpha^{f}_i+\zeta_i$ 代入 BLF 导数后，经由
+$\alpha^{f}_i=\alpha_i-\tilde\alpha_i$ 得到
+
+$$
+\dot V_1=\sum_i\!\Big[G_i e_{2,i}+G_i(\alpha_i+\zeta_i-\dot q_{d,i})-G_i\tilde\alpha_i-H_i\dot\rho_{i,1}\Big]
+$$
+
+选用标准 PTS 速度函数：
+
+$$
+\Psi_\eta(S)=\frac{\pi}{2\eta T_p}\Big(S^{\,1-\eta/2}+S^{\,1+\eta/2}\Big).
+$$
+
+将常数增益 $k_{1i}$ **改为状态依赖的 PTS 增益**：
+
+$$
+\boxed{
+k_{1i}(z_{i,1},\rho_{i,1})
+=\rho_{i,1}^2\;\frac{\Psi_\eta(S_i)}{S_i}
+=\frac{\pi\,\rho_{i,1}^2}{2\eta T_p}\Big((2V_{1,i})^{-\eta/2}+(2V_{1,i})^{\eta/2}\Big).
+}
+$$
+
+把它带回虚拟控制律：
+
+$$
+\boxed{
+\alpha_i \;=\; \dot q_{d,i}-\zeta_i
+-\;k_{1i}(z_{i,1},\rho_{i,1})\,
+\frac{z_{i,1}(\rho_{i,1}^2-z_{i,1}^2)}{\rho_{i,1}^4}
++\;\frac{z_{i,1}^3}{\rho_{i,1}^3}\,\dot\rho_{i,1}.
+}
+$$
+
+则一步 Lyapunov 导数化简为
+
+$$
+\boxed{
+\dot V_1
+= \sum_{i=1}^n \Big[
+G_i e_{2,i}\;-\;\Psi_\eta(2V_{1,i})\;-\;G_i\tilde\alpha_i
+\Big].
+}
+$$
+
+
+In the second step, a BLF is used as an energy function for the error dynamics. We choose:
+\begin{equation}\label{eq:25}
+	V_2= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{i,2}^2 z_{i,2}^2}{\rho_{i,2}^2-z_{i,2}^2}. 
+\end{equation}
+
+
+
+
+\subsubsection{BLF-based actual controller with DOB \& FLS (Step~2)}
+
+\paragraph{Notation aligned with Step~1.}
+For each channel $i=1,\dots,n$, keep
+\[
+z_{1,i}=e_{1,i}=x_{1,i}-q_{d,i},\qquad
+z_{2,i}=e_{2,i}=x_{2,i}-\alpha_i^{f}-\zeta_i .
+\]
+The Step~1 BLF weights are
+\[
+G_{1,i}\;=\;\frac{\rho_{i,1}^4 z_{1,i}}{\bigl(\rho_{i,1}^{2}-z_{1,i}^{2}\bigr)^{2}},\quad
+H_{1,i}\;=\;\frac{\rho_{i,1} z_{1,i}^{4}}{\bigl(\rho_{i,1}^{2}-z_{1,i}^{2}\bigr)^{2}},
+\]
+and the Step~2 BLF is
+\[
+V_2=\frac12\sum_{i=1}^{n}\frac{\rho_{i,2}^2 z_{2,i}^2}{\rho_{i,2}^2-z_{2,i}^2},
+\]
+with the corresponding weights
+\[
+P_i \;=\; \frac{\rho_{i,2}^4 z_{2,i}}{\bigl(\rho_{i,2}^{2}-z_{2,i}^{2}\bigr)^{2}},\qquad
+H_{2,i}\;=\;\frac{\rho_{i,2} z_{2,i}^{4}}{\bigl(\rho_{i,2}^{2}-z_{2,i}^{2}\bigr)^{2}},\qquad
+\Phi_{2,i}\;=\;\frac{z_{2,i}\bigl(\rho_{i,2}^{2}-z_{2,i}^{2}\bigr)}{\rho_{i,2}^{4}} .
+\]
+The G-PPF ${\rho}_{i,1}(t),{\rho}_{i,2}(t)$ and their derivatives $\dot\rho_{i,1}$, $\dot\rho_{i,2}$ follow \eqref{eq:gppf-def}–\eqref{eq:gppf-drho-post}.
+
+\paragraph{Robot dynamics in acceleration form.}
+From \eqref{eq:1}, the acceleration dynamics can be written as
+\[
+\dot x_2 = f_{\rm nom}(x)+\phi(x)+g(q)\,u_{\rm act}+d'(t),
+\]
+where $f_{\rm nom}(x)=-M^{-1}(q)\{C(q,\dot q)\,x_2+G(q)\}$,
+$g(q)=M^{-1}(q)$, $\phi(x)$ collects structured uncertainties,
+and $d'(t)$ collects external disturbances.
+The applied input is $u_{\rm act}=M^{-1}(q)\bigl(\tau_{\rm act}-C(q,\dot q)x_2-G(q)\bigr)$ with $\tau_{\rm act}=\mathrm{sat}(\tau_{\rm cmd})$.
+
+\paragraph{Time derivative of $V_2$.}
+Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain
+\[
+\dot V_2=\sum_{i=1}^n \Big[\,P_i\,\dot z_{2,i}-H_{2,i}\,\dot\rho_{i,2}\,\Big].
+\]
+
+\paragraph{Predefined-time shaping for Step~2.}
+Define $S_{2,i}\triangleq 2V_{2,i}=\frac{\rho_{i,2}^2 z_{2,i}^2}{\rho_{i,2}^2-z_{2,i}^2}$ and
+\[
+\Psi_{\eta_2}(S)=\frac{\pi}{2\eta_2 T_p}\bigl(S^{\,1-\eta_2/2}+S^{\,1+\eta_2/2}\bigr),\quad 0<\eta_2<1.
+\]
+Choose the state-dependent gain
+\begin{equation}\label{eq:k2-pts}
+k_{2,i}(z_{2,i},\rho_{i,2})=\rho_{i,2}^{2}\,\frac{\Psi_{\eta_2}(S_{2,i})}{S_{2,i}}
+=\frac{\pi\,\rho_{i,2}^2}{2\eta_2 T_p}\Big((2V_{2,i})^{-\eta_2/2}+(2V_{2,i})^{\eta_2/2}\Big).
+\end{equation}
+
+\paragraph{Fuzzy logic system (FLS) identifier.}
+Let $\chi\in\mathbb{R}^m$ be the regressor and $\xi(\chi)\in\mathbb{R}^{N}$ the normalized basis
+(see Sec.~\ref{sec:FLS}).
+Approximate the structured uncertainty by
+\[
+\hat\phi_i(\chi)=\theta_i^\top \xi(\chi),
+\]
+with $\theta_i\in\mathbb{R}^{N}$ adapted online by
+\begin{equation}\label{eq:theta-law}
+\dot\theta_i = \kappa_i\,P_i\,z_{2,i}\,\xi(\chi) \;-\; \sigma_i\,\theta_i,\qquad
+\kappa_i>0,\ \sigma_i\ge 0 .
+\end{equation}
+
+\paragraph{Disturbance observer (DOB).}
+Using a first-order filter for $\dot x_2$,
+\[
+\dot\eta=-\omega_d\,\eta+\omega_d\,x_2,\qquad \hat{\dot x}_2=\omega_d(x_2-\eta),
+\]
+the DOB estimating the residual disturbance is
+\begin{equation}\label{eq:dob}
+\dot{\hat d}= -\Lambda_o\,\hat d
++\Lambda_o\Big(\hat{\dot x}_2 - f_{\rm nom}(x) - g(q)\,u_{\rm act} - \hat\phi(\chi)\Big),
+\quad \Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0,
+\end{equation}
+where $u_{\rm act}$ uses the saturated torque $\tau_{\rm act}$ (not the command).
+
+\paragraph{Actual controller (Step~2).}
+Let $G_{1,i}$ be the Step~1 weight above and define $G_1=\mathrm{col}\{G_{1,i}\}$,
+$P=\mathrm{col}\{P_i\}$,
+$\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$.
+The torque command is designed as
+\begin{equation}\label{eq:tau-cmd}
+\boxed{
+\begin{aligned}
+\tau_{\rm cmd} &= C(q,\dot q)\,x_2 + G(q) \\
+&\quad + M(q)\Big[
+\dot\alpha^{f}+\dot\zeta
+\;-\;\mathrm{diag}(G_1./P)\,z_{2}
+\;-\;k_{2}(z_{2},\rho_{2})\odot \Phi_{2}
+\;+\;\Big(\tfrac{z_{2}^{\odot 3}}{\rho_{2}^{\odot 3}}\Big)\odot \dot\rho_{2} \\
+&\hspace{24mm}
+\;-\;\hat\phi(\chi)
+\;-\;\hat d
+\;-\;k_s\,\mathrm{sat}\!\big(z_{2}/\phi\big)
+\Big],
+\end{aligned}}
+\end{equation}
+where all vector products are elementwise, ``./'' is elementwise division,
+$k_s>0$ is a robustifying gain and $\phi>0$ a saturation width. The applied torque is
+$\tau_{\rm act}=\mathrm{sat}(\tau_{\rm cmd})$, and $\zeta$ follows \eqref{eq:zeta2-pts}.
+
+\paragraph{Closed-loop analysis sketch.}
+Adding $\dot V_1$ (Step~1 result) and $\dot V_2$, and substituting \eqref{eq:tau-cmd}–\eqref{eq:dob} and
+\eqref{eq:theta-law}, we obtain the cancellations
+\[
+P_i\!\left(-\tfrac{G_{1,i}}{P_i}z_{2,i}\right)=-G_{1,i}z_{2,i},\qquad
+P_i\!\left(\tfrac{z_{2,i}^3}{\rho_{i,2}^3}\dot\rho_{i,2}\right)=H_{2,i}\dot\rho_{i,2},
+\]
+so that
+\[
+\dot V_1+\dot V_2
+\;\le\;
+-\sum_{i=1}^n \Psi_{\eta_1}(2V_{1,i})
+-\sum_{i=1}^n \Psi_{\eta_2}(2V_{2,i})
+-\sum_{i=1}^n k_s\,|P_i|\,\Big\|\mathrm{sat}\big(z_{2,i}/\phi\big)\Big\|_1
+-\frac{1}{\lambda}\tilde\alpha^\top C\,\tilde\alpha
+-\frac{\lambda_{o,\min}}{\gamma_o}\|\tilde d\|^2,
+\]
+where $\tilde\alpha=\alpha-\alpha^f$, $\tilde d=\hat d-d'$, and the FLS term is canceled by the quadratic term
+$\frac{1}{2\kappa_i}\tilde\theta_i^\top\tilde\theta_i$ under \eqref{eq:theta-law}.
+With the G-PPF properties and bounded initial conditions, the closed loop is
+predefined-time stable (zero input) and PTS–ISS under bounded disturbances.
+
+
+
+
 
 % where $ \omega_j>0$ is an adaptive gain. Its adaptation law is
 % \begin{equation}\label{eq:26}
