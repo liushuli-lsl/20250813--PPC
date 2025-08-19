@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.6.13)  18 AUG 2025 17:27
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.6.13)  19 AUG 2025 17:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -903,8 +903,20 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \c@remark=\count374
 \c@properties=\count375
 \c@definition=\count376
+ (./manuscript.aux
 
-No file manuscript.aux.
+LaTeX Warning: Label `eq:25' multiply defined.
+
+
+LaTeX Warning: Label `eq:25@cref' multiply defined.
+
+
+LaTeX Warning: Label `eq:25' multiply defined.
+
+
+LaTeX Warning: Label `eq:25@cref' multiply defined.
+
+)
 \openout1 = `manuscript.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
@@ -927,6 +939,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 114.
 LaTeX Font Info:    ... okay on input line 114.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 114.
 LaTeX Font Info:    ... okay on input line 114.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -968,11 +981,9 @@ LaTeX Font Info:    Overwriting symbol font `AMSa' in version `normal'
 LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
 (Font)                  U/msa/m/n --> U/msa/m/n on input line 114.
 Package hyperref Info: Link coloring ON on input line 114.
+(./manuscript.out) (./manuscript.out)
 \@outlinefile=\write4
 \openout4 = `manuscript.out'.
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
@@ -1041,7 +1052,7 @@ Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of spacing.
 Package microtype Info: No adjustment of kerning.
-(d:/softwares/texlive/2023/texmf-dist/tex/latex/microtype/mt-LatinModernRoman.cfg
+ (d:/softwares/texlive/2023/texmf-dist/tex/latex/microtype/mt-LatinModernRoman.cfg
 File: mt-LatinModernRoman.cfg 2021/02/21 v1.1 microtype config. file: Latin Modern Roman (RS)
 ) (d:/softwares/texlive/2023/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
@@ -1060,51 +1071,17 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 164.
 
-
-Package natbib Warning: Citation `SciaviccoSiciliano_2012_ModellingControl' on page 1 undefined on input line 188.
-
-
-Package natbib Warning: Citation `BagheriEtAl_2019_Feedbacklinearization' on page 1 undefined on input line 188.
-
-
-LaTeX Warning: Reference `eq:1' on page 1 undefined on input line 195.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [1
 
 ]
-
-Package natbib Warning: Citation `Spong_2022_historicalperspective' on page 2 undefined on input line 216.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
-
-Package natbib Warning: Citation `WangEtAl_2022_Adaptivefuzzy' on page 3 undefined on input line 379.
-
-
-LaTeX Warning: Reference `eq:PTS-ISS-core' on page 1 undefined on input line 434.
-
-
-LaTeX Warning: Reference `eq:PTS-ISS-bound' on page 1 undefined on input line 442.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
-
-Package natbib Warning: Citation `TeeEtAl_2009_Barrierlyapunova' on page 4 undefined on input line 493.
-
-
-Package natbib Warning: Citation `HardyLittlewoodPolya_1952_Inequalities' on page 4 undefined on input line 504.
-
-
-Package natbib Warning: Citation `TeeEtAl_2009_Barrierlyapunov' on page 4 undefined on input line 512.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4]
@@ -1113,26 +1090,8 @@ Package hyperref Warning: Difference (3) between bookmark levels is greater
 (hyperref)                than one, level fixed on input line 565.
 
 
-LaTeX Warning: Reference `eq:gppf-def' on page 5 undefined on input line 583.
-
-
-LaTeX Warning: Reference `eq:gppf-window' on page 5 undefined on input line 586.
-
-
-LaTeX Warning: Reference `eq:gppf-drho-pre' on page 5 undefined on input line 589.
-
-
-LaTeX Warning: Reference `eq:gppf-drho-post' on page 5 undefined on input line 589.
-
-
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 592.
-
-
-LaTeX Warning: Reference `eq:gppf-drho-pre' on page 5 undefined on input line 598.
-
-
-LaTeX Warning: Reference `eq:gppf-drho-post' on page 5 undefined on input line 598.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1140,26 +1099,26 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [5]
 File: fig1.eps Graphic file (type eps)
 <fig1.eps>
-
-
-LaTeX Warning: Reference `fig:1' on page 1 undefined on input line 615.
-
-
-LaTeX Warning: Reference `fig:2' on page 1 undefined on input line 624.
-
 File: fig2.pdf Graphic file (type pdf)
 <use fig2.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Warning: Reference `eq:zeta2-pts' on page 7 undefined on input line 1290.
+ [7]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 767.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [7]
+ [8]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9]
 Missing character: There is no ∎ (U+220E) in font [lmroman9-regular]:mapping=tex-text;!
 (./manuscript.bbl
 Underfull \hbox (badness 2644) in paragraph at lines 77--86
@@ -1171,10 +1130,6 @@ Underfull \hbox (badness 4072) in paragraph at lines 77--86
 \TU/lmr/m/n/10.53937 of Control, Robotics, and Autonomous Systems \TU/lmr/bx/n/10.53937 5\TU/lmr/m/n/10.53937 (1), 1–31 (2022-05-03) [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] [][][][] []
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8]
 
 Package fontspec Info: Could not resolve font "Microsoft YaHei Bold/I" (it
 (fontspec)             probably doesn't exist).
@@ -1206,23 +1161,14 @@ Package fontspec Info: Font family 'MicrosoftYaHei(0)' created for font
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
 )
-
-Package natbib Warning: There were undefined citations.
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [9] (./manuscript.aux
+ [10]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
+ [11] (./manuscript.aux)
 
-)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
 
 Package rerunfilecheck Warning: File `manuscript.out' has changed.
@@ -1230,16 +1176,16 @@ Package rerunfilecheck Warning: File `manuscript.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `manuscript.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  4BC46F31999FBBB0BE91215EAE1132EA;1702.
+(rerunfilecheck)             Before: 7CDE8FE0EE62884C3526AB99FA86D791;2608
+(rerunfilecheck)             After:  3733AE602655061CD817E1BAA398940B;2404.
  ) 
 Here is how much of TeX's memory you used:
- 32664 strings out of 476683
- 705479 string characters out of 5803165
+ 32685 strings out of 476683
+ 705754 string characters out of 5803165
  1876012 words of memory out of 5000000
- 52279 multiletter control sequences out of 15000+600000
+ 52294 multiletter control sequences out of 15000+600000
  533035 words of font info for 157 fonts, out of 8000000 for 9000
  1358 hyphenation exceptions out of 8191
  89i,13n,97p,1601b,650s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on manuscript.pdf (9 pages).
+Output written on manuscript.pdf (11 pages).
