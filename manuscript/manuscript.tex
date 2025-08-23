@@ -197,14 +197,14 @@ For controller design, define the state $x = [x_1,x_2] = [q,\dot{q}] \in \mathbb
 	\left\{
 	\begin{aligned}
 		\dot{x}_1 & = x_2,     \\
-		\dot{x}_2 & =f +g \bar{u} +h,
+		\dot{x}_2 & =f +g \mathrm{sat}(u) +h,
 	\end{aligned}
 	\right.
 	\label{eq:2}
 \end{equation}
-where $f(x)=-M^{-1}(q) (C(q,\dot{q})x_2 + G(q)) $, $g(q)=M^{-1}(q)$, $h(x,t)=-M^{-1}(q)\Delta(q,\dot{q},t) +M^{-1}(q) d(t)$, and $x_1=[x_{1,1},x_{1,2},...,x_{1,n}]^{\top}$, $x_2=[x_{2,1},x_{2,2},...,x_{2,n}]^{\top}$, $\bar{u}$ is the saturation of control input $u=\tau$. Define the saturation error as
+where $f(x)=-M^{-1}(q) (C(q,\dot{q})x_2 + G(q)) $, $g(q)=M^{-1}(q)$, $h(x,t)=-M^{-1}(q)\Delta(q,\dot{q},t) +M^{-1}(q) d(t)$, and $x_1=[x_{1,1},x_{1,2},...,x_{1,n}]^{\top}$, $x_2=[x_{2,1},x_{2,2},...,x_{2,n}]^{\top}$, $\mathrm{sat}(u)$ is the saturation of control input $u=\tau$. Define the saturation error as
 \begin{equation}\label{eq:3}
-\Delta u_{i} =  u_{i}-\bar{u}_{i}=\begin{cases} 
+\Delta u_{i} =  u_{i}-\mathrm{sat}(u_i)=\begin{cases} 
 	u_{i}-u_{\max}, & u_i \geq u_{\max}, \\
 0,       & u_{\min} < u_i < u_{\max},  \quad i=1,2,...,n,\\
 u_{i}-u_{\min}, & u_i \leq u_{\min},
@@ -402,8 +402,6 @@ The parameters of FLS are set as $N=25$, $\mathcal C_{j,\ell}\in\{-1,\,-0.5,\,0,
 $, where $x \in \mathbb{R}^n$ is the system's state, and $x(0) = x_0$ is the initial state. $f(\cdot)$ is continuous and satisfies $f(0) = 0$. et $V:\mathbb{R}^n\to\mathbb{R}_+$ be continuously differentiable, positive definite, and radially unbounded, with $V(0)=0$ and $V(x)>0$ for all $x\neq 0$.
 For given design parameters $0<\eta<1$, $T_p>0$, and $0<\varsigma<\infty$, suppose the closed-loop system satisfies
 			  
-% Suppose there is a continuously differentiable, positive definite, and radially unbounded function $V(x)$, for some constants \(0<\eta<1,T_p>0, 0<\varsigma<\infty\), the closed-loop system satisfies
-% Consider a continuously differentiable, positive definite, and radially unbounded Lyapunov function candidate \( V(x) : \mathbb{R}^n \rightarrow \mathbb{R}_+ \) satisfying \( V(0) = 0 \) and \( V(x) > 0 \) for all \( x \neq 0 \). For given design parameters \( 0 < \eta < 1 \), \( T_p > 0 \), and \( 0 < \varsigma < +\infty \), the closed-loop system is designed to satisfy the following stability condition: 
 \begin{equation}	\label{eq:7}
 	\dot V(x) \le
 	-\,\frac{\pi}{\eta\,T_p}\left(V(x)^{\,1-\frac{\eta}{2}}+V(x)^{\,1+\frac{\eta}{2}}\right)
@@ -530,14 +528,14 @@ V(t)\ \le\ V^\star(\|u\|_\infty).
 		\sum_{i=1}^{n}|\mathcal{X}_i|^{\mathcal{Y} } \geq n^{1-\mathcal{Y} }\left(\sum_{i=1}^{n}|\mathcal{X}_i|\right)^{\mathcal{Y} }, \quad \mathcal{Y}  \in (1,\infty) .
 	\end{equation}
 \end{lemma}
-\begin{lemma}	\label{lemma:4}\cite{TeeEtAl_2009_Barrierlyapunov}
-	For \(\mathcal{Y} >0\), \(\mathcal{X}\in \mathbb R\) with \(\lvert \mathcal{X}\rvert < \mathcal{Y} \), there is
-\begin{equation}\label{eq:13}
-		\log\!\biggl(\frac{\mathcal{Y} ^2}{\,\mathcal{Y} ^2 - \mathcal{X}^2\,}\biggr)
-		\le
-		\frac{\mathcal{X}^2}{\,\mathcal{Y} ^2 - \mathcal{X}^2\,}.
-	\end{equation}
-\end{lemma}
+% \begin{lemma}	\label{lemma:4}\cite{TeeEtAl_2009_Barrierlyapunov}
+% 	For \(\mathcal{Y} >0\), \(\mathcal{X}\in \mathbb R\) with \(\lvert \mathcal{X}\rvert < \mathcal{Y} \), there is
+% \begin{equation}\label{eq:13}
+% 		\log\!\biggl(\frac{\mathcal{Y} ^2}{\,\mathcal{Y} ^2 - \mathcal{X}^2\,}\biggr)
+% 		\le
+% 		\frac{\mathcal{X}^2}{\,\mathcal{Y} ^2 - \mathcal{X}^2\,}.
+% 	\end{equation}
+% \end{lemma}
 
 
 
@@ -629,11 +627,11 @@ where $\gamma(\cdot)\in\mathcal K$ aggregates bounded inputs (disturbance, NN re
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{fig1.eps}
-	\caption{Error shift transformation and shift function.}
+	\caption{全局动态变化PPC.}
 	\label{fig:1}
 \end{figure}
 \begin{remark}
-	如 \cref{fig:1} 所示：左图给出了经移位变换后的缩放误差轨迹 $z(t)$ 相对于性能包络 $\rho(t)$ 的演化。即便存在 $|e(0)|>\rho(0)$ 的初值越界，由于 $\beta(0)=0$ 从而 $z(0)=0$，误差在变量层面被“强制合法化”，避免了传统 PPC 采用 $z=e/\rho$ 时在进入阶段出现的奇异性与可行域切换（往往需要投影算子或非对称放缩等权宜修补）。右图展示了不同形状参数 $(\upsilon_1,\upsilon_2)$ 下的 $\beta(t)$ 曲线族，体现出“前期更缓/更陡、后期更快/更慢”的可调缩放能力，可在力矩峰值与稳态精度之间进行显式权衡。综合来看，本文的 误差变换结构的特点在于：\textbf{(i)} 将预定义时间的边界收紧（Bernstein 加权的 $\rho$）与误差注入路径成形解耦成双调谐器，实现预定义时间+预设性能的可设计收敛路径；\textbf{(ii)} 通过 $z(0)=0$ 从源头消除初值奇异性与非法区问题，无需额外重置/投影机制；\textbf{(iii)} $\dot\rho(t),\dot\beta(t)$ 具备封闭、光滑、可界的解析形式，便于与饱和补偿、RBFNN 等模块级联并保持 Lyapunov 证明闭合.
+	% 如 \cref{fig:1} 所示
 	\end{remark}
 	
 
@@ -720,7 +718,7 @@ In the first step, a BLF is used as an energy function for the error dynamics. W
 
 记
 $$
-S_{1,i} = V_{1,i}=\frac{1}{2}\frac{\rho_{1}^2 z_{1,i}^2}{\rho_{1}^2-z_{1,i}^2},\qquad
+
 G_i=\frac{\rho_{1}^4 z_{1,i}}{(\rho_{1}^2-z_{1,i}^2)^2},\quad
 H_i=\frac{\rho_{1} z_{1,i}^4}{(\rho_{1}^2-z_{1,i}^2)^2},
 \quad
@@ -735,19 +733,19 @@ $$
 $$
 
 选用标准 PTS 速度函数：$
-\Psi(S)=\frac{\pi}{2 \eta T_p}\Big(S^{\,1-\eta/2}+S^{\,1+\eta/2}\Big).
+\Psi(S)=\frac{\pi}{ \eta T_p}\Big(S^{\,1-\eta/2}+n^{-\frac{n}{2} }S^{\,1+\eta/2}\Big).
 $
 
 $$
 \mathcal{K}_{1,i}(z_{1,i},\rho_{1})
-=\rho_{1}^2\;\frac{\Psi_1(S_i)}{S_i}
-=\frac{\pi\,\rho_{1}^2}{2\eta T_p}\Big((V_{1,i})^{-\eta/2}+(V_{1,i})^{\eta/2}\Big).
+=\frac{\rho_{1}^2}{2}\;\frac{\Psi_1(V_1)}{V_1}
+=\frac{\pi\,\rho_{1}^2}{2\eta T_p}\Big((V_{1,i})^{-\eta/2}+n^{-\frac{n}{2} }(V_{1,i})^{\eta/2}\Big).
 $$
 
 把它带回虚拟控制律：
 
 $$
-\alpha_i \;=\; \dot q_{d,i}-z_{2,i}-\zeta_i
+\alpha_i \;=\; \dot q_{d,i}-\zeta_i
 -\;\mathcal{K}_{1,i}(z_{1,i},\rho_{1})\Phi_{1,i}
 +\;\frac{z_{1,i}^3}{\rho_{1}^3}\,\dot\rho_{1}-k_{1,i}z_{1,i}.
 $$
@@ -756,7 +754,7 @@ $$
 
 $$
 \dot V_1
-= \sum_{i=1}^n \Big[
+\le \sum_{i=1}^n \Big[ G_i z_{2,i}+G_i z_{2,i}
 -G_i k_{1,i}z_{1,i}\;-\;2\Psi_1(V_{1,i})\;-\;G_i\tilde\alpha_i
 \Big].
 $$
@@ -764,15 +762,8 @@ $$
 
 In the second step, a BLF is used as an energy function for the error dynamics. We choose:
 \begin{equation}\label{eq:25}
-	V_2= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2}^2 z_{2,i}^2}{\rho_{2}^2-z_{2,i}^2}. 
+	V_2= V_1+\frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2}^2 z_{2,i}^2}{\rho_{2}^2-z_{2,i}^2}. 
 \end{equation}
-
-
-For each channel $i=1,\dots,n$, keep
-\[
-z_{1,i}=e_{1,i}=x_{1,i}-q_{d,i},\qquad
-z_{2,i}=e_{2,i}=x_{2,i}-\alpha_i^{f}-\zeta_i .
-\]
 
 
 with the corresponding weights
@@ -791,23 +782,23 @@ Q_{i}\;=\;\frac{\rho_{2} z_{2,i}^{4}}{\bigl(\rho_{2}^{2}-z_{2,i}^{2}\bigr)^{2}},
 % where $f(x)=-M^{-1}(q)\{C(q,\dot q)\,x_2+G(q)\}$,
 % $g(q)=M^{-1}(q)$, $\psi(x)$ collects structured uncertainties,
 % and $d(t)$ collects external disturbances.
-% The applied input is $u_{\rm act}=M^{-1}(q)\bigl(u-C(q,\dot q)x_2-G(q)\bigr)$ with $u=\mathrm{sat}(\tau_{\rm cmd})$.
+% The applied input is $\mathrm{sat}(u)=M^{-1}(q)\bigl(u-C(q,\dot q)x_2-G(q)\bigr)$ with $u=\mathrm{sat}(\tau_{\rm cmd})$.
 
 Time derivative of $V_2$ is as
 Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain
 \begin{equation}
 	\begin{aligned}
-		\dot V_2&=\sum_{i=1}^n \Big[\,P_i\,\dot z_{2,i}-Q_{i}\,\dot\rho_{2}\,\Big] = \sum_{i=1}^n \Big[\,P_i\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{i}\,\dot\rho_{2}\,\Big]\\
+		\dot V_2&=\dot V_1+\sum_{i=1}^n \Big[\,P_i\,\dot z_{2,i}-Q_{i}\,\dot\rho_{2}\,\Big] = \sum_{i=1}^n \Big[\,P_i\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{i}\,\dot\rho_{2}\,\Big]\\
 		&
-		 = \sum_{i=1}^n \Big[\,P_i\,(f(x)+h(x,t)+g(q)\,\bar{u}_i+d'(t)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i)-Q_{i}\,\dot\rho_{2}\,\Big]\\
+		 = \dot V_1+\sum_{i=1}^n \Big[\,P_i\,(f(x)+h(x,t)+g(q)\,\mathrm{sat}(u_i)+d'(t)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i)-Q_{i}\,\dot\rho_{2}\,\Big]\\
 		&
-		 = \sum_{i=1}^n \Big[\,P_i\,[(f(x)+h(x,t)+g(q)\,\bar{u}_i+d'(t)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i)-\frac{Q_{i}}{P_i}\,\dot\rho_{2}]\Big]
+		 = \dot V_1+\sum_{i=1}^n \Big[\,P_i\,[(f(x)+h(x,t)+g(q)\,\mathrm{sat}(u_i)_i+d'(t)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i)-\frac{Q_{i}}{P_i}\,\dot\rho_{2}]\Big]
 	\end{aligned}
 \end{equation}
 
  Choose the state-dependent gain
 \begin{equation}\label{eq:k2-pts}
-\mathcal{K}_{2,i}(z_{2,i},\rho_{2})=\rho_{2}^{2}\,\frac{\Psi(S_{2,i})}{S_{2,i}}
+\mathcal{K}_{2,i}(z_{2,i},\rho_{2})=\frac{\rho_{2}^2}{2}\frac{\Psi(V_{2})}{V_{2}}
 =\frac{\pi\,\rho_{2}^2}{2\eta T_p}\Big((V_{2,i})^{-\eta/2}+(V_{2,i})^{\eta/2}\Big).
 \end{equation}
 
@@ -820,22 +811,20 @@ with $\theta_i\in\mathbb{R}^{N}  $ adapted online by
 \end{equation}
 
 
-$\dot x_2 = f_{\rm nom}(x)+h(x)+g(q)u_{\rm act}+d'(t)$，
+$\dot x_2 = f(x)+h(x)+g(q)\mathrm{sat}(u)+d'(t)$，
 将“结构不确定+外扰”的剩余项定义为
 $w(x,t)=h(x)-\hat h(\chi)+d'(t)$。
 为避免直接微分速度，采用一阶跟踪微分器
-\[
-\dot\eta=-\omega_d\,\eta+\omega_d\,x_2,\qquad 
-\hat{\dot x}_2=\omega_d(x_2-\eta),
-\]
-并设计加速度域 DOB：
-\begin{equation}\label{eq:dob-correct}
+\begin{equation}
+	\begin{cases}
+\dot\vartheta =-\omega_d\,\vartheta+\omega_d\,x_2,  \\
+\hat{\dot x}_2=\omega_d(x_2-\vartheta),   \\
 \dot{\hat w}= -\Lambda_o\,\hat w
-+\Lambda_o\Big(\hat{\dot x}_2 - f_{\rm nom}(x) - g(q)\,u_{\rm act} - \hat h(\chi)\Big),
-\qquad \Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0,
++\Lambda_o\left(\hat{\dot x}_2 - f(x) - g(q)\,\mathrm{sat}(u) - \hat h(\chi)\right),
+\end{cases}
 \end{equation}
-其中 $f_{\rm nom}(x)=-M^{-1}(q)\{C(q,\dot q)\,x_2+G(q)\}$，
-$g(q)=M^{-1}(q)$，且必须使用饱和后的实际输入 $u_{\rm act}$。
+where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, \vartheta=x_2(0)$, $f(x)=-M^{-1}(q)\{C(q,\dot q)\,x_2+G(q)\}$，
+$g(q)=M^{-1}(q)$，且必须使用饱和后的实际输入 $\mathrm{sat}(u)$。
 将估计误差项 $\tilde w=\hat w-w$ 纳入 Lyapunov 函数
 $V_w=\tfrac{1}{2\gamma_o}\tilde w^\top\tilde w$，
 可得 $\dot V_w\le -\tfrac{\lambda_{o,\min}}{\gamma_o}\|\tilde w\|^2+{\small o}(1)$，
@@ -844,51 +833,39 @@ $V_w=\tfrac{1}{2\gamma_o}\tilde w^\top\tilde w$，
 
 
 
-*******************上一篇论文修改点：$z_{1,i},\mathrm{diag}\{\lambda_{o,i}\}$.
+
+
+
+
 
 
 
 Let $Q=\mathrm{col}\{Q_{i}\}$,
 $P=\mathrm{col}\{P_i\}$,
-$\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$.
-
-The control input torque is designed as
+$\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
 \begin{equation}\label{eq:tau-cmd}
 \begin{aligned}
-u &=g(q)\left[-f(x)-\hat{h}(\chi)-d'(t)+\dot\alpha_i^{f}+\delta_i\ -\ \mu_2\,\zeta_i+\frac{Q_{i}}{P_i}\,\dot\rho_{2}\right]\\
-&=g(q)\left[-f(x)+\dot\alpha_i^{f}+\delta_i\ -\ \mu_2\,\zeta_i+\Big(\tfrac{z_{2}^{3}}{\rho_{2}^{3}}\Big)\dot\rho_{2}
+u &==g(q)\left[-f(x)+\dot\alpha_i^{f}+\delta_i\ -\ \mu_2\,\zeta_i-+\Big(\tfrac{z_{2}^{3}}{\rho_{2}^{3}}\Big)\dot\rho_{2}
 \;-\;\hat{h}(\chi)
-\;-\;\hat d
+\;-\;\hat w
 \;-\;k_s\,\mathrm{sgn}(z_{2})-\;\mathcal{K}_{2}(z_{2},\rho_{2}) \Phi_{2}-k_{2,i}z_{2,i}\right]
 \end{aligned}
 \end{equation}
 
 
-% \begin{equation}\label{eq:tau-cmd}
-% \begin{aligned}
-% \tau_{\rm cmd} &= C(q,\dot q)\,x_2 + G(q) \\
-% &\quad + M(q)\Big[
-% \dot\alpha^{f}+\dot\zeta
-% \;-\;\mathrm{diag}(Q./P)\,z_{2}
-% \;-\;\mathcal{K}_{2}(z_{2},\rho_{2})\odot \Phi_{2}
-% \;+\;\Big(\tfrac{z_{2}^{\odot 3}}{\rho_{2}^{\odot 3}}\Big)\odot \dot\rho_{2} \\
-% &\hspace{24mm}
-% \;-\;\hat\phi(\chi)
-% \;-\;\hat d
-% \;-\;k_s\,\mathrm{sat}\!\big(z_{2}/\phi\big)
-% \Big],
-% \end{aligned}
-% \end{equation}
 where $k_{2,i}>0$,
 $k_s>0$.
 \[
 \dot V_1+\dot V_2
 \;\le\;
 \sum_{i=1}^n \Big[
--G_i k_{1,i}z_{1,i}\;-\;2\Psi(V_{1,i})\;-\;G_i\tilde\alpha_i]
+-G_i k_{1,i}z_{1,i}\;-\;\Psi(V_{1,i})\;-\;G_i\tilde\alpha_i]
 +\sum_{i=1}^n \Big[
--P_i k_{2,i}z_{2,i}\;-\;2\Psi(V_{2,i})\;-\;P_i\tilde{d}_i+P_i(h(\chi)-\hat{h}(\chi))- k_s |P_i|\mathrm{sgn}(z_{2,i})\Big]
+-P_i k_{2,i}z_{2,i}\;-\;\Psi(V_{2,i})\;-\;P_i\tilde{w}_i- k_s |P_i|\mathrm{sgn}(z_{2,i})\Big]
 \]
+
+
+
 \section{Stability analysis}
 
  We analyze the stability of the closed-loop system under the proposed controller.  A composite Lyapunov function \cref{eq:45} is constructed by combining the BLF-based error energy, the RBFNN weight estimation error $\tilde \theta_{i}$, the virtual-control filtering error $\tilde\alpha$, and the disturbance-estimation errors $\tilde d_{1,i},\tilde d_{2,i}$. The composite function is able to analyze the trajectory error dynamics, adaptive weight convergence and the preservation of performance constraints in a unified manner. Sufficient conditions for the global stability of the system and for all signals to be bounded are given by the derivation of its time derivative inequality. Ultimately, we show that in any initial state, the system trajectory will converge within a tight set at a set predefined-time $T_p$, thus achieving global predefined-time stability.
@@ -899,30 +876,30 @@ $k_s>0$.
 
 
 \begin{proof}
-Adding $\dot V_1$ (Step~1 result) and $\dot V_2$, and substituting \eqref{eq:tau-cmd}–\eqref{eq:dob} and
-\eqref{eq:theta-law}, we obtain the cancellations
+% Adding $\dot V_1$ (Step~1 result) and $\dot V_2$, and substituting \eqref{eq:tau-cmd}–\eqref{eq:dob} and
+% \eqref{eq:theta-law}, we obtain the cancellations
 \[
 P_i\!\left(-\tfrac{G_{1,i}}{P_i}z_{2,i}\right)=-G_{1,i}z_{2,i},\qquad
 P_i\!\left(\tfrac{z_{2,i}^3}{\rho_{2}^3}\dot\rho_{2}\right)=Q _{2,i}\dot\rho_{2},
 \]
-so that
-\[
-\dot V_1+\dot V_2
-\;\le\;
--2\sum_{i=1}^n \Psi(V_{1,i})
--2\sum_{i=1}^n \Psi(V_{2,i})
--\sum_{i=1}^n k_s |P_i|\mathrm{sgn}(z_{2,i})
--\frac{1}{\lambda}\tilde\alpha^\top C\,\tilde\alpha
--\frac{\lambda_{o,\min}}{\gamma_o}\|\tilde d\|^2,
-\]
-where $\tilde\alpha=\alpha-\alpha^f$, $\tilde d=\hat d-d'$, and the FLS term is canceled by the quadratic term
-$\frac{1}{2\varrho_i}\tilde\theta_i^\top\tilde\theta_i$ under \eqref{eq:theta-law}.
+% so that
+% \[
+% \dot V_1+\dot V_2
+% \;\le\;
+% -2\sum_{i=1}^n \Psi(V_{1,i})
+% -2\sum_{i=1}^n \Psi(V_{2,i})
+% -\sum_{i=1}^n k_s |P_i|\mathrm{sgn}(z_{2,i})
+% -\frac{1}{\lambda}\tilde\alpha^\top C\,\tilde\alpha
+% -\frac{\lambda_{o,\min}}{\gamma_o}\|\tilde d\|^2,
+% \]
+% where $\tilde\alpha=\alpha-\alpha^f$, $\tilde d=\hat d-d'$, and the FLS term is canceled by the quadratic term
+% $\frac{1}{2\varrho_i}\tilde\theta_i^\top\tilde\theta_i$ under \eqref{eq:theta-law}.
 
 
 The composite Lyapunov function is constructed as follows
 \begin{equation}\label{eq:45}
 	\begin{aligned}
-		V & =\dot V_1+\dot V_2+ \sum_{i=1}^n \frac{1}{2\,\varrho_i}\,\tilde \theta_{i}^\mathsf{T}\tilde \theta_{i}.
+		V= \sum_i(V_{1,i}+V_{2,i})+\tfrac{1}{2\gamma}\tilde\alpha^\top \tilde\alpha+\tfrac{1}{2\gamma_o}\tilde w^\top\tilde w+\sum_i\tfrac{1}{2\varrho_i}\|\tilde\theta_i\|^2.
 	\end{aligned}
 \end{equation}
 
