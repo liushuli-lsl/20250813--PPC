@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.30)  23 AUG 2025 22:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.30)  24 AUG 2025 22:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1085,7 +1085,7 @@ File: ctex-zhmap-windows.tex 2022/07/14 v2.5.10 Windows font map loader for pdfT
 
 Package natbib Warning: Citation `Spong_2022_historicalperspective' on page 2 undefined on input line 237.
 
-Package CJKpunct Info: use punctuation spaces for family 'rm' with punctstyle (quanjiao) on input line 346.
+Package CJKpunct Info: use punctuation spaces for family 'rm' with punctstyle (quanjiao) on input line 345.
 
 
 
@@ -1093,14 +1093,14 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
 
-Package natbib Warning: Citation `WangEtAl_2022_Adaptivefuzzy' on page 3 undefined on input line 400.
+Package natbib Warning: Citation `WangEtAl_2022_Adaptivefuzzy' on page 3 undefined on input line 399.
 
-Package CJKpunct Info: use punctuation spaces for family 'zhkai' with punctstyle (quanjiao) on input line 437.
+Package CJKpunct Info: use punctuation spaces for family 'zhkai' with punctstyle (quanjiao) on input line 436.
 
-LaTeX Warning: Reference `eq:PTS-ISS-core' on page 1 undefined on input line 453.
+LaTeX Warning: Reference `eq:PTS-ISS-core' on page 1 undefined on input line 452.
 
 
-LaTeX Warning: Reference `eq:PTS-ISS-bound' on page 1 undefined on input line 461.
+LaTeX Warning: Reference `eq:PTS-ISS-bound' on page 1 undefined on input line 460.
 
 
 
@@ -1109,10 +1109,10 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
 
-Package natbib Warning: Citation `TeeEtAl_2009_Barrierlyapunova' on page 4 undefined on input line 512.
+Package natbib Warning: Citation `TeeEtAl_2009_Barrierlyapunova' on page 4 undefined on input line 511.
 
 
-Package natbib Warning: Citation `HardyLittlewoodPolya_1952_Inequalities' on page 4 undefined on input line 523.
+Package natbib Warning: Citation `HardyLittlewoodPolya_1952_Inequalities' on page 4 undefined on input line 522.
 
 
 
@@ -1122,29 +1122,29 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [4{g:/software/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 584.
+(hyperref)                than one, level fixed on input line 583.
 
 
-LaTeX Warning: Reference `eq:gppf-def' on page 5 undefined on input line 602.
+LaTeX Warning: Reference `eq:gppf-def' on page 5 undefined on input line 601.
 
 
-LaTeX Warning: Reference `eq:gppf-window' on page 5 undefined on input line 605.
+LaTeX Warning: Reference `eq:gppf-window' on page 5 undefined on input line 604.
 
 
-LaTeX Warning: Reference `eq:gppf-drho-pre' on page 5 undefined on input line 608.
+LaTeX Warning: Reference `eq:gppf-drho-pre' on page 5 undefined on input line 607.
 
 
-LaTeX Warning: Reference `eq:gppf-drho-post' on page 5 undefined on input line 608.
+LaTeX Warning: Reference `eq:gppf-drho-post' on page 5 undefined on input line 607.
 
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 611.
+(hyperref)                than one, level fixed on input line 610.
 
 
-LaTeX Warning: Reference `eq:gppf-drho-pre' on page 5 undefined on input line 617.
+LaTeX Warning: Reference `eq:gppf-drho-pre' on page 5 undefined on input line 616.
 
 
-LaTeX Warning: Reference `eq:gppf-drho-post' on page 5 undefined on input line 617.
+LaTeX Warning: Reference `eq:gppf-drho-post' on page 5 undefined on input line 616.
 
 
 
@@ -1159,16 +1159,16 @@ Package epstopdf Info: Source file: <fig1.eps>
 (epstopdf)                    date: 2025-08-05 16:02:46
 (epstopdf)                    size: 82589 bytes
 (epstopdf)             Command: <repstopdf --outfile=./fig1-eps-converted-to.pdf fig1.eps>
-(epstopdf)             \includegraphics on input line 629.
+(epstopdf)             \includegraphics on input line 628.
 Package epstopdf Info: Output file is already uptodate.
 <./fig1-eps-converted-to.pdf, id=282, 596.2275pt x 171.64125pt>
 File: ./fig1-eps-converted-to.pdf Graphic file (type pdf)
 <use ./fig1-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig1-eps-converted-to.pdf  used on input line 629.
+Package pdftex.def Info: ./fig1-eps-converted-to.pdf  used on input line 628.
 (pdftex.def)             Requested size: 466.053pt x 134.16771pt.
 
 
-LaTeX Warning: Reference `fig:2' on page 1 undefined on input line 643.
+LaTeX Warning: Reference `fig:2' on page 1 undefined on input line 642.
 
 
 
@@ -1176,7 +1176,7 @@ pdfTeX warning: pdflatex.exe (file ./fig2.pdf): PDF inclusion: found PDF version
 <fig2.pdf, id=283, 606.83414pt x 216.06923pt>
 File: fig2.pdf Graphic file (type pdf)
 <use fig2.pdf>
-Package pdftex.def Info: fig2.pdf  used on input line 646.
+Package pdftex.def Info: fig2.pdf  used on input line 645.
 (pdftex.def)             Requested size: 466.053pt x 165.9452pt.
 
 
@@ -1187,80 +1187,47 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.671 \end{equation}
+l.670 \end{equation}
                     
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.671 \end{equation}
+l.670 \end{equation}
                      <./fig1-eps-converted-to.pdf> <./fig2.pdf>]
-g:/paper/20250813--ppc/manuscript/manuscript.tex:721: Missing $ inserted.
-<inserted text> 
-                $
-l.721 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-g:/paper/20250813--ppc/manuscript/manuscript.tex:721: Display math should end with $$.
-<to be read again> 
-                   \tex_par:D 
-l.721 
-      
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-g:/paper/20250813--ppc/manuscript/manuscript.tex:722: Missing $ inserted.
-<inserted text> 
-                $
-l.722 G_
-        i=\frac{\rho_{1}^4 z_{1,i}}{(\rho_{1}^2-z_{1,i}^2)^2},\quad
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-g:/paper/20250813--ppc/manuscript/manuscript.tex:727: Missing $ inserted.
-<inserted text> 
-                $
-l.727 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [7]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 830.
+LaTeX Warning: Reference `eq:45' on page 1 undefined on input line 840.
 
 
-LaTeX Warning: Reference `eq:45' on page 1 undefined on input line 871.
+LaTeX Warning: Reference `assumption:3' on page 1 undefined on input line 843.
 
 
-LaTeX Warning: Reference `assumption:3' on page 1 undefined on input line 874.
+LaTeX Warning: Reference `assumption:2' on page 1 undefined on input line 843.
 
 
-LaTeX Warning: Reference `assumption:2' on page 1 undefined on input line 874.
+LaTeX Warning: Reference `assumption:1' on page 1 undefined on input line 843.
 
 
-LaTeX Warning: Reference `assumption:1' on page 1 undefined on input line 874.
+LaTeX Warning: Reference `eq:40' on page 1 undefined on input line 843.
 
 
-LaTeX Warning: Reference `eq:40' on page 1 undefined on input line 874.
+LaTeX Warning: Reference `eq:30' on page 1 undefined on input line 843.
 
 
-LaTeX Warning: Reference `eq:30' on page 1 undefined on input line 874.
+LaTeX Warning: Reference `eq:41' on page 1 undefined on input line 843.
 
 
-LaTeX Warning: Reference `eq:41' on page 1 undefined on input line 874.
+LaTeX Warning: Reference `eq:32' on page 1 undefined on input line 843.
 
 
-LaTeX Warning: Reference `eq:32' on page 1 undefined on input line 874.
+LaTeX Warning: Reference `eq:42' on page 1 undefined on input line 843.
 
 
-LaTeX Warning: Reference `eq:42' on page 1 undefined on input line 874.
+LaTeX Warning: Reference `eq:45' on page 1 undefined on input line 875.
 
 
 
@@ -1269,61 +1236,58 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
 
-LaTeX Warning: Reference `eq:45' on page 1 undefined on input line 906.
+LaTeX Warning: Reference `eq:42' on page 1 undefined on input line 883.
 
 
-LaTeX Warning: Reference `eq:42' on page 1 undefined on input line 914.
+LaTeX Warning: Reference `eq:4' on page 1 undefined on input line 883.
 
 
-LaTeX Warning: Reference `eq:4' on page 1 undefined on input line 914.
+LaTeX Warning: Reference `eq:23' on page 1 undefined on input line 909.
 
 
-LaTeX Warning: Reference `eq:23' on page 1 undefined on input line 940.
+LaTeX Warning: Reference `eq:22' on page 1 undefined on input line 909.
 
 
-LaTeX Warning: Reference `eq:22' on page 1 undefined on input line 940.
+LaTeX Warning: Reference `eq:23' on page 1 undefined on input line 913.
 
 
-LaTeX Warning: Reference `eq:23' on page 1 undefined on input line 944.
+LaTeX Warning: Reference `eq:21' on page 1 undefined on input line 913.
 
 
-LaTeX Warning: Reference `eq:21' on page 1 undefined on input line 944.
+LaTeX Warning: Reference `eq:46' on page 1 undefined on input line 940.
 
 
-LaTeX Warning: Reference `eq:46' on page 1 undefined on input line 971.
+LaTeX Warning: Reference `lemma:2' on page 1 undefined on input line 940.
 
 
-LaTeX Warning: Reference `lemma:2' on page 1 undefined on input line 971.
+LaTeX Warning: Reference `eq:41' on page 1 undefined on input line 940.
 
 
-LaTeX Warning: Reference `eq:41' on page 1 undefined on input line 971.
+LaTeX Warning: Reference `eq:32' on page 1 undefined on input line 940.
 
 
-LaTeX Warning: Reference `eq:32' on page 1 undefined on input line 971.
+LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 961.
 
 
-LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 992.
+LaTeX Warning: Reference `eq:56' on page 1 undefined on input line 991.
 
 
-LaTeX Warning: Reference `eq:56' on page 1 undefined on input line 1022.
+LaTeX Warning: Reference `eq:55' on page 1 undefined on input line 991.
 
 
-LaTeX Warning: Reference `eq:55' on page 1 undefined on input line 1022.
+LaTeX Warning: Reference `eq:54' on page 1 undefined on input line 991.
 
 
-LaTeX Warning: Reference `eq:54' on page 1 undefined on input line 1022.
+LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 991.
 
 
-LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 1022.
+LaTeX Warning: Reference `eq:57' on page 1 undefined on input line 998.
 
 
-LaTeX Warning: Reference `eq:57' on page 1 undefined on input line 1029.
+LaTeX Warning: Reference `eq:46' on page 1 undefined on input line 998.
 
 
-LaTeX Warning: Reference `eq:46' on page 1 undefined on input line 1029.
-
-
-LaTeX Warning: Reference `eq:45' on page 1 undefined on input line 1029.
+LaTeX Warning: Reference `eq:45' on page 1 undefined on input line 998.
 
 
 
@@ -1332,32 +1296,32 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9]
 
-LaTeX Warning: Reference `lemma:2' on page 1 undefined on input line 1061.
+LaTeX Warning: Reference `lemma:2' on page 1 undefined on input line 1030.
 
 
-LaTeX Warning: Reference `lemma:3' on page 1 undefined on input line 1066.
+LaTeX Warning: Reference `lemma:3' on page 1 undefined on input line 1035.
 
 
-LaTeX Warning: Reference `eq:59' on page 1 undefined on input line 1066.
+LaTeX Warning: Reference `eq:59' on page 1 undefined on input line 1035.
 
 
-LaTeX Warning: Reference `eq:52' on page 1 undefined on input line 1066.
+LaTeX Warning: Reference `eq:52' on page 1 undefined on input line 1035.
 
 
-LaTeX Warning: Reference `eq:61' on page 1 undefined on input line 1087.
+LaTeX Warning: Reference `eq:61' on page 1 undefined on input line 1056.
 
 
-LaTeX Warning: Reference `lemma:1' on page 1 undefined on input line 1087.
+LaTeX Warning: Reference `lemma:1' on page 1 undefined on input line 1056.
 
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-LaTeX Warning: Reference `eq:60' on page 1 undefined on input line 1088.
+LaTeX Warning: Reference `eq:60' on page 1 undefined on input line 1057.
 
 
-LaTeX Warning: Reference `eq:zeta2-pts' on page 10 undefined on input line 1122.
+LaTeX Warning: Reference `eq:zeta2-pts' on page 10 undefined on input line 1091.
 
 
 
@@ -1390,13 +1354,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12]
 
-g:/paper/20250813--ppc/manuscript/manuscript.tex:1799: LaTeX Error: \begin{proof} on input line 878 ended by \end{document}.
+g:/paper/20250813--ppc/manuscript/manuscript.tex:1768: LaTeX Error: \begin{proof} on input line 847 ended by \end{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1799 \end{document}
+l.1768 \end{document}
                      
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -1430,24 +1394,24 @@ Package rerunfilecheck Info: Checksums for `manuscript.out':
  )
 (\end occurred inside a group at level 1)
 
-### semi simple group (level 1) entered at line 878 (\begingroup)
+### semi simple group (level 1) entered at line 847 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 32130 strings out of 473578
- 598084 string characters out of 5727715
+ 32115 strings out of 473578
+ 597843 string characters out of 5727715
  998123 words of memory out of 5000000
- 53785 multiletter control sequences out of 15000+600000
- 644362 words of font info for 442 fonts, out of 8000000 for 9000
+ 53775 multiletter control sequences out of 15000+600000
+ 644092 words of font info for 441 fonts, out of 8000000 for 9000
  1151 hyphenation exceptions out of 8191
- 90i,13n,93p,2631b,836s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,13n,93p,2631b,838s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc
 
 pdfTeX warning: pdflatex.exe (file c:/Windows/Fonts/simsun.ttc): subfont unisong22: wrong mapping: character 14 --> 0x220E --> .notdef
-><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb>
-Output written on manuscript.pdf (12 pages, 1143659 bytes).
+><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb>
+Output written on manuscript.pdf (12 pages, 1136535 bytes).
 PDF statistics:
- 1042 PDF objects out of 1200 (max. 8388607)
- 715 compressed objects within 8 object streams
- 117 named destinations out of 1000 (max. 500000)
- 67891 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 1033 PDF objects out of 1200 (max. 8388607)
+ 708 compressed objects within 8 object streams
+ 114 named destinations out of 1000 (max. 500000)
+ 67887 words of extra memory for PDF output out of 74296 (max. 10000000)
 
