@@ -44,8 +44,7 @@
 \csname PreBibitemsHook\endcsname
 
 %%% 1
-\bibitem[\protect\citeauthoryear{Sciavicco and
-  Siciliano}{2012}]{SciaviccoSiciliano_2012_ModellingControl}
+\bibitem[\protect\citeauthoryear{Sciavicco and Siciliano}{2012}]{SciaviccoSiciliano_2012_ModellingControl}
 \begin{bbook}
 \bauthor{\bsnm{Sciavicco}, \binits{L.}},
 \bauthor{\bsnm{Siciliano}, \binits{B.}}:
@@ -58,14 +57,12 @@
 \endbibitem
 
 %%% 2
-\bibitem[\protect\citeauthoryear{Bagheri
-  et~al.}{2019-10}]{BagheriEtAl_2019_Feedbacklinearization}
+\bibitem[\protect\citeauthoryear{Bagheri et~al.}{2019-10}]{BagheriEtAl_2019_Feedbacklinearization}
 \begin{barticle}
 \bauthor{\bsnm{Bagheri}, \binits{M.}},
 \bauthor{\bsnm{Naseradinmousavi}, \binits{P.}},
 \bauthor{\bsnm{Krsti\'c}, \binits{M.}}:
-\batitle{Feedback linearization based predictor for time delay control of a
-  high-dof robot manipulator}.
+\batitle{Feedback linearization based predictor for time delay control of a high-dof robot manipulator}.
 \bjtitle{Automatica}
 \bvolume{108},
 \bfpage{108485}
@@ -88,14 +85,12 @@
 \endbibitem
 
 %%% 4
-\bibitem[\protect\citeauthoryear{Wang
-  et~al.}{2022-12}]{WangEtAl_2022_Adaptivefuzzy}
+\bibitem[\protect\citeauthoryear{Wang et~al.}{2022-12}]{WangEtAl_2022_Adaptivefuzzy}
 \begin{barticle}
 \bauthor{\bsnm{Wang}, \binits{Q.}},
 \bauthor{\bsnm{Cao}, \binits{J.}},
 \bauthor{\bsnm{Liu}, \binits{H.}}:
-\batitle{Adaptive fuzzy control of nonlinear systems with predefined time and
-  accuracy}.
+\batitle{Adaptive fuzzy control of nonlinear systems with predefined time and accuracy}.
 \bjtitle{IEEE Transactions on Fuzzy Systems}
 \bvolume{30}(\bissue{12}),
 \bfpage{5152}--\blpage{5165}
@@ -105,14 +100,12 @@
 \endbibitem
 
 %%% 5
-\bibitem[\protect\citeauthoryear{Tee
-  et~al.}{2009-04}]{TeeEtAl_2009_Barrierlyapunova}
+\bibitem[\protect\citeauthoryear{Tee et~al.}{2009-04}]{TeeEtAl_2009_Barrierlyapunova}
 \begin{barticle}
 \bauthor{\bsnm{Tee}, \binits{K.P.}},
 \bauthor{\bsnm{Ge}, \binits{S.S.}},
 \bauthor{\bsnm{Tay}, \binits{E.H.}}:
-\batitle{Barrier lyapunov functions for the control of output-constrained
-  nonlinear systems}.
+\batitle{Barrier lyapunov functions for the control of output-constrained nonlinear systems}.
 \bjtitle{Automatica}
 \bvolume{45}(\bissue{4}),
 \bfpage{918}--\blpage{927}
@@ -122,8 +115,7 @@
 \endbibitem
 
 %%% 6
-\bibitem[\protect\citeauthoryear{Hardy
-  et~al.}{1952}]{HardyLittlewoodPolya_1952_Inequalities}
+\bibitem[\protect\citeauthoryear{Hardy et~al.}{1952}]{HardyLittlewoodPolya_1952_Inequalities}
 \begin{bbook}
 \bauthor{\bsnm{Hardy}, \binits{G.H.}},
 \bauthor{\bsnm{Littlewood}, \binits{J.E.}},

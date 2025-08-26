@@ -709,20 +709,14 @@ Let ${S_{j,i}}=\frac{1}{2}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2},
 $$
 \mathcal{K}_{1,i}(z_{1,i},\rho_{1,i})
 =\frac{\rho_{j,i}^2}{2}\frac{\Psi(S_{j,i})}{S_{j,i}}
-=\frac{\pi\,\rho_{j,i}^2}{2\eta T_p}\Big(((S_{j,i}))^{-\eta/2}+n^{-\frac{\eta}{2} }((S_{j,i}))^{\eta/2}\Big).
+=\frac{\pi\,\rho_{j,i}^2}{2\eta T_p}\Big((S_{j,i})^{-\eta/2}+n^{-\frac{\eta}{2} }(S_{j,i})^{\eta/2}\Big).
 $$
 
 把它代回，可设计虚拟控制律为：
-
-$$
-\frac{\rho_{j,i}^4 z_{j,i}}{(\rho_{j,i}^2-z_{j,i}^2)^2}* \\
-\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}
-$$
-
 \begin{equation}\label{eq:25}
 \alpha_i = \dot q_{d,i}-\zeta_i
 -\mathcal{K}_{1,i}(z_{1,i},\rho_{1,i})\Phi_{1,i}
-+\frac{z_{1,i}^3}{\rho_{1,i}^3}\,\dot\rho_{1,i}-k_{1,i}z_{1,i},
++\frac{z_{1,i}^3}{\rho_{1,i}^3}\,\dot\rho_{1,i}-k_{1,i} \rho_{1,i}^2 \Phi_{1,i},
 \end{equation}
 where $k_1=\mathrm{diag}\{k_{1,1},k_{1,i},\cdots,k_{1,n}\}>0$, $k_{1,i}>0$,
 
@@ -751,16 +745,16 @@ Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain the ti
 	\end{aligned}
 \end{equation}
 
-Let $Q=\mathrm{col}\{Q_{2,i}\}$,
-$P=\mathrm{col}\{P_{2,i}\}$,
+Let $Q_2=\mathrm{col}\{Q_{2,i}\}$,
+$P_1=\mathrm{col}\{P_{1,i}\}$,
 $\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
 \begin{equation}\label{eq:tau-cmd}
 \begin{aligned}
 u =&C(q,\dot{q})x_2 + G(q)\\
-&+M(q)\left[-f(x)+\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{Q}{P}z_2+\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i}
+&+M(q)\left[-f(x)+\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{Q_2}{P_1}z_2+\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i}
 -\hat{h}(\chi)
 -\hat w
--k_s\,\mathrm{sgn}(z_{2})-\mathcal{K}_{2}(z_{2},\rho_{2,i}) \Phi_{2}-k_{2}z_{2}\right]
+-k_s\,\mathrm{sgn}(z_{2})-\mathcal{K}_{2}(z_{2},\rho_{2,i}) \Phi_{2}-k_{2}\rho_{2,i}^2 \Phi_{2,i}\right]
 \end{aligned}
 \end{equation}
 
@@ -768,10 +762,10 @@ u =&C(q,\dot{q})x_2 + G(q)\\
 where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s>0$.
 
 Let $\chi=\{q,\dot{q}\}\in\mathbb{R}^m$ be the regressor and $\psi(\chi)\in\mathbb{R}^{N}$ the normalized basis. Approximate the structured uncertainty by 
-\( \hat h_i(\chi)=\theta_i^\top \psi_i(\chi)\),
+\( \hat h_i(\chi)=\hat \theta_i^\top \psi_i(\chi)\),
 with $\theta_i\in\mathbb{R}^{N}  $ adapted online by
 \begin{equation}\label{eq:theta-law}
-\dot\theta_i = \varrho_i\,P_{2,i}\,z_{2,i}\,\psi(\chi) - \kappa_i\,\theta_i,\qquad
+\dot{\hat{\theta}}_i = \varrho_i\,P_{2,i}\psi(\chi) - \kappa_i\,\hat{\theta}_i,\qquad
 \varrho_i,\kappa_i>0.
 \end{equation}
 
@@ -791,10 +785,13 @@ where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,
 设观测误差为 $\tilde w=\hat w-w$.
 根据公式可得到
 \begin{equation}
+	\begin{aligned}
 	\dot V_2
-\le
+\le&
 \sum_{i=1}^n \left( -P_{1,i} k_{1,i}z_{1,i}-\Psi(V_{1,i})-P_{1,i}\tilde\alpha_i\right)
-+\sum_{i=1}^n \left( -P_{2,i} k_{2,i}z_{2,i}-\Psi(V_{2,i})-P_{2,i}\tilde{w}_i  \right)-k_s\sum_{i=1}^n |P_{2,i}|\left\lVert  \mathrm{sgn}(z_{2,i})  \right\rVert_1
++\sum_{i=1}^n \left( -P_{2,i} k_{2,i}z_{2,i}-\Psi(V_{2,i})-P_{2,i}\tilde{w}_i  \right)\\
+&+\sum_{i=1}^n P_{2,i}(h-\hat{h}) -k_s\sum_{i=1}^n |P_{2,i}|\left\lVert  \mathrm{sgn}(z_{2,i})  \right\rVert_1
+\end{aligned}
 \end{equation}
 
 
@@ -833,19 +830,19 @@ P_{2,i}\!\left(\tfrac{z_{2,i}^3}{\rho_{2,i}^3}\dot\rho_{2,i}\right)=Q _{2,i}\dot
 The composite Lyapunov function is constructed as follows
 \begin{equation}\label{eq:45}
 	\begin{aligned}
-		V= &\sum_{i=1}^n(V_{1,i})+\tfrac{1}{2}\tilde\alpha^\top \tilde\alpha+\tfrac{1}{2\gamma_o}\tilde w^\top\tilde w+\sum_{i=1}^n\tfrac{1}{2\varrho_i}\|\tilde\theta_i\|^2\\
-		=&\sum_{i=1}^n \left( -P_{1,i} k_{1,i}z_{1,i}-\Psi(V_{1,i})-P_{1,i}\tilde\alpha_i\right)
-+\sum_{i=1}^n \left( -P_{2,i} k_{2,i}z_{2,i}-\Psi(V_{2,i})-P_{2,i}\tilde{w}_i  \right)\\
-&-k_s\sum_{i=1}^n |P_{2,i}|\left\lVert  \mathrm{sgn}(z_{2,i})  \right\rVert_1+\tfrac{1}{2}\tilde\alpha^\top \tilde\alpha+\tfrac{1}{2\gamma_o}\tilde w^\top\tilde w+\sum_{i=1}^n\tfrac{1}{2\varrho_i}\|\tilde\theta_i\|^2
+		V= &\sum_{i=1}^n V_{2,i}+\tfrac{1}{2}\tilde\alpha^\top \tilde\alpha+\tfrac{1}{2\gamma_o}\tilde w^\top\tilde w+\sum_{i=1}^n\tfrac{1}{2\varrho_i}\|\tilde\theta_i\|^2\\
 	\end{aligned}
 \end{equation}
 
 The time derivative of \cref{eq:45} is given by
-\begin{equation}\label{eq:46}
+\begin{equation}\label{eq:45}
 	\begin{aligned}
-		\dot{V}  & =
+		\dot{V} \le&\sum_{i=1}^n \left( -P_{1,i} k_{1,i}z_{1,i}-\Psi(V_{1,i})-P_{1,i}\tilde\alpha_i\right)
++\sum_{i=1}^n \left( -P_{2,i} k_{2,i}z_{2,i}-\Psi(V_{2,i})-P_{2,i}\tilde{w}_i  \right)\\
+&+\sum_{i=1}^n P_{2,i}(h-\hat{h})-k_s\sum_{i=1}^n |P_{2,i}|\left\lVert  \mathrm{sgn}(z_{2,i})  \right\rVert_1+\tilde\alpha^\top \dot{\tilde \alpha}+\tfrac{1}{\gamma_o}\tilde w^\top \dot{\tilde w}+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i 
 	\end{aligned}
 \end{equation}
+
 
 
 Combined with \cref{eq:4,eq:42}, we have $h_i-\hat h_i=\theta_{i}^{*\top}\psi_i-\hat \theta_{i}^{\top}\psi_i    
@@ -854,21 +851,15 @@ Combined with \cref{eq:4,eq:42}, we have $h_i-\hat h_i=\theta_{i}^{*\top}\psi_i-
 	+\frac12{\bar \theta_{i}}^{2}$, this yields
 	\begin{equation}\label{eq:47}
 		\begin{aligned}
-				&\frac{\beta}{\omega_{2}}
-				  \sum_{i=1}^{n}
-					\varGamma_{2,i}\left(h_i-\hat h_i\right)
-				 +\sum_{i=1}^{n}
+				&\sum_{i=1}^n P_{2,i}(h-\hat{h})+\sum_{i=1}^{n}
 					\frac{1}{\varrho_i}\,\tilde \theta_{i}^{\top}\dot{\tilde \theta}_i \\
-					&= \frac{\beta}{\omega_{2}} \sum_{i}
-					\varGamma_{2,i}\tilde \theta_{i}^{\top}\psi_i
-				 -\sum_{i}
+					&= 
+					\sum_{i=1}^n P_{2,i}(h-\hat{h}) -\sum_{i}
 					\frac{1}{\varrho_i}\tilde \theta_{i}^{\top}
 					\left(
-						-\frac{\beta}{\omega_{2}}\varrho_i
-						 \varGamma_{2,i}\psi_i
-						+\kappa_i\hat \theta_{i}
-					\right)                                                    = -\sum_{i=1}^{n}\frac{\kappa_i}{\varrho_i}\tilde \theta_{i}^{\top}\hat \theta_{i}       \\
-					&  =\sum_{i=1}^n \frac{\kappa_i}{\varrho_i}\,\theta_{i}\|\tilde \theta_{i}\|
+						\varrho_i\,P_{2,i}\psi(\chi) - \kappa_i\,\hat{\theta}_i
+					\right)                                                   \\
+					 &= -\sum_{i=1}^{n}\frac{\kappa_i}{\varrho_i}\tilde \theta_{i}^{\top}\hat \theta_{i}        =\sum_{i=1}^n \frac{\kappa_i}{\varrho_i}\,\theta_{i}\|\tilde \theta_{i}\|
 				- \sum_{i=1}^n \frac{\kappa_i}{\varrho_i}\,\|\tilde \theta_{i}\|^2 \le
 				- \frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \|\tilde \theta_{i}\|^2+\frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \bar \theta_{i}^2,		
 			\end{aligned}
@@ -876,7 +867,7 @@ Combined with \cref{eq:4,eq:42}, we have $h_i-\hat h_i=\theta_{i}^{*\top}\psi_i-
 
 From \cref{eq:22,eq:23}, the time derivative of the filtering error $\dot{\tilde{\alpha}}$ is given as
 \begin{equation}\label{eq:48}
-	\sum_{i=1}^{n}{\tilde{\alpha}}\dot{\tilde{\alpha}}= \sum_{i=1}^{n}{\tilde{\alpha}} \frac{d}{dt}\bar{\alpha}-\lambda\sum_{i=1}^{n}{\tilde{\alpha}}^2,
+	\sum_{i=1}^{n}\tilde\alpha^\top \dot{\tilde \alpha}= \sum_{i=1}^{n}{\tilde{\alpha}}\dot{\alpha}-\frac{1}{\lambda}\sum_{i=1}^{n}{\tilde{\alpha}}^2,
 \end{equation}
 根据\cref{eq:21,eq:23},可知 $\frac{d}{dt} \bar{\alpha}$ 为分段连续函数，在整个定义域上仅在两端处存在有限阶不连续点，但整体仍属于 piecewise continuous 函数。虚拟控制律 $\alpha$ 是由状态反馈设计得到的连续可导函数，其导数 $\dot{\alpha}$ 可由系统状态和参考轨迹导数构成，因此在闭环系统稳定的前提下为有界函数。由此，令$R_i=\frac{d}{dt} \bar{\alpha}$, $R_i$ is a bounded continuous function.
 Then by employing Young's inequality, we obtain:
