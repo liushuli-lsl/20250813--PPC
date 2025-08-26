@@ -696,8 +696,8 @@ In the first step, a BLF is used as an energy function for the error dynamics. W
 
 记
 $
-P_{j,i}=\frac{\rho_{j,i}^4 z_{j,i}}{(\rho_{j,i}^2-z_{j,i}^2)^2},
-Q_{j,i}=\frac{\rho_{j,i} z_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2},
+P_{j,i}=\frac{\rho_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2},
+Q_{j,i}=\frac{ z_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2},
 \Phi_{j,i}=\frac{z_{j,i}\left(\rho_{j,i}^{2}-z_{j,i}^{2}\right)}{\rho_{j,i}^{4}}, j\in\{1,2\}
 $,
 $\dot z_{1,i}= z_{2,i}-\dot q_{d,i}+\alpha^{f}_i+\zeta_i$, 将它们代入 BLF 导数后，并根据公式（），得到
@@ -851,13 +851,13 @@ Combined with \cref{eq:4,eq:42}, we have $h_i-\hat h_i=\theta_{i}^{*\top}\psi_i-
 	+\frac12{\bar \theta_{i}}^{2}$, this yields
 	\begin{equation}\label{eq:47}
 		\begin{aligned}
-				&\sum_{i=1}^n P_{2,i}(h-\hat{h})+\sum_{i=1}^{n}
+				&\sum_{i=1}^{n}
 					\frac{1}{\varrho_i}\,\tilde \theta_{i}^{\top}\dot{\tilde \theta}_i \\
 					&= 
-					\sum_{i=1}^n P_{2,i}(h-\hat{h}) -\sum_{i}
+					-\sum_{i}
 					\frac{1}{\varrho_i}\tilde \theta_{i}^{\top}
 					\left(
-						\varrho_i\,P_{2,i}\psi(\chi) - \kappa_i\,\hat{\theta}_i
+						 - \kappa_i\,\hat{\theta}_i
 					\right)                                                   \\
 					 &= -\sum_{i=1}^{n}\frac{\kappa_i}{\varrho_i}\tilde \theta_{i}^{\top}\hat \theta_{i}        =\sum_{i=1}^n \frac{\kappa_i}{\varrho_i}\,\theta_{i}\|\tilde \theta_{i}\|
 				- \sum_{i=1}^n \frac{\kappa_i}{\varrho_i}\,\|\tilde \theta_{i}\|^2 \le
