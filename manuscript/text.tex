@@ -166,7 +166,7 @@
 
 
 求$V_1$ 的时间导数为
-
+V_{j,i}
 \begin{equation}\label{eq:25}
 	\begin{aligned}
 \dot V_1
@@ -193,11 +193,11 @@ $$
 \dot V_1=\sum_{i=1}^n\!\Big[P_{1,i} z_{1,i}z_{2,i}+P_{1,i}z_{1,i}(\alpha_i+\zeta_i-\dot q_{d,i})-P_{1,i}z_{1,i}\tilde\alpha_i-Q_{1,i}\rho_{1,i} \dot\rho_{1,i}\Big]
 $$
 
-Let ${S_{j,i}}=\frac{1}{2}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}, \Psi(S_{j,i})=\frac{\pi}{ \eta T_p}\Big((S_{j,i})^{\,1-\eta/2}+n^{-\frac{\eta}{2} }(S_{j,i})^{\,1+\eta/2}\Big)$, 我们设计
+Let ${V_{j,i}}=\frac{1}{2}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}, \Psi(V_{j,i})=\frac{\pi}{ \eta T_p}\Big((V_{j,i})^{\,1-\eta/2}+n^{-\frac{\eta}{2} }(V_{j,i})^{\,1+\eta/2}\Big)$, 我们设计
 $$
 \mathcal{K}_{1,i}(z_{j,i},\rho_{j,i})
-=\frac{\rho_{j,i}^2}{2}\frac{\Psi(S_{j,i})}{S_{j,i}}
-=\frac{\pi\,\rho_{j,i}^2}{2\eta T_p}\Big((S_{j,i})^{-\eta/2}+n^{-\frac{\eta}{2} }(S_{j,i})^{\eta/2}\Big).
+=\frac{\rho_{j,i}^2}{2}\frac{\Psi(V_{j,i})}{V_{j,i}}
+=\frac{\pi\,\rho_{j,i}^2}{2\eta T_p}\Big((V_{j,i})^{-\eta/2}+n^{-\frac{\eta}{2} }(V_{j,i})^{\eta/2}\Big).
 $$
 
 把它代回，可设计虚拟控制律为：
@@ -220,16 +220,16 @@ $$
 
 In the second step, a BLF is used as an energy function for the error dynamics. We choose:
 \begin{equation}\label{eq:25}
-	V_2= V_1+\frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}. 
+	V_2= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}. 
 \end{equation}
 
 
 Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain the time derivative of $V_2$ is as
 \begin{equation}
 	\begin{aligned}
-		\dot V_2& = V_1+\sum_{i=1}^n \Big[\,P_{2,i}z_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{2,i}\rho_{2,i}\,\dot\rho_{2,i}\,\Big]\\
+		\dot V_2& = \sum_{i=1}^n \Big[\,P_{2,i}z_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{2,i}\rho_{2,i}\,\dot\rho_{2,i}\,\Big]\\
 		&
-		 = \dot V_1+\sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+h_i(x,t)+g_i(u_i-\Delta u_i)+d'(t)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
+		 = \sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+h_i(x,t)+g_i(u_i-\Delta u_i)+d'(t)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
 	\end{aligned}
 \end{equation}
 
@@ -275,9 +275,7 @@ where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, \omega_d>0, \vartheta(0)=x_2(
 \begin{equation}
 	\begin{aligned}
 	\dot V_2
-\le&
-\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i\right)
-+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right) -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert 
+\le&+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right) -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert +P_{2,i}z_{2,i}\left(h(x)-\hat h(\chi)\right)
 \end{aligned}
 \end{equation}
 
@@ -287,10 +285,10 @@ where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, \omega_d>0, \vartheta(0)=x_2(
 	\begin{aligned}
 		\dot{V} \le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i\right)
 		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right)\\
-		& -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert +\tilde\alpha^\top \dot{\tilde \alpha}+\tfrac{1}{\gamma_o}\tilde \omega^\top \dot{\tilde \omega}+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i \\
+		& -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert +P_{2,i}z_{2,i}\left(h(x)-\hat h(\chi)\right)+\tilde\alpha^\top \dot{\tilde \alpha}+\tfrac{1}{\gamma_o}\tilde \omega^\top \dot{\tilde \omega}+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i \\
 		\le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})\right)
 		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})  \right)\\
-		& -P_{2,i}z_{2,i}\tilde{\omega}_i +\tfrac{1}{\gamma_o}\tilde \omega^\top \dot{\tilde \omega}-k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert+\tilde\alpha^\top \dot{\tilde \alpha}-P_{1,i}z_{1,i}\tilde\alpha_i+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i 
+		& -P_{2,i}z_{2,i}\tilde{\omega}_i +\tfrac{1}{\gamma_o}\tilde \omega^\top \dot{\tilde \omega}-k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert+\tilde\alpha^\top \dot{\tilde \alpha}-P_{1,i}z_{1,i}\tilde\alpha_i+P_{2,i}z_{2,i}\left(h(x)-\hat h(\chi)\right)+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i 
 	\end{aligned}
 \end{equation}
 
