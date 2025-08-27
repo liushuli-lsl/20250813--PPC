@@ -678,7 +678,6 @@ In the first step, a BLF is used as an energy function for the error dynamics. W
 \end{equation}
 
 求$V_1$ 的时间导数为
-
 \begin{equation}\label{eq:25}
 	\begin{aligned}
 \dot V_1
@@ -696,27 +695,27 @@ In the first step, a BLF is used as an energy function for the error dynamics. W
 
 记
 $
-P_{j,i}=\frac{\rho_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2},
-Q_{j,i}=\frac{ z_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2},
-\Phi_{j,i}=\frac{z_{j,i}\left(\rho_{j,i}^{2}-z_{j,i}^{2}\right)}{\rho_{j,i}^{4}}, j\in\{1,2\}
+P_{j,i}=\frac{\rho_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2}>0,
+Q_{j,i}=\frac{ z_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2}>0,
+\Phi_{j,i}=\frac{z_{j,i}\left(\rho_{j,i}^{2}-z_{j,i}^{2}\right)}{\rho_{j,i}^{4}}=\frac{z_{j,i}(\rho_{j,i}^2-z_{j,i}^2)}{P_{j,i}}, j\in\{1,2\}
 $,
 $\dot z_{1,i}= z_{2,i}-\dot q_{d,i}+\alpha^{f}_i+\zeta_i$, 将它们代入 BLF 导数后，并根据公式（），得到
 $$
-\dot V_1=\sum_{i=1}^n\!\Big[P_{1,i} z_{2,i}+P_{1,i}(\alpha_i+\zeta_i-\dot q_{d,i})-P_{1,i}\tilde\alpha_i-Q_{1,i}\dot\rho_{1,i}\Big]
+\dot V_1=\sum_{i=1}^n\!\Big[P_{1,i} z_{1,i}z_{2,i}+P_{1,i}z_{1,i}(\alpha_i+\zeta_i-\dot q_{d,i})-P_{1,i}z_{1,i}\tilde\alpha_i-Q_{1,i}\rho_{1,i} \dot\rho_{1,i}\Big]
 $$
 
-Let ${S_{j,i}}=\frac{1}{2}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}, \Psi(S_{j,i})=\frac{\pi}{ \eta T_p}\Big((S_{j,i})^{\,1-\eta/2}+n^{-\frac{\eta}{2} }(S_{j,i})^{\,1+\eta/2}\Big)$, 我们设计
+Let ${V_{j,i}}=\frac{1}{2}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}, \Psi(V_{j,i})=\frac{\pi}{ \eta T_p}\Big((V_{j,i})^{\,1-\eta/2}+n^{-\frac{\eta}{2} }(V_{j,i})^{\,1+\eta/2}\Big)$, 我们设计
 $$
-\mathcal{K}_{1,i}(z_{1,i},\rho_{1,i})
-=\frac{\rho_{j,i}^2}{2}\frac{\Psi(S_{j,i})}{S_{j,i}}
-=\frac{\pi\,\rho_{j,i}^2}{2\eta T_p}\Big((S_{j,i})^{-\eta/2}+n^{-\frac{\eta}{2} }(S_{j,i})^{\eta/2}\Big).
+\mathcal{K}_{1,i}(z_{j,i},\rho_{j,i})
+=\frac{\rho_{j,i}^2}{2}\frac{\Psi(V_{j,i})}{V_{j,i}}
+=\frac{\pi\,\rho_{j,i}^2}{2\eta T_p}\Big((V_{j,i})^{-\eta/2}+n^{-\frac{\eta}{2} }(V_{j,i})^{\eta/2}\Big).
 $$
 
 把它代回，可设计虚拟控制律为：
 \begin{equation}\label{eq:25}
-\alpha_i = \dot q_{d,i}-\zeta_i
+\alpha_i = \dot q_{d,i}-\zeta_i+\frac{z_{1,i}^3}{\rho_{1,i}^3}\,\dot\rho_{1,i}
 -\mathcal{K}_{1,i}(z_{1,i},\rho_{1,i})\Phi_{1,i}
-+\frac{z_{1,i}^3}{\rho_{1,i}^3}\,\dot\rho_{1,i}-k_{1,i} \rho_{1,i}^2 \Phi_{1,i},
+-k_{1,i} \rho_{1,i}^2 \Phi_{1,i},
 \end{equation}
 where $k_1=\mathrm{diag}\{k_{1,1},k_{1,i},\cdots,k_{1,n}\}>0$, $k_{1,i}>0$,
 
@@ -724,24 +723,24 @@ where $k_1=\mathrm{diag}\{k_{1,1},k_{1,i},\cdots,k_{1,n}\}>0$, $k_{1,i}>0$,
 
 $$
 \dot V_1
-\le \sum_{i=1}^n \Big[ P_{1,i} z_{2,i}
--P_{1,i} k_{1,i}z_{1,i}-\Psi(V_{1,i})-P_{1,i}\tilde\alpha_i
+\le \sum_{i=1}^n \Big[ P_{1,i}z_{1,i} z_{2,i}
+-\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i- k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2} 
 \Big].
 $$
 
 
 In the second step, a BLF is used as an energy function for the error dynamics. We choose:
 \begin{equation}\label{eq:25}
-	V_2= V_1+\frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}. 
+	V_2= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}. 
 \end{equation}
 
 
 Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain the time derivative of $V_2$ is as
 \begin{equation}
 	\begin{aligned}
-		\dot V_2& = \sum_{i=1}^n \Big[\,P_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{2,i}\,\dot\rho_{2,i}\,\Big]\\
+		\dot V_2& = \sum_{i=1}^n \Big[\,P_{2,i}z_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{2,i}\rho_{2,i}\,\dot\rho_{2,i}\,\Big]\\
 		&
-		 = \dot V_1+\sum_{i=1}^n \left[\,P_{2,i}\,\left(f_i(x)+h_i(x,t)+g_i(u_i-\Delta u_i)+d'(t)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\frac{Q_{2,i}}{P_{2,i}}\,\dot\rho_{2,i} \right)\right]
+		 = \sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+h_i(x,t)+g_i(u_i-\Delta u_i)+d'(t)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
 	\end{aligned}
 \end{equation}
 
@@ -751,10 +750,10 @@ $\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
 \begin{equation}\label{eq:tau-cmd}
 \begin{aligned}
 u =&C(q,\dot{q})x_2 + G(q)\\
-&+M(q)\left[-f(x)+\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{Q_2}{P_1}z_2+\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i}
+&+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i}-\mathcal{K}_{2}(z_{2},\rho_{2,i}) \Phi_{2}
 -\hat{h}(\chi)
--\hat w
--k_s\,\mathrm{sgn}(z_{2})-\mathcal{K}_{2}(z_{2},\rho_{2,i}) \Phi_{2}-k_{2}\rho_{2,i}^2 \Phi_{2,i}\right]
+-\hat \omega
+-k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2,i}^2 \Phi_{2,i}\right]
 \end{aligned}
 \end{equation}
 
@@ -764,33 +763,45 @@ where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s
 Let $\chi=\{q,\dot{q}\}\in\mathbb{R}^m$ be the regressor and $\psi(\chi)\in\mathbb{R}^{N}$ the normalized basis. Approximate the structured uncertainty by 
 \( \hat h_i(\chi)=\hat \theta_i^\top \psi_i(\chi)\),
 with $\theta_i\in\mathbb{R}^{N}  $ adapted online by
+% \begin{equation}\label{eq:theta-law}
+% \dot{\hat{\theta}}_i = \varrho_i\,P_{2,i} z_{2,i}\psi(\chi) - \kappa_i\,\hat{\theta}_i,\qquad
+% \varrho_i,\kappa_i>0.
+% \end{equation}
 \begin{equation}\label{eq:theta-law}
-\dot{\hat{\theta}}_i = \varrho_i\,P_{2,i}\psi(\chi) - \kappa_i\,\hat{\theta}_i,\qquad
-\varrho_i,\kappa_i>0.
-\end{equation}
+	\dot{\hat{\theta}}_i =  - \kappa_i\,\hat{\theta}_i,\qquad
+	\varrho_i,\kappa_i>0.
+	\end{equation}
 
-
+% 将外扰的项定义为
+% $\omega(x,t)= M^{-1}(q) d(t)$。
 将结构不确定估计误差和外扰的剩余项定义为
-$w(x,t)=h(x)-\hat h(\chi)+ M^{-1}(q) d(t)$。
+$\omega(x,t)=h(x)-\hat h(\chi)+ M^{-1}(q) d(t)$。
+
 为避免直接微分速度，采用一阶跟踪微分器作为观测器
 \begin{equation}
 	\begin{cases}
 \dot\vartheta =-\omega_d\,\vartheta+\omega_d\,x_2,  \\
 \hat{\dot x}_2=\omega_d(x_2-\vartheta),   \\
-\dot{\hat w}= -\Lambda_o\,\hat w
+\dot{\hat \omega}= -\Lambda_o\,\hat \omega
 +\Lambda_o\left(\hat{\dot x}_2 - f(x) - M^{-1}(q)\,\mathrm{sat}(u) - \hat h(\chi)\right),
 \end{cases}
 \end{equation}
-where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,
-设观测误差为 $\tilde w=\hat w-w$.
+where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, \omega_d>0, \vartheta(0)=x_2(0), \hat \omega(0)=0$,
+设观测误差为 $\tilde \omega=\omega-\hat\omega$. 其动力学为
+
+$$
+\dot{\tilde\omega}
+= -\Lambda_o\,\tilde\omega\;+\;\Delta_\omega,\qquad
+\Delta_\omega:=\dot\omega-\Lambda_o\,\varepsilon_d,
+$$
+where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,$\varepsilon_d:=\hat{\dot x}_2-\dot x_2$ 为跟踪微分器误差。
+
+
 根据公式可得到
 \begin{equation}
 	\begin{aligned}
 	\dot V_2
-\le&
-\sum_{i=1}^n \left( -P_{1,i} k_{1,i}z_{1,i}-\Psi(V_{1,i})-P_{1,i}\tilde\alpha_i\right)
-+\sum_{i=1}^n \left( -P_{2,i} k_{2,i}z_{2,i}-\Psi(V_{2,i})-P_{2,i}\tilde{w}_i  \right)\\
-&+\sum_{i=1}^n P_{2,i}(h-\hat{h}) -k_s\sum_{i=1}^n |P_{2,i}|\left\lVert  \mathrm{sgn}(z_{2,i})  \right\rVert_1
+\le&+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right) -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert
 \end{aligned}
 \end{equation}
 
@@ -809,10 +820,10 @@ where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,
 \begin{proof}
 % Adding $\dot V_1$ (Step~1 result) and $\dot V_2$, and substituting \eqref{eq:tau-cmd}–\eqref{eq:dob} and
 % \eqref{eq:theta-law}, we obtain the cancellations
-\[
-P_{2,i}\!\left(-\tfrac{G_{1,i}}{P_{2,i}}z_{2,i}\right)=-G_{1,i}z_{2,i},\qquad
-P_{2,i}\!\left(\tfrac{z_{2,i}^3}{\rho_{2,i}^3}\dot\rho_{2,i}\right)=Q _{2,i}\dot\rho_{2,i},
-\]
+% \[
+% P_{2,i}\!\left(-\tfrac{G_{1,i}}{P_{2,i}}z_{2,i}\right)=-G_{1,i}z_{2,i},\qquad
+% P_{2,i}\!\left(\tfrac{z_{2,i}^3}{\rho_{2,i}^3}\dot\rho_{2,i}\right)=Q _{2,i}\dot\rho_{2,i},
+% \]
 % so that
 % \[
 % \dot V_1+\dot V_2
@@ -835,13 +846,18 @@ The composite Lyapunov function is constructed as follows
 \end{equation}
 
 The time derivative of \cref{eq:45} is given by
+
 \begin{equation}\label{eq:45}
 	\begin{aligned}
-		\dot{V} \le&\sum_{i=1}^n \left( -P_{1,i} k_{1,i}z_{1,i}-\Psi(V_{1,i})-P_{1,i}\tilde\alpha_i\right)
-+\sum_{i=1}^n \left( -P_{2,i} k_{2,i}z_{2,i}-\Psi(V_{2,i})-P_{2,i}\tilde{w}_i  \right)\\
-&+\sum_{i=1}^n P_{2,i}(h-\hat{h})-k_s\sum_{i=1}^n |P_{2,i}|\left\lVert  \mathrm{sgn}(z_{2,i})  \right\rVert_1+\tilde\alpha^\top \dot{\tilde \alpha}+\tfrac{1}{\gamma_o}\tilde w^\top \dot{\tilde w}+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i 
+		\dot{V} \le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i\right)
+		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right)\\
+		& -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert +\tilde\alpha^\top \dot{\tilde \alpha}+\tilde \omega^\top \dot{\tilde \omega}+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i \\
+		\le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})\right)
+		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})  \right)\\
+		& -\sum_{i=1}^nP_{2,i}z_{2,i}\tilde{\omega}_i +\tilde \omega^\top \dot{\tilde \omega}-k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert+\tilde\alpha^\top \dot{\tilde \alpha}-\sum_{i=1}^n P_{1,i}z_{1,i}\tilde\alpha_i+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i 
 	\end{aligned}
 \end{equation}
+
 
 
 
@@ -856,9 +872,8 @@ Combined with \cref{eq:4,eq:42}, we have $h_i-\hat h_i=\theta_{i}^{*\top}\psi_i-
 					&= 
 					-\sum_{i}
 					\frac{1}{\varrho_i}\tilde \theta_{i}^{\top}
-					\left(
-						 - \kappa_i\,\hat{\theta}_i
-					\right)                                                   \\
+					\left(- \kappa_i\,\hat{\theta}_i
+					\right)                                               \\
 					 &= -\sum_{i=1}^{n}\frac{\kappa_i}{\varrho_i}\tilde \theta_{i}^{\top}\hat \theta_{i}        =\sum_{i=1}^n \frac{\kappa_i}{\varrho_i}\,\theta_{i}\|\tilde \theta_{i}\|
 				- \sum_{i=1}^n \frac{\kappa_i}{\varrho_i}\,\|\tilde \theta_{i}\|^2 \le
 				- \frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \|\tilde \theta_{i}\|^2+\frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \bar \theta_{i}^2,		
@@ -876,6 +891,83 @@ Then by employing Young's inequality, we obtain:
 		\sum_{i=1}^{n}{\tilde{\alpha}}\dot{\tilde{\alpha}}\leq -\frac{\lambda}{2} \sum_{i=1}^{n} {\tilde{\alpha}}^{2} + \frac{1}{2\lambda} \sum_{i=1}^{n}R_{i}^2. 
 	\end{aligned}
 \end{equation}
+
+
+
+
+
+Let 
+$$
+\mathcal{L} =-\sum_{i=1}^nP_{2,i}z_{2,i}\tilde{\omega}_i\;+\;\tilde \omega^\top \dot{\tilde \omega}\;-\;k_s\sum_{i=1}^n P_{2,i} | z_{2,i} |
+$$
+
+
+利用不等式 $ab\le k\,a+\frac{b^2}{4k}$（$(\sqrt{k\,a}-\frac{b}{2\sqrt{k}})^2\ge0$）并取
+$a=P_{2,i}|z_{2,i}|,\ b=|\tilde\omega_i|,\ k=k_s$，对每个通道有
+
+$$
+-\,P_{2,i}z_{2,i}\tilde\omega_i
+\ \le\
+P_{2,i}|z_{2,i}|\,|\tilde\omega_i|
+\ \le\
+k_s P_{2,i}|z_{2,i}|+\frac{1}{4k_s}\tilde\omega_i^{\,2}.
+$$
+
+于是
+
+$$
+-\,k_s\!\sum_{i=1}^n\! P_{2,i}|z_{2,i}|
+-\sum_{i=1}^n P_{2,i}z_{2,i}\tilde\omega_i
+\ \le\
+\frac{1}{4k_s}\,\|\tilde\omega\|^2
+$$
+
+
+由观测器误差$
+\dot{\tilde\omega}= -\Lambda_o\,\tilde\omega+\Delta_\omega,
+\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0$, 并根据Young不等式得
+
+$$
+\tilde\omega^\top\dot{\tilde\omega}
+= -\tilde\omega^\top\Lambda_o\tilde\omega+\tilde\omega^\top\Delta_\omega
+\ \le\
+-\tilde\omega^\top\Lambda_o\tilde\omega
++\frac{\varepsilon}{2}\tilde\omega^\top\Lambda_o\tilde\omega
++\frac{1}{2\varepsilon}\Delta_\omega^\top\Lambda_o^{-1}\Delta_\omega \le\
+-\Big(1-\tfrac{\varepsilon}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
++\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2,
+$$
+
+
+
+把（A）与（B）相加：
+
+$$
+\begin{aligned}
+	\mathcal{L}
+&\le
+-\Big(1-\tfrac{\varepsilon}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
++\frac{1}{4k_s}\|\tilde\omega\|^2
++\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2.
+\end{aligned}
+$$
+
+利用 $\tilde\omega^\top\Lambda_o\tilde\omega\ge \lambda_{o,\min}\|\tilde\omega\|^2$，得到
+
+$$
+\mathcal{L} \le\
+-\Big(\big(1-\tfrac{\varepsilon}{2}\big)\lambda_{o,\min}-\tfrac{1}{4k_s}\Big)\|\tilde\omega\|^2
++\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2.
+$$
+
+令 $\varepsilon=\tfrac12$（简洁且常用），净负系数为 $\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}$。
+只要$
+\boxed{ \ k_s\;>\;\frac{1}{3\,\lambda_{o,\min}}\ }$
+
+ $\frac{1}{2\varepsilon}\|\Lambda_o^{-1/2}\Delta_\omega\|^2$ 作为输入项（由 $\Delta_\omega=\dot\omega-\Lambda_o\varepsilon_d$ 决定）并入 $\sigma(\|r(t)\|)$。
+
+
+
 
 
 

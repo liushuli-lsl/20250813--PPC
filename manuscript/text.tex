@@ -166,7 +166,6 @@
 
 
 求$V_1$ 的时间导数为
-V_{j,i}
 \begin{equation}\label{eq:25}
 	\begin{aligned}
 \dot V_1
@@ -257,9 +256,11 @@ with $\theta_i\in\mathbb{R}^{N}  $ adapted online by
 \varrho_i,\kappa_i>0.
 \end{equation}
 
-
+% 将外扰的项定义为
+% $\omega(x,t)= M^{-1}(q) d(t)$。
 将结构不确定估计误差和外扰的剩余项定义为
 $\omega(x,t)=h(x)-\hat h(\chi)+ M^{-1}(q) d(t)$。
+
 为避免直接微分速度，采用一阶跟踪微分器作为观测器
 \begin{equation}
 	\begin{cases}
@@ -269,15 +270,29 @@ $\omega(x,t)=h(x)-\hat h(\chi)+ M^{-1}(q) d(t)$。
 +\Lambda_o\left(\hat{\dot x}_2 - f(x) - M^{-1}(q)\,\mathrm{sat}(u) - \hat h(\chi)\right),
 \end{cases}
 \end{equation}
-where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, \omega_d>0, \vartheta(0)=x_2(0)$,
-设观测误差为 $\tilde \omega=\omega-\hat\omega$.
+where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, \omega_d>0, \vartheta(0)=x_2(0), \hat \omega(0)=0$,
+设观测误差为 $\tilde \omega=\omega-\hat\omega$. 其动力学为
+
+$$
+\dot{\tilde\omega}
+= -\Lambda_o\,\tilde\omega\;+\;\Delta_\omega,\qquad
+\Delta_\omega:=\dot\omega-\Lambda_o\,\varepsilon_d,
+$$
+where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,$\varepsilon_d:=\hat{\dot x}_2-\dot x_2$ 为跟踪微分器误差。
+
+
 根据公式可得到
 \begin{equation}
 	\begin{aligned}
 	\dot V_2
-\le&+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right) -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert +P_{2,i}z_{2,i}\left(h(x)-\hat h(\chi)\right)
+\le&+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right) -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert
 \end{aligned}
 \end{equation}
+
+
+
+
+
 
 
 
@@ -285,10 +300,10 @@ where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, \omega_d>0, \vartheta(0)=x_2(
 	\begin{aligned}
 		\dot{V} \le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i\right)
 		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right)\\
-		& -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert +P_{2,i}z_{2,i}\left(h(x)-\hat h(\chi)\right)+\tilde\alpha^\top \dot{\tilde \alpha}+\tfrac{1}{\gamma_o}\tilde \omega^\top \dot{\tilde \omega}+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i \\
+		& -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert +\tilde\alpha^\top \dot{\tilde \alpha}+\tilde \omega^\top \dot{\tilde \omega}+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i \\
 		\le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})\right)
 		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})  \right)\\
-		& -P_{2,i}z_{2,i}\tilde{\omega}_i +\tfrac{1}{\gamma_o}\tilde \omega^\top \dot{\tilde \omega}-k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert+\tilde\alpha^\top \dot{\tilde \alpha}-P_{1,i}z_{1,i}\tilde\alpha_i+P_{2,i}z_{2,i}\left(h(x)-\hat h(\chi)\right)+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i 
+		& -\sum_{i=1}^nP_{2,i}z_{2,i}\tilde{\omega}_i +\tilde \omega^\top \dot{\tilde \omega}-k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert+\tilde\alpha^\top \dot{\tilde \alpha}-\sum_{i=1}^n P_{1,i}z_{1,i}\tilde\alpha_i+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i 
 	\end{aligned}
 \end{equation}
 
@@ -296,12 +311,334 @@ $$
 \rho_{2,i}^2 - z_{2,i}^2 \le \rho_{2,i}^2
 $$
 
-\begin{equation}\label{eq:45}
-	\begin{aligned}
 
 
-	\end{aligned}
-\end{equation}
+Let 
+$$
+\mathcal{L} =-\sum_{i=1}^nP_{2,i}z_{2,i}\tilde{\omega}_i\;+\;\tilde \omega^\top \dot{\tilde \omega}\;-\;k_s\sum_{i=1}^n P_{2,i} | z_{2,i} |
+$$
+
+
+利用不等式 $ab\le k\,a+\frac{b^2}{4k}$（$(\sqrt{k\,a}-\frac{b}{2\sqrt{k}})^2\ge0$）并取
+$a=P_{2,i}|z_{2,i}|,\ b=|\tilde\omega_i|,\ k=k_s$，对每个通道有
+
+$$
+-\,P_{2,i}z_{2,i}\tilde\omega_i
+\ \le\
+P_{2,i}|z_{2,i}|\,|\tilde\omega_i|
+\ \le\
+k_s P_{2,i}|z_{2,i}|+\frac{1}{4k_s}\tilde\omega_i^{\,2}.
+$$
+
+于是
+
+$$
+-\,k_s\!\sum_{i=1}^n\! P_{2,i}|z_{2,i}|
+-\sum_{i=1}^n P_{2,i}z_{2,i}\tilde\omega_i
+\ \le\
+\frac{1}{4k_s}\,\|\tilde\omega\|^2
+$$
+
+
+由观测器误差$
+\dot{\tilde\omega}= -\Lambda_o\,\tilde\omega+\Delta_\omega,
+\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0$, 并根据Young不等式得
+
+$$
+\tilde\omega^\top\dot{\tilde\omega}
+= -\tilde\omega^\top\Lambda_o\tilde\omega+\tilde\omega^\top\Delta_\omega
+\ \le\
+-\tilde\omega^\top\Lambda_o\tilde\omega
++\frac{\varepsilon}{2}\tilde\omega^\top\Lambda_o\tilde\omega
++\frac{1}{2\varepsilon}\Delta_\omega^\top\Lambda_o^{-1}\Delta_\omega \le\
+-\Big(1-\tfrac{\varepsilon}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
++\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2,
+$$
+
+
+
+把（A）与（B）相加：
+
+$$
+\begin{aligned}
+	\mathcal{L}
+&\le
+-\Big(1-\tfrac{\varepsilon}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
++\frac{1}{4k_s}\|\tilde\omega\|^2
++\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2.
+\end{aligned}
+$$
+
+利用 $\tilde\omega^\top\Lambda_o\tilde\omega\ge \lambda_{o,\min}\|\tilde\omega\|^2$，得到
+
+$$
+\mathcal{L} \le\
+-\Big(\big(1-\tfrac{\varepsilon}{2}\big)\lambda_{o,\min}-\tfrac{1}{4k_s}\Big)\|\tilde\omega\|^2
++\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2.
+$$
+
+令 $\varepsilon=\tfrac12$（简洁且常用），净负系数为 $\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}$。
+只要$
+\boxed{ \ k_s\;>\;\frac{1}{3\,\lambda_{o,\min}}\ }$
+
+ $\frac{1}{2\varepsilon}\|\Lambda_o^{-1/2}\Delta_\omega\|^2$ 作为输入项（由 $\Delta_\omega=\dot\omega-\Lambda_o\varepsilon_d$ 决定）并入 $\sigma(\|r(t)\|)$。
+
+% ---
+
+% ## 融入总 Lyapunov 导数与 PTS–ISS
+
+% 将（C）代入总 $\dot V$，并与一步/二步 BLF 的主衰减项
+% $-\Psi(S_{j,i})$、$-k_{j,i}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}$ 合并，再用幂和不等式把 $\sum_i\Psi(S_{j,i})$ 下界为 $V$ 的函数，可得
+
+% $$
+% \dot V
+% \ \le\
+% -\frac{\pi}{\eta T_p^\star}\big(V^{1-\eta/2}+V^{1+\eta/2}\big)
+% \ -\ c_\omega\|\tilde\omega\|^2
+% \ +\ \sigma(\|r(t)\|),
+% $$
+
+% 其中 $c_\omega=\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}>0$。这正是你需要的 **PTS–ISS** 标准形式。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% 其中 $\odot$ 表示Hadamard积。
+% % 特别地，取 $\varepsilon_1=\varepsilon_2=\tfrac12$ 时，
+
+% % \begin{equation}\label{eq:45}
+% % 	\begin{aligned}
+% % \mathcal T
+% % \le 
+% % &-\tfrac12\,\tilde\omega^\top\Lambda_o\tilde\omega
+% % \;+\;\big\|\Lambda_o^{-1/2}(P_2\!\odot z_2)\big\|^2
+% % \;+\;\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2 .
+% % \end{aligned}
+% % \end{equation}
+
+% Let
+% \begin{equation}\label{eq:45}
+% 	\begin{aligned}
+% \mathcal T =& -\sum_{i=1}^n P_{2,i}z_{2,i}\tilde\omega_i\;+\;\tilde\omega^\top\dot{\tilde\omega}\\
+% = &-\sum_{i=1}^n P_{2,i}z_{2,i}\tilde\omega_i\;+\;\tilde\omega^\top(-\Lambda_o\tilde\omega+\Delta_\omega)
+% = -\tilde\omega^\top\Lambda_o\tilde\omega\;-\;\sum_i P_{2,i}z_{2,i}\tilde\omega_i\;+\;\tilde\omega^\top\Delta_\omega .
+% \end{aligned}
+% \end{equation}
+
+
+% 对第$i$个通道展开
+
+% $$
+% \mathcal T_i
+% = -\lambda_{o,i}\tilde\omega_i^2 \;-\;P_{2,i}z_{2,i}\tilde\omega_i \;+\; \tilde\omega_i\Delta_{\omega,i}.
+% $$
+
+% 根据加权Young不等式（配权 $\lambda_{o,i}$ 以便与前述二次负项合并）：
+
+% \begin{equation}\label{eq:45}
+% 	\begin{aligned}
+% 		&
+% -\;P_{2,i}z_{2,i}\tilde\omega_i
+% \le \frac{\varepsilon_1}{2}\lambda_{o,i}\tilde\omega_i^2
+% +\frac{1}{2\varepsilon_1}\frac{(P_{2,i}z_{2,i})^2}{\lambda_{o,i}},
+% \\
+% &
+% \tilde\omega_i\Delta_{\omega,i}
+% \le \frac{\varepsilon_2}{2}\lambda_{o,i}\tilde\omega_i^2
+% +\frac{1}{2\varepsilon_2}\frac{\Delta_{\omega,i}^2}{\lambda_{o,i}}.
+% \end{aligned}
+% \end{equation}
+
+% 其中，定义任意 $\varepsilon_1,\varepsilon_2\in(0,1)$
+% 代回并整理得到
+
+% $$
+% \mathcal T_i
+% \le
+% -\Big(1-\tfrac{\varepsilon_1+\varepsilon_2}{2}\Big)\lambda_{o,i}\tilde\omega_i^2
+% +\frac{1}{2\varepsilon_1}\frac{(P_{2,i}z_{2,i})^2}{\lambda_{o,i}}
+% +\frac{1}{2\varepsilon_2}\frac{\Delta_{\omega,i}^2}{\lambda_{o,i}}.
+% $$
+
+% 对 $i=1,\dots,n$ 求和，并以矩阵范式写作
+
+% $$
+% \sum_i \lambda_{o,i}\tilde\omega_i^2=\tilde\omega^\top\Lambda_o\tilde\omega,\quad
+% \sum_i \frac{(P_{2,i}z_{2,i})^2}{\lambda_{o,i}}
+% =\big\|\Lambda_o^{-1/2}(P_2\!\odot z_2)\big\|^2,\quad
+% \sum_i \frac{\Delta_{\omega,i}^2}{\lambda_{o,i}}
+% =\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2,
+% $$
+
+% $$
+% \boxed{\;
+% \mathcal T
+% := -\sum_{i=1}^n P_{2,i}z_{2,i}\tilde\omega_i\;+\;\tilde\omega^\top\dot{\tilde\omega}
+% \ \le\
+% -\Big(1-\tfrac{\varepsilon_1+\varepsilon_2}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
+% \;+\;\frac{1}{2\varepsilon_1}\big\|\Lambda_o^{-1/2}(P_2\!\odot z_2)\big\|^2
+% \;+\;\frac{1}{2\varepsilon_2}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2,}
+% $$
+
+% 由上式第一项
+% $$
+% -\Big(1-\tfrac{\varepsilon_1+\varepsilon_2}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
+% $$
+
+% 给出关于 $\tilde\omega$ 的确定负耗散（取 $\varepsilon_1+\varepsilon_2<2$ 即可）。
+
+% 2. **输入相关项.** 其余两项
+
+% $$
+% \frac{1}{2\varepsilon_1}\big\|\Lambda_o^{-1/2}(P_2\!\odot z_2)\big\|^2,\qquad
+% \frac{1}{2\varepsilon_2}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2
+% $$
+
+% 分别由 BLF 管道内 $z_2$ 与性能边界/外扰/微分器误差（$\Delta_\omega=\dot\omega-\Lambda_o\varepsilon_d$）所确定。它们可与实际控制律中的鲁棒项
+% $-k_s\sum_i P_{2,i}|z_{2,i}|$ 通过Young不等式进一步配平（部分吸收），余项并入输入函数 $\sigma(\|r(t)\|)$。
+
+% 3. **并入总导数.** 将上述不等式嵌入复合Lyapunov导数（叠加一步/二步的 $-\Psi(S_{j,i})$、$-k_{j,i}\tfrac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}$、滤波误差与参数泄露项的负定耗散），并利用幂和不等式把 $\sum_i\Psi(S_{j,i})$ 下界为 $V$ 的函数，可得
+
+% $$
+% \dot V
+% \;\le\;
+% -\frac{\pi}{\eta T_p^\star}\Big(V^{1-\eta/2}+V^{1+\eta/2}\Big)
+% \;+\;\sigma\big(\|r(t)\|\big),
+% $$
+
+% 从而满足预定义时间—输入到状态稳定（PTS–ISS）的标准格式。上述推导中参数 $\varepsilon_1,\varepsilon_2$ 可选为 $\tfrac12$ 以简化表达；$\Lambda_o$ 的对角元则由观测器带宽与噪声鲁棒性综合权衡给定。
+
+
+
+
+
+
+% 利用不等式$ab\ \le\ k\,a\;+\;\frac{b^2}{4k}\qquad(\text{由 }(\sqrt{k\,a}-\tfrac{b}{2\sqrt{k}})^2\ge0)$,
+% 并取$a=P_{2,i}|z_{2,i}|,\qquad b=|\tilde\omega_i|,\qquad k=k_s$
+
+% 得到
+% $$
+% -P_{2,i}z_{2,i}\tilde\omega_i
+% \ \le\ 
+% P_{2,i}|z_{2,i}|\,|\tilde\omega_i|
+% \ \le\ 
+% k_s P_{2,i}|z_{2,i}|\;+\;\frac{1}{4k_s}\,\tilde\omega_i^{\,2}.
+% $$
+
+% $$
+
+% -\,k_s\sum_i P_{2,i}|z_{2,i}|\;-\;\sum_i P_{2,i}z_{2,i}\tilde\omega_i
+% \;\le\;
+% \frac{1}{4k_s}\,\|\tilde\omega\|^2.
+% $$
+
+%  与观测器负项合并，给出净耗散，观测误差满足
+
+% $$
+% \dot{\tilde\omega}=-\Lambda_o\tilde\omega+\Delta_\omega,
+% \quad \Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0,
+% $$
+
+% 取 $\gamma_o=1$，则
+
+% $$
+% \tilde\omega^\top\dot{\tilde\omega}
+% \le
+% -\lambda_{o,\min}\|\tilde\omega\|^2
+% +\frac{\varepsilon}{2}\|\tilde\omega\|^2
+% +\frac{1}{2\varepsilon}\|\Delta_\omega\|^2
+% $$
+
+% （Young 不等式，任意 $\varepsilon>0$）。
+
+% 把这条与上面的配平结果相加：
+
+% $$
+% \begin{aligned}
+% &\underbrace{-\,k_s\sum_i P_{2,i}|z_{2,i}|}_{\text{鲁棒项}}
+% \;+\;
+% \underbrace{\Big(-\sum_i P_{2,i}z_{2,i}\tilde\omega_i\Big)}_{\text{交叉项}}
+% \;+\;
+% \underbrace{\tilde\omega^\top\dot{\tilde\omega}}_{\text{观测器项}}\\[2pt]
+% &\le
+% -\Big(\lambda_{o,\min}-\tfrac{\varepsilon}{2}-\tfrac{1}{4k_s}\Big)\,\|\tilde\omega\|^2
+% \;+\;\frac{1}{2\varepsilon}\,\|\Delta_\omega\|^2.
+% \end{aligned}
+% $$
+
+% 令 $\varepsilon=\tfrac{\lambda_{o,\min}}{2}$，得
+
+% $$
+% -\Big(\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}\Big)\,\|\tilde\omega\|^2
+% \;+\;\frac{1}{\lambda_{o,\min}}\,\|\Delta_\omega\|^2.
+% $$
+
+% 只要满足
+
+% $$
+% \boxed{\ k_s\;>\;\frac{1}{3\,\lambda_{o,\min}}\ }
+% $$
+
+% 则系数 $\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}>0$，于是得到关于 $\tilde\omega$ 的**净负耗散**，而 $\|\Delta_\omega\|^2$（由 $\dot\omega$ 和微分器误差等决定）可并入 ISS 的输入函数 $\sigma(\|r(t)\|)$。
+
+
+% 将上述结论与一步/二步 BLF 的项（$-\Psi(\cdot)$、$-k_{j,i}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}$ 等）合并，有
+
+% $$
+% \dot V
+% \;\le\;
+% -\frac{\pi}{\eta T_p^\star}\Big(V^{1-\eta/2}+V^{1+\eta/2}\Big)
+% -\underbrace{c_\omega\|\tilde\omega\|^2}_{\text{净耗散}}
+% +\underbrace{\sigma(\|r(t)\|)}_{\text{输入项}},
+% $$
+
+% 其中 $c_\omega=\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}>0$，从而满足 **PTS–ISS** 的标准格式。
+% 这就是与鲁棒项 $-k_s\sum_i P_{2,i}|z_{2,i}|$ 的“配平吸收”全过程。
+
+
+
+
+
 
 % \bibliographystyle{sn-mathphys-num}
 % \bibliography{sn-bibliography}
