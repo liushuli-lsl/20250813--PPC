@@ -129,7 +129,7 @@
 % \credit{Writing - Original Draft, Methodology, Software, Visualization, Data curation}
 
 
-\author*[3]{\fnm{} \sur{Yi Liu}}\email{liuyi\_hust@163.com}
+\author*[3]{\fnm{} \sur{Yi Liu}}\email{liuyi_hust@163.com}
 \author*[3]{\fnm{} \sur{Jingang Liu}}\email{wellbuild@126.com}
 % \credit{Resources, Investigation, Formal analysis, Conceptualization, Writing - Review \& Editing}
 % \equalcont{These authors contributed equally to this work.}
@@ -450,7 +450,7 @@ In particular, if $\varsigma=0$ then $V(T_p)=0$.
 	\end{theorem}
 	
 	\begin{proof}
-	令 $r:=\|u\|_\infty$，则 $\sigma(\|u\|_\infty)=\sigma(r)$ 为常数。由 \cref{eq:PTS-ISS-core} 得
+	令 $r=\|u\|_\infty$，则 $\sigma(\|u\|_\infty)=\sigma(r)$ 为常数。由 \cref{eq:PTS-ISS-core} 得
 	\[
 	\dot V\ \le\ -\,\frac{\pi}{\eta\,T}\Big(V^{\,1-\frac{\eta}{2}}+V^{\,1+\frac{\eta}{2}}\Big)\ +\ \sigma(r).
 	\]
@@ -460,7 +460,7 @@ In particular, if $\varsigma=0$ then $V(T_p)=0$.
 	\]
 	由比较引理得 $V(t)\le z(t)$。对该标量系统应用预定义时间引理（即原文的 Lemma~1，将常数项 $\varsigma$ 替换为 $\sigma(r)$），即可得到 \cref{eq:PTS-ISS-bound}。进一步令
 \[
-V^\star(r):=\min\!\left\{
+V^\star(r)=\min\!\left\{
 \Big(\tfrac{2\eta T}{\pi}\,\sigma(r)\Big)^{\!\frac{1}{1-\frac{\eta}{2}}},
 \ \ 
 \Big(\tfrac{2\eta T}{\pi}\,\sigma(r)\Big)^{\!\frac{1}{1+\frac{\eta}{2}}}
@@ -768,10 +768,13 @@ with $\theta_i\in\mathbb{R}^{N}  $ adapted online by
 % \dot{\hat{\theta}}_i = \varrho_i\,P_{2,i} z_{2,i}\psi(\chi) - \kappa_i\,\hat{\theta}_i,\qquad
 % \varrho_i,\kappa_i>0.
 % \end{equation}
-\begin{equation}\label{eq:theta-law}
-	\dot{\hat{\theta}}_i =  - \kappa_i\,\hat{\theta}_i,\qquad
-	\varrho_i,\kappa_i>0.
-	\end{equation}
+\begin{equation}
+\dot{\hat{\theta}}_i = \varrho_i P_{2,i} z_{2,i} \psi(\chi) - \kappa_i \hat{\theta}_i,\quad \varrho_i,\kappa_i>0.
+\end{equation}
+% \begin{equation}\label{eq:theta-law}
+% 	\dot{\hat{\theta}}_i =  - \kappa_i\,\hat{\theta}_i,\qquad
+% 	\varrho_i,\kappa_i>0.
+% 	\end{equation}
 
 % 将外扰的项定义为
 % $\omega(x,t)= M^{-1}(q) d(t)$。
@@ -793,9 +796,9 @@ where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, \omega_d>0, \vartheta(0)=x_2(
 $$
 \dot{\tilde\omega}
 = -\Lambda_o\,\tilde\omega\;+\;\Delta_\omega,\qquad
-\Delta_\omega:=\dot\omega-\Lambda_o\,\varepsilon_d,
+\Delta_\omega=\dot\omega-\Lambda_o\,\varepsilon_d,
 $$
-where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,$\varepsilon_d:=\hat{\dot x}_2-\dot x_2$ 为跟踪微分器误差。
+where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,$\varepsilon_d=\hat{\dot x}_2-\dot x_2$ 为跟踪微分器误差。
 
 
 根据公式可得到
@@ -869,36 +872,88 @@ Combined with \cref{eq:4,eq:42}, we have $h_i-\hat h_i=\theta_{i}^{*\top}\psi_i-
 	\begin{equation}\label{eq:47}
 		\begin{aligned}
 				&\sum_{i=1}^{n}
-					\frac{1}{\varrho_i}\,\tilde \theta_{i}^{\top}\dot{\tilde \theta}_i \\
-					&= 
-					-\sum_{i}
-					\frac{1}{\varrho_i}\tilde \theta_{i}^{\top}
-					\left(- \kappa_i\,\hat{\theta}_i
-					\right)                                               \\
-					 &= -\sum_{i=1}^{n}\frac{\kappa_i}{\varrho_i}\tilde \theta_{i}^{\top}\hat \theta_{i}        =\sum_{i=1}^n \frac{\kappa_i}{\varrho_i}\,\theta_{i}\|\tilde \theta_{i}\|
-				- \sum_{i=1}^n \frac{\kappa_i}{\varrho_i}\,\|\tilde \theta_{i}\|^2 \le
+					\frac{1}{\varrho_i}\,\tilde \theta_{i}^{\top}\dot{\tilde \theta}_i  \le
 				- \frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \|\tilde \theta_{i}\|^2+\frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \bar \theta_{i}^2,		
 			\end{aligned}
 		\end{equation}
 
-From \cref{eq:22,eq:23}, the time derivative of the filtering error $\dot{\tilde{\alpha}}$ is given as
-\begin{equation}\label{eq:48}
-	\sum_{i=1}^{n}\tilde\alpha^\top \dot{\tilde \alpha}= \sum_{i=1}^{n}{\tilde{\alpha}}\dot{\alpha}-\frac{1}{\lambda}\sum_{i=1}^{n}{\tilde{\alpha}}^2,
-\end{equation}
-根据\cref{eq:21,eq:23},可知 $\frac{d}{dt} \bar{\alpha}$ 为分段连续函数，在整个定义域上仅在两端处存在有限阶不连续点，但整体仍属于 piecewise continuous 函数。虚拟控制律 $\alpha$ 是由状态反馈设计得到的连续可导函数，其导数 $\dot{\alpha}$ 可由系统状态和参考轨迹导数构成，因此在闭环系统稳定的前提下为有界函数。由此，令$R_i=\frac{d}{dt} \bar{\alpha}$, $R_i$ is a bounded continuous function.
-Then by employing Young's inequality, we obtain:
-\begin{equation}\label{eq:49}
-	\begin{aligned}
-		\sum_{i=1}^{n}{\tilde{\alpha}}\dot{\tilde{\alpha}}\leq -\frac{\lambda}{2} \sum_{i=1}^{n} {\tilde{\alpha}}^{2} + \frac{1}{2\lambda} \sum_{i=1}^{n}R_{i}^2. 
-	\end{aligned}
-\end{equation}
+
+
+
+
+
+
+
+
+
+在 BLF 约束管道内 $|z_{1,i}(t)|<\rho_{1,i}(t)$ 不变，故存在常数 $\delta\in(0,1)$ 使$\frac{|z_{1,i}(t)|}{\rho_{1,i}(t)}\le 1-\delta, \forall t \in (0,+\infty)$. 令 $c_\delta=\frac{1}{(2\delta-\delta^2)^2}>0$, 可得到
+
+% 令 $c_\delta=\frac{1}{(2\delta-\delta^2)^2}>0$。则对任意 $\varepsilon_i>0$ 有
+% \begin{equation}\label{eq\:lemma-key}
+% \begin{aligned}
+% -\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i
+% -k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}
+% &\le
+% -\Psi(V_{1,i})-(2k_{1,i}-\varepsilon_i),V_{1,i}
+% +\frac{c_\delta^{,2}}{2\varepsilon_i},\tilde\alpha_i^2 .
+% \end{aligned}
+% \end{equation}
+
+ 
+$$
+|P_{1,i}z_{1,i}| \le c_\delta |z_{1,i}|\le c_\delta \sqrt{2V_{1,i}},
+$$
+$$
+|P_{1,i}z_{1,i}\tilde\alpha_i|
+\le c_\delta\sqrt{2V_{1,i}}\,|\tilde\alpha_i|
+\le \varepsilon_i V_{1,i}+\frac{c_\delta^{\,2}}{2\varepsilon_i}\tilde\alpha_i^2,
+$$
+
+
+由 $\lambda\dot\alpha^f=-(\alpha^f-\alpha)$ 得 $\dot{\tilde\alpha}=\dot\alpha-\tfrac{1}{\lambda}\tilde\alpha$，从而
 
 $$
-\tilde\alpha^\top \dot{\tilde \alpha}-\sum_{i=1}^n P_{1,i}z_{1,i}\tilde\alpha_i
-
+\tilde\alpha^\top\dot{\tilde\alpha}
+\le -\frac{1}{2\lambda}\|\tilde\alpha\|^2+\lambda\,\Xi_\alpha(t),
 $$
 
+% From \cref{eq:22,eq:23}, the time derivative of the filtering error $\dot{\tilde{\alpha}}$ is given as
+% \begin{equation}\label{eq:48}
+% 	\tilde\alpha^\top \dot{\tilde \alpha}= {\tilde{\alpha}}\dot{\alpha}-\frac{1}{\lambda}{\tilde{\alpha}}^2,
+% \end{equation}
+% 根据\cref{eq:21,eq:23},可知 $\frac{d}{dt} \bar{\alpha}$ 为分段连续函数，在整个定义域上仅在两端处存在有限阶不连续点，但整体仍属于 piecewise continuous 函数。虚拟控制律 $\alpha$ 是由状态反馈设计得到的连续可导函数，其导数 $\dot{\alpha}$ 可由系统状态和参考轨迹导数构成，因此在闭环系统稳定的前提下为有界函数。由此，令$R_i=\frac{d}{dt} \bar{\alpha}$, $R_i$ is a bounded continuous function.
+% Then by employing Young's inequality, we obtain:
+% \begin{equation}\label{eq:49}
+% 	\begin{aligned}
+% 		{\tilde{\alpha}}\dot{\tilde{\alpha}}\leq -\frac{\lambda}{2}  {\tilde{\alpha}}^{2} + \frac{1}{2\lambda} R_{i}^2. 
+% 	\end{aligned}
+% \end{equation}
 
+其中 $\Xi_\alpha(t)$ 由有界信号构成。将其与 \eqref{eq:3} 相加，并取 $\varepsilon_i=k_{1,i}$ 可得
+
+\begin{equation}\label{eq:50}
+\begin{aligned}
+&-P_{1,i}z_{1,i}\tilde\alpha_i
+-k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}
++\tilde\alpha^\top\dot{\tilde\alpha}\\
+& \le
+\frac{\varepsilon_i}{2} V_{1,i}+\frac{c_\delta^{\,2}}{2\varepsilon_i}\tilde\alpha_i^2-k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\frac{1}{2\lambda}\|\tilde\alpha\|^2+\lambda\,\Xi_\alpha(t)\\
+&\le
+(\frac{\varepsilon_i}{2}-2k_{1,i})V_{1,i}
+-\Big(\frac{1}{2\lambda}-\frac{c_\delta^{\,2}}{2k_{1,i}}\Big)\tilde\alpha_i^2
++\lambda\,\Xi_\alpha(t)\\
+&\le
+-\tfrac{3}{2}k_{1,i}V_{1,i}
+-\Big(\frac{1}{2\lambda}-\frac{c_\delta^{\,2}}{2k_{1,i}}\Big)\tilde\alpha_i^2
++\lambda\,\Xi_\alpha(t).
+\end{aligned}
+\end{equation}
+
+
+若进一步选取
+$
+\boxed{\ \lambda\ \le\ \frac{k_{1,i}}{c_\delta^{\,2}}\ ,\ }
+$
 
 
 
@@ -980,45 +1035,36 @@ $$
  $\frac{1}{2\varepsilon}\|\Lambda_o^{-1/2}\Delta_\omega\|^2$ 作为输入项（由 $\Delta_\omega=\dot\omega-\Lambda_o\varepsilon_d$ 决定）并入 $\sigma(\|r(t)\|)$。
 
 
+\begin{equation}\label{eq:45}
+	\begin{aligned}
+		\dot{V} 
+		\le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})\right)
+		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})  \right)\\
+		& -\sum_{i=1}^nP_{2,i}z_{2,i}\tilde{\omega}_i +\tilde \omega^\top \dot{\tilde \omega}-k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert+\tilde\alpha^\top \dot{\tilde \alpha}-\sum_{i=1}^n P_{1,i}z_{1,i}\tilde\alpha_i+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i \\
+		\le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})\right)
+		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})  \right)\\
+		&+\frac{\varepsilon_i}{2} V_{1,i}+\frac{c_\delta^{\,2}}{2\varepsilon_i}\tilde\alpha_i^2-\frac{1}{2\lambda}\|\tilde\alpha\|^2+\lambda\,\Xi_\alpha(t)-\Big(\big(1-\tfrac{\varepsilon}{2}\big)\lambda_{o,\min}-\tfrac{1}{4k_s}\Big)\|\tilde\omega\|^2
++\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2- \frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \|\tilde \theta_{i}\|^2+\frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \bar \theta_{i}^2\\
+\le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})\right)
+		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})  \right)\\
+		&+\frac{\varepsilon_i}{2} V_{1,i}+\frac{c_\delta^{\,2}}{2\varepsilon_i}\tilde\alpha_i^2-\frac{1}{2\lambda}\|\tilde\alpha\|^2+\lambda\,\Xi_\alpha(t)-\Big(\big(1-\tfrac{\varepsilon}{2}\big)\lambda_{o,\min}-\tfrac{1}{4k_s}\Big)\|\tilde\omega\|^2
++\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2- \frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \|\tilde \theta_{i}\|^2+\frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \bar \theta_{i}^2
+	\end{aligned}
+\end{equation}
+
+
+\begin{equation}\label{eq:45}
+	\begin{aligned}
+		\dot{V} 
+\le&-(2k_{1,i}-\frac{\varepsilon_i}{2})V_{1,i}- 2k_{2,i}V_{2,i}-\Big(\frac{1}{2\lambda}-\frac{c_\delta^{\,2}}{2k_{1,i}}\Big)\tilde\alpha_i^2 -\Big(\big(1-\tfrac{\varepsilon}{2}\big)\lambda_{o,\min}-\tfrac{1}{4k_s}\Big)\|\tilde\omega\|^2\\
+&- \frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \|\tilde \theta_{i}\|^2+\frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \bar \theta_{i}^2
++\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2
++\lambda\,\Xi_\alpha(t)
+	\end{aligned}
+\end{equation}
 
 
 
-
-
-
-% \begin{equation}\label{eq:36}
-% 	\begin{aligned}
-% \dot{V}_{d,1}
-% &=
-% \frac{1}{\hbar_{1,i}} \tilde{d}_{1,i} \dot{\tilde{d}}_{1,i} 
-% - \frac{1}{\omega_1} \frac{z_{1,i} \hat{d}_{1,i}}{\rho_{1,i}^2 - z_{1,i}^2}\\
-% &= \frac{1}{\hbar_{1,i}} \tilde{d}_{1,i}\dot{d}_{1,i} +\tilde{d}_{1,i} \operatorname{sgn}(s_{1,i})+\frac{\varpi_{1,i}}{\hbar_{1,i}} \tilde{d}_{1,i} {\hat d}_{1,i}  
-% + \frac{z_{1,i} \tilde{d}_{1,i}}{\omega_1(\rho_{1,i}^2 - z_{1,i}^2)}
-% - \frac{z_{1,i} d_{1,i}}{\omega_1(\rho_{1,i}^2 - z_{1,i}^2)}\\
-% &\le \frac{1}{2\hbar_{1,i}} \tilde{d}_{1,i}^2 + \frac{ 1}{2\hbar_{1,i}} \dot{\bar{{d}}}_{1,i}^2+\frac{1}{2} \tilde{d}_{1,i}^2 + \frac{1}{2}-\frac{\varpi_{1,i}}{2 \hbar_{1,i}}{\tilde{d}_{1,i}}^2+\frac{\varpi_{1,i}}{2 \hbar_{1,i}}{{d}^2_{1,i}}\\
-% &+\frac{1}{\omega_1} \frac{z_{1,i}^2}{\rho_{1,i}^2 - z_{1,i}^2}+\frac{1}{2\omega_1  (\rho_{1,i}^2 - z_{1,i}^2)} \tilde{d}_{1,i}^2+\frac{1}{2\omega_1  (\rho_{1,i}^2 - z_{1,i}^2)} {d}_{1,i}^2\\
-% &\le \left(\frac{1}{2\hbar_{1,i}}+ \frac{1}{2}-\frac{\varpi_{1,i}}{2 \hbar_{1,i}}+ \frac{1}{2\omega_1  (\rho_{1,i}^2 - z_{1,i}^2)}\right)\tilde{d}_{1,i}^2+ \frac{ 1}{2\hbar_{1,i}} \dot{\bar{{d}}}_{1,i}^2+\frac{\varpi_{1,i}}{2 \hbar_{1,i}}{{d}^2_{1,i}}+\frac{1}{\omega_1} \frac{z_{1,i}^2}{\rho_{1,i}^2 - z_{1,i}^2}+\frac{1}{2\omega_1  (\rho_{1,i}^2 - z_{1,i}^2)} {d}_{1,i}^2
-% \end{aligned}
-% \end{equation}
-
-In \cref{eq:46}, according to \cref{lemma:2}, and using \cref{eq:32,eq:41},
-$\dot{\tilde d}_{j,i}=\dot d_{j,i}+\hbar_{j,i}\operatorname{sgn}(s_{j,i})+\varpi_{j,i}\hat d_{j,i}-\hbar_{j,i}\Gamma_{j,i}/\omega_j$. With $\|\dot d_{j,i}\|\le\bar{\dot d}$ and Young's inequality, we obtain
-\begin{subequations}\label{eq:50}
-\begin{align}
-	&\frac{1}{\hbar_{{j,i}}} \tilde{d}_{{j,i}} \dot{d}_{{j,i}}
-	\leq \frac{1}{2\hbar_{{j,i}}} \tilde{d}_{{j,i}}^2 + \frac{ 1}{2\hbar_{{j,i}}} \dot{\bar{d}}_{{j,i}}^2,\\
-	&
-	\tilde{d}_{{j,i}} \operatorname{sgn}(s_{{j,i}})
-	\leq \frac{1}{2} \tilde{d}_{{j,i}}^2 + \frac{1}{2},\\
-	&
-	\frac{\varpi_{{j,i}}}{\hbar_{{j,i}}} \tilde{d}_{{j,i}} {\hat d}_{{j,i}} =\frac{\varpi_{{j,i}}}{\hbar_{{j,i}}} \tilde{d}_{{j,i}}({d}_{{j,i}}-\tilde{d}_{{j,i}})  
-	 \leq -\frac{\varpi_{{j,i}}}{2 \hbar_{{j,i}}}{\tilde{d}_{{j,i}}}^2+\frac{\varpi_{{j,i}}}{2 \hbar_{{j,i}}}{{\bar d}^2_{{j,i}}},\\
-	 &
-	 \left| \frac{z_{{j,i}} d_{{j,i}}}{\omega_j(\rho_{{j,i}}^2 - z_{{j,i}}^2)} \right| \le
-	\frac{\epsilon_j}{2 \omega_j} \frac{z_{{j,i}}^2}{\rho_{{j,i}}^2 - z_{{j,i}}^2}+\frac{1}{2\epsilon_j \omega_j  (\rho_{{j,i}}^2 - z_{{j,i}}^2)} {\bar d}^2_{{j,i}},
-	\end{align}
-\end{subequations}
-where $\epsilon_j >0$ is arbitrary.
 
 
 
@@ -1030,13 +1076,15 @@ with
 \begin{equation}\label{eq:55}
 \begin{aligned}
 r = \min \left\{
-	\min_{i}\left(\frac{2 k_{1,i}-\epsilon_1}{\omega_{1}}\right), \min_{i}\left(\frac{2 k_{2,i}-\epsilon_2}{\omega_{2}}\right),
-      \min_{i}(\kappa_i), \lambda, \min_{i}\left(\varpi_{1,i}-1-\hbar_{1,i}\right), \min_{i}\left(\varpi_{2,i}-1-\hbar_{2,i}\right)
+	\min_{i}\left(2k_{1,i}-\frac{\varepsilon_i}{2}\right), 2k_{2,i}, \min_{i}\left(\frac{1}{2\lambda}-\frac{c_\delta^{\,2}}{2k_{1,i}}\right),\min_{i}\left(\big(1-\tfrac{\varepsilon}{2}\big)\lambda_{o,\min}-\tfrac{1}{4k_s}\right),
+      \min_{i}(\kappa_i)
 \right\}>0,
 \end{aligned}
 \end{equation}
 \begin{equation}\label{eq:56}
-	\sigma =\frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \bar \theta_{i}^2 +\frac{1}{2\lambda} \sum_{i=1}^{n}R_{i}^2 + \frac{n}{4  \omega_{1} \iota_1 }+ \frac{n}{4  \omega_{2}\iota_2 }+H.
+	\sigma =\frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \bar \theta_{i}^2
++\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2
++\lambda\,\Xi_\alpha(t).
 \end{equation} 
 % \begin{equation}\label{eq:38}
 % \begin{aligned}
@@ -1052,10 +1100,10 @@ r = \min \left\{
 
 
 
-From the above \cref{eq:53,eq:54,eq:55,eq:56}, as long as the controller parameters are chosen reasonably, $V$ is converge exponentially, which implies all signals $z_{1,i}, z_{2,i}, {\tilde{\alpha}}, \tilde \theta_{i}, \tilde{d}_{1,i}, \tilde{d}_{2,i}$ are bounded within the compact set $\mathcal{Q} $. Let
+From the above \cref{eq:53,eq:54,eq:55,eq:56}, as long as the controller parameters are chosen reasonably, $V$ is converge exponentially, which implies all signals $z_{1,i}, z_{2,i}, {\tilde{\alpha}}, \tilde \theta_{i}, \tilde{\omega}_{i}$ are bounded within the compact set $\mathcal{Q} $. Let
 \begin{equation}\label{eq:57}
-	\mathcal{Q} =\left\{ (z_{1,i},z_{2,i},\tilde\alpha,\tilde \theta_{i},\tilde d_{1,i},\tilde d_{2,i})\,:
-	\|(z,\tilde\alpha,\tilde w,\tilde d)\|\le \sqrt{\phi}\right\}.
+	\mathcal{Q} =\left\{ (z_{1,i}, z_{2,i}, {\tilde{\alpha}}, \tilde \theta_{i}, \tilde{\omega}_{i}\,:
+	\|(z_1,z_2,\tilde\alpha, \tilde \theta, \tilde{\omega})\|\le \sqrt{\phi}\right\}.
 \end{equation}
 
 
