@@ -155,11 +155,103 @@
 }
 \maketitle
 
-% Main text
 
-下面是在你原有排版基础上**逐句打磨、修正符号与措辞**后的版本（保留结构与编号；只做必要的更正与增润）。
+\section{Global prescribed–performance function}
+
+为同时实现“\emph{初值全局可行}、\emph{预定义时间内平滑收紧}”与“\emph{收敛后对饱和/扰动的自适应友好}”，构造一类全局预设性能函数（G-PPF），系统性解决传统 PPC/BLF-PPF 的三类痛点：(\emph{i}) 初值越界诱发进入阶段奇异，常需投影/重置/非对称缩放等权宜处理；(\emph{ii}) 在 $T_p$ 处边界多为仅连续非 $C^1$，易在控制律中产生尖峰项并放大噪声；(\emph{iii}) 收敛后采用固定且过窄管径，面对执行器饱和与外扰时保守与抖振并存。所提 G-PPF 以核函数 $\phi(b)=-\ln b$ 与光滑窗 $s(b)$ 协同保证 $\rho(0^+)=+\infty$ 与 $\dot\rho(T_p^-)=0$，实现“\emph{预定义时间内平滑收紧而初值全局合法}”。进一步，引入\emph{前段缩放} $\sigma(t)$（调速收紧）与\emph{后段“呼吸式”缩放} $\Sigma(t)$（稳态放宽）两级解耦调节，并按饱和残差与扰动强度低通自适应调整约束，避免长期保守。与此同时，给出 $\dot\rho(t)$ 的显式解析式，使 BLF 导数中的边界变化项可被严格抵消，不遗留常数残差，从而将闭环 Lyapunov 不等式自然规范为 PTS-ISS 形态。该构造与反步、饱和补偿、RBFNN 等模块无缝兼容，可在严格保证预定义时间稳定的同时提升稳态精度与执行器友好性。
+
+\subsection{Definition}
+
+令 $T_p>0$ 为预定义收敛时间、$0<p<1$，定义归一化时间
+
+$$
+b(t)=\bigl(t/T_p\bigr)^p\in(0,1],\qquad \dot b=\tfrac{p}{T_p}\bigl(t/T_p\bigr)^{p-1}>0,
+$$
+
+取 $C^1$ 光滑窗
+\begin{equation}\label{eq\:gppf-window}
+s(b)=1-3b^2+2b^3,\quad s(0)=1,\ s(1)=0,\ s'(1)=0,
+\end{equation}
+以及全局核函数
+\begin{equation}\label{eq\:gppf-kernel}
+\phi(b)=-\ln b,\qquad \phi(b)\to+\infty\ (b\to0^+),\ \ \phi(1)=0.
+\end{equation}
+对每个通道 $i=1,\dots,n$，定义全局性能函数
+\begin{equation}\label{eq\:gppf-def}
+\rho_i(t)=
+\begin{cases}
+\displaystyle a+\sigma_i(t),\phi!\left(b(t)\right),s!\left(b(t)\right), & 0<t<T_p,\\
+\displaystyle a\bigl[1+g(t),\Sigma_i(t)\bigr], & t\ge T_p,
+\end{cases}
+\end{equation}
+其中 $a>0$ 表示稳态精度下界。$\sigma_i(t)$ 调节 $t<T_p$ 阶段的\emph{收紧速率}，$\Sigma_i(t)$ 则在 $t\ge T_p$ 阶段实现\emph{呼吸式放宽}以顺应饱和与扰动：
+\begin{align}
+&\sigma_i(t)=\operatorname{Proj}*{[\sigma*{\min},,\sigma_{\max}]}!\Bigl(\sigma_{i0}+k_u r_{u,i}+k_d r_{d,i}\Bigr),\label{eq\:gppf-sigma}\\
+&\tau_u \dot r_{u,i}=-r_{u,i}+|\Delta u_i|,\qquad
+\tau_d \dot r_{d,i}=-r_{d,i}+|d_i|,\nonumber
+\end{align}
+其中 $\sigma_{i0},k_u,k_d,\tau_u,\tau_d>0$，$\Delta u_i=u_i-\operatorname{sat}(u_i)$ 为饱和残差。$t\ge T_p$ 时，以 $C^1$ 门控函数确保光滑拼接：
+\begin{equation}\label{eq\:gppf-gate}
+g(t)=1-\exp!\bigl(-\iota (t-T_p)^2\bigr),\quad \iota>0,\ \ g(T_p)=0,\ g'(T_p)=0,
+\end{equation}
+并设呼吸幅值
+\begin{align}
+&\Sigma_i(t)=\operatorname{Proj}*{[,0,,\Sigma*{\max},]}!\Bigl(k_u r_{u,i}+k_d r_{d,i}+k_e r_{e,i}\Bigr),\label{eq\:gppf-Sigma}\\
+&\tau_e \dot r_{e,i}=-r_{e,i}+|e_i|,\qquad k_e,\tau_e>0.\nonumber
+\end{align}
+
+\subsection{Derivatives for exact compensation}
+
+由 $\phi'(b)=-1/b$、$s'(b)=-6b+6b^2$ 与 \cref{eq:gppf-window}–\cref{eq:gppf-def}，在 $0<t<T_p$ 有
+\begin{equation}\label{eq\:gppf-drho-pre}
+\dot\rho_i
+= \dot\sigma_i,\phi(b),s(b)
+* \sigma_i\Bigl[\phi'(b),s(b)+\phi(b),s'(b)\Bigr]\dot b .
+  \end{equation}
+  在 $t\ge T_p$，
+  \begin{equation}\label{eq:gppf-drho-post}
+  \dot\rho_i
+  = a\Bigl[g'(t),\Sigma_i(t)+g(t),\dot\Sigma_i(t)\Bigr],\qquad
+  \dot\Sigma_i=\text{Proj-grad}\Bigl(k_u\dot r_{u,i}+k_d\dot r_{d,i}+k_e\dot r_{e,i}\Bigr).
+  \end{equation}
+  在 BLF 框架中，诸如 $\dot V_{\mathrm{BLF}}\ni (\dot\rho_i \rho_i)\cdot(\cdot)$ 的边界变化项可用 \cref{eq:gppf-drho-pre,eq:gppf-drho-post} 精确抵消，避免残余常数项，便于将闭环不等式规范为 PTS-ISS 形式。
+
+\subsection{Properties}
+
+% \begin{properties}
+对 $\rho_i(t)$ 于 \cref{eq:gppf-def}–\cref{eq:gppf-Sigma}，成立：
+\begin{enumerate}
+\item \textbf{全局初值合法性：} $\displaystyle\lim_{t\to0^+}\rho_i(t)=+\infty$，故任意有限 $e_i(0)$ 均满足 $|e_i(0)|<\rho_i(0^+)$。
+\item \textbf{预定义时间收紧与 $C^1$ 拼接：} 由 $\phi(1)=0$、$s(1)=0$ 得 $\rho_i(T_p^-)=a$；由 $s'(1)=0$ 与 $g(T_p)=g'(T_p)=0$ 得 $\dot\rho_i(T_p^-)=\dot\rho_i(T_p^+)=0$，实现 $C^1$ 级平滑衔接。
+\item \textbf{单调与平滑（$0<t\le T_p$）：} 在 $\dot\sigma_i\le 0$（或 $\dot\sigma_i$ 由低通滤波器充分抑制）时，\cref{eq:gppf-drho-pre} 第二项严格为负，且第一项不为正，故 $\rho_i(t)$ 在 $(0,T_p]$ 上严格递减且 $C^1$。更一般地，只要 $|\dot\sigma_i|$ 足够小，单调性仍保持。
+\item \textbf{$t\ge T_p$ 的自适应稳态友好性：} $\rho_i(t)=a,[1+g(t)\Sigma_i(t)]\ge a$，其中 $g$、$\Sigma_i$ 有界且经低通滤波，保证边界正性与缓变性；$\Sigma_i$ 随饱和残差与扰动强度自适应调整，可在不破坏约束的前提下降低保守性。
+\item \textbf{实现友好的导数：} \cref{eq:gppf-drho-pre}–\cref{eq:gppf-drho-post} 给出闭式导数，便于在 BLF 导数中做\emph{精确补偿}，避免由未知边界变化引入的保守加项。
+\end{enumerate}
+% \end{properties}
+
+\begin{remark}[Parameter guidelines and compatibility]
+\emph{参数选取与实现建议：} 令 $\sigma_{\min}\le\sigma_{i0}\le\sigma_{\max}$，并取 $0\le\Sigma_{\max}\le 0.5$ 将收敛后最大放宽幅度限制在 $50%$ 以内；选 $\tau_u,\tau_d,\tau_e$ 相对较大以平缓 $\rho_i(t)$ 变化，避免激发闭环；优先设置 $k_u,k_d\gg k_e$，使“呼吸”主要由饱和/扰动而非瞬态误差驱动；$p\in(0,1)$ 决定早期收紧速率，$p\to 1$ 较温和、$p\to 0$ 较迅猛，可与 $\sigma_{i0}$ 联合整定。实现上，$\operatorname{Proj}$ 与其“Proj-grad”在投影边界处按 Carathéodory/几乎处处可导理解，常规数值实现取“饱和即停”的次梯度即可稳定工作。\emph{兼容性：} 该 G-PPF 为控制器无关的上层约束构件，可与反步、非线性抗饱和补偿、RBFNN 动态补偿及滑模/积分增强等模块直接耦合，且保持 PTS-ISS 证法的闭式推导。
+\end{remark}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{fig1.eps}
+\caption{全局动态 G-PPF：预定义时间内平滑收紧与收敛后“呼吸式”放宽。}
+\label{fig:1}
+\end{figure}
 
 ---
+
+\noindent\textbf{与原稿相比的关键改进要点：}（1）动机与三类痛点更聚焦，建立到设计要素的“一一对应”；（2）显式强调 $C^1$ 拼接与 BLF 导数的“精确补偿”关系，服务于后续 PTS-ISS 证明链；（3）单调性给出可操作的充分条件（$\dot\sigma_i\le 0$ 或“足够小”）；（4）参数整定与实现细节（Proj-grad、$p$ 的物理含义）前置，降低读者复现实践门槛；（5）行文删繁就简，保留必要数学细节与工程语义。
+
+
+
+
+
+
+
+
+
 
 \subsection{System description}
 
@@ -385,7 +477,7 @@ $$
 
 % ---
 
-% ## 融入总 Lyapunov 导数与 PTS–ISS
+%  融入总 Lyapunov 导数与 PTS–ISS
 
 % 将（C）代入总 $\dot V$，并与一步/二步 BLF 的主衰减项
 % $-\Psi(S_{j,i})$、$-k_{j,i}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}$ 合并，再用幂和不等式把 $\sum_i\Psi(S_{j,i})$ 下界为 $V$ 的函数，可得

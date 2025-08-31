@@ -184,7 +184,6 @@ For robotic manipulators trajectory tracking with unknown dynamics, bounded dist
 % \section{Problem statement and preliminaries}
 \section{Problem and preliminary}
 
-
 \subsection{System description}
 \par This work considers an uncertain nonlinear n-DOF robot manipulators system. Its dynamics are described as \cite{SciaviccoSiciliano_2012_ModellingControl,BagheriEtAl_2019_Feedbacklinearization}:
 \begin{equation}
@@ -198,12 +197,12 @@ For controller design, define the state $x = [x_1,x_2] = [q,\dot{q}] \in \mathbb
 	\left\{
 	\begin{aligned}
 		\dot{x}_1 & = x_2,     \\
-		\dot{x}_2 & =f +g \mathrm{sat}(u) +h,
+		\dot{x}_2 & =f(x) +g(q) \mathrm{sat}(u) +\omega(x,t),
 	\end{aligned}
 	\right.
 	\label{eq:2}
 \end{equation}
-where $f(x)=-M^{-1}(q) (C(q,\dot{q})x_2 + G(q)) $, $M^{-1}(q)=M^{-1}(q)$, $h(x,t)=-M^{-1}(q)\Delta(q,\dot{q},t)$, and $x_1=[x_{1,1},x_{1,2},...,x_{1,n}]^{\top}$, $x_2=[x_{2,1},x_{2,2},...,x_{2,n}]^{\top}$, $\mathrm{sat}(u)$ is the saturation of control input $u=\tau$. Define the saturation error as
+where $f(x)=-M^{-1}(q) (C(q,\dot{q})x_2 + G(q)) $, $g(q)=M^{-1}(q)$, $\omega(x,t)=-M^{-1}(q)(\Delta(q,\dot{q},t)-d(t))$, and $x_1=[x_{1,1},x_{1,2},...,x_{1,n}]^{\top}$, $x_2=[x_{2,1},x_{2,2},...,x_{2,n}]^{\top}$, $\mathrm{sat}(u)$ is the saturation of control input $u=\tau$. Define the saturation error as
 \begin{equation}\label{eq:3}
 \Delta u_{i} =  u_{i}-\mathrm{sat}(u_i)=\begin{cases} 
 	u_{i}-u_{\max}, & u_i \geq u_{\max}, \\
@@ -212,27 +211,6 @@ u_{i}-u_{\min}, & u_i \leq u_{\min},
 \end{cases}
 \end{equation}
 where $u_{\max},u_{\min}$ are the upper and lower saturation bounds of control input, respectively.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \par The controller design and stability analysis are conducted under the following physically justified assumptions.
 \begin{assumption}\cite{Spong_2022_historicalperspective}   \label{assumption:1}
@@ -266,121 +244,39 @@ where $u_{\max},u_{\min}$ are the upper and lower saturation bounds of control i
 
 
 
-
-
-
-% \subsection{Radial basis function neural network}
-
-
-
-
-% \par RBFNN is a universal approximator on compact sets and is widely employed to estimate unknown nonlinear functions \cite{SunEtAl_2022_NeuralNetworkBased, SongZhou_2018_NeuroadaptiveControl}. The input to the RBFNN is defined as $\chi$, the output of the network denoted as $h_i$, is expressed as
-% \begin{equation}
-% 	h_i={\theta_{i}^*}^{T} { Q_{2,i}} (\chi)+\varepsilon_i, 
-% 	\label{eq:4}
-% \end{equation}
-% where ${{\theta_{i}^*}}\in \mathbb{R}^N, \theta_{i}^*=[{{w}_{1,i}},{{w}_{2,i}},\cdots,{{w}_{i,N}}]^{T}$ is the idea weight vector, $Q_{2,i}(\chi)\!\in\mathbb{R}^N$ is the vector of basis functions, and $\varepsilon_i$ is the approximation error satisfying $|\varepsilon_i|\le \bar\varepsilon$ for all $\chi$ in a compact set $\Omega_\chi\subset\mathbb{R}^m$, with a known constant $\bar\varepsilon>0$. ${ Q_{2,i}}(\chi)=[{{ Q}_{1,i}( \chi )}, {{ Q_{2,i}}( \chi )}, \cdots,{{ Q_{i,N}}( \chi )}]^{T}$ is the activation function of the hidden layer neurons. The base function \( { Q}_{i,\ell }( \chi ) \) is
-% \begin{equation}
-% 	{ Q}_{i,\ell}( \chi ) =\operatorname{exp} \biggl(-\frac{\left\| \chi-o_{\ell} \right\|^2} { D_{\ell}^2} \biggr), \quad \ell=1, 2,..., N,
-% 	\label{eq:5}
-% \end{equation}
-% where $o_\ell\in\mathbb{R}^m$ and $D_\ell>0$ denote the center and width of the Gaussian basis, respectively; $N$ is the number of neurons.
-
-% % \par Define $\tilde{w}_i = \theta_{i}^*-\hat{w}_i$, where $\tilde{w}_i$ is the weight estimation. To ensure the validity of the weight adaptation process, the ideal weight $\theta_{i}^*$ should minimize the approximate error \( \varepsilon_i \), that is
-% \par Let $\hat \theta_{i}$ be the adaptive estimate of $\theta_{i}^*$ and define the weight estimation error $\tilde \theta_{i}= \theta_{i}^*-\hat \theta_{i}$. The ideal weight $\theta_{i}^*$ is understood as the best fixed parameter within the chosen basis that minimizes the worst-case approximation error over $\Omega_\chi$:
-% \begin{equation}
-% 	\theta_{i}^* = \arg \min_{\theta_{i} \in \mathbb{R}^N} \left\{ \sup_{\chi \in \Omega_\chi} | f_i(\chi) - \theta_{i}^{\top}  Q_{2,i}(\chi) | \right\}.
-% 	\label{eq:6}
-% \end{equation}
-
-% \begin{assumption}\label{assumption:3}
-% 	The optimal weight vector $\theta_{i}^*$ is bounded, and there exists \(\| \theta_{i}^* \| \leq \bar{w}\), $\bar{w} > 0$.
-% \end{assumption}
-
-
-
-
-\subsection{Fuzzy logic system }
-\par Fuzzy logic systems (FLS) are universal approximators on compact sets and are widely employed to estimate unknown nonlinear mappings. Let the regressor be $\chi\in\mathbb{R}^m$. For the $i$-th channel, an FLS with $N$ Takagi--Sugeno rules (singleton fuzzifier, product inference, and center-average defuzzifier) is constructed as:
-\begin{center}
-\emph{Rule $\ell$: If $\chi_1$ is $A_{1\ell}$ and $\cdots$ and $\chi_m$ is $A_{m\ell}$, then $y_i$ is $\theta_{\ell,i}$}, \quad $\ell=1,\dots,N$,
-\end{center}
-where $\theta_{\ell,i}\in\mathbb{R}$ are consequent parameters to be learned. Denote the normalized basis vector by
-\(
-\psi_i(\chi)=\big[\psi_{1}(\chi),\dots,\psi_{N}(\chi)\big]^\top\in\mathbb{R}^N.
-\)
-Then the FLS output used to approximate the unknown $f_i(\chi)$ is modeled as
-\begin{equation}
-    h_i(\chi) = {\theta_i^*}^{\!\top}\,\psi_i(\chi)+\varepsilon_i,
-    \label{eq:4}
-\end{equation}
-where $\theta_i^*=[\theta_{1,i}^*,\dots,\theta_{N,i}^*]^\top\in\mathbb{R}^N$ is the ideal parameter vector within the chosen rule base, and $\varepsilon_i$ is the bounded approximation error satisfying $|\varepsilon_i|\le\bar\varepsilon$ for all $\chi$ in a compact set $\Omega_\chi\subset\mathbb{R}^m$, with a known constant $\bar\varepsilon>0$.
-
-\par The normalized basis functions $\psi_{\ell,i}(\chi)$ are computed from the firing strengths $\varpi_\ell(\chi)$:
-\begin{equation}
-    \psi_{i,\ell}(\chi)=\frac{\varpi_\ell(\chi)}{\sum_{k=1}^N \varpi_k(\chi)},
-    \quad
-    \varpi_\ell(\chi)=\prod_{\flat=1}^m \mu_{\flat,\ell}(\chi_j),
-    \quad \ell=1,\dots,N,
-    \label{eq:5}
-\end{equation} 
-where $\mu_{\flat,\ell}(\cdot)$ are the membership functions of the antecedent fuzzy sets $A_{\flat,\ell}$. In this paper we choose Gaussian membership functions
-\[
-\mu_{\flat,\ell}(\chi_j)=\exp\!\Big(-\frac{(\chi_j-\mathcal{C}_{\flat,\ell})^2}{\mathcal{D}_{\flat,\ell}^2}\Big),\quad
-\mathcal{C}_{\flat,\ell}\in\mathbb{R},\ \mathcal{D}_{\flat,\ell}>0,
-\]
-with $\mathcal{C}_{\flat,\ell}$ and $\mathcal{D}_{\flat ,\ell}$ denoting the centers and widths, respectively.
-
-\par Let $\hat\theta_i$ be the adaptive estimate of $\theta_i^*$ and define the parameter estimation error $\tilde\theta_i=\theta_i^*-\hat\theta_i$, $\hat\theta_i(0)= 0$. The ideal parameter vector $\theta_i^*$ is understood as the best fixed parameter within the chosen rule base that minimizes the worst-case approximation error over $\Omega_\chi$:
-\begin{equation}
-    \theta_i^* = \arg\min_{\theta_i\in\mathbb{R}^N}
-    \left\{\,\sup_{\chi\in\Omega_\chi}\, \big|\, f_i(\chi)-\theta_i^\top \psi_i(\chi)\,\big| \right\}.
-    \label{eq:6}
-\end{equation}
-
-\begin{assumption}\label{assumption:3}
-The ideal parameter vector $\theta_i^*$ is bounded, i.e., there exists $\bar\theta>0$ such that $\|\theta_i^*\|\le \bar\theta$.
-\end{assumption}
-
-
-仿真参数设置：
-The parameters of FLS are set as $N=25$, $\mathcal C_{\flat,\ell}\in\{-1,\,-0.5,\,0,\,0.5,\,1\}$, $\mathcal D_{j,\ell}=0.4$, $\bar\theta=50$, $\varrho_i=15$, $\kappa_i=0.05$。
-
-
-
-
-% \subsection{模糊逻辑系统（FLS）}
-% \par 模糊逻辑系统（FLS）在紧集上具有通用逼近能力，常用于对未知非线性映射进行估计。设回归向量为 $\chi\in\mathbb{R}^m$。针对第 $i$ 个通道，构造包含 $N$ 条 Takagi--Sugeno 规则（单点隶属化、乘积推理、中心平均解模糊）的 FLS：
+% ******************************FLS*********************************
+% \subsection{Fuzzy logic system }
+% \par Fuzzy logic systems (FLS) are universal approximators on compact sets and are widely employed to estimate unknown nonlinear mappings. Let the regressor be $\chi\in\mathbb{R}^m$. For the $i$-th channel, an FLS with $N$ Takagi--Sugeno rules (singleton fuzzifier, product inference, and center-average defuzzifier) is constructed as:
 % \begin{center}
-% \emph{规则 $\ell$: 若 $\chi_1$ 属于 $A_{1\ell}$ 且 $\cdots$ 且 $\chi_m$ 属于 $A_{m\ell}$，则 $y_i$ 为 $\theta_{i,\ell}$}, \quad $\ell=1,\dots,N$,
+% \emph{Rule $\ell$: If $\chi_1$ is $A_{1\ell}$ and $\cdots$ and $\chi_m$ is $A_{m\ell}$, then $y_i$ is $\theta_{\ell,i}$}, \quad $\ell=1,\dots,N$,
 % \end{center}
-% 其中 $\theta_{i,\ell}\in\mathbb{R}$ 为后件参数。记归一化基向量（归一化的触发强度）为
-% \[
-% \Psi_i(\chi)=\big[\psi_{1,i}(\chi),\dots,\psi_{i,N}(\chi)\big]^\top\in\mathbb{R}^N.
-% \]
-% 则用于逼近未知函数 $f_i(\chi)$ 的 FLS 输出记为
+% where $\theta_{\ell,i}\in\mathbb{R}$ are consequent parameters to be learned. Denote the normalized basis vector by
+% \(
+% \psi_i(\chi)=\big[\psi_{1}(\chi),\dots,\psi_{N}(\chi)\big]^\top\in\mathbb{R}^N.
+% \)
+% Then the FLS output used to approximate the unknown $f_i(\chi)$ is modeled as
 % \begin{equation}
-%     h_i = {\theta_i^*}^{\!\top}\,\psi_i(\chi)+\varepsilon_i,
+%     h_i(\chi) = {\theta_i^*}^{\!\top}\,\psi_i(\chi)+\varepsilon_i,
 %     \label{eq:4}
 % \end{equation}
-% 其中 $\theta_i^*=[\theta_{1,i}^*,\dots,\theta_{i,N}^*]^\top\in\mathbb{R}^N$ 为在所选规则库下的（未知）理想参数向量，$\varepsilon_i$ 为逼近误差，满足对所有 $\chi\in\Omega_\chi\subset\mathbb{R}^m$（紧集）都有 $|\varepsilon_i|\le\bar\varepsilon$，其中 $\bar\varepsilon>0$ 为已知常数。
+% where $\theta_i^*=[\theta_{1,i}^*,\dots,\theta_{N,i}^*]^\top\in\mathbb{R}^N$ is the ideal parameter vector within the chosen rule base, and $\varepsilon_i$ is the bounded approximation error satisfying $|\varepsilon_i|\le\bar\varepsilon$ for all $\chi$ in a compact set $\Omega_\chi\subset\mathbb{R}^m$, with a known constant $\bar\varepsilon>0$.
 
-% \par 归一化基函数 $\psi_{i,\ell}(\chi)$ 由未归一化触发强度 $\varpi_\ell(\chi)$ 得到：
+% \par The normalized basis functions $\psi_{\ell,i}(\chi)$ are computed from the firing strengths $\varpi_\ell(\chi)$:
 % \begin{equation}
 %     \psi_{i,\ell}(\chi)=\frac{\varpi_\ell(\chi)}{\sum_{k=1}^N \varpi_k(\chi)},
 %     \quad
-%     \varpi_\ell(\chi)=\prod_{j=1}^m \mu_{j,\ell}(\chi_j),
+%     \varpi_\ell(\chi)=\prod_{\flat=1}^m \mu_{\flat,\ell}(\chi_j),
 %     \quad \ell=1,\dots,N,
 %     \label{eq:5}
-% \end{equation}
-% 其中 $\mu_{j,\ell}(\cdot)$ 为前件模糊集 $A_{j,\ell}$ 的隶属函数。本文选用高斯型隶属函数
+% \end{equation} 
+% where $\mu_{\flat,\ell}(\cdot)$ are the membership functions of the antecedent fuzzy sets $A_{\flat,\ell}$. In this paper we choose Gaussian membership functions
 % \[
-% \mu_{j,\ell}(\chi_j)=\exp\!\Big(-\frac{(\chi_j-\mathcal{C}_{j,\ell})^2}{\mathcal{D}_{j,\ell}^2}\Big),\quad
-% \mathcal{C}_{j,\ell}\in\mathbb{R},\ \mathcal{D}_{j,\ell}>0,
+% \mu_{\flat,\ell}(\chi_j)=\exp\!\Big(-\frac{(\chi_j-\mathcal{C}_{\flat,\ell})^2}{\mathcal{D}_{\flat,\ell}^2}\Big),\quad
+% \mathcal{C}_{\flat,\ell}\in\mathbb{R},\ \mathcal{D}_{\flat,\ell}>0,
 % \]
-% 其中 $\mathcal{C}_{j,\ell}$ 与 $\mathcal{D}_{j,\ell}$ 分别表示中心与宽度。
+% with $\mathcal{C}_{\flat,\ell}$ and $\mathcal{D}_{\flat ,\ell}$ denoting the centers and widths, respectively.
 
-% \par 记 $\hat\theta_i$ 为 $\theta_i^*$ 的自适应估计，并定义参数估计误差 $\tilde\theta_i=\theta_i^*-\hat\theta_i$,。理想参数向量 $\theta_i^*$ 定义为在给定规则/基函数下，使得在 $\Omega_\chi$ 上最坏情形逼近误差最小的固定参数：
+% \par Let $\hat\theta_i$ be the adaptive estimate of $\theta_i^*$ and define the parameter estimation error $\tilde\theta_i=\theta_i^*-\hat\theta_i$, $\hat\theta_i(0)= 0$. The ideal parameter vector $\theta_i^*$ is understood as the best fixed parameter within the chosen rule base that minimizes the worst-case approximation error over $\Omega_\chi$:
 % \begin{equation}
 %     \theta_i^* = \arg\min_{\theta_i\in\mathbb{R}^N}
 %     \left\{\,\sup_{\chi\in\Omega_\chi}\, \big|\, f_i(\chi)-\theta_i^\top \psi_i(\chi)\,\big| \right\}.
@@ -388,16 +284,19 @@ The parameters of FLS are set as $N=25$, $\mathcal C_{\flat,\ell}\in\{-1,\,-0.5,
 % \end{equation}
 
 % \begin{assumption}\label{assumption:3}
-% 理想参数向量 $\theta_i^*$ 有界，即存在常数 $\bar\theta>0$ 使得 $\|\theta_i^*\|\le \bar\theta$。
+% The ideal parameter vector $\theta_i^*$ is bounded, i.e., there exists $\bar\theta>0$ such that $\|\theta_i^*\|\le \bar\theta$.
 % \end{assumption}
 
 
+% 仿真参数设置：
+% The parameters of FLS are set as $N=25$, $\mathcal C_{\flat,\ell}\in\{-1,\,-0.5,\,0,\,0.5,\,1\}$, $\mathcal D_{j,\ell}=0.4$, $\bar\theta=50$, $\varrho_i=15$, $\kappa_i=0.05$。
+% ******************************FLS*********************************
 
 
 \subsection{Preliminary}
 
 
-\begin{lemma} \label{lemma:1}\cite{WangEtAl_2022_Adaptivefuzzy} (Predefined time stable theory). Consider the system $
+\begin{lemma} \label{lemma:1}\cite{WangEtAl_2022_Adaptivefuzzy} Consider the system $
 	\dot{x}(t) = f(x(t)), x(0) = x_0
 $, where $x \in \mathbb{R}^n$ is the system's state, and $x(0) = x_0$ is the initial state. $f(\cdot)$ is continuous and satisfies $f(0) = 0$. et $V:\mathbb{R}^n\to\mathbb{R}_+$ be continuously differentiable, positive definite, and radially unbounded, with $V(0)=0$ and $V(x)>0$ for all $x\neq 0$.
 For given design parameters $0<\eta<1$, $T_p>0$, and $0<\varsigma<\infty$, suppose the closed-loop system satisfies
@@ -421,18 +320,18 @@ In particular, if $\varsigma=0$ then $V(T_p)=0$.
 
 
 
-\begin{definition}[PTS--ISS]\label{def:PTS-ISS}
+\begin{definition}\label{def:PTS-ISS}
 	考虑系统 $\dot x = f(x,u)$。若存在给定常数 $T>0$、$\eta\in(0,1)$ 以及类-$\mathcal{K}$ 函数 $\gamma(\cdot)$，使得对任意本质有界输入 $u\in L_\infty$，
 	\[
 	\|x(T)\|\ \le\ \gamma\big(\|u\|_\infty\big),
 	\]
-	并且对所有 $t\ge T$ 状态保持在该球内；若 $u\equiv 0$ 则 $x(T)=0$。则称系统在预定义时间 $T$ 满足输入到状态稳定（Predefined-Time ISS, 简记 PTS--ISS）。
+	并且对所有 $t\ge T$ 状态保持在该球内；若 $u= 0$ 则 $x(T)=0$。则称系统在预定义时间 $T$ 满足输入到状态稳定（Predefined-Time ISS, 简记 PTS--ISS）。
 	\end{definition}
 	
 	\begin{theorem}[PTS--ISS 的 Lyapunov 判据]\label{thm:PTS-ISS}
-	设存在 $C^1$ Lyapunov 函数 $V:\mathbb{R}^n\to\mathbb{R}_+$ 与类-$\mathcal{K}_\infty$ 函数 $\alpha_1,\alpha_2$ 使得
+	设存在 $C^1$ Lyapunov 函数 $V:\mathbb{R}^n\to\mathbb{R}_+$ 与类-$\mathcal{K}_\infty$ 函数 $\mathcal{A}_1,\mathcal{A}_2$ 使得
 	\[
-	\alpha_1(\|x\|)\ \le\ V(x)\ \le\ \alpha_2(\|x\|),\quad V(0)=0,
+	\mathcal{A}_1(\|x\|)\ \le\ V(x)\ \le\ \mathcal{A}_2(\|x\|),\quad V(0)=0,
 	\]
 	并存在给定参数 $T>0,\ \eta\in(0,1)$ 以及类-$\mathcal{K}$ 函数 $\sigma(\cdot)$，使对所有 $(x,u)$ 成立
 	\begin{equation}\label{eq:PTS-ISS-core}
@@ -446,21 +345,21 @@ In particular, if $\varsigma=0$ then $V(T_p)=0$.
 	\Big(\tfrac{2\eta T}{\pi}\,\sigma(\|u\|_\infty)\Big)^{\!\frac{1}{\,1+\frac{\eta}{2}\,}}
 	\right\},
 	\end{equation}
-	并且对所有 $t\ge T$ 有 $V(t)\le V(T)$。若 $u\equiv 0$（从而 $\sigma(0)=0$），则 $V(T)=0$，即系统在预定义时间 $T$ 到达原点。
+	并且对所有 $t\ge T$ 有 $V(t)\le V(T)$。若 $u= 0$, $\sigma(0)=0$，则 $V(T)=0$，即系统在预定义时间 $T$ 到达原点。
 	\end{theorem}
 	
 	\begin{proof}
-	令 $r:=\|u\|_\infty$，则 $\sigma(\|u\|_\infty)=\sigma(r)$ 为常数。由 \cref{eq:PTS-ISS-core} 得
+	令 $r=\|u\|_\infty$，则 $\sigma(\|u\|_\infty)=\sigma(r)$ 为常数。由 \cref{eq:PTS-ISS-core} 得
 	\[
 	\dot V\ \le\ -\,\frac{\pi}{\eta\,T}\Big(V^{\,1-\frac{\eta}{2}}+V^{\,1+\frac{\eta}{2}}\Big)\ +\ \sigma(r).
 	\]
 	考虑比较系统
 	\[
-	\dot z\ =\ -\,\frac{\pi}{\eta\,T}\Big(z^{\,1-\frac{\eta}{2}}+z^{\,1+\frac{\eta}{2}}\Big)\ +\ \sigma(r),\quad z(0)=V(0).
+	\dot y\ =\ -\,\frac{\pi}{\eta\,T}\Big(y^{\,1-\frac{\eta}{2}}+y^{\,1+\frac{\eta}{2}}\Big)\ +\ \sigma(r),\quad y(0)=V(0).
 	\]
-	由比较引理得 $V(t)\le z(t)$。对该标量系统应用预定义时间引理（即原文的 Lemma~1，将常数项 $\varsigma$ 替换为 $\sigma(r)$），即可得到 \cref{eq:PTS-ISS-bound}。进一步令
+	由比较引理得 $V(t)\le y(t)$。对该标量系统应用\cref{lemma:1}，将常数项 $\varsigma$ 替换为 $\sigma(r)$, 即可得到 \cref{eq:PTS-ISS-bound}。进一步令
 \[
-V^\star(r):=\min\!\left\{
+V^\star(r)=\min\!\left\{
 \Big(\tfrac{2\eta T}{\pi}\,\sigma(r)\Big)^{\!\frac{1}{1-\frac{\eta}{2}}},
 \ \ 
 \Big(\tfrac{2\eta T}{\pi}\,\sigma(r)\Big)^{\!\frac{1}{1+\frac{\eta}{2}}}
@@ -470,37 +369,33 @@ V^\star(r):=\min\!\left\{
 \[
 V(t)\ \le\ V^\star(\|u\|_\infty).
 \]
-若 $u\equiv0$（从而 $\sigma(0)=0$），则 $V^\star(0)=0$ 且 $V(T)=0$。证毕。
+若 $u=0$, 则 $V^\star(0)=0$ 且 $V(T)=0$。证毕。
 
 	\end{proof}
 	
-	\begin{remark}[与原 Lemma 1（预定义时间稳定）的对比]
-	\begin{itemize}
-	  \item \textbf{扰动建模层级：} Lemma 1 要求
-	  $\dot V \le -\frac{\pi}{\eta T_p}(V^{1-\eta/2}+V^{1+\eta/2})+\varsigma$，其中 $\varsigma$ 为常数；
-	  本定理将该常数推广为输入范数的类-$\mathcal{K}$ 函数 $\sigma(\|u\|_\infty)$，从而可统一刻画外界扰动、建模不确定性、近似残差、饱和残差、滤波导数等所有残余影响（将其堆叠为“输入”并取 $\|\cdot\|_\infty$）。
-	  \item \textbf{结论形式：} 两者在 $t=T$ 都给出闭式“进入并保持”的半径；当 $u\equiv0$（或 $\sigma(0)=0$）时，本定理退化为 Lemma 1 的“预定义时间到原点”结论；当 $u\not\equiv0$ 而有界时，本定理给出预定义时间一致实用稳定（半径由 $\sigma(\|u\|_\infty)$ 决定），而 Lemma 1 只能处理常数半径。
-	  \item \textbf{可设定时间：} 两者右端均含“双幂核” $V^{1\mp\eta/2}$，系数 $\pi/(\eta T)$ 直接将到达/进入时间预设为 $T$；若工程上得到
-	  $\dot V\le -c\big(V^{1-\eta/2}+V^{1+\eta/2}\big)+\sigma(\|u\|_\infty)$，取 $T=\pi/(\eta c)$ 可归约到本定理形式。
+	\begin{remark}
+	与原\cref{Lemma:1}对比, \cref{Lemma:1} 要求 $\dot V \le -\frac{\pi}{\eta T_p}(V^{1-\eta/2}+V^{1+\eta/2})+\varsigma$，其中 $\varsigma$ 为常数.
+	  本定理将该常数推广为输入范数的类-$\mathcal{K}$ 函数 $\sigma(\|u\|_\infty)$，从而可统一刻画外界扰动、建模不确定性、饱和残差、滤波导数等所有残余影响,并将其整合为 $\|\cdot\|_\infty$。
+	   两者在 $t=T$ 都给出闭式进入并保持的半径；当 $u=0$或 $\sigma(0)=0$时，本定理退化为 Lemma 1 的预定义时间到原点结论；当 $u\not=0$ 而有界时，本定理给出预定义时间一致实用稳定，收敛半径由 $\sigma(\|u\|_\infty)$ 决定，而 Lemma 1 只能处理常数半径。
 	\end{itemize}
 	\end{remark}
 	
-	\begin{remark}[在本文闭环中的实例化]
-	在本文闭环中可令
-	\[
-	u \equiv \big[\ \Delta u,\ d,\ \dot d,\ \varepsilon,\ R\ \big],
-	\]
-	分别表示饱和残差、外扰及其导数、RBF 近似残差、滤波导数等；可取
-	\[
-	\sigma(\|u\|_\infty)\ =\ c_\Delta\|\Delta u\|_\infty^2
-	+c_d\|d\|_\infty^2
-	+c_{\dot d}\|\dot d\|_\infty^2
-	+c_\varepsilon\|\varepsilon\|_\infty^2
-	+c_R\|R\|_\infty^2
-	+\sigma(0),
-	\]
-	其中 $\sigma(0)\ge0$ 吸收 Young 不等式常数、泄漏/投影等小常数；通过增大 $\lambda,\kappa,\varpi,\iota$ 等参数可将 $\sigma(0)$ 压小，以减小最终半径。
-	\end{remark}
+	% \begin{remark}
+	% 在本文闭环中可令
+	% \(
+	% u = \big[\ \Delta u,\ d,\ \dot d,\ \varepsilon,\ R\ \big],
+	% \)
+	% 分别表示饱和残差、外扰及其导数、滤波导数等；可取
+	% \[
+	% \sigma(\|u\|_\infty)\ =\ c_\Delta\|\Delta u\|_\infty^2
+	% +c_d\|d\|_\infty^2
+	% +c_{\dot d}\|\dot d\|_\infty^2
+	% +c_\varepsilon\|\varepsilon\|_\infty^2
+	% +c_R\|R\|_\infty^2
+	% +\sigma(0),
+	% \]
+	% 其中 $\sigma(0)\ge0$ 吸收 Young 不等式常数、泄漏/投影等小常数；通过增大 $\beta,\kappa,\varpi,\iota$ 等参数可将 $\sigma(0)$ 压小，以减小最终半径。
+	% \end{remark}
 	
 
 
@@ -541,11 +436,9 @@ V(t)\ \le\ V^\star(\|u\|_\infty).
 
 \section{Global prescribed–performance function}
 
+为在预定义时间内实现全局可行的误差约束，并兼顾稳态阶段对饱和与扰动的友好性，本文构造一类全局性能函数（G-PPF）.
 
-本小节的目标是构造一种全局性能函数（G-PPF），同时解决现有 PPC/BLF-PPF 常见的三类问题：其一，传统性能函数在初值越界时会出现进入阶段奇异，需依赖投影/重置/非对称缩放等权宜手段；其二，边界在 $T_p$ 处常仅保证连续而非 $C^1$，易在控制律中诱发尖峰项并放大噪声；其三，收敛后仍以固定且过窄的管径面对执行器饱和与扰动，导致保守或抖振。为此，所提 G-PPF 通过 $\phi(b)=-\ln b$ 与光滑窗 $s(b)$ 保证 $\rho(0^+)=\infty$、$\dot\rho(T_p^-)=0$，在预定义时间内平滑收紧且初值全局合法；并以前段缩放 $\sigma(t)$ 与后段“呼吸式”缩放 $\Sigma(t)$ 解耦调节收敛路径与收敛后放宽，按饱和残差与扰动强度自适应调整约束，避免长期保守。与此同时，给出 $\dot\rho(t)$ 的解析表达，便于在 BLF 导数中实施精确补偿，不遗留常数残差，从而将总 Lyapunov 不等式规范为 PTS-ISS 形式。该构造与反步、饱和补偿、RBFNN 等模块无缝兼容，可在严格保证预定义时间稳定的同时提升稳态精度与执行器友好性。
-
-Let $T_p>0$ be the predefined convergence time and $0<p<1$ a shaping exponent.
-Define the normalized time $b(t)=(t/T_p)^p\in(0,1]$, a $C^1$ window
+Let $T_p>0$ be the predefined convergence time and $0<p<1$. Define the normalized time $b(t)=(t/T_p)^p\in(0,1]$, a $C^1$ window
 \begin{equation}\label{eq:gppf-window}
 s(b)=1-3b^2+2b^3,\quad s(0)=1,\ s(1)=0,\ s'(1)=0,
 \end{equation}
@@ -554,6 +447,7 @@ and the global kernel
 \phi(b) = -\ln b,
 \end{equation}
 which ensures $\phi(b)\to+\infty$ as $b\to0^+$ and $\phi(1)=0$.
+
 For each channel $i=1,\dots,n$, we define the global performance function
 \begin{equation}\label{eq:gppf-def}
 \rho_i(t)=
@@ -562,56 +456,58 @@ For each channel $i=1,\dots,n$, we define the global performance function
 \displaystyle a\Bigl[1 + g(t)\,\Sigma_i(t)\Bigr], & t\ge T_p,
 \end{cases}
 \end{equation}
-where $a>0$ is the steady-state accuracy.
-
-The factor $\sigma_i(t)$ modulates the \emph{pre-$T_p$} constriction rate, while $\Sigma_i(t)$ allows a \emph{post-$T_p$} breathing of the tube in response to actuator saturation and disturbances:
+where $a>0$ is the steady-state accuracy. The factor $\sigma_i(t)$ modulates the constriction rate when $0<t<T_p$, while $\Sigma_i(t)$ allows adjustment in response to actuator saturation and disturbances when $t \geq T_p $:
 \begin{align}
-&\sigma_i(t)=\operatorname{Proj}_{[\sigma_{\min},\,\sigma_{\max}]}\!\Bigl(\sigma_{i0}+k_u r_{u,i}+k_d r_{d,i}\Bigr),\label{eq:gppf-sigma}\\
-&\tau_u \dot r_{u,i}=-r_{u,i}+\|\Delta u_i\|,\quad
-  \tau_d \dot r_{d,i}=-r_{d,i}+\|d_i\|, \nonumber
+&\sigma_i(t)=\operatorname{Proj}_{[\sigma_{\min},\,\sigma_{\max}]}\!\Bigl(\sigma_{0}+k_u r_{u,i}+k_d r_{d,i}\Bigr),\label{eq:gppf-sigma}\\
+&\tau_u \dot r_{u,i}=-r_{u,i}+\|\Delta u_i\|,\\
+  &\tau_d \dot r_{d,i}=-r_{d,i}+\|d_i\|, 
 \end{align}
-with $\sigma_{i0},k_u,k_d,\tau_u,\tau_d>0$, and $\Delta u_i=u_i-\operatorname{sat}(u_i)$ the saturation residue.
-After $T_p$, a smooth gate ensures $C^1$ transition
+with $\sigma_{0},k_u,k_d,\tau_u,\tau_d>0$.
+
+When $t \geq T_p $, a smooth gate ensures $C^1$ transition
 \begin{equation}\label{eq:gppf-gate}
-g(t)=1-\exp\!\left(-\iota (t-T_p)^2\right),\quad \iota>0,\ \ g(T_p)=0,\ g'(T_p)=0,
+g(t)=1-\exp\!\left(-\iota (t-T_p)^2\right),
 \end{equation}      
-and the post–convergence breathing amplitude is
+where $\iota>0, g(T_p)=0, g'(T_p)=0$. The post-convergence adjustable amplitude is
 \begin{align}
 &\Sigma_i(t)=\operatorname{Proj}_{[\,0,\,\Sigma_{\max}\,]}\!\Bigl(k_u r_{u,i}+k_d r_{d,i}+k_e r_{e,i}\Bigr),\label{eq:gppf-Sigma}\\
 &\tau_e \dot r_{e,i}=-r_{e,i}+|e_i|, \quad k_e,\tau_e>0.\nonumber
 \end{align}
 
-\paragraph{Derivatives (for exact compensation).}
-For $0<t<T_p$, using $\dot b=\frac{p}{T_p}(t/T_p)^{p-1}$, $\phi'(b)=-1/b$, and $s'(b)=-6b+6b^2$,
+Since $\phi'(b)=-1/b$, $s'(b)=-6b+6b^2$, $\dot b=\frac{p}{T_p}(t/T_p)^{p-1}$, and \cref{eq:gppf-def}. For $0<t<T_p$, there is
 \begin{equation}\label{eq:gppf-drho-pre}
 \dot\rho_i
 = \dot\sigma_i\,\phi(b)\,s(b)
-+ \sigma_i\Bigl[\phi'(b)\,s(b)+\phi(b)\,s'(b)\Bigr]\dot b .
++ \sigma_i\Bigl[\phi'(b)\,s(b)+\phi(b)\,s'(b)\Bigr]\dot b.
 \end{equation}
 For $t\ge T_p$,
 \begin{equation}\label{eq:gppf-drho-post}
-\dot\rho_i
-= a\Bigl[g'(t)\,\Sigma_i(t)+g(t)\,\dot\Sigma_i(t)\Bigr],\quad
-\dot\Sigma_i=\text{Proj-grad}\Bigl(k_u\dot r_{u,i}+k_d\dot r_{d,i}+k_e\dot r_{e,i}\Bigr).
+	\begin{aligned}
+		&\dot\rho_i
+= a\Bigl[g'(t)\,\Sigma_i(t)+g(t)\,\dot\Sigma_i(t)\Bigr],\\
+&\dot\Sigma_i=\text{Proj-grad}\Bigl(k_u\dot r_{u,i}+k_d\dot r_{d,i}+k_e\dot r_{e,i}\Bigr).
+	\end{aligned}
 \end{equation}
 In the control design, the terms $+\dot\rho_i/\rho_i$ are included to cancel the boundary variation terms in the BLF derivatives.
 
 
 
 \begin{properties}
+
 The function $\rho_i(t)$ in \eqref{eq:gppf-def} has the following properties:
-\begin{enumerate}
-\item \textbf{Global initial admissibility:} $\displaystyle\lim_{t\to0^+}\rho_i(t)=+\infty$, so any finite $e_i(0)$ satisfies $|e_i(0)|<\rho_i(0^+)$.
-\item \textbf{Predefined-time constriction:} $\rho_i(T_p^-)=a$ and, by \eqref{eq:gppf-window}, $\dot\rho_i(T_p^-)=0$.
-\item \textbf{Monotonicity and smoothness ($0<t<T_p$):} $\rho_i(t)$ is strictly decreasing and $C^1$ on $(0,T_p]$.
-\item \textbf{Post-$T_p$ adaptation:} for $t\ge T_p$, $\rho_i(t)=a[1+g(t)\Sigma_i(t)]\ge a$, with $g$ and $\Sigma_i$ bounded and low-pass filtered; thus $\rho_i$ remains positive and slowly varying.
-\item \textbf{Implementation-ready derivatives:} the explicit forms \eqref{eq:gppf-drho-pre}–\eqref{eq:gppf-drho-post} allow exact compensation in the BLF-based Lyapunov analysis without leaving constant residues.
-\end{enumerate}
+(\emph{i}) $\displaystyle\lim_{t\to0^+}\rho_i(t)=+\infty$, so any finite $e_i(0)$ satisfies $|e_i(0)|<\rho_i(0^+)$. (\emph{ii}) 由 $\phi(1)=0$、$s(1)=0$ 得 $\rho_i(T_p^-)=a$；由 $s'(1)=0$ 与 $g(T_p)=g'(T_p)=0$ 得 $\dot\rho_i(T_p^-)=\dot\rho_i(T_p^+)=0$，实现 $C^1$ 级平滑衔接.
+(\emph{iii}) When $0<t<T_p$, $\rho_i(t)$ is strictly decreasing and $C^1$ on $(0,T_p]$.
+(\emph{iv}) For $t\ge T_p$, $\rho_i(t)=a[1+g(t)\Sigma_i(t)]\ge a$, with $g$ and $\Sigma_i$ bounded and low-pass filtered, thus $\rho_i$ remains positive and slowly varying.
+
 \end{properties}
 
 \begin{remark}
+	我们构造的一类全局预设性能函数，系统性解决传统 PPC/BLF-PPF 的三类痛点：(\emph{i}) 初值越界诱发进入阶段奇异，常需投影/重置/非对称缩放等权宜处理；(\emph{ii}) 在 $T_p$ 处边界多为仅连续非 $C^1$，易在控制律中产生尖峰项并放大噪声；(\emph{iii}) 收敛后采用固定且过窄管径，面对执行器饱和与外扰时保守与抖振并存。所提 G-PPF 实现预定义时间内平滑收紧而初值全局合法。而且进一步，引入前段$\sigma(t)$调速收紧，与后段 $\Sigma(t)$稳态放宽两级解耦调节，并按饱和残差与扰动强度低通自适应调整约束，避免长期保守。与此同时，给出 $\dot\rho(t)$ 的显式解析式，使 BLF 导数中的边界变化项可被严格抵消，不遗留常数残差，从而将闭环 Lyapunov 不等式自然规范为 PTS-ISS 形态。该构造可在严格保证预定义时间稳定的同时提升稳态精度与执行器友好性。
+
+\end{remark}
+\begin{remark}
 \paragraph{Parameter guidelines.}
-Choose $\sigma_{\min}\le\sigma_{i0}\le\sigma_{\max}$ and $0\le\Sigma_{\max}\le 0.5$ to cap the largest post–convergence relaxation at $50\%$; pick $\tau_u,\tau_d,\tau_e$ relatively large so that $\rho_i(t)$ varies slowly and does not excite the closed-loop; set $k_u,k_d\gg k_e$ to prioritize actuator/disturbance–driven breathing over transient error–driven relaxation.% 如 \cref{fig:1} 所示
+Choose $\sigma_{\min}\le\sigma_{0}\le\sigma_{\max}$ and $0\le\Sigma_{\max}\le 0.5$ to cap the largest post–convergence relaxation at $50\%$; pick $\tau_u,\tau_d,\tau_e$ relatively large so that $\rho_i(t)$ varies slowly and does not excite the closed-loop; set $k_u,k_d\gg k_e$ to prioritize actuator/disturbance–driven breathing over transient error–driven relaxation.% 如 \cref{fig:1} 所示
 \end{remark}
 	
 \begin{figure}[H]
@@ -620,6 +516,29 @@ Choose $\sigma_{\min}\le\sigma_{i0}\le\sigma_{\max}$ and $0\le\Sigma_{\max}\le 0
 	\caption{全局动态变化PPC.}
 	\label{fig:1}
 \end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Main results}
 
@@ -652,10 +571,10 @@ This work presents a controller design methodology that integrates the backstepp
 
  To smooth the signal and facilitate the design of the subsequent control law, the filter of the virtual controller $\alpha^{f}$ is introduced with the following dynamic equations:
 \begin{equation}\label{eq:22}
-	\lambda \dot{\alpha}^{f}
+	\beta \dot{\alpha}^{f}
 	= -\left(\alpha^{f}-\alpha\right),	
 \end{equation}
-where $0<\lambda<1, \alpha^{f}(0)=\alpha(0)$. Define the filtering error is
+where $0<\beta<1, \alpha^{f}(0)=\alpha(0)$. Define the filtering error is
 $\tilde{\alpha}= \alpha-\alpha^{f}$.
 
 
@@ -671,7 +590,7 @@ $\tilde{\alpha}= \alpha-\alpha^{f}$.
 
 
 % 从而可在各 backstepping 级次精确定义虚拟/实际控制律，使 $\dot V\le -cV+\mu$ 并完成稳定性证明。
-
+ 
 In the first step, a BLF is used as an energy function for the error dynamics. We choose:
 \begin{equation}\label{eq:25}
 	V_1= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}. 
@@ -695,12 +614,10 @@ In the first step, a BLF is used as an energy function for the error dynamics. W
 
 记
 $
-\rho_{2,i}^2 - z_{2,i}^2 \le \rho_{2,i}^2,
 P_{j,i}=\frac{\rho_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2}>0,
 Q_{j,i}=\frac{ z_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2}>0,
-\Phi_{j,i}=\frac{z_{j,i}\left(\rho_{j,i}^{2}-z_{j,i}^{2}\right)}{\rho_{j,i}^{4}}=\frac{z_{j,i}(\rho_{j,i}^2-z_{j,i}^2)}{P_{j,i}}, j\in\{1,2\}
-$,
-$\dot z_{1,i}= z_{2,i}-\dot q_{d,i}+\alpha^{f}_i+\zeta_i$, 将它们代入 BLF 导数后，并根据公式（），得到
+\Phi_{j,i}=\frac{z_{j,i}\left(\rho_{j,i}^{2}-z_{j,i}^{2}\right)}{\rho_{j,i}^{4}}, \rho_{j,i}^2 - z_{j,i}^2 \le \rho_{j,i}^2,
+$, 将$\dot z_{1,i}= z_{2,i}-\dot q_{d,i}+\alpha^{f}_i+\zeta_i$,代入 BLF 导数后，并根据公式（），得到
 $$
 \dot V_1=\sum_{i=1}^n\!\Big[P_{1,i} z_{1,i}z_{2,i}+P_{1,i}z_{1,i}(\alpha_i+\zeta_i-\dot q_{d,i})-P_{1,i}z_{1,i}\tilde\alpha_i-Q_{1,i}\rho_{1,i} \dot\rho_{1,i}\Big]
 $$
@@ -708,8 +625,7 @@ $$
 Let ${V_{j,i}}=\frac{1}{2}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}, \Psi(V_{j,i})=\frac{\pi}{ \eta T_p}\Big((V_{j,i})^{\,1-\eta/2}+n^{-\frac{\eta}{2} }(V_{j,i})^{\,1+\eta/2}\Big)$, 我们设计
 $$
 \mathcal{K}_{1,i}(z_{j,i},\rho_{j,i})
-=\frac{\rho_{j,i}^2}{2}\frac{\Psi(V_{j,i})}{V_{j,i}}
-=\frac{\pi\,\rho_{j,i}^2}{2\eta T_p}\Big((V_{j,i})^{-\eta/2}+n^{-\frac{\eta}{2} }(V_{j,i})^{\eta/2}\Big).
+=\frac{\rho_{j,i}^2}{2}\frac{\Psi(V_{j,i})}{V_{j,i}}.
 $$
 
 把它代回，可设计虚拟控制律为：
@@ -750,53 +666,89 @@ $P_1=\mathrm{col}\{P_{1,i}\}$,
 $\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
 \begin{equation}\label{eq:tau-cmd}
 \begin{aligned}
-u =&C(q,\dot{q})x_2 + G(q)\\
-&+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i}-\mathcal{K}_{2}(z_{2},\rho_{2,i}) \Phi_{2}
+	u =&C(q,\dot{q})x_2 + G(q)\\
+&+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2}^{3}}\dot\rho_{2}-\mathcal{K}_{2}(z_{2},\rho_{2}) \Phi_{2}
 -\hat{h}(\chi)
 -\hat \omega
--k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2,i}^2 \Phi_{2,i}\right]
+-k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2}^2 \Phi_{2}\right]
+% u =&C(q,\dot{q})x_2 + G(q)\\
+% &+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i}-\mathcal{K}_{2}(z_{2},\rho_{2,i}) \Phi_{2}
+% -\hat{h}(\chi)
+% -\hat \omega
+% -k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2,i}^2 \Phi_{2,i}\right]
 \end{aligned}
 \end{equation}
 
 
 where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s>0$.
 
-Let $\chi=\{q,\dot{q}\}\in\mathbb{R}^m$ be the regressor and $\psi(\chi)\in\mathbb{R}^{N}$ the normalized basis. Approximate the structured uncertainty by 
-\( \hat h_i(\chi)=\hat \theta_i^\top \psi_i(\chi)\),
-with $\theta_i\in\mathbb{R}^{N}  $ adapted online by
+% Let $\chi=\{q,\dot{q}\}\in\mathbb{R}^m$ be the regressor and $\psi(\chi)\in\mathbb{R}^{N}$ the normalized basis. Approximate the structured uncertainty by 
+% \( \hat h_i(\chi)=\hat \theta_i^\top \psi_i(\chi)\),
+% with $\theta_i\in\mathbb{R}^{N}  $ adapted online by
 % \begin{equation}\label{eq:theta-law}
 % \dot{\hat{\theta}}_i = \varrho_i\,P_{2,i} z_{2,i}\psi(\chi) - \kappa_i\,\hat{\theta}_i,\qquad
 % \varrho_i,\kappa_i>0.
 % \end{equation}
-\begin{equation}\label{eq:theta-law}
-	\dot{\hat{\theta}}_i =  - \kappa_i\,\hat{\theta}_i,\qquad
-	\varrho_i,\kappa_i>0.
-	\end{equation}
+% \begin{equation}
+% \dot{\hat{\theta}}_i = \varrho_i P_{2,i} z_{2,i} \psi(\chi) - \kappa_i \hat{\theta}_i,\quad \varrho_i,\kappa_i>0.
+% \end{equation}
+% \begin{equation}\label{eq:theta-law}
+% 	\dot{\hat{\theta}}_i =  - \kappa_i\,\hat{\theta}_i,\qquad
+% 	\varrho_i,\kappa_i>0.
+% 	\end{equation}
 
 % 将外扰的项定义为
 % $\omega(x,t)= M^{-1}(q) d(t)$。
-将结构不确定估计误差和外扰的剩余项定义为
-$\omega(x,t)=h(x)-\hat h(\chi)+ M^{-1}(q) d(t)$。
+% 将结构不确定和额外扰动的定义为
+% $\omega(x,t)=h(x)-\hat h(\chi)+ M^{-1}(q) d(t)$。
 
-为避免直接微分速度，采用一阶跟踪微分器作为观测器
+% 为避免直接微分速度，采用一阶跟踪微分器作为观测器
+% \begin{equation}
+% 	\begin{cases}
+% \dot\vartheta =-\omega_d\,\vartheta+\omega_d\,x_2,  \\
+% \hat{\dot x}_2=\omega_d(x_2-\vartheta),   \\
+% \dot{\hat \omega}= -\Lambda\,\hat \omega
+% +\Lambda\left(\hat{\dot x}_2 - f(x) - M^{-1}(q)\,\mathrm{sat}(u) - \hat h(\chi)\right),
+% \end{cases}
+% \end{equation}
+% where $\Lambda=\mathrm{diag}\{\lambda_{i}\}>0, \omega_d>0, \vartheta(0)=x_2(0), \hat \omega(0)=0$,
+% 设观测误差为 $\tilde \omega=\omega-\hat\omega$. 其动力学为
+
+% $$
+% \dot{\tilde\omega}
+% = -\Lambda\,\tilde\omega\;+\;\Delta_\omega,\qquad
+% \Delta_\omega=\dot\omega-\Lambda\,\varepsilon_d,
+% $$
+% where $\Lambda=\mathrm{diag}\{\lambda_{i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,$\varepsilon_d=\hat{\dot x}_2-\dot x_2$ 为跟踪微分器误差。
+
+
+
+% 将结构不确定和额外扰动的定义为
+% $\omega(x,t)=[f(x)-\hat h(\chi)+ M^{-1}(q) d(t)$。
+
+为结构不确定和额外扰动,避免直接微分速度，采用一阶跟踪微分器作为观测器
 \begin{equation}
 	\begin{cases}
 \dot\vartheta =-\omega_d\,\vartheta+\omega_d\,x_2,  \\
 \hat{\dot x}_2=\omega_d(x_2-\vartheta),   \\
-\dot{\hat \omega}= -\Lambda_o\,\hat \omega
-+\Lambda_o\left(\hat{\dot x}_2 - f(x) - M^{-1}(q)\,\mathrm{sat}(u) - \hat h(\chi)\right),
+\dot{\hat \omega}= -\Lambda\,\hat \omega
++\Lambda\left(\hat{\dot x}_2 - f(x) -g(q)\,\mathrm{sat}(u) \right),
 \end{cases}
 \end{equation}
-where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, \omega_d>0, \vartheta(0)=x_2(0), \hat \omega(0)=0$,
+where $\Lambda=\mathrm{diag}\{\lambda_{1},...,\lambda_{n}\}, \lambda_{i}>0, \omega_d>0, \vartheta \in \mathbb{R}^n, \vartheta(0)=x_2(0), \hat \omega(0)=0$,
 设观测误差为 $\tilde \omega=\omega-\hat\omega$. 其动力学为
 
-$$
+\begin{equation}\label{eq:omega-tilde}
 \dot{\tilde\omega}
-= -\Lambda_o\,\tilde\omega\;+\;\Delta_\omega,\qquad
-\Delta_\omega:=\dot\omega-\Lambda_o\,\varepsilon_d,
-$$
-where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,$\varepsilon_d:=\hat{\dot x}_2-\dot x_2$ 为跟踪微分器误差。
+= -\Lambda\,\tilde\omega\;+\;\Delta_\omega,\qquad
+\Delta_\omega=\dot\omega-\Lambda\,\varepsilon_d,
+\end{equation}
+$\varepsilon_d=\hat{\dot x}_2-\dot x_2$ 为跟踪微分器误差,一致有界并可收敛.
 
+% $\| \varepsilon_d \Vert  \le \bar{\varepsilon}_d, \bar{\varepsilon}_d>0$, $\| \omega\Vert  \le \bar{\omega}, \bar{\omega}>0$, $\| \dot{\omega}\Vert  \le \bar{\dot{\omega}}, \bar{\dot{\omega}}>0$.
+
+
+% > **Assumption (Disturbance regularity).** The matched disturbance $\omega(t)=M^{-1}(q)d(t)$ is bounded and piecewise $C^1$ with bounded derivative, i.e., $\|\omega(t)\|\le\bar\omega$, $\|\dot\omega(t)\|\le\bar{\dot\omega}$. The differentiator error satisfies $\|\varepsilon_d(t)\|\le\bar\varepsilon_d$. Under the closed-loop bounds proven below, all model terms are bounded on a compact set.
 
 根据公式可得到
 \begin{equation}
@@ -811,7 +763,7 @@ where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,$
 
 \section{Stability analysis}
 
- We analyze the stability of the closed-loop system under the proposed controller.  A composite Lyapunov function \cref{eq:45} is constructed by combining the BLF-based error energy, the RBFNN weight estimation error $\tilde \theta_{i}$, the virtual-control filtering error $\tilde\alpha$, and the disturbance-estimation errors $\tilde d_{1,i},\tilde d_{2,i}$. The composite function is able to analyze the trajectory error dynamics, adaptive weight convergence and the preservation of performance constraints in a unified manner. Sufficient conditions for the global stability of the system and for all signals to be bounded are given by the derivation of its time derivative inequality. Ultimately, we show that in any initial state, the system trajectory will converge within a tight set at a set predefined-time $T_p$, thus achieving global predefined-time stability.
+ We analyze the stability of the closed-loop system under the proposed controller. A composite Lyapunov function \cref{eq:45} is constructed by combining the BLF-based error energy, the virtual-control filtering error $\tilde\alpha$, and the Observer error $\tilde\omega$.  Sufficient conditions for the global stability of the system and for all signals to be bounded are given by the derivation of its time derivative inequality. Finally, we prove that, for any initial state, the trajectories enter a compact set no later than the predefined time $T_p$. This establishes global predefined-time stability.
 
  \begin{theorem}
 	Under \cref{assumption:1,assumption:2,assumption:3} and the controller in \cref{eq:30,eq:40} with observers \cref{eq:32,eq:41} and weight update \cref{eq:42}, and under certain parameter conditions. At this point, for any initial condition, the closed-loop system is predefined-time stable. The scaled errors $z_{1,i}(t),z_{2,i}(t)$ enter a compact set no later than $T_p$, hence $|e_{i}(t)|<\rho_{i}(t)$ for all $t$, and $e_i(t)$ converges to a prescribed small neighborhood of the origin.
@@ -833,7 +785,7 @@ where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,$
 % -2\sum_{i=1}^n \Psi(V_{2,i})
 % -\sum_{i=1}^n k_s |P_{2,i}|\mathrm{sgn}(z_{2,i})
 % -\frac{1}{\lambda}\tilde\alpha^\top C\,\tilde\alpha
-% -\frac{\lambda_{o,\min}}{\gamma_o}\|\tilde d\|^2,
+% -\frac{\lambda_{\min}}{}\|\tilde d\|^2,
 % \]
 % where $\tilde\alpha=\alpha-\alpha^f$, $\tilde d=\hat d-d'$, and the FLS term is canceled by the quadratic term
 % $\frac{1}{2\varrho_i}\tilde\theta_i^\top\tilde\theta_i$ under \eqref{eq:theta-law}.
@@ -842,291 +794,328 @@ where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,$
 The composite Lyapunov function is constructed as follows
 \begin{equation}\label{eq:45}
 	\begin{aligned}
-		V= &\sum_{i=1}^n V_{2,i}+\tfrac{1}{2}\tilde\alpha^\top \tilde\alpha+\tfrac{1}{2\gamma_o}\tilde w^\top\tilde w+\sum_{i=1}^n\tfrac{1}{2\varrho_i}\|\tilde\theta_i\|^2\\
+		\mathcal{L}
+	=  V_{1}+ V_{2}+\tfrac{1}{2}\| \tilde\alpha\Vert ^2+\tfrac{1}{2}\| \tilde \omega\Vert ^2
 	\end{aligned}
-\end{equation}
-
+\end{equation} 
 The time derivative of \cref{eq:45} is given by
 
 \begin{equation}\label{eq:45}
 	\begin{aligned}
-		\dot{V} \le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i\right)
+		\dot{\mathcal{L}} \le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i\right)
 		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right)\\
-		& -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert +\tilde\alpha^\top \dot{\tilde \alpha}+\tilde \omega^\top \dot{\tilde \omega}+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i \\
-		\le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})\right)
-		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})  \right)\\
-		& -\sum_{i=1}^nP_{2,i}z_{2,i}\tilde{\omega}_i +\tilde \omega^\top \dot{\tilde \omega}-k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert+\tilde\alpha^\top \dot{\tilde \alpha}-\sum_{i=1}^n P_{1,i}z_{1,i}\tilde\alpha_i+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i 
+		& -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert +\tilde\alpha^\top \dot{\tilde \alpha}+\tilde \omega^\top \dot{\tilde \omega} \\
+		\le&\sum_{i=1}^n \left( -\Psi(V_{1,i})-\Psi(V_{2,i})\right)
+		+\sum_{i=1}^n \left(- 2k_{1,i}V_{1,i} - k_{2,i}V_{2,i} \right) -\sum_{i=1}^n P_{2,i}z_{2,i}\tilde{\omega}_i +\tilde \omega^\top \dot{\tilde \omega}-k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert\\
+		&+\tilde\alpha^\top \dot{\tilde \alpha}-\sum_{i=1}^n P_{1,i}z_{1,i}\tilde\alpha_i
 	\end{aligned}
 \end{equation}
 
-
-
-
-Combined with \cref{eq:4,eq:42}, we have $h_i-\hat h_i=\theta_{i}^{*\top}\psi_i-\hat \theta_{i}^{\top}\psi_i    
-=\tilde \theta_{i}^{\!\top}\psi_i, \tilde \theta_{i}=\theta_{i}^{*}-\hat \theta_{i}$, $\tilde \theta_{i}^\top\hat \theta_{i}   =\tilde \theta_{i}^\top \theta_{i}- \|\tilde \theta_{i}\|^2
-\le \bar \theta_{i}\|\tilde \theta_{i}\| - \|\tilde \theta_{i}\|^2, \dot{\tilde \theta}_i=-\dot{\hat \theta}_i$, and combined with Young inequalities $\bar \theta_{i}\|\tilde \theta_{i}\| \le \frac12\|\tilde \theta_{i}\|^{2}
-	+\frac12{\bar \theta_{i}}^{2}$, this yields
-	\begin{equation}\label{eq:47}
-		\begin{aligned}
-				&\sum_{i=1}^{n}
-					\frac{1}{\varrho_i}\,\tilde \theta_{i}^{\top}\dot{\tilde \theta}_i \\
-					&= 
-					-\sum_{i}
-					\frac{1}{\varrho_i}\tilde \theta_{i}^{\top}
-					\left(- \kappa_i\,\hat{\theta}_i
-					\right)                                               \\
-					 &= -\sum_{i=1}^{n}\frac{\kappa_i}{\varrho_i}\tilde \theta_{i}^{\top}\hat \theta_{i}        =\sum_{i=1}^n \frac{\kappa_i}{\varrho_i}\,\theta_{i}\|\tilde \theta_{i}\|
-				- \sum_{i=1}^n \frac{\kappa_i}{\varrho_i}\,\|\tilde \theta_{i}\|^2 \le
-				- \frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \|\tilde \theta_{i}\|^2+\frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \bar \theta_{i}^2,		
-			\end{aligned}
-		\end{equation}
-
-From \cref{eq:22,eq:23}, the time derivative of the filtering error $\dot{\tilde{\alpha}}$ is given as
-\begin{equation}\label{eq:48}
-	\sum_{i=1}^{n}\tilde\alpha^\top \dot{\tilde \alpha}= \sum_{i=1}^{n}{\tilde{\alpha}}\dot{\alpha}-\frac{1}{\lambda}\sum_{i=1}^{n}{\tilde{\alpha}}^2,
-\end{equation}
-根据\cref{eq:21,eq:23},可知 $\frac{d}{dt} \bar{\alpha}$ 为分段连续函数，在整个定义域上仅在两端处存在有限阶不连续点，但整体仍属于 piecewise continuous 函数。虚拟控制律 $\alpha$ 是由状态反馈设计得到的连续可导函数，其导数 $\dot{\alpha}$ 可由系统状态和参考轨迹导数构成，因此在闭环系统稳定的前提下为有界函数。由此，令$R_i=\frac{d}{dt} \bar{\alpha}$, $R_i$ is a bounded continuous function.
-Then by employing Young's inequality, we obtain:
-\begin{equation}\label{eq:49}
-	\begin{aligned}
-		\sum_{i=1}^{n}{\tilde{\alpha}}\dot{\tilde{\alpha}}\leq -\frac{\lambda}{2} \sum_{i=1}^{n} {\tilde{\alpha}}^{2} + \frac{1}{2\lambda} \sum_{i=1}^{n}R_{i}^2. 
-	\end{aligned}
-\end{equation}
-
-$$
-\tilde\alpha^\top \dot{\tilde \alpha}-\sum_{i=1}^n P_{1,i}z_{1,i}\tilde\alpha_i
-
-$$
-
-
-
-
-
-
-
-
-
-
-
-
-Let 
-$$
-\mathcal{L} =-\sum_{i=1}^nP_{2,i}z_{2,i}\tilde{\omega}_i\;+\;\tilde \omega^\top \dot{\tilde \omega}\;-\;k_s\sum_{i=1}^n P_{2,i} | z_{2,i} |
-$$
-
-
-利用不等式 $ab\le k\,a+\frac{b^2}{4k}$（$(\sqrt{k\,a}-\frac{b}{2\sqrt{k}})^2\ge0$）并取
-$a=P_{2,i}|z_{2,i}|,\ b=|\tilde\omega_i|,\ k=k_s$，对每个通道有
-
-$$
--\,P_{2,i}z_{2,i}\tilde\omega_i
-\ \le\
-P_{2,i}|z_{2,i}|\,|\tilde\omega_i|
-\ \le\
-k_s P_{2,i}|z_{2,i}|+\frac{1}{4k_s}\tilde\omega_i^{\,2}.
-$$
-
-于是
-
-$$
--\,k_s\!\sum_{i=1}^n\! P_{2,i}|z_{2,i}|
--\sum_{i=1}^n P_{2,i}z_{2,i}\tilde\omega_i
-\ \le\
-\frac{1}{4k_s}\,\|\tilde\omega\|^2
-$$
-
-
-由观测器误差$
-\dot{\tilde\omega}= -\Lambda_o\,\tilde\omega+\Delta_\omega,
-\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0$, 并根据Young不等式得
-
-$$
-\tilde\omega^\top\dot{\tilde\omega}
-= -\tilde\omega^\top\Lambda_o\tilde\omega+\tilde\omega^\top\Delta_\omega
-\ \le\
--\tilde\omega^\top\Lambda_o\tilde\omega
-+\frac{\varepsilon}{2}\tilde\omega^\top\Lambda_o\tilde\omega
-+\frac{1}{2\varepsilon}\Delta_\omega^\top\Lambda_o^{-1}\Delta_\omega \le\
--\Big(1-\tfrac{\varepsilon}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
-+\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2,
-$$
-
-
-
-把（A）与（B）相加：
-
-$$
-\begin{aligned}
-	\mathcal{L}
-&\le
--\Big(1-\tfrac{\varepsilon}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
-+\frac{1}{4k_s}\|\tilde\omega\|^2
-+\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2.
-\end{aligned}
-$$
-
-利用 $\tilde\omega^\top\Lambda_o\tilde\omega\ge \lambda_{o,\min}\|\tilde\omega\|^2$，得到
-
-$$
-\mathcal{L} \le\
--\Big(\big(1-\tfrac{\varepsilon}{2}\big)\lambda_{o,\min}-\tfrac{1}{4k_s}\Big)\|\tilde\omega\|^2
-+\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2.
-$$
-
-令 $\varepsilon=\tfrac12$（简洁且常用），净负系数为 $\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}$。
-只要$
-\boxed{ \ k_s\;>\;\frac{1}{3\,\lambda_{o,\min}}\ }$
-
- $\frac{1}{2\varepsilon}\|\Lambda_o^{-1/2}\Delta_\omega\|^2$ 作为输入项（由 $\Delta_\omega=\dot\omega-\Lambda_o\varepsilon_d$ 决定）并入 $\sigma(\|r(t)\|)$。
-
-
-
-
-
-
-
-
-% \begin{equation}\label{eq:36}
-% 	\begin{aligned}
-% \dot{V}_{d,1}
-% &=
-% \frac{1}{\hbar_{1,i}} \tilde{d}_{1,i} \dot{\tilde{d}}_{1,i} 
-% - \frac{1}{\omega_1} \frac{z_{1,i} \hat{d}_{1,i}}{\rho_{1,i}^2 - z_{1,i}^2}\\
-% &= \frac{1}{\hbar_{1,i}} \tilde{d}_{1,i}\dot{d}_{1,i} +\tilde{d}_{1,i} \operatorname{sgn}(s_{1,i})+\frac{\varpi_{1,i}}{\hbar_{1,i}} \tilde{d}_{1,i} {\hat d}_{1,i}  
-% + \frac{z_{1,i} \tilde{d}_{1,i}}{\omega_1(\rho_{1,i}^2 - z_{1,i}^2)}
-% - \frac{z_{1,i} d_{1,i}}{\omega_1(\rho_{1,i}^2 - z_{1,i}^2)}\\
-% &\le \frac{1}{2\hbar_{1,i}} \tilde{d}_{1,i}^2 + \frac{ 1}{2\hbar_{1,i}} \dot{\bar{{d}}}_{1,i}^2+\frac{1}{2} \tilde{d}_{1,i}^2 + \frac{1}{2}-\frac{\varpi_{1,i}}{2 \hbar_{1,i}}{\tilde{d}_{1,i}}^2+\frac{\varpi_{1,i}}{2 \hbar_{1,i}}{{d}^2_{1,i}}\\
-% &+\frac{1}{\omega_1} \frac{z_{1,i}^2}{\rho_{1,i}^2 - z_{1,i}^2}+\frac{1}{2\omega_1  (\rho_{1,i}^2 - z_{1,i}^2)} \tilde{d}_{1,i}^2+\frac{1}{2\omega_1  (\rho_{1,i}^2 - z_{1,i}^2)} {d}_{1,i}^2\\
-% &\le \left(\frac{1}{2\hbar_{1,i}}+ \frac{1}{2}-\frac{\varpi_{1,i}}{2 \hbar_{1,i}}+ \frac{1}{2\omega_1  (\rho_{1,i}^2 - z_{1,i}^2)}\right)\tilde{d}_{1,i}^2+ \frac{ 1}{2\hbar_{1,i}} \dot{\bar{{d}}}_{1,i}^2+\frac{\varpi_{1,i}}{2 \hbar_{1,i}}{{d}^2_{1,i}}+\frac{1}{\omega_1} \frac{z_{1,i}^2}{\rho_{1,i}^2 - z_{1,i}^2}+\frac{1}{2\omega_1  (\rho_{1,i}^2 - z_{1,i}^2)} {d}_{1,i}^2
+% 令 $c_v=\frac{1}{(2v-v^2)^2}>0$。则对任意 $\varepsilon_i>0$ 有
+% \begin{equation}\label{eq\:lemma-key}
+% \begin{aligned}
+% -\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i
+% -k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}
+% &\le
+% -\Psi(V_{1,i})-(2k_{1,i}-\varepsilon_i),V_{1,i}
+% +\frac{c_v^{,2}}{2\varepsilon_i},\tilde\alpha_i^2 .
 % \end{aligned}
 % \end{equation}
 
-In \cref{eq:46}, according to \cref{lemma:2}, and using \cref{eq:32,eq:41},
-$\dot{\tilde d}_{j,i}=\dot d_{j,i}+\hbar_{j,i}\operatorname{sgn}(s_{j,i})+\varpi_{j,i}\hat d_{j,i}-\hbar_{j,i}\Gamma_{j,i}/\omega_j$. With $\|\dot d_{j,i}\|\le\bar{\dot d}$ and Young's inequality, we obtain
-\begin{subequations}\label{eq:50}
-\begin{align}
-	&\frac{1}{\hbar_{{j,i}}} \tilde{d}_{{j,i}} \dot{d}_{{j,i}}
-	\leq \frac{1}{2\hbar_{{j,i}}} \tilde{d}_{{j,i}}^2 + \frac{ 1}{2\hbar_{{j,i}}} \dot{\bar{d}}_{{j,i}}^2,\\
-	&
-	\tilde{d}_{{j,i}} \operatorname{sgn}(s_{{j,i}})
-	\leq \frac{1}{2} \tilde{d}_{{j,i}}^2 + \frac{1}{2},\\
-	&
-	\frac{\varpi_{{j,i}}}{\hbar_{{j,i}}} \tilde{d}_{{j,i}} {\hat d}_{{j,i}} =\frac{\varpi_{{j,i}}}{\hbar_{{j,i}}} \tilde{d}_{{j,i}}({d}_{{j,i}}-\tilde{d}_{{j,i}})  
-	 \leq -\frac{\varpi_{{j,i}}}{2 \hbar_{{j,i}}}{\tilde{d}_{{j,i}}}^2+\frac{\varpi_{{j,i}}}{2 \hbar_{{j,i}}}{{\bar d}^2_{{j,i}}},\\
-	 &
-	 \left| \frac{z_{{j,i}} d_{{j,i}}}{\omega_j(\rho_{{j,i}}^2 - z_{{j,i}}^2)} \right| \le
-	\frac{\epsilon_j}{2 \omega_j} \frac{z_{{j,i}}^2}{\rho_{{j,i}}^2 - z_{{j,i}}^2}+\frac{1}{2\epsilon_j \omega_j  (\rho_{{j,i}}^2 - z_{{j,i}}^2)} {\bar d}^2_{{j,i}},
-	\end{align}
-\end{subequations}
-where $\epsilon_j >0$ is arbitrary.
+ 
+在 BLF 约束内会存在 $|z_{1,i}(t)|<\rho_{1,i}(t)$ 不变，故存在常数 $v\in(0,1)$ 使${|z_{1,i}(t)|}/{\rho_{1,i}(t)}\le 1-v, \forall t \in (0,+\infty)$. 令 $c_v=\frac{1}{(2v-v^2)^2}>0$, 可得到
+$
+|P_{1,i}z_{1,i}| \le c_v |z_{1,i}|\le c_v \sqrt{2V_{1,i}}
+$. Then, we get
+$$
+|P_{1,i}z_{1,i}\tilde\alpha_i|
+\le c_v\sqrt{2V_{1,i}}\,|\tilde\alpha_i|
+\le \varepsilon V_{1,i}+\frac{c_v^{\,2}}{2\varepsilon}\tilde\alpha_i^2,
+$$
+where $\varepsilon>0$ is a positive constant.
+
+由 $\beta\dot\alpha^f=-(\alpha^f-\alpha)$ 得 $\dot{\tilde\alpha}=\dot\alpha-\tfrac{1}{\beta}\tilde\alpha$，从而
+$$
+\tilde\alpha^\top\dot{\tilde\alpha}
+\le -\frac{1}{2\beta}\|\tilde\alpha\|^2+\beta\,\mathcal{E}(t),
+$$
+ 
+% From \cref{eq:22,eq:23}, the time derivative of the filtering error $\dot{\tilde{\alpha}}$ is given as
+% \begin{equation}\label{eq:48}
+% 	\tilde\alpha^\top \dot{\tilde \alpha}= {\tilde{\alpha}}\dot{\alpha}-\frac{1}{\beta}{\tilde{\alpha}}^2,
+% \end{equation}
+% 根据\cref{eq:21,eq:23},可知 $\frac{d}{dt} \bar{\alpha}$ 为分段连续函数，在整个定义域上仅在两端处存在有限阶不连续点，但整体仍属于 piecewise continuous 函数。虚拟控制律 $\alpha$ 是由状态反馈设计得到的连续可导函数，其导数 $\dot{\alpha}$ 可由系统状态和参考轨迹导数构成，因此在闭环系统稳定的前提下为有界函数。由此，令$R_i=\frac{d}{dt} \bar{\alpha}$, $R_i$ is a bounded continuous function.
+% Then by employing Young's inequality, we obtain:
+% \begin{equation}\label{eq:49}
+% 	\begin{aligned}
+% 		{\tilde{\alpha}}\dot{\tilde{\alpha}}\leq -\frac{\beta}{2}  {\tilde{\alpha}}^{2} + \frac{1}{2\beta} R_{i}^2. 
+% 	\end{aligned}
+% \end{equation}
+
+其中 $\mathcal{E}(t)$ is a continuous and bounded function, 并且由有界信号构成。
+
+将其与 \eqref{eq:3} 相加，可得
+
+\begin{equation}\label{eq:50}
+\begin{aligned}
+	\mathcal{L}_{\alpha}=&-\sum_{i=1}^nP_{1,i}z_{1,i}\tilde\alpha_i
+-k_{1,i}\sum_{i=1}^n\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}
++\tilde\alpha^\top\dot{\tilde\alpha}\\
+& \le
+\varepsilon \sum_{i=1}^n V_{1,i}+\frac{c_v^{\,2}}{2\varepsilon}\sum_{i=1}^n \tilde\alpha_i^2-k_{1,i}\sum_{i=1}^n \frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\frac{1}{2\beta}\|\tilde\alpha\|^2+\beta\,\mathcal{E}(t)\\
+&\le
+(\varepsilon-2k_{1,i})\sum_{i=1}^n V_{1,i}
+-\Big(\frac{1}{2\beta}-\frac{c_v^{\,2}}{2\varepsilon}\Big)\|\alpha\Vert^2
++\beta\,\mathcal{E}(t)\\
+\end{aligned}
+\end{equation}
+
+
+% 若进一步选取
+% $
+% \boxed{\ \lambda\ \le\ \frac{k_{1,i}}{c_v^{\,2}}\ ,\ }
+% $
+
+
+结合\cref{eq:omega-tilde}, and let
+\begin{equation}\label{eq:50}
+	\begin{aligned}
+\mathcal{L}_\omega
+=&\,-\sum_{i=1}^nP_{2,i}z_{2,i}\tilde{\omega}_i\;+\;\tilde \omega^\top \dot{\tilde \omega}\;-\;k_s\sum_{i=1}^n P_{2,i} | z_{2,i} |  \\
+=&\;-\tilde\omega^\top\Lambda\tilde\omega\;-\sum_{i=1}^nP_{2,i}z_{2,i}\tilde\omega_i\;-\;k_s\sum_{i=1}^n P_{2,i} | z_{2,i} |\;+\;\tilde\omega^\top\Delta_\omega .
+\end{aligned}
+\end{equation}
+
+取任意 $\epsilon_1,\epsilon_2\in(0,1)$。用矩阵带权（$\Lambda$）的 Young 不等式, 可得
+
+$$
+\big|\tilde\omega^\top(P_2\!\odot z_2)\big|
+=\big|(\Lambda^{1/2}\tilde\omega)^\top\Lambda^{-1/2}(P_2\!\odot z_2)\big|
+\le \tfrac{\epsilon_1}{2}\tilde\omega^\top\Lambda\tilde\omega
++ \tfrac{1}{2\epsilon_1}\big\|\Lambda^{-1/2}(P_2\!\odot z_2)\big\|^2,
+$$
+
+$$
+\tilde\omega^\top\Delta_\omega
+\le \tfrac{\epsilon_2}{2}\tilde\omega^\top\Lambda\tilde\omega
++\tfrac{1}{2\epsilon_2}\big\|\Lambda^{-1/2}\Delta_\omega\big\|^2 .
+$$
+
+代回$\mathcal{L}_\omega$ 可得
+$$
+\mathcal{L}_\omega
+\le
+-\Big(1-\tfrac{\epsilon_1+\epsilon_2}{2}\Big)\tilde\omega^\top\Lambda\tilde\omega
++\sum_{i=1}^n\!\left[\tfrac{1}{2\epsilon_1\,\lambda_{i}}(P_{2,i}|z_{2,i}|)^2
+- k_s P_{2,i}|z_{2,i}|\right]
++\tfrac{1}{2\epsilon_2}\big\|\Lambda^{-1/2}\Delta_\omega\big\|^2 .
+$$
+
+采用用配方法处理，有
+$$
+\sum_{i=1}^n\!\left[\tfrac{1}{2\epsilon_1\,\lambda_{i}}(P_{2,i}|z_{2,i}|)^2
+- k_s P_{2,i}|z_{2,i}|\right]
+\le -\,\tfrac{\epsilon_1}{2}\,k_s^2\,\mathrm{tr}(\Lambda)\ \le\ 0.
+$$
+
+这是一个有利的负常数，为了简洁可直接丢弃而保持上界。进一步用 $\tilde\omega^\top\Lambda\tilde\omega\ge \lambda_{\min}\|\tilde\omega\|^2$, 于是得到
+$$
+\mathcal{L}_\omega
+\ \le\
+-\Big(1-\tfrac{\epsilon_1+\epsilon_2}{2}\Big)\lambda_{\min}\|\tilde\omega\|^2
+\;+\;\tfrac{1}{2\epsilon_2}\big\|\Lambda^{-1/2}\Delta_\omega\big\|^2,\qquad
+% c_\omega=\Big(1-\tfrac{\epsilon_1+\epsilon_2}{2}\Big)\lambda_{\min}>0
+$$
+
+
+
+
+% Let 
+% $$
+% \mathcal{L} =-\sum_{i=1}^nP_{2,i}z_{2,i}\tilde{\omega}_i\;+\;\tilde \omega^\top \dot{\tilde \omega}\;-\;k_s\sum_{i=1}^n P_{2,i} | z_{2,i} |
+% $$
+
+
+% 利用不等式 $ab\le k\,a+\frac{b^2}{4k}$（$(\sqrt{k\,a}-\frac{b}{2\sqrt{k}})^2\ge0$）并取
+% $a=P_{2,i}|z_{2,i}|,\ b=|\tilde\omega_i|,\ k=k_s$，对每个通道有
+
+% $$
+% -\,P_{2,i}z_{2,i}\tilde\omega_i
+% \ \le\
+% P_{2,i}|z_{2,i}|\,|\tilde\omega_i|
+% \ \le\
+% k_s P_{2,i}|z_{2,i}|+\frac{1}{4k_s}\tilde\omega_i^{\,2}.
+% $$
+
+% 于是
+
+% $$
+% -\,k_s\!\sum_{i=1}^n\! P_{2,i}|z_{2,i}|
+% -\sum_{i=1}^n P_{2,i}z_{2,i}\tilde\omega_i
+% \ \le\
+% \frac{1}{4k_s}\,\|\tilde\omega\|^2
+% $$
+
+
+% 由观测器误差$
+% \dot{\tilde\omega}= -\Lambda\,\tilde\omega+\Delta_\omega,
+% \Lambda=\mathrm{diag}\{\lambda_{i}\}>0$, 并根据Young不等式得
+
+% $$
+% \tilde\omega^\top\dot{\tilde\omega}
+% = -\tilde\omega^\top\Lambda\tilde\omega+\tilde\omega^\top\Delta_\omega
+% \ \le\
+% -\tilde\omega^\top\Lambda\tilde\omega
+% +\frac{\varepsilon}{2}\tilde\omega^\top\Lambda\tilde\omega
+% +\frac{1}{2\varepsilon}\Delta_\omega^\top\Lambda^{-1}\Delta_\omega \le\
+% -\Big(1-\tfrac{\varepsilon}{2}\Big)\tilde\omega^\top\Lambda\tilde\omega
+% +\frac{1}{2\varepsilon}\big\|\Lambda^{-1/2}\Delta_\omega\big\|^2,
+% $$
+
+
+
+% 把（A）与（B）相加：
+
+% $$
+% \begin{aligned}
+% 	\mathcal{L}
+% &\le
+% -\Big(1-\tfrac{\varepsilon}{2}\Big)\tilde\omega^\top\Lambda\tilde\omega
+% +\frac{1}{4k_s}\|\tilde\omega\|^2
+% +\frac{1}{2\varepsilon}\big\|\Lambda^{-1/2}\Delta_\omega\big\|^2.
+% \end{aligned}
+% $$
+
+% 利用 $\tilde\omega^\top\Lambda\tilde\omega\ge \lambda_{\min}\|\tilde\omega\|^2$，得到
+
+% $$
+% \mathcal{L} \le\
+% -\Big(\big(1-\tfrac{\varepsilon}{2}\big)\lambda_{\min}-\tfrac{1}{4k_s}\Big)\|\tilde\omega\|^2
+% +\frac{1}{2\varepsilon}\big\|\Lambda^{-1/2}\Delta_\omega\big\|^2.
+% $$
+
+% 令 $\varepsilon=\tfrac12$（简洁且常用），净负系数为 $\tfrac{3}{4}\lambda_{\min}-\tfrac{1}{4k_s}$。
+% 只要$
+% \boxed{ \ k_s\;>\;\frac{1}{3\,\lambda_{\min}}\ }$
+
+%  $\frac{1}{2\varepsilon}\|\Lambda^{-1/2}\Delta_\omega\|^2$ 作为输入项（由 $\Delta_\omega=\dot\omega-\Lambda\varepsilon_d$ 决定）并入 $\sigma(\|r(t)\|)$。
+
+
+\begin{equation}\label{eq:45}
+	\begin{aligned}
+		\dot{\mathcal{L}} 
+		\le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})\right)
+		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})  \right)\\
+		&+\frac{\varepsilon}{2} V_{1,i}+\frac{c_v^{\,2}}{2\varepsilon}\tilde\alpha_i^2-\frac{1}{2\lambda}\|\tilde\alpha\|^2+\beta\,\mathcal{E}(t)-\Big(1-\tfrac{\epsilon_1+\epsilon_2}{2}\Big)\lambda_{\min}\|\tilde\omega\|^2\;+\;\tfrac{1}{2\epsilon_2}\big\|\Lambda^{-1/2}\Delta_\omega\big\|^2\\
+\le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})\right)
+		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})  \right)\\
+		&+\frac{\varepsilon}{2} V_{1,i}+\frac{c_v^{\,2}}{2\varepsilon}\tilde\alpha_i^2-\frac{1}{2\beta}\|\tilde\alpha\|^2+\beta\,\mathcal{E}(t)-\Big(1-\tfrac{\epsilon_1+\epsilon_2}{2}\Big)\lambda_{\min}\|\tilde\omega\|^2\;+\;\tfrac{1}{2\epsilon_2}\big\|\Lambda^{-1/2}\Delta_\omega\big\|^2
+	\end{aligned}
+\end{equation}
+
+根据公式可得到
+\begin{equation}\label{eq:45}
+	\begin{aligned}
+		\dot{\mathcal{L}} 
+\le&-(2k_{1,i}-\varepsilon)V_{1,i}- 2k_{2,i}V_{2,i}-\Big(\frac{1}{2\beta}-\frac{c_v^{\,2}}{2\varepsilon}\Big)\tilde\alpha_i^2 -\Big(1-\tfrac{\epsilon_1+\epsilon_2}{2}\Big)\lambda_{\min}\|\tilde\omega\|^2
++\frac{1}{2\epsilon_2}\big\|\Lambda^{-1/2}\Delta_\omega\big\|^2
++\beta\,\mathcal{E}(t)
+	\end{aligned}
+\end{equation}
+
+
+
 
 
 
 After organizing \cref{eq:53}, the principal negative qualitative and constant bounded terms of Lyapunov's derivative can be obtained, which further leads to
 \begin{equation}\label{eq:54}
-\dot{V}\le -r  V+\sigma,
+\dot{\mathcal{L}}\le -\mathcal{M}  \mathcal{L}+\mathcal{N}(t) ,
 		\end{equation}
 with
 \begin{equation}\label{eq:55}
 \begin{aligned}
-r = \min \left\{
-	\min_{i}\left(\frac{2 k_{1,i}-\epsilon_1}{\omega_{1}}\right), \min_{i}\left(\frac{2 k_{2,i}-\epsilon_2}{\omega_{2}}\right),
-      \min_{i}(\kappa_i), \lambda, \min_{i}\left(\varpi_{1,i}-1-\hbar_{1,i}\right), \min_{i}\left(\varpi_{2,i}-1-\hbar_{2,i}\right)
+\mathcal{M}  = \min \left\{
+	\min_{i}\left(2k_{1,i}-\varepsilon\right), 2k_{2,i}, \min_{i}\left(\frac{1}{2\beta}-\frac{c_v^{\,2}}{2\varepsilon}\right),\min_{i}\left(1-\tfrac{\epsilon_1+\epsilon_2}{2}\right)
 \right\}>0,
 \end{aligned}
 \end{equation}
 \begin{equation}\label{eq:56}
-	\sigma =\frac{\kappa_i}{2\varrho_i}\sum_{i=1}^n \bar \theta_{i}^2 +\frac{1}{2\lambda} \sum_{i=1}^{n}R_{i}^2 + \frac{n}{4  \omega_{1} \iota_1 }+ \frac{n}{4  \omega_{2}\iota_2 }+H.
+	\mathcal{N}(t)  =\frac{1}{2\varepsilon}\big\|\Lambda^{-1/2}\Delta_\omega\big\|^2
++\beta\,\mathcal{E}(t).
 \end{equation} 
-% \begin{equation}\label{eq:38}
-% \begin{aligned}
-% r = \min \Bigg\{ 
-%     &\ \min_{i=1...n}\left(2k_{1,i}-\frac{1}{r}\right),\ 
-%       \min_{i=1...n}\left(2k_{2i}-\rho_{2i}\right),\
-%       \min_{i=1...n}(\kappa_i-\varrho_i), \\
-%     &\ \min_{i=1...n}\left(\lambda - \frac{r}{\rho_{1,i}^2-e_{1,i}^2}\right),\
-%       \min_{i=1...n}\left(\frac{k_{I i}}{\rho_{1,i}^2 - e_{1,i}^2} - \frac{1}{k_{I i}}\right) 
-% \Bigg\},
-% \end{aligned}
-% \end{equation}
 
-
-
-From the above \cref{eq:53,eq:54,eq:55,eq:56}, as long as the controller parameters are chosen reasonably, $V$ is converge exponentially, which implies all signals $z_{1,i}, z_{2,i}, {\tilde{\alpha}}, \tilde \theta_{i}, \tilde{d}_{1,i}, \tilde{d}_{2,i}$ are bounded within the compact set $\mathcal{Q} $. Let
+From the above \cref{eq:53,eq:54,eq:55,eq:56}, as long as the controller parameters are chosen reasonably, $\mathcal{L}$ is 一致有界并可收敛, which implies all signals $z_{1}, z_{2}, {\tilde{\alpha}}, \tilde{\omega}$ are bounded within the compact set $\mathcal{Q} $, 从而存在常数$\phi>0$ such that
 \begin{equation}\label{eq:57}
-	\mathcal{Q} =\left\{ (z_{1,i},z_{2,i},\tilde\alpha,\tilde \theta_{i},\tilde d_{1,i},\tilde d_{2,i})\,:
-	\|(z,\tilde\alpha,\tilde w,\tilde d)\|\le \sqrt{\phi}\right\}.
+	(z_1,z_2,\tilde\alpha,\tilde{\omega}) \in \mathcal{Q} =\left\{
+	\|(z_1,z_2,\tilde\alpha,\tilde{\omega})\|\le \sqrt{\phi}\right\}.
 \end{equation}
 
+According to \cref{eq:45,eq:46,eq:57} and \cref{lemma:3}, it follows that
 
-According to \cref{eq:45,eq:46,eq:57}, it follows that
-\begin{equation}\label{eq:58}
+\begin{equation}\label{eq:45}
 	\begin{aligned}
-		\dot{V} \le& - \sum_{i=1}^{n}\varGamma_{1,i}z_{1,i}\left[\frac{\pi}{\eta\,T_p}\,
-		\left( 2^{-1}+n^{\frac\eta2} 2^{-\tfrac\eta2 -1}\,\left(\frac{z_{1,i}^2}{\rho_{1,i}^2 - z_{1,i}^2}\right)^{\frac{\eta}{2}}\right)  \right]    \\
-		&                      
-		- \sum_{i=1}^{n}\varGamma_{2,i}z_{2,i}\left[\frac{\pi}{\eta\,T_p}\,
-		 \left( 2^{-1}+n^{\frac\eta2} 2^{-\tfrac\eta2 -1}\,\left(\frac{z_{2,i}^2}{\rho_{2,i}^2 - z_{2,i}^2}\right)^{\frac{\eta}{2}}\right)  \right]\\
-	&-\frac{\pi}{\eta T_{p}}\sum_{i=1}^{n}\left[ \left(\frac{1}{2\,\varrho_i}\,\tilde \theta_{i}^2\right)^{\frac{\eta}{2}-1}+\left(\frac{1}{2}\,{\tilde{\alpha}}^2\right)^{\frac{\eta}{2}-1}+\left(\frac{1}{2\hbar_{1,i}}{\tilde d}^2_{1,i}\right)^{\frac{\eta}{2}-1}+\left(\frac{1}{2\hbar_{2,i}}{\tilde d}^2_{2,i}\right)^{\frac{\eta}{2}-1}\right] \\
-		        & - n^{\frac\eta2}\frac{\pi}{\eta T_{p}}\sum_{i=1}^{n}\left[
-		\left(\frac{1}{2\,\varrho_i}\,\tilde \theta_{i}^2\right)^{\frac{\eta}{2}+1}+\left(\frac{1}{2}\,{\tilde{\alpha}}^2\right)^{\frac{\eta}{2}+1}+\left(\frac{1}{2\hbar_{1,i}}{\tilde d}^2_{1,i}\right)^{\frac{\eta}{2}+1}+\left(\frac{1}{2\hbar_{2,i}}{\tilde d}^2_{2,i}\right)^{\frac{\eta}{2}+1} \right]   \\
-		&        
-		+\sum_{i=1}^{n}\frac{2\pi}{\eta T_{p}} \left[  \left(\frac{\phi}{2}\right)^{1-\frac{\eta}{2}} + n^{\frac\eta2}\left(\frac{\phi}{2}\right)^{1+\frac{\eta}{2}}  \right]+\sigma  .                  
-	\end{aligned}
-\end{equation}
-
-
-% \begin{equation}\label{eq:composite_V}
-% 	\begin{aligned}
-% 		\dot{V} 
-% &\le-\frac{\pi}{\eta T_{p}}\sum_{i=1}^{n}\left( \left( \frac{z_{1,i}^{2}}{2(\rho_{1,i}^{2} - z_{1,i}^{2})} \right)^{1 - \frac{\eta}{2}} 
-%  +\left( \frac{z_{2,i}^{2}}{2(\rho_{2i}^{2} - z_{2,i}^{2})} \right)^{1 - \frac{\eta}{2}} 
-%  + \left(\frac{1}{2\,\varrho_i}\,\tilde \theta_{i}^2\right)^{\frac{\eta}{2}-1}+\left(\frac{1}{2}\,{\tilde{\alpha}}^2\right)^{\frac{\eta}{2}-1}+\left(\frac{1}{2\,k_{I i}}\,\sigma_{i}^2\right)^{\frac{\eta}{2}-1}\right) \\
-% &- n^{\frac\eta2}\frac{\pi}{\eta T_{p}}\sum_{i=1}^{n}\left(
-%   \left( \frac{z_{1,i}^{2}}{2(\rho_{1,i}^{2} - z_{1,i}^{2})} \right)^{1 + \frac{\eta}{2}} 
-% +   \left( \frac{z_{2,i}^{2}}{2(\rho_{2i}^{2} - z_{2,i}^{2})} \right)^{1 + \frac{\eta}{2}}   + \left(\frac{1}{2\,\varrho_i}\,\tilde \theta_{i}^2\right)^{\frac{\eta}{2}+1}+\left(\frac{1}{2}\,{\tilde{\alpha}}^2\right)^{\frac{\eta}{2}+1}+\left(\frac{1}{2\,k_{I i}}\,\sigma_{i}^2\right)^{\frac{\eta}{2}+1} \right)\\
-% &+\sum_{i=1}^{n}\frac{2\pi}{\eta T_{p}} \left( \beta_1 (\frac{\phi}{2})^{1-\frac{\eta}{2}} + \beta_2(\frac{\phi}{2})^{1+\frac{\eta}{2}}  \right)+\sigma \\
-% 		\end{aligned}
-% \end{equation}	
-
-
-			
-From \cref{lemma:2}, letting $\mathcal{X} =1/2\sum_{i=1}^{n} \ln({\rho_{j,i}^2}/{\rho_{j,i}^2-e_{j,i}^2}), \mathcal{Y} =1, \mathcal{Z}_{1}= {1-{\eta}/{2}}, \mathcal{Z}_{2}={\eta}/{2}, \mathcal{Z}_{3}= (\eta/2)^{(\eta/(2-\eta))}$, we have
-\begin{equation}\label{eq:59}
-	\left(\frac{1}{2}\sum_{i=1}^{n} \ln\frac{\rho_{j,i}^2}{\rho_{j,i}^2-e_{j,i}^2}\right)^{1-\frac{\eta}{2}} \le \frac{1}{2} \sum_{i=1}^{n} \ln\frac{\rho_{j,i}^2}{\rho_{j,i}^2-e_{j,i}^2}+\left( 1-\frac{\eta}{2}\right) \left(\frac{\eta}{2}\right)^{\frac{\eta}{2-\eta}}.
-\end{equation}
-
-Quoting \cref{lemma:3}, and combined with \cref{eq:52,eq:59}, we get
-\begin{equation}\label{eq:60}
-	\begin{aligned}
-		\dot{V}
-		 & \le-\frac{\pi}{\eta T_{p}}\left(\frac{1}{2}\sum_{i=1}^{n} \ln\frac{\rho_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}
-		+ \frac{1}{2}\sum_{i=1}^{n} \ln\frac{\rho_{2i}^2}{\rho_{2i}^2-z_{2,i}^2}
-		+ \sum_{i=1}^{n}\frac{1}{2\,\varrho_i}\,\tilde \theta_{i}^2+\sum_{i=1}^{n}\frac{1}{2}\,{\tilde{\alpha}}^2+\frac{1}{2\hbar_{1,i}}{\tilde d}^2_{1,i}+\frac{1}{2\hbar_{2,i}}{\tilde d}^2_{2,i}\right)^{1-\frac{\eta}{2}} \\
-		 & -\frac{\pi }{\eta T_{p}}\left(\frac{1}{2}\sum_{i=1}^{n} \ln\frac{\rho_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}
-		+ \frac{1}{2}\sum_{i=1}^{n} \ln\frac{\rho_{2i}^2}{\rho_{2i}^2-z_{2,i}^2}
-		+ \sum_{i=1}^{n}\frac{1}{2\,\varrho_i}\,\tilde \theta_{i}^2+\sum_{i=1}^{n}\frac{1}{2}\,{\tilde{\alpha}}^2+\frac{1}{2\hbar_{1,i}}{\tilde d}^2_{1,i}+\frac{1}{2\hbar_{2,i}}{\tilde d}^2_{2,i}\right)^{1+\frac{\eta}{2}} \\
-		 & +\sum_{i=1}^{n}\frac{2\pi}{\eta T_{p}} \left[  \left(\frac{\phi}{2}\right)^{1-\frac{\eta}{2}} + n^{\frac\eta2}\left(\frac{\phi}{2}\right)^{1+\frac{\eta}{2}}  \right]+\left( 2-\eta\right) \left(\frac{\eta}{2}\right)^{\frac{\eta}{2-\eta}}+\sigma      \\
-		 & \le-\frac{\pi}{\eta T_{p}}\left( V^{1-\frac{\eta}{2}}+V^{1+\frac{\eta}{2}}\right)+\varsigma    ,                                                                    
+		\dot{\mathcal{L}} 
+\le& -\sum_{i=1}^n \Psi(V_{1,i})-\sum_{i=1}^n \Psi(V_{2,i})-\frac{\pi}{\eta T_{p}}\sum_{i=1}^{n}\left[ \left(\tfrac{1}{2}\tilde\alpha^2 \right)^{1-\frac{\eta}{2}}+\left(\tfrac{1}{2}\tilde \omega^2\right)^{1-\frac{\eta}{2}}\right] \\
+& - n^{\frac\eta2}\frac{\pi}{\eta T_{p}}\sum_{i=1}^{n}\left[ \left(\tfrac{1}{2}\tilde\alpha^2\right)^{1+\frac{\eta}{2}}+\left(\tfrac{1}{2}\tilde \omega^2\right)^{1+\frac{\eta}{2}}\right]  +\frac{2\pi}{\eta T_{p}} \sum_{i=1}^{n}\left[  \left(\frac{\phi}{2}\right)^{1+\frac{\eta}{2}} + n^{\frac\eta2}\left(\frac{\phi}{2}\right)^{1+\frac{\eta}{2}}  \right]+\mathcal{N}(t)   \\
+\le &-\frac{\pi}{\eta T_{p}}\left[ \sum_{i=1}^{n}V_{1,i}+\sum_{i=1}^{n}V_{2,i} +\left(\tfrac{1}{2}\tilde\alpha^2 \right)+\left(\tfrac{1}{2}\tilde \omega^2\right)\right]^{1-\frac{\eta}{2}}-\frac{\pi}{\eta T_{p}}\left[ \sum_{i=1}^{n}V_{1,i}+\sum_{i=1}^{n}V_{2,i} +\left(\tfrac{1}{2}\tilde\alpha^2 \right)+\left(\tfrac{1}{2}\tilde \omega^2\right)\right]^{1+\frac{\eta}{2}} \\
+&+\frac{2\pi}{\eta T_{p}}\sum_{i=1}^{n} \left[  \left(\frac{\phi}{2}\right)^{1-\frac{\eta}{2}} + n^{\frac\eta2}\left(\frac{\phi}{2}\right)^{1+\frac{\eta}{2}}  \right]+\mathcal{N}(t) \\
+&  \le-\frac{\pi}{\eta T_{p}}\left( \mathcal{L}^{1-\frac{\eta}{2}}+\mathcal{L}^{1+\frac{\eta}{2}}\right)+\mathcal{R}(t) 
 	\end{aligned}
 \end{equation}
 where
 \begin{equation}\label{eq:61}
 	\begin{aligned}
-\varsigma =\sum_{i=1}^{n}\frac{2\pi}{\eta T_{p}} \left(  (\frac{\phi}{2})^{1-\frac{\eta}{2}} + n^{\frac\eta2}(\frac{\phi}{2})^{1+\frac{\eta}{2}}  \right)+\left( 2-\eta\right) \left(\frac{\eta}{2}\right)^{\frac{\eta}{2-\eta}}+\sigma.
+\mathcal{R}(t) =\frac{2\pi}{\eta T_{p}}\sum_{i=1}^{n} \left[  \left(\frac{\phi}{2}\right)^{1-\frac{\eta}{2}} + n^{\frac\eta2}\left(\frac{\phi}{2}\right)^{1+\frac{\eta}{2}}  \right]+\mathcal{N}(t).
 		\end{aligned}
 \end{equation}
 
-In summary, \cref{eq:61} is strictly controlled by the sum of the negative definite term and the bounded term $\varsigma$. From \cref{lemma:1} then the closed loop system is globally stable at a predefined-time. Remember 
-$A=\left[z_1, z_2,\tilde \theta,\tilde \alpha, {\tilde d}_{1}, {\tilde d}_{2}\right]^{\mathsf T} \in \mathbb{R}^{6n}$. And take the Lyapunov function $V(A)=\|A\|_2^2$, combined with the previous derivation and \cref{eq:60}, it can be seen that, for any initial condition, the closed-loop system globally converges to a compact set $\Omega$ within a predefined-time $T_p$. After that, $V(A)$ does not increase any further, which ensures that the system remains stable within this set. The $\Omega$ is as follows
-\begin{equation}\label{eq:62}
-	\Omega
-	=\left\{\,A : \lim_{t\to T_p}V(A) \le
-	\min\left\{
-	\left(\tfrac{2\eta\,T_p \varsigma }{\pi}\right)^{\!{\frac{1}{1-\frac{\eta}{2}}}}\!,
-	\left(\tfrac{2\eta\,T_p \varsigma }{\pi}\right)^{\!{\frac{1}{1+\frac{\eta}{2}}}}
-	\right\}\right\}.
-\end{equation}
+令
+$$
+\overline{\mathcal{R}}_t=\underset{0\le s\le t}{\operatorname*{ess\,sup}}\ \mathcal{R}(s),
+$$
+
+考虑比较系统
+
+$$
+\dot y= -\frac{\pi}{\eta T_p}\Big(y^{1-\frac{\eta}{2}}+y^{1+\frac{\eta}{2}}\Big)+\overline{\mathcal{R}}_t,\qquad y(0)=\mathcal{L}(0).
+$$
+
+由比较引理有 $\mathcal{L}(t)\le y(t)$。对上述标量系统应用预定义时间稳定引理（你文中的 Lemma 1），得到在 $t=T_p$ 时
+$$
+y(T_p)\ \le\ 
+\gamma\!\big(\overline{\mathcal{R}}_{T_p}\big)
+=\min\!\left\{
+\Big(\tfrac{2\eta T_p\,\overline{\mathcal{R}}_{T_p}}{\pi}\Big)^{\!\frac{1}{1-\frac{\eta}{2}}},
+\ \Big(\tfrac{2\eta T_p\,\overline{\mathcal{R}}_{T_p}}{\pi}\Big)^{\!\frac{1}{1+\frac{\eta}{2}}}
+\right\}.
+$$
+
+于是
+$$
+\mathcal{L}(t)\ \le\ o \big(\mathcal{L}(0),t\big)\;+\;\gamma\!\Big(\sup_{0\le s\le t}\mathcal{R}(s)\Big),
+$$
+where $o(t)=0\ \ (t\ge T_p)$. 当$\mathcal{R}=0$时, $\mathcal{L}(T_p)=0$；有界输入时，在 $t=T_p$ 以前吸入到半径 $\gamma(\|\mathcal{R}\|_{\infty,[0,T_p]})$ 的紧集内。等价地，设
+$$
+\Omega=\big\{\mathcal{S}:\ \mathcal{L}(T_p)\le \gamma(\overline{\mathcal{R}}_{T_p})\big\},\quad 
+\mathcal{S}=[z_1,z_2,\tilde\alpha,\tilde\omega]^\top,
+$$
+\begin{remark}
+	若 $\Delta_\omega,\ \mathcal{E}(t)\in L_\infty$，则 $\mathcal{R}(t)\in L_\infty$，因而 $\overline{\mathcal{R}}_{T_p}<\infty$，结论成立；当 $\mathcal{R}=0$ 时得到严格的预定义时间收敛。
+\end{remark}
+
+
+% In summary, \cref{eq:61} is strictly controlled by the sum of the negative definite term and the bounded term $\varsigma$. From \cref{lemma:1} then the closed loop system is globally stable at a predefined-time. Remember 
+% $\mathcal{S}=\left[z_1, z_2,\tilde \alpha, {\tilde \omega}\right]^{\mathsf T} \in \mathbb{R}^{6n}$. And take the Lyapunov function $V(\mathcal{S})=\|\mathcal{S}\|_2^2$, combined with the previous derivation and \cref{eq:60}, it can be seen that, for any initial condition, the closed-loop system globally converges to a compact set $\Omega$ within a predefined-time $T_p$. After that, $V(\mathcal{S})$ does not increase any further, which ensures that the system remains stable within this set. The $\Omega$ is as follows
+
+% \begin{equation}\label{eq:62}
+% 	\Omega
+% 	=\left\{\,\mathcal{S} : \lim_{t\to T_p}V(\mathcal{S}) \le
+% 	\min\left\{
+% 	\left(\tfrac{2\eta\,T_p \mathcal{R}(t) }{\pi}\right)^{\!{\frac{1}{1-\frac{\eta}{2}}}}\!,
+% 	\left(\tfrac{2\eta\,T_p \mathcal{R}(t) }{\pi}\right)^{\!{\frac{1}{1+\frac{\eta}{2}}}}
+% 	\right\}\right\}.
+% \end{equation}
 
 The stability proof is completed.
 
@@ -1152,43 +1141,21 @@ The stability proof is completed.
 
 
 \begin{theorem}\label{thm:u-only}
-	在适当参数（$0<\gamma<1,\ \mu>0,\ T_\zeta>0$）下，补偿器 \eqref{eq:zeta2-pts} 使所有通道的 $\zeta_{i}(t)$ 在 $t=T_\zeta$ 之前严格收敛到零或给定的极小邻域；若 $\Delta u_i\equiv 0$（饱和不被触发），则 $\zeta_{i}$ 在 $T_\zeta$ 内收敛到原点。该性质与主闭环的 BLF–PTS 设计可并行成立。
+	在适当参数（$0<\gamma<1,\ \mu>0,\ T_\zeta>0$）下，补偿器 \eqref{eq:zeta2-pts} 使所有通道的 $\zeta_{i}(t)$ 在 $t=T_\zeta$ 之前严格收敛到零或给定的极小邻域；若 $\Delta u_i= 0$（饱和不被触发），则 $\zeta_{i}$ 在 $T_\zeta$ 内收敛到原点。该性质与主闭环的 BLF–PTS 设计可并行成立。
 	\end{theorem}
 	
 	\begin{proof}
 	
-	
-	 需要套用的 PTS–ISS 引理（简述）
-	
-	若存在正定径向有界的 $V(x)$ 以及常数 $T>0,\ \eta\in(0,1)$ 和类-$\mathcal K$ 函数 $\sigma(\cdot)$，使闭环满足
+	针对每个$i$通道，设计Lyapunov 函数如下
 	
 	$$
-	\alpha_1(\|x\|)\le V(x)\le \alpha_2(\|x\|),\quad
-	\dot V \ \le\ -\frac{\pi}{\eta T}\Big(V^{1-\frac{\eta}{2}}+V^{1+\frac{\eta}{2}}\Big)\ +\ \sigma(\|u\|_\infty),
+	\mathcal{L}_{\zeta,i}\ =\ \frac12\zeta_i^2.
 	$$
 	
-	则对任意本质有界输入 $u$，在 $t=T$ 时
+	对$\mathcal{L}_{\zeta,i}$求时间导数。并结合$\zeta_i\,\mathrm{sig}(\zeta_i)^\alpha=|\zeta_i|^{\alpha+1}$ 得
 	
 	$$
-	V(T)\ \le\ \min\!\left\{
-	\Big(\tfrac{2\eta T\,\sigma(\|u\|_\infty)}{\pi}\Big)^{\!\frac{1}{1-\frac{\eta}{2}}},
-	\ \ 
-	\Big(\tfrac{2\eta T\,\sigma(\|u\|_\infty)}{\pi}\Big)^{\!\frac{1}{1+\frac{\eta}{2}}}
-	\right\},
-	$$
-	
-	并进入且保持对应紧集；若 $u\equiv0$，则 $V(T)=0$（预定义时间到达原点）。
-	
-	设计Lyapunov 函数如下
-	
-	$$
-	V_{i,\zeta}\ =\ \frac12\zeta_i^2.
-	$$
-	
-	对$V_{i,\zeta}$求时间导数。并结合$\zeta_i\,\mathrm{sig}(\zeta_i)^\alpha=|\zeta_i|^{\alpha+1}$ 得
-	
-	$$
-	\dot V_{i,\zeta}= -\frac{\pi}{2\gamma T_\zeta}\Big((V_{i,\zeta})^{1-\frac{\gamma}{2}}+(V_{i,\zeta})^{1+\frac{\gamma}{2}}\Big)\ -\ \mu\zeta_i^2\ -\  g_i\zeta_i\Delta u_i.
+	\dot{\mathcal{L}}_{\zeta,i}= -\frac{\pi}{2\gamma T_\zeta}\Big((\mathcal{L}_{\zeta,i})^{1-\frac{\gamma}{2}}+(\mathcal{L}_{\zeta,i})^{1+\frac{\gamma}{2}}\Big)\ -\ \mu\zeta_i^2\ -\  g_i\zeta_i\Delta u_i.
 	$$
 	
 	
@@ -1202,48 +1169,42 @@ The stability proof is completed.
 	合并上式并丢弃额外负项 $-\frac{\mu}{2}\sum\zeta_i^2\le0$
 	
 	$$
-	\boxed{
-	\dot V_{i,\zeta}
+		\dot{\mathcal{L}}_{\zeta,i}
 	\ \le\
-	-\frac{\pi}{2\gamma T_\zeta}\Big((V_{i,\zeta})^{1-\frac{\gamma}{2}}+(V_{i,\zeta})^{1+\frac{\gamma}{2}}\Big)
-	\ +\ \underbrace{\sum_{i=1}^{n}\frac{g_i^2}{2\mu}(\Delta u_i)^2}_{\displaystyle \triangleq\ \Lambda(t)}\ .
-	}
+	-\frac{\pi}{2\gamma T_\zeta}\Big((\mathcal{L}_{\zeta,i})^{1-\frac{\gamma}{2}}+(\mathcal{L}_{\zeta,i})^{1+\frac{\gamma}{2}}\Big)
+	\ +\ \sum_{i=1}^{n}\frac{g_i^2}{2\mu}(\Delta u_i)^2.
 	$$
 	
-	(3) 将输入依赖项规整为 $\mathcal K$ 项.
+
 	因为执行器幅值有限，$\Delta u$ 本质有界：$\|\Delta u\|_\infty<\infty$。令 $\bar g\ge \max_i|g_i|$，则
-	
+	$\frac{\bar g^2}{2\mu}\,\|\Delta u\|_\infty^2\ \triangleq\ \varphi (\|\Delta u\|_\infty)$, 其中 $\varphi (r)=\frac{\bar g^2}{2\mu} r^2\in\mathcal K$。因此
+	 
 	$$
-	\Lambda_i(t)\ \le\ \frac{\bar g^2}{2\mu}\,\|\Delta u\|_\infty^2\ \triangleq\ \sigma_u(\|\Delta u\|_\infty),
-	$$
-	
-	其中 $\sigma_u(r)=\frac{\bar g^2}{2\mu} r^2\in\mathcal K$。因此
-	
-	$$
-	\dot V_{i,\zeta}
+	\dot{\mathcal{L}}_{\zeta,i}
 	\ \le\
-	-\frac{\pi}{\gamma T_\zeta}\Big(V_{i,\zeta}^{1-\frac{\gamma}{2}}+V_{i,\zeta}^{1+\frac{\gamma}{2}}\Big)
-	\ +\ \sigma_u(\|\Delta u\|_\infty),
+	-\frac{\pi}{\gamma T_\zeta}\Big(\mathcal{L}_{\zeta,i}^{1-\frac{\gamma}{2}}+\mathcal{L}_{\zeta,i}^{1+\frac{\gamma}{2}}\Big)
+	\ +\ \varphi (\|\Delta u\|_\infty),
 	$$
 	
-	且 $V_{i,\zeta}$ 满足 $\alpha_1(\|\zeta\|)=\alpha_2(\|\zeta\|)=\tfrac12\|\zeta\|^2$。
+	% 且 $\mathcal{L}_{\zeta,i}$ 满足 $\alpha_1(\|\zeta\|)=\alpha_2(\|\zeta\|)=\tfrac12\|\zeta\|^2$。
 	
-	(4) 套用 PTS–ISS 引理并得出结论.
-	取 $T=T_\zeta,\ \eta=\gamma,\ \sigma(\cdot)=\sigma_u(\cdot)$，由引理可得在 $t=T_\zeta$：
+	% (4) 套用 PTS–ISS 引理并得出结论.
+	% 取 $T=T_\zeta,\ \eta=\gamma,\ \sigma(\cdot)=\varphi (\cdot)$，
+	由引理可得在 $t=T_\zeta$：
 	
 	$$
-	V_{i,\zeta}(T_\zeta)\ \le\
+	\mathcal{L}_{\zeta,i}(T_\zeta)\ \le\
 	\min\!\left\{
-	\Big(\tfrac{2\gamma T_\zeta\,\sigma_u(\|\Delta u\|_\infty)}{\pi}\Big)^{\!\frac{1}{1-\frac{\gamma}{2}}},
+	\Big(\tfrac{2\gamma T_\zeta\,\varphi (\|\Delta u\|_\infty)}{\pi}\Big)^{\!\frac{1}{1-\frac{\gamma}{2}}},
 	\ \ 
-	\Big(\tfrac{2\gamma T_\zeta\,\sigma_u(\|\Delta u\|_\infty)}{\pi}\Big)^{\!\frac{1}{1+\frac{\gamma}{2}}}
+	\Big(\tfrac{2\gamma T_\zeta\,\varphi (\|\Delta u\|_\infty)}{\pi}\Big)^{\!\frac{1}{1+\frac{\gamma}{2}}}
 	\right\},
 	$$
-	
-	并且对所有 $t\ge T_\zeta$ “进入并保持”。若饱和未触发（$\Delta u_i\equiv0\Rightarrow \sigma_u(0)=0$），则 $V_{i,\zeta}(T_\zeta)=0\Rightarrow \zeta_i(T_\zeta)=0$，从而在 $T_\zeta$ 内到达原点。至此，定理成立。∎
+	 
+	并且对所有 $t\ge T_\zeta$ “进入并保持”。若饱和未触发（$\Delta u_i=0, \varphi (0)=0$），则 $\mathcal{L}_{\zeta,i}(T_\zeta)=0$，从而在 $T_\zeta$ 内到达原点。
 	
 	\begin{remark}
-	本证明严格地把饱和残差 $\Delta u$ 视为“输入”，给出 PTS–ISS 形式的微分不等式；这样既覆盖“饱和被触发”的情形（给出与 $\|\Delta u\|_\infty$ 成比例的 ISS 半径），又在“无饱和”时自然退化为 PTS 到达原点的结论。
+	本证明严格地把饱和残差 $\Delta u$ 视为输入，给出 PTS–ISS 形式的微分不等式；这样既覆盖饱和被触发的情形，又在无饱和时自然退化为 PTS 到达原点的结论。
 	\end{remark}
 	
 	\end{proof}
