@@ -1,0 +1,3 @@
+method1:无约束
+method3:渐近收敛
+method2:固定时间收敛，参考文献：Reinforcement Learning-Based Fixed-Time Trajectory Tracking Control for Uncertain Robotic Manipulators With Input Saturation

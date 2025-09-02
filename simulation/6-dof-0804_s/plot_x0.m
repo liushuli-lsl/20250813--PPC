@@ -1,0 +1,269 @@
+clearvars; close all; clc;
+
+%% 1) 定义要读取的文件列表
+% files = {'x1.mat'};  % 根据实际情况列出所有文件
+num_cases = 4;
+colors = lines(6);
+line_styles = {'-', '--', '-.', ':','-', '--',}; % 不同线型
+
+% 预分配 cell 数组
+all_tspan = cell(num_cases,1);
+all_q_use = cell(num_cases,1);
+all_qd    = cell(num_cases,1);
+all_e_q   = cell(num_cases,1);
+all_dq_use= cell(num_cases,1);
+all_dqd   = cell(num_cases,1);
+all_e_dq  = cell(num_cases,1);
+all_tau   = cell(num_cases,1);
+all_rho1  = cell(num_cases,1);
+all_rho2  = cell(num_cases,1);
+%% 循环读取并截取前 5 秒
+T_cut = 10;
+for k = 1:num_cases
+      fname = sprintf('method%d.mat', k);
+    S = load(fname, ...
+        'tspan','e_q','e_dq','tau_mat','q_use','qd_mat','dq_use','dqd_mat','rho1','rho2');
+
+    % 先把 tspan 转成列向量，然后找出 <= T_cut 的索引
+    t_full       = S.tspan(:);       
+    idx          = t_full <= T_cut;  
+
+    % 截断并存储
+    all_tspan{k}  = t_full(idx(1:end-1));           % (M×1)
+    all_q_use{k}  = S.q_use(idx(1:end-1), :);       % (M×6)
+    all_qd{k}     = S.qd_mat(idx(1:end-1), :);      % (M×6)
+    all_e_q{k}    = S.e_q(idx(1:end-1), :);         % (M×6)
+    all_dq_use{k} = S.dq_use(idx(1:end-1), :);      % (M×6)
+    all_dqd{k}    = S.dqd_mat(idx(1:end-1), :);     % (M×6)
+    all_e_dq{k}   = S.e_dq(idx(1:end-1), :);        % (M×6)
+    all_tau{k}    = S.tau_mat(idx(1:end-1), :);     % (M×6)
+
+    % 性能函数上下界
+    all_rho1{k}  = S.rho1(idx(1:end-1)).';          % (M×1)
+    all_rho2{k}  = S.rho2(idx(1:end-1)).';          % (M×1)
+end
+%  t = all_tspan{1}(:);
+% labels1 = { 'Error',  'Error boundaries' };
+labels1 = { ...
+  'PTC', ...
+    'PPC', ...
+     'PTPPC', ...
+    'Proposed', 
+%     'Desired trajectory '  ...
+};
+labels2 = { 'PTC', ...
+    'PPC', ...
+     'PTPPC', ...
+    'Proposed',  'Desired trajectory ' };
+
+
+%% ================= 量化指标计算（增强版） =====================
+rated_tau = [60 60 40 30 20 15]*2;    % 额定力矩 (Nm)
+thresh_ss = 0.02;                     % 稳态误差阈值 (rad)
+start_chatter = 3;                    % 抖振积分起始时间 (s)
+
+E_max_all   = zeros(num_cases,6);
+Edq_max_all = zeros(num_cases,6);
+T95_all     = zeros(num_cases,6);
+Tau_ratio   = zeros(num_cases,6);
+J_energy    = zeros(num_cases,1);     % 控制能耗指标 ∫||τ||² dt
+
+for k = 1:num_cases
+    t    = all_tspan{k};
+    dt   = t(2) - t(1);
+    eq   = abs(all_e_q{k});           % 位置误差 (M×6)
+    edq  = abs(all_e_dq{k});          % 速度误差 (M×6)
+    tau  = all_tau{k};                % 控制输入 (M×6)
+
+    % 1) 最大位置误差
+    E_max_all(k,:) = max(eq,[],1);
+
+    % 2) 最大速度误差
+    Edq_max_all(k,:) = max(edq,[],1);
+
+    % 3) 调节时间
+    for j = 1:6
+idx = find(eq(:,j) < thresh_ss, 1, 'first');
+if ~isempty(idx)
+    T95_all(k,j) = t(idx);
+else
+    T95_all(k,j) = NaN;
+end
+    end
+
+    % 4) 峰值力矩占额定百分比
+    Tau_ratio(k,:) = max(abs(tau),[],1) ./ rated_tau;
+
+    % 5) 控制能耗（积分）
+    J_energy(k) = trapz(t, sum(tau.^2,2));   % 每行是 ∥τ∥²
+end
+
+% 选择最不利关节
+E_max_case   = max(E_max_all,[],2);
+Edq_max_case = max(Edq_max_all,[],2);
+T95_case     = max(T95_all,[],2);
+Tau_case     = 100 * max(Tau_ratio,[],2);
+
+%% 表格格式输出
+fprintf('\n===================== 量化指标汇总 =====================\n');
+fprintf('%-12s | %-12s | %-10s | %-14s | %-14s | %-12s\n', ...
+        'Controller', 'Max|e_q| (rad)', 'Max|e_{dq}|(rad/s)','T95 (s)',  'Energy (J)');
+fprintf('-----------------------------------------------------------------------------------------------\n');
+for k = 1:num_cases
+    fprintf('%-12s | %-12.3f | %-10.3f | %-14.3f | %-14.3f \n', ...
+        labels1{k}, E_max_case(k), Edq_max_case(k), T95_case(k), J_energy(k));
+end
+fprintf('===============================================================================================\n');
+
+
+
+
+% %% 3) 示例：画第 1 案例的 6 自由度位置误差
+% figure('Position',[200 200 800 450]);
+% h_legend = [];
+% for i = 1:6
+%   ax = subplot(3,2,i); hold(ax,'on');
+%   h_err = gobjects(num_cases,1);
+%    hold on;
+%      t = all_tspan{4}(:);
+%        rho1 = all_rho1{4}(:,1);  % 提取列向量
+%     x_fill = [t; flipud(t)];
+%     y_fill = [rho1; flipud(-rho1)];
+% fill(x_fill, y_fill, [0.5 0.5 0.5], ...  % 灰色
+%     'FaceAlpha', 0.1, ...
+%     'EdgeColor', 'none', ...
+%     'HandleVisibility', 'off');
+% plot(t,  rho1,  '--', 'Color', [0.5 0.5 0.5], 'LineWidth', 0.8)
+% plot(t, -rho1,  '--', 'Color', [0.5 0.5 0.5], 'LineWidth', 0.8)
+%    for k = 1:num_cases
+%     h_err(k)=plot(all_tspan{k}, all_e_q{k}(:,i), 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
+%    end
+% %    ylim([-0.5,0.5]);
+%  xlabel(ax,'Time (s)');
+% ylabel(sprintf('$e_{%d}$ (rad)', i),'Interpreter','latex');
+% title('');
+% grid off;
+% box on;
+% end
+% legend(h_err, labels1, 'Location', 'southeast', 'Interpreter', 'latex');
+% 
+% set(gcf, 'Units', 'inches', 'Position', [1 1 10 6]);
+% set(gca, 'FontName', 'Times New Roman');
+% exportgraphics(gcf, 'fig16.eps', ...
+%     'ContentType','vector', ...
+%     'BackgroundColor','none', ...
+%     'Resolution',600);
+% 
+% %% 3) 示例：画第 1 案例的 6 自由度位置跟踪
+% figure('Position',[200 200 800 450]);
+% h_legend = [];
+% for i = 1:6
+%     ax = subplot(3,2,i); hold(ax,'on');
+%           for k = 1:num_cases
+%     h_err=plot(all_tspan{k}, all_q_use{k}(:,i), 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
+%           end
+%    h_bound=plot(all_tspan{1},  all_qd{1}(:,i), 'LineWidth',1.5,'LineStyle', line_styles{5},'Color', colors(5,:));
+% h_all = [h_err; h_bound];
+% % ylim([-0.25,0.1])
+%  xlabel(ax,'Time (s)');
+% ylabel(sprintf('$q_{%d}$ (rad)', i),'Interpreter','latex');
+% title('');
+% % legend(h_all,labels2,'Location', 'southeast', 'Interpreter','latex');grid off
+% grid off;
+% box on;
+% end
+% legend(h_legend, labels2, 'Location', 'southeast', 'Interpreter', 'latex');
+% set(gcf, 'Units', 'inches', 'Position', [1 1 10 6]);
+% set(gca, 'FontName', 'Times New Roman');
+% exportgraphics(gcf, 'fig17.eps', ...
+%     'ContentType','vector', ...
+%     'BackgroundColor','none', ...
+%     'Resolution',600);
+% 
+% %% 3) 示例：画第 1 案例的 6 自由度速度误差
+% figure('Position',[200 200 800 450]);
+% h_legend = []; % 初始化图例句柄存储
+% for i = 1:6
+%      ax = subplot(3,2,i); hold(ax,'on');
+%      h_err = gobjects(num_cases,1);
+%       rho2 = all_rho2{4}(:,1);  % 提取列向量
+%     x_fill = [t; flipud(t)];
+%     y_fill = [rho2; flipud(-rho2)];
+% fill(x_fill, y_fill, [0.5 0.5 0.5], ...  % 灰色
+%     'FaceAlpha', 0.1, ...
+%     'EdgeColor', 'none', ...
+%     'HandleVisibility', 'off');
+% plot(t,  rho2,  '--', 'Color', [0.5 0.5 0.5], 'LineWidth', 0.8)
+% plot(t, -rho2,  '--', 'Color', [0.5 0.5 0.5], 'LineWidth', 0.8)
+%        for k = 1:num_cases
+%     h_err(k)=plot(all_tspan{k}, all_e_dq{k}(:,i), 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
+%        end
+%     hold on;
+% % ylim([-10,10]);
+% %    ylim([-5,0.5]);
+%  xlabel(ax,'Time (s)');
+% ylabel(sprintf('$\\dot{e}_{%d}$ (rad/s)', i),'Interpreter','latex');
+% title('');
+% grid off;
+% box on;
+% end
+% % 在全图添加唯一图例（位置自动调整）
+% legend(h_err, labels1, 'Location', 'southeast', 'Interpreter', 'latex');
+% set(gcf, 'Units', 'inches', 'Position', [1 1 10 6]);
+% set(gca, 'FontName', 'Times New Roman');
+% exportgraphics(gcf, 'fig18.eps', ...
+%     'ContentType','vector', ...
+%     'BackgroundColor','none', ...
+%     'Resolution',600);
+% 
+% %% 3) 示例：画第 1 案例的 6 自由度速度跟踪
+% figure('Position',[200 200 800 450]);
+% h_legend = [];
+% for i = 1:6
+%       ax = subplot(3,2,i); hold(ax,'on');
+%     h_err = gobjects(num_cases,1);
+%      for k = 1:num_cases
+%     h_err=plot(all_tspan{k}, all_dq_use{k}(:,i), 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
+%      end
+%     hold on;
+%    h_bound=plot(all_tspan{1},  all_dqd{1}(:,i), 'LineWidth',1.5,'LineStyle', line_styles{5},'Color', colors(5,:));
+% % plot(all_tspan{1},  -all_rho1{1}, 'LineWidth',1.5,'LineStyle', line_styles{2},'Color', colors(2,:));
+% h_all = [h_err; h_bound];
+% % ylim([-0.25,0.1])
+%  xlabel(ax,'Time (s)');
+% ylabel(sprintf('$\\dot{q}_{%d}$ (rad/s)', i),'Interpreter','latex');
+% title('');
+% grid off;
+% box on;
+% end
+% legend(h_legend, labels2, 'Location', 'southeast', 'Interpreter', 'latex');
+% set(gcf, 'Units', 'inches', 'Position', [1 1 10 6]);
+% set(gca, 'FontName', 'Times New Roman');
+% exportgraphics(gcf, 'fig19.eps', ...
+%     'ContentType','vector', ...
+%     'BackgroundColor','none', ...
+%     'Resolution',600);
+% % 
+% % 
+% %% 3) 示例：画第 1 案例的 6 自由力矩
+% figure('Position',[200 200 800 450]);
+% h_legend = [];
+% for i = 1:6
+%     ax = subplot(3,2,i); hold(ax,'on');
+%      for k = 1:num_cases
+%    plot(all_tspan{k}, all_tau{k}(:,i), 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
+%      end
+%  xlabel(ax,'Time (s)');
+% %      ylim([-200,200]);
+% ylabel(sprintf('$u_{%d}$ (Nm)', i), 'Interpreter','latex');
+% title('');
+% grid off;
+% box on;
+% end
+% legend(labels1,'Location', 'southeast', 'Interpreter','latex');
+% set(gcf, 'Units', 'inches', 'Position', [1 1 10 6]);
+% set(gca, 'FontName', 'Times New Roman');
+% exportgraphics(gcf, 'fig20.eps', ...
+%     'ContentType','vector', ...
+%     'BackgroundColor','none', ...
+%     'Resolution',600);
