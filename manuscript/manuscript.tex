@@ -377,7 +377,6 @@ V(t)\ \le\ V^\star(\|u\|_\infty).
 	与原\cref{Lemma:1}对比, \cref{Lemma:1} 要求 $\dot V \le -\frac{\pi}{\eta T_p}(V^{1-\eta/2}+V^{1+\eta/2})+\varsigma$，其中 $\varsigma$ 为常数.
 	  本定理将该常数推广为输入范数的类-$\mathcal{K}$ 函数 $\sigma(\|u\|_\infty)$，从而可统一刻画外界扰动、建模不确定性、饱和残差、滤波导数等所有残余影响,并将其整合为 $\|\cdot\|_\infty$。
 	   两者在 $t=T$ 都给出闭式进入并保持的半径；当 $u=0$或 $\sigma(0)=0$时，本定理退化为 Lemma 1 的预定义时间到原点结论；当 $u\not=0$ 而有界时，本定理给出预定义时间一致实用稳定，收敛半径由 $\sigma(\|u\|_\infty)$ 决定，而 Lemma 1 只能处理常数半径。
-	\end{itemize}
 	\end{remark}
 	
 	% \begin{remark}
@@ -512,7 +511,7 @@ Choose $\sigma_{\min}\le\sigma_{0}\le\sigma_{\max}$ and $0\le\Sigma_{\max}\le 0.
 	
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{fig1.eps}
+	\includegraphics[width=0.5\textwidth]{fig1.eps}
 	\caption{全局动态变化PPC.}
 	\label{fig:1}
 \end{figure}
@@ -653,11 +652,12 @@ In the second step, a BLF is used as an energy function for the error dynamics. 
 
 
 Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain the time derivative of $V_2$ is as
+
 \begin{equation}
 	\begin{aligned}
 		\dot V_2& = \sum_{i=1}^n \Big[\,P_{2,i}z_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{2,i}\rho_{2,i}\,\dot\rho_{2,i}\,\Big]\\
 		&
-		 = \sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+h_i(x,t)+g_i(u_i-\Delta u_i)+d'(t)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
+		 = \sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+\omega_i(x,t)+g_i(u_i-\Delta u_i)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
 	\end{aligned}
 \end{equation}
 
@@ -668,19 +668,18 @@ $\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
 \begin{aligned}
 	u =&C(q,\dot{q})x_2 + G(q)\\
 &+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2}^{3}}\dot\rho_{2}-\mathcal{K}_{2}(z_{2},\rho_{2}) \Phi_{2}
--\hat{h}(\chi)
 -\hat \omega
 -k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2}^2 \Phi_{2}\right]
+
+\end{aligned}
+\end{equation}
+where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s>0$.
 % u =&C(q,\dot{q})x_2 + G(q)\\
 % &+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i}-\mathcal{K}_{2}(z_{2},\rho_{2,i}) \Phi_{2}
 % -\hat{h}(\chi)
 % -\hat \omega
 % -k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2,i}^2 \Phi_{2,i}\right]
-\end{aligned}
-\end{equation}
 
-
-where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s>0$.
 
 % Let $\chi=\{q,\dot{q}\}\in\mathbb{R}^m$ be the regressor and $\psi(\chi)\in\mathbb{R}^{N}$ the normalized basis. Approximate the structured uncertainty by 
 % \( \hat h_i(\chi)=\hat \theta_i^\top \psi_i(\chi)\),

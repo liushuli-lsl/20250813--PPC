@@ -23,30 +23,24 @@ q00 = [
 ];
 q0 = q00(2, :)';   % q0 = [0; 0]  2,3,4,5
 dq0 = [0;0];                  %初始誤差不能爲0，否則會產生歧義
-% q0  = zeros(6,1);
-% dq0 = zeros(6,1);
-zeta1   = zeros(n,1);
-zeta2   = zeros(n,1);
+zeta   = zeros(n,1);
 e1_int  = zeros(n,1);
 alpha_bar = zeros(n,1);
 d1 = zeros(n,1);
 d2 = zeros(n,1);
-x0  = [q0; dq0;zeta1; zeta2;e1_int;alpha_bar;d1;d2];
-
+x0  = [q0; dq0;zeta;e1_int;alpha_bar;d1;d2];
 
 
 %% 3) 预分配存储
 
-x       = zeros(8*n, N);
+x       = zeros(7*n, N);
 q_use   = zeros(N,n);
 dq_use  = zeros(N,n);
 qd_mat  = zeros(N,n);
 dqd_mat = zeros(N,n);
 tau_mat = zeros(N,n);
 alpha_mat = zeros(N,n);
-W_hat_mat = zeros(N,n);
-zeta1_mat= zeros(N,n);
-zeta2_mat= zeros(N,n);
+zeta_mat= zeros(N,n);
 
 x(:,1) = x0;
 q_use(1,:)  = q0.';
@@ -56,18 +50,17 @@ dq_use(1,:) = dq0.';
 for k = 1:N-1
     t = tspan(k);
     % 解算一次 RK4
-  [k1, tau1, alpha1,W_hat1] = controller_ptc(t,           x(:,k));
-[k2, tau2, alpha2,W_hat2] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k1);
-[k3, tau3, alpha3,W_hat3] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k2);
-[k4, tau4, alpha4,W_hat4] = controller_ptc(t+dt,        x(:,k)+dt*k3);
+  [k1, tau1, alpha1] = controller_ptc(t,           x(:,k));
+[k2, tau2, alpha2] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k1);
+[k3, tau3, alpha3] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k2);
+[k4, tau4, alpha4] = controller_ptc(t+dt,        x(:,k)+dt*k3);
 
     x(:,k+1) = x(:,k) + dt*(k1 + 2*k2 + 2*k3 + k4)/6;
 
     % 存储关节、参考、控制
     q   = x(1:2,k+1);
     dq  = x(3:4,k+1);
-    zeta1= x(5:6,k+1);
-     zeta2= x(7:8,k+1);
+    zeta= x(5:6,k+1);
 
 qd = [0.1*sin(0.5*t) + cos(0.5*t);0.1*sin(t) + cos(t)];
 dqd = [0.05*cos(0.5*t)-0.5*sin(0.5*t); 0.1*cos(t)-sin(t)];
@@ -77,25 +70,21 @@ dqd = [0.05*cos(0.5*t)-0.5*sin(0.5*t); 0.1*cos(t)-sin(t)];
     qd_mat(k,:)  = qd.';
     dqd_mat(k,:) = dqd.';
 
-%     tau = controller_ptc(t+dt, q, dq);
     tau_mat(k+1,:) = tau1.';
      alpha_mat(k+1,:) = alpha1.';
-     zeta1_mat(k+1,:) = zeta1.';
-     zeta2_mat(k+1,:) = zeta2.';
-%      W_hat_mat(k+1,:) = W_hat1.';
+     zeta_mat(k+1,:) = zeta.';
+
 end
 
 e_q  = q_use   - qd_mat;
 e_dq = dq_use  - dqd_mat;
 
-% === 在 main_simulation.m 的绘图部分后面添加 ===
-% alpha_use  = ALPHA_BAR; 
 
 
 [rho1] = arrayfun(@(tt) performance_poly1(tt),tspan);
 [rho2] = arrayfun(@(tt) performance_poly2(tt),tspan);
 
-save('x2.mat', 'tspan', 'e_q', 'e_dq', 'tau_mat', 'qd_mat', 'q_use','dqd_mat', 'dq_use','rho1','rho2',"zeta1_mat",'zeta2_mat',"alpha_mat");
+save('x2.mat', 'tspan', 'e_q', 'e_dq', 'tau_mat', 'qd_mat', 'q_use','dqd_mat', 'dq_use','rho1','rho2',"zeta_mat","alpha_mat");
 figure;
 for i = 1:n
     subplot(2,1,i);
@@ -163,28 +152,21 @@ for i = 1:n
     title(['Joint \tau_' num2str(i)]);
     xlabel('Time (s)'); ylabel('Torque (Nm)');
 end
-figure;
-for i = 1:n
-    subplot(2,1,i);
-    plot(tspan, alpha_mat(:,i), 'k', 'LineWidth', 1.5);
-    title(['Joint \alpha_' num2str(i)]);
-    xlabel('Time (s)'); ylabel('Torque (Nm)');
-end
-% 
-figure;
-for i = 1:n
-    subplot(2,1,i);
-    plot(tspan, zeta1_mat(:,i), 'k', 'LineWidth', 1.5);
-    title(['Joint \zeta_1' num2str(i)]);
-    xlabel('Time (s)'); ylabel('Torque (Nm)');
-end
-figure;
-for i = 1:n
-    subplot(2,1,i);
-    plot(tspan, zeta2_mat(:,i), 'k', 'LineWidth', 1.5);
-    title(['Joint \zeta_2' num2str(i)]);
-    xlabel('Time (s)'); ylabel('Torque (Nm)');
-end
+% figure;
+% for i = 1:n
+%     subplot(2,1,i);
+%     plot(tspan, alpha_mat(:,i), 'k', 'LineWidth', 1.5);
+%     title(['Joint \alpha_' num2str(i)]);
+%     xlabel('Time (s)'); ylabel('Torque (Nm)');
+% end
+% % 
+% figure;
+% for i = 1:n
+%     subplot(2,1,i);
+%     plot(tspan, zeta_mat(:,i), 'k', 'LineWidth', 1.5);
+%     title(['Joint \zeta_1' num2str(i)]);
+%     xlabel('Time (s)'); ylabel('Torque (Nm)');
+% end
 
 
 function [rho] = performance_poly1(t)
