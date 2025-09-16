@@ -70,7 +70,7 @@ K1   = 0.5*(rho1.^2) .* (Psi1 ./ max(V1,eps0));           % \mathcal{K}_{1}
 % Control parameters
 k1 = diag([12, 12])*3;
 k2 = diag([6, 6]);
-Lambda=diag([0.5, 0.5]);
+% kI=[12, 12]*10;
 % 虚拟控制器
 alpha = dqd - zeta ...
       + ( (z1.^3) ./ max(rho1.^3,eps0) ) .* drho1 ...     % (z1^3/rho1^3)*drho1
@@ -94,8 +94,14 @@ P1_over_P2 = P1 ./ max(P2,eps0);
 % 未建模项估计（若无 RBFNN，则置零）
 h = zeros(n,1);
 %     omega_d = params.omega_d;                 % 标量或逐通道统一标量
-
-
+%     Lambda  = diag(params.lambda(:));         % n×n 正定对角阵
+% 
+%     % 一阶跟踪微分器（避免直接微分dq）
+%     theta_dot   = -omega_d*theta + omega_d*dq;
+%     x2hat_dot   =  omega_d*(dq - theta);
+% 
+%     % 未知项观测器（用“实际输入” u_act）
+%     omegahat_dot = -Lambda*omegahat + Lambda*( x2hat_dot - f - g*u_act );
 k_s  = 5.0;                                              % sgn 增益
 sat_sgn = sign(z2);                                      % 若要减抖，可用 tanh(z2/eps)
 
@@ -115,12 +121,6 @@ tau=max( min(u, U_max2), -U_max2 );
 u_d=u-tau;
 ddq = f + M\tau + h;
 
-    % 一阶跟踪微分器（避免直接微分dq）
-    theta_dot   = -omega_d*theta + omega_d*dq;
-    x2hat_dot   =  omega_d*(dq - theta);
-
-    % 未知项观测器（用“实际输入” u_act）
-    omegahat_dot = -Lambda*omegahat + Lambda*( x2hat_dot - f - g*u );
 % 回灌 Δu/d 到 G-PPF 的 LPF（只更新内部状态，不重算本步 rho）
 cfg1.feed_only = true;  gppf(t, z1, u_d, d_est1, cfg1);
 cfg2.feed_only = true;  gppf(t, z2, u_d, d_est2, cfg2);
@@ -130,8 +130,8 @@ for i = 1:n
     dzeta(i) =delta(i) -12*zeta(i)- g(i,i)*u_d(i);
 end
 
-% dot_d1=[0;0];dot_d2=[0;0];
-dx = [dq; ddq; dzeta;z1;dalpha_bar;theta_dot;omegahat_dot];
+dot_d1=[0;0];dot_d2=[0;0];
+dx = [dq; ddq; dzeta;z1;dalpha_bar;dot_d1;dot_d2];
 end
 
 

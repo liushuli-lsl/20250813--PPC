@@ -182,7 +182,7 @@ For robotic manipulators trajectory tracking with unknown dynamics, bounded dist
 
 
 % \section{Problem statement and preliminaries}
-\section{Problem and preliminary}
+\section{Problem statement and preliminaries}
 
 \subsection{System description}
 \par This work considers an uncertain nonlinear n-DOF robot manipulators system. Its dynamics are described as \cite{SciaviccoSiciliano_2012_ModellingControl,BagheriEtAl_2019_Feedbacklinearization}:
@@ -192,22 +192,22 @@ For robotic manipulators trajectory tracking with unknown dynamics, bounded dist
 \end{equation}
 where $ q, \dot{q}, \ddot{q} \in \mathbb{R}^n $ are the joint state vectors, $M(q) \in \mathbb{R}^{n\times n}$ is the inertia matrix, $C(q, \dot{q}) \in \mathbb{R}^{n\times n} $ represents the centrifugal effects, $G(q) \in \mathbb{R}^n $ represents the gravitational force, $\tau \in \mathbb{R}^n$ is the control joint input, $\Delta(q, \dot{q}, t) \in \mathbb{R}^n$ is the uncertainty and unmodeled dynamics, $d(t) \in \mathbb{R}^n$ is an external disturbance, $n$ is the number of DOF of the manipulators system.
 
-For controller design, define the state $x = [x_1,x_2] = [q,\dot{q}] \in \mathbb{R}^{2n}$. The system \cref{eq:1} can be written in the standard state space form:
+For controller design, define the state $x = [x_1,x_2]^{\top} = [q,\dot{q}]^{\top} \in \mathbb{R}^{2n}$. The system \cref{eq:1} can be written in the standard state space form:
 \begin{equation}
 	\left\{
 	\begin{aligned}
 		\dot{x}_1 & = x_2,     \\
-		\dot{x}_2 & =f(x) +g(q) \mathrm{sat}(u) +\omega(x,t),
+		\dot{x}_2 & =f(x) +g(q) u +\omega(x,t),
 	\end{aligned}
 	\right.
 	\label{eq:2}
 \end{equation}
-where $f(x)=-M^{-1}(q) (C(q,\dot{q})x_2 + G(q)) $, $g(q)=M^{-1}(q)$, $\omega(x,t)=-M^{-1}(q)(\Delta(q,\dot{q},t)-d(t))$, and $x_1=[x_{1,1},x_{1,2},...,x_{1,n}]^{\top}$, $x_2=[x_{2,1},x_{2,2},...,x_{2,n}]^{\top}$, $\mathrm{sat}(u)$ is the saturation of control input $u=\tau$. Define the saturation error as
+where $f(x)=-M^{-1}(q) (C(q,\dot{q})x_2 + G(q)) $, $g(q)=M^{-1}(q)$, $\omega(x,t)=-M^{-1}(q)(\Delta(q,\dot{q},t)-d(t))$, and $x_1=[x_{1,1},x_{1,2},...,x_{1,n}]^{\top}$, $x_2=[x_{2,1},x_{2,2},...,x_{2,n}]^{\top}$, $u$ is the saturation of control input $u=\tau$. Define the saturation error as
 \begin{equation}\label{eq:3}
-\Delta u_{i} =  u_{i}-\mathrm{sat}(u_i)=\begin{cases} 
-	u_{i}-u_{\max}, & u_i \geq u_{\max}, \\
-0,       & u_{\min} < u_i < u_{\max},  \quad i=1,2,...,n,\\
-u_{i}-u_{\min}, & u_i \leq u_{\min},
+\Delta u_{i} =  u^{\prime}_i-u_i=\begin{cases} 
+	u^{\prime}_i-u_{\max}, & u^{\prime}_i \geq u_{\max}, \\
+0,       & u_{\min} < u^{\prime}_i < u_{\max},  \quad i=1,2,...,n,\\
+u^{\prime}_i-u_{\min}, & u^{\prime}_i \leq u_{\min},
 \end{cases}
 \end{equation}
 where $u_{\max},u_{\min}$ are the upper and lower saturation bounds of control input, respectively.
@@ -657,7 +657,7 @@ Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain the ti
 	\begin{aligned}
 		\dot V_2& = \sum_{i=1}^n \Big[\,P_{2,i}z_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{2,i}\rho_{2,i}\,\dot\rho_{2,i}\,\Big]\\
 		&
-		 = \sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+\omega_i(x,t)+g_i(u_i-\Delta u_i)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
+		 = \sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+\omega_i(x,t)+g_i(u^{\prime}_i-\Delta u_i)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
 	\end{aligned}
 \end{equation}
 
@@ -670,7 +670,6 @@ $\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
 &+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2}^{3}}\dot\rho_{2}-\mathcal{K}_{2}(z_{2},\rho_{2}) \Phi_{2}
 -\hat \omega
 -k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2}^2 \Phi_{2}\right]
-
 \end{aligned}
 \end{equation}
 where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s>0$.
@@ -707,7 +706,7 @@ where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s
 % \dot\vartheta =-\omega_d\,\vartheta+\omega_d\,x_2,  \\
 % \hat{\dot x}_2=\omega_d(x_2-\vartheta),   \\
 % \dot{\hat \omega}= -\Lambda\,\hat \omega
-% +\Lambda\left(\hat{\dot x}_2 - f(x) - M^{-1}(q)\,\mathrm{sat}(u) - \hat h(\chi)\right),
+% +\Lambda\left(\hat{\dot x}_2 - f(x) - M^{-1}(q)\,u - \hat h(\chi)\right),
 % \end{cases}
 % \end{equation}
 % where $\Lambda=\mathrm{diag}\{\lambda_{i}\}>0, \omega_d>0, \vartheta(0)=x_2(0), \hat \omega(0)=0$,
@@ -731,7 +730,7 @@ where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s
 \dot\vartheta =-\omega_d\,\vartheta+\omega_d\,x_2,  \\
 \hat{\dot x}_2=\omega_d(x_2-\vartheta),   \\
 \dot{\hat \omega}= -\Lambda\,\hat \omega
-+\Lambda\left(\hat{\dot x}_2 - f(x) -g(q)\,\mathrm{sat}(u) \right),
++\Lambda\left(\hat{\dot x}_2 - f(x) -g(q)\,u \right),
 \end{cases}
 \end{equation}
 where $\Lambda=\mathrm{diag}\{\lambda_{1},...,\lambda_{n}\}, \lambda_{i}>0, \omega_d>0, \vartheta \in \mathbb{R}^n, \vartheta(0)=x_2(0), \hat \omega(0)=0$,

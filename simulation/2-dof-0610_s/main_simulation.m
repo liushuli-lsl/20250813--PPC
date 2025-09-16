@@ -48,12 +48,12 @@ dq_use(1,:) = dq0.';
 
 %% 4) 固定步长 RK4 主循环
 for k = 1:N-1
-    t = tspan(k);
+    t = tspan(k)
     % 解算一次 RK4
-  [k1, tau1, alpha1] = controller_ptc(t,           x(:,k));
-[k2, tau2, alpha2] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k1);
-[k3, tau3, alpha3] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k2);
-[k4, tau4, alpha4] = controller_ptc(t+dt,        x(:,k)+dt*k3);
+  [k1, tau1] = controller_ptc(t,           x(:,k));
+[k2, tau2] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k1);
+[k3, tau3] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k2);
+[k4, tau4] = controller_ptc(t+dt,        x(:,k)+dt*k3);
 
     x(:,k+1) = x(:,k) + dt*(k1 + 2*k2 + 2*k3 + k4)/6;
 
@@ -61,6 +61,7 @@ for k = 1:N-1
     q   = x(1:2,k+1);
     dq  = x(3:4,k+1);
     zeta= x(5:6,k+1);
+     alpha= x(9:10,k+1);
 
 qd = [0.1*sin(0.5*t) + cos(0.5*t);0.1*sin(t) + cos(t)];
 dqd = [0.05*cos(0.5*t)-0.5*sin(0.5*t); 0.1*cos(t)-sin(t)];
@@ -71,7 +72,7 @@ dqd = [0.05*cos(0.5*t)-0.5*sin(0.5*t); 0.1*cos(t)-sin(t)];
     dqd_mat(k,:) = dqd.';
 
     tau_mat(k+1,:) = tau1.';
-     alpha_mat(k+1,:) = alpha1.';
+     alpha_mat(k+1,:) = alpha.';
      zeta_mat(k+1,:) = zeta.';
 
 end
@@ -152,13 +153,13 @@ for i = 1:n
     title(['Joint \tau_' num2str(i)]);
     xlabel('Time (s)'); ylabel('Torque (Nm)');
 end
-% figure;
-% for i = 1:n
-%     subplot(2,1,i);
-%     plot(tspan, alpha_mat(:,i), 'k', 'LineWidth', 1.5);
-%     title(['Joint \alpha_' num2str(i)]);
-%     xlabel('Time (s)'); ylabel('Torque (Nm)');
-% end
+figure;
+for i = 1:n
+    subplot(2,1,i);
+    plot(tspan, alpha_mat(:,i), 'k', 'LineWidth', 1.5);
+    title(['Joint \alpha_' num2str(i)]);
+    xlabel('Time (s)'); ylabel('Torque (Nm)');
+end
 % % 
 % figure;
 % for i = 1:n
