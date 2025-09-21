@@ -644,7 +644,9 @@ $$
 \Big].
 $$
 
-
+\begin{equation}\label{eq:25}
+	V_2= \frac{1}{2}z_{2,i}^{\top}z_{2,i}. 
+\end{equation}
 In the second step, a BLF is used as an energy function for the error dynamics. We choose:
 \begin{equation}\label{eq:25}
 	V_2= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}. 
@@ -666,7 +668,7 @@ $P_1=\mathrm{col}\{P_{1,i}\}$,
 $\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
 \begin{equation}\label{eq:tau-cmd}
 \begin{aligned}
-	u =&C(q,\dot{q})x_2 + G(q)\\
+	u^{\prime} =&C(q,\dot{q})x_2 + G(q)\\
 &+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2}^{3}}\dot\rho_{2}-\mathcal{K}_{2}(z_{2},\rho_{2}) \Phi_{2}
 -\hat \omega
 -k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2}^2 \Phi_{2}\right]
