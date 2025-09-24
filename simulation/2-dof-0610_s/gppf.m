@@ -1,17 +1,6 @@
-function [rho, rho_dot, aux] = gppf(t, e, DeltaU, d, cfg)
+function [rho, rho_dot, aux] = gppf(t, n,e, DeltaU, d, cfg)
 % GPPF: Global Prescribed-Performance Function (vector form, per-channel)
-% Inputs:
-%   t       : current time (scalar)
-%   e       : n×1 (用于 re 通道的 |e|，建议传 kappa.*e)
-%   DeltaU  : n×1 执行器饱和残差 Δu = u - sat(u)
-%   d       : n×1 扰动幅值估计（例如 |d_hat|），没有可传 0
-%   cfg     : 参数结构体（见控制器内 cfg1/cfg2）
-%             必填: id, Tp, p, a, sigma0, sigma_min, sigma_max, iota, Sigma_max,
-%                   k_u,k_d,k_e, use_lpf, tau_u,tau_d,tau_e
-%             可选: feed_only=true  时，仅更新内部 LPF，不返回有效 rho
-% Outputs:
-%   rho, rho_dot : n×1
-%   aux          : struct，含 ru,rd,re,g,Sigma,sigma（便于调试/记录）
+% 关键改动：t=0 数值保护 + aux.ratio = (dot{rho}/rho) 的稳健输出（t=0 置 0）
 
 % -------- persistent 状态：为每个 id 维护一组滤波器 --------
 persistent S
@@ -30,20 +19,50 @@ end
 Si = S(id);
 
 % 估计 dt（适配可变步长 ODE 求解器）
-dt = max( t - Si.t_prev, 0 );
+dt = max(t - Si.t_prev, 0);
 
-% ---- 驱动信号：低通或直接使用（由 cfg.use_lpf 决定）----
-if isfield(cfg,'use_lpf') && cfg.use_lpf
-    if dt > 0
-        Si.ru = Si.ru + dt*( -Si.ru + abs(DeltaU) )/cfg.tau_u;
-        Si.rd = Si.rd + dt*( -Si.rd + abs(d)      )/cfg.tau_d;
-        Si.re = Si.re + dt*( -Si.re + abs(e)      )/cfg.tau_e;
-    end
+% % ---- 驱动信号：低通或直接使用（由 cfg.use_lpf 决定）----
+% if isfield(cfg,'use_lpf') && cfg.use_lpf
+%     if dt > 0
+%         Si.ru = Si.ru + dt*( -Si.ru + abs(DeltaU) )/cfg.tau_u;
+%         Si.rd = Si.rd + dt*( -Si.rd + abs(d)      )/cfg.tau_d;
+%         Si.re = Si.re + dt*( -Si.re + abs(e)      )/cfg.tau_e;
+%     end
+% else
+%     Si.ru = abs(DeltaU);
+%     Si.rd = abs(d);          % 修正原来的 Sim.rd
+%     Si.re = abs(e);
+% end
+% ---- parse optional inputs (robust) ----
+% 1) DeltaU: [] => do not update ru this step
+do_feed_u = true;
+if nargin < 3 || isempty(DeltaU)
+    do_feed_u = false; 
+    DeltaU = zeros(n,1);         % 占位，保证尺寸；但不用于更新
 else
-    Si.ru = abs(DeltaU);
-    Sim.rd= abs(d);
-    Si.re = abs(e);
+    DeltaU = DeltaU(:);
+    if numel(DeltaU)==1, DeltaU = repmat(DeltaU,n,1); end
 end
+
+% 2) d: [] => treat as zeros (可选是否也跳过更新)
+do_feed_d = true;
+if nargin < 4 || isempty(d)
+    do_feed_d = false;
+    d = zeros(n,1);
+else
+    d = d(:);
+    if numel(d)==1, d = repmat(d,n,1); end
+end
+
+% ---- LPF updates (only when we actually feed) ----
+if do_feed_u
+    Si.ru = Si.ru + dt*( -Si.ru + abs(DeltaU) )/cfg.tau_u;
+end
+if do_feed_d
+    Si.rd = Si.rd + dt*( -Si.rd + abs(d) )/cfg.tau_d;
+end
+% 误差通道通常每步都可以更新（或同样做保护）
+Si.re = Si.re + dt*( -Si.re + abs(e) )/cfg.tau_e;
 
 % 如果仅 feed（回灌），直接更新状态并返回（不改变当步 rho）
 if isfield(cfg,'feed_only') && cfg.feed_only
@@ -53,13 +72,18 @@ if isfield(cfg,'feed_only') && cfg.feed_only
     return
 end
 
+% ---- t=0 数值保护：用 t_eff 与 b_min ----
+t_eps = 1e-6;                 % 极小起跳时间
+b_min = 1e-6;                 % 归一化时间下界，避免 log(0)
+t_eff = max(t, t_eps);        % 用 t_eff 代替 t
+
 % ---- 归一化时间核与窗 ----
-b     = max( (t/cfg.Tp)^cfg.p, 1e-6 );       % 避免 log(0)
+b     = max( (t_eff/cfg.Tp)^cfg.p, b_min);   % 避免 log(0)
 phi   = -log(b);                              % phi(b)
-s     = 1 - 3*b^2 + 2*b^3;                    % s(b)
+s     = 1 - 3*b^2 + 2*b^3;                   % s(b)
 phip  = -1/b;                                 % dphi/db
 sp    = -6*b + 6*b^2;                         % ds/db
-b_dot = (cfg.p/cfg.Tp) * (t/cfg.Tp)^(cfg.p-1);
+b_dot = (cfg.p/cfg.Tp) * (t_eff/cfg.Tp)^(cfg.p-1);
 
 % ---- sigma (pre-phase) 与 g, Sigma (post-phase) ----
 sigma = proj(cfg.sigma0 + cfg.k_u*Si.ru + cfg.k_d*Si.rd, cfg.sigma_min, cfg.sigma_max);
@@ -76,14 +100,27 @@ Sigma = proj(cfg.k_u*Si.ru + cfg.k_d*Si.rd + cfg.k_e*Si.re, 0, cfg.Sigma_max);
 n = numel(e);
 rho     = zeros(n,1);
 rho_dot = zeros(n,1);
+ratio   = zeros(n,1);  % aux.ratio = dot{rho}/rho（稳健实现）
 
 if t < cfg.Tp
     % 预定义时间内： a + sigma*phi*s  （sigma 视为慢变，忽略 sigma_dot）
     rho     = cfg.a + sigma.*(phi*s);
     rho_dot =          sigma.*( phip*s + phi*sp )*b_dot;
+
+    % —— 在 t 非常小时的稳健处理：
+    if t <= t_eps
+        % dot{rho}/rho 的右极限为 0：直接置 0，避免把 1/t 型带入控制律
+        ratio = zeros(n,1);
+        % 可选：对 rho_dot 做幅值限制，防止日志或乘法放大（不影响稳定性）
+        rho_dot_cap = 1e6;   % 如需更严，可调小些
+        rho_dot = max(min(rho_dot, rho_dot_cap), -rho_dot_cap);
+    else
+        ratio = rho_dot ./ max(rho, 1e-12);
+    end
 else
     % 收敛后： a*(1 + g*Sigma)
-    gp        = 2*cfg.iota*(t - cfg.Tp)*exp(-cfg.iota*(t - cfg.Tp)^2);
+    gp = 2*cfg.iota*(t - cfg.Tp) * exp(-cfg.iota*(t - cfg.Tp)^2);
+
     % LPF 的解析时间导数（有 dt>0 时有效；否则近似为 0）
     if dt > 0 && isfield(cfg,'use_lpf') && cfg.use_lpf
         ru_dot = ( -Si.ru + abs(DeltaU) )/cfg.tau_u;
@@ -93,8 +130,10 @@ else
     else
         Sigma_dot = zeros(n,1);
     end
+
     rho     = cfg.a*(1 + g*Sigma);
     rho_dot = cfg.a*( gp*Sigma + g.*Sigma_dot );
+    ratio   = rho_dot ./ max(rho, 1e-12);
 end
 
 % 更新状态
@@ -103,7 +142,8 @@ S(id) = Si;
 
 % 辅助量
 aux = struct('ru',Si.ru,'rd',Si.rd,'re',Si.re, ...
-             'g',g,'Sigma',Sigma,'sigma',sigma);
+             'g',g,'Sigma',Sigma,'sigma',sigma, ...
+             'ratio',ratio);   % 用于控制律的 \dot\rho/\rho 稳健补偿
 end
 
 % ----- helpers -----

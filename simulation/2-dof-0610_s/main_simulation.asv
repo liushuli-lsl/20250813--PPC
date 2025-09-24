@@ -80,7 +80,7 @@ dqd = [0.05*cos(0.5*t)-0.5*sin(0.5*t); 0.1*cos(t)-sin(t)];
      zeta_mat(k+1,:) = zeta.';
  rho_mat(k+1,:) = rho1.';
    omegahat_mat(k+1,:) =  omegahat.';
-     d_mat(k+1,:) =  d_true.';
+     d_mat(k+1,:) =  omegahat.';
 % if mod(round(t,2),1)==0      % 每 0.5 s 打一次
 %     fprintf('t=%.1f  alpha=%+.2f   u=%+.2f\n',...
 %         t, alpha, tau1);
@@ -179,13 +179,13 @@ for i = 1:n
     xlabel('Time (s)'); ylabel('Torque (Nm)');
 end
 % % 
-figure;
-for i = 1:n
-    subplot(2,1,i);
-    plot(tspan, d_mat(:,i), 'k', 'LineWidth', 1.5);
-    title(['Joint d' num2str(i)]);
-    xlabel('Time (s)'); ylabel('d');
-end
+% figure;
+% for i = 1:n
+%     subplot(2,1,i);
+%     plot(tspan, zeta_mat(:,i), 'k', 'LineWidth', 1.5);
+%     title(['Joint \zeta_1' num2str(i)]);
+%     xlabel('Time (s)'); ylabel('Torque (Nm)');
+% end
 
 
 function [rho] = performance_poly1(t)

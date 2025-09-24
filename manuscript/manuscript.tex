@@ -581,10 +581,10 @@ $\tilde{\alpha}= \alpha-\alpha^{f}$.
 \begin{equation}\label{eq:zeta2-pts}
 	\begin{cases}
 \dot\zeta \ =\ \delta\ -\ \mu_2\,\zeta\ -\ M^{-1}(q)\Delta u,\\
-\delta\ =\ -\frac{\pi}{2\gamma T_\zeta}\left[\mathrm{sig}(\zeta)^{\,1-\gamma}+\mathrm{sig}(\zeta)^{\,1+\gamma}\right],
+\delta\ =\ -\frac{\pi}{2\gamma T_\zeta}\left(|\zeta|^{1- \gamma}\mathrm{sgn}(\zeta)+|\zeta|^{1+\gamma}\mathrm{sgn}(\zeta)\right),
 	\end{cases}
 \end{equation}
-其中 $0<\gamma<1,\ \mu_2>0$, $\mathrm{sig}(\zeta)^{1\pm \gamma}=|\zeta|^{1\pm \gamma}\mathrm{sig}(\zeta)$, 并取初值 $\zeta_{i}(0)=0$。
+其中 $0<\gamma<1,\ \mu_2>0$, $\mathrm{sgn}(\zeta)^{1\pm \gamma}=|\zeta|^{1\pm \gamma}\mathrm{sgn}(\zeta)$, 并取初值 $\zeta_{i}(0)=0$。
 
 
 
@@ -615,66 +615,105 @@ In the first step, a BLF is used as an energy function for the error dynamics. W
 $
 P_{j,i}=\frac{\rho_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2}>0,
 Q_{j,i}=\frac{ z_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2}>0,
-\Phi_{j,i}=\frac{z_{j,i}\left(\rho_{j,i}^{2}-z_{j,i}^{2}\right)}{\rho_{j,i}^{4}}, \rho_{j,i}^2 - z_{j,i}^2 \le \rho_{j,i}^2,
+ \rho_{j,i}^2 - z_{j,i}^2 \le \rho_{j,i}^2,
 $, 将$\dot z_{1,i}= z_{2,i}-\dot q_{d,i}+\alpha^{f}_i+\zeta_i$,代入 BLF 导数后，并根据公式（），得到
 $$
 \dot V_1=\sum_{i=1}^n\!\Big[P_{1,i} z_{1,i}z_{2,i}+P_{1,i}z_{1,i}(\alpha_i+\zeta_i-\dot q_{d,i})-P_{1,i}z_{1,i}\tilde\alpha_i-Q_{1,i}\rho_{1,i} \dot\rho_{1,i}\Big]
 $$
 
-Let ${V_{j,i}}=\frac{1}{2}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}, \Psi(V_{j,i})=\frac{\pi}{ \eta T_p}\Big((V_{j,i})^{\,1-\eta/2}+n^{-\frac{\eta}{2} }(V_{j,i})^{\,1+\eta/2}\Big)$, 我们设计
-$$
-\mathcal{K}_{1,i}(z_{j,i},\rho_{j,i})
-=\frac{\rho_{j,i}^2}{2}\frac{\Psi(V_{j,i})}{V_{j,i}}.
-$$
+% Let ${V_{j,i}}=\frac{1}{2}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}, \Psi(V_{j,i})=\frac{\pi}{ \eta T_p}\Big((V_{j,i})^{\,1-\eta/2}+n^{-\frac{\eta}{2} }(V_{j,i})^{\,1+\eta/2}\Big)$, 我们设计
+% $$
+% \mathcal{K}_{1,i}(z_{j,i},\rho_{j,i})
+% =\frac{\rho_{j,i}^2}{2}\frac{\Psi(V_{j,i})}{V_{j,i}}.
+% $$
 
+$$
+\Phi_{1,i}=\frac{z_{j,i}\left(\rho_{j,i}^{2}-z_{j,i}^{2}\right)}{\rho_{j,i}^{2}}=z_{j,i}-\frac{z_{j,i}^{3}}{\rho_{j,i}^{2}},
+$$
 把它代回，可设计虚拟控制律为：
 \begin{equation}\label{eq:25}
 \alpha_i = \dot q_{d,i}-\zeta_i+\frac{z_{1,i}^3}{\rho_{1,i}^3}\,\dot\rho_{1,i}
 -\mathcal{K}_{1,i}(z_{1,i},\rho_{1,i})\Phi_{1,i}
--k_{1,i} \rho_{1,i}^2 \Phi_{1,i},
+-k_{1,i} \Phi_{1,i},
 \end{equation}
-where $k_1=\mathrm{diag}\{k_{1,1},k_{1,i},\cdots,k_{1,n}\}>0$, $k_{1,i}>0$,
+where $k_1=\mathrm{diag}\{k_{1,1},k_{1,i},\cdots,k_{1,n}\}$, $k_{1,i}>0$, $
+\mathcal{K}_{1,i}(z_{j,i},\rho_{j,i})
+=\frac{2\pi}{\eta T_p}\Big((V_{j,i})^{-\eta/2}+n^{-\frac{\eta}{2} }(V_{j,i})^{\eta/2}\Big)$.
 
 则一步 Lyapunov 导数化简为
 
 $$
 \dot V_1
-\le \sum_{i=1}^n \Big[ P_{1,i}z_{1,i} z_{2,i}
--\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i- k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2} 
+\le \sum_{i=1}^n \Big[ P_{1,i}z_{1,i} z_{2,i}-
+2\mathcal{K}V_{1,i}-P_{1,i}z_{1,i}\tilde\alpha_i- k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2} 
 \Big].
 $$
 
-\begin{equation}\label{eq:25}
-	V_2= \frac{1}{2}z_{2,i}^{\top}z_{2,i}. 
-\end{equation}
+
 In the second step, a BLF is used as an energy function for the error dynamics. We choose:
 \begin{equation}\label{eq:25}
-	V_2= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}. 
+	V_2= V_1+ \frac{1}{2}\sum_{i=1}^{n}z_{2,i}^{\top}z_{2,i}. 
 \end{equation}
-
 
 Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain the time derivative of $V_2$ is as
 
 \begin{equation}
 	\begin{aligned}
-		\dot V_2& = \sum_{i=1}^n \Big[\,P_{2,i}z_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{2,i}\rho_{2,i}\,\dot\rho_{2,i}\,\Big]\\
+		\dot V_2& = \dot V_1+ \sum_{i=1}^{n}z_{2,i} \dot{z}_{2,i}
+		=  \dot V_1+\sum_{i=1}^n \Big[z_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)\Big]\\
 		&
-		 = \sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+\omega_i(x,t)+g_i(u^{\prime}_i-\Delta u_i)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
+		 \le  \sum_{i=1}^n \left[P_{1,i}z_{1,i} z_{2,i}+ z_{2,i}\,\left(f_i(x)+\omega_i(x,t)+g_i(u^{\prime}_i-\Delta u_i)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i \right)\right]
 	\end{aligned}
 \end{equation}
 
-Let $Q_2=\mathrm{col}\{Q_{2,i}\}$,
-$P_1=\mathrm{col}\{P_{1,i}\}$,
-$\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
+The control input torque is designed as
 \begin{equation}\label{eq:tau-cmd}
 \begin{aligned}
-	u^{\prime} =&C(q,\dot{q})x_2 + G(q)\\
-&+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2}^{3}}\dot\rho_{2}-\mathcal{K}_{2}(z_{2},\rho_{2}) \Phi_{2}
+	u^{\prime} =&C(q,\dot{q})x_2 + G(q)+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-P_1 z_1-\mathcal{K}_{2}
 -\hat \omega
--k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2}^2 \Phi_{2}\right]
+-k_s\,\mathrm{sgn}(z_{2})-k_{2}z_2\right]
 \end{aligned}
 \end{equation}
-where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s>0$.
+where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s>0$, $\mathcal{K}_{2}=\frac{\pi}{2\eta T_p}\left[ 2^{\eta/2} | z_2\vert ^{1-\eta}\mathrm{sgn}(z_2)+(\frac{n}{2})^{{\eta}/{2} }| z_2\vert ^{1+\eta}\mathrm{sgn}(z_2)\right]$.
+
+
+
+
+
+
+
+% ************************带约束的V2
+% \begin{equation}\label{eq:25}
+% 	V_2= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}. 
+% \end{equation}
+
+
+% Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain the time derivative of $V_2$ is as
+
+% \begin{equation}
+% 	\begin{aligned}
+% 		\dot V_2& = \sum_{i=1}^n \Big[\,P_{2,i}z_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{2,i}\rho_{2,i}\,\dot\rho_{2,i}\,\Big]\\
+% 		&
+% 		 = \sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+\omega_i(x,t)+g_i(u^{\prime}_i-\Delta u_i)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
+% 	\end{aligned}
+% \end{equation}
+
+% Let $Q_2=\mathrm{col}\{Q_{2,i}\}$,
+% $P_1=\mathrm{col}\{P_{1,i}\}$,
+% $\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
+% \begin{equation}\label{eq:tau-cmd}
+% \begin{aligned}
+% 	u^{\prime} =&C(q,\dot{q})x_2 + G(q)\\
+% &+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2}^{3}}\dot\rho_{2}-\mathcal{K}_{2}(z_{2},\rho_{2}) \Phi_{2}
+% -\hat \omega
+% -k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2}^2 \Phi_{2}\right]
+% \end{aligned}
+% \end{equation}
+% where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s>0$.
+
+
+
+
 % u =&C(q,\dot{q})x_2 + G(q)\\
 % &+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i}-\mathcal{K}_{2}(z_{2},\rho_{2,i}) \Phi_{2}
 % -\hat{h}(\chi)
@@ -754,7 +793,9 @@ $\varepsilon_d=\hat{\dot x}_2-\dot x_2$ 为跟踪微分器误差,一致有界并
 \begin{equation}
 	\begin{aligned}
 	\dot V_2
-\le&+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right) -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert
+\le&\sum_{i=1}^n \Big[
+-\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i- k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2} 
+\Big]+\sum_{i=1}^n \left( - k_{2,i} z_{2,i}^2-z_{2,i}\mathcal{K}_{2,i}-z_{2,i}\tilde{\omega}_i  \right) -k_s\sum_{i=1}^n z_{2,i}\mathrm{sgn}(z_2)
 \end{aligned}
 \end{equation}
 
@@ -795,7 +836,7 @@ The composite Lyapunov function is constructed as follows
 \begin{equation}\label{eq:45}
 	\begin{aligned}
 		\mathcal{L}
-	=  V_{1}+ V_{2}+\tfrac{1}{2}\| \tilde\alpha\Vert ^2+\tfrac{1}{2}\| \tilde \omega\Vert ^2
+	=   V_{2}+\tfrac{1}{2}\| \tilde\alpha\Vert ^2+\tfrac{1}{2}\| \tilde \omega\Vert ^2
 	\end{aligned}
 \end{equation} 
 The time derivative of \cref{eq:45} is given by
@@ -1152,7 +1193,7 @@ The stability proof is completed.
 	\mathcal{L}_{\zeta,i}\ =\ \frac12\zeta_i^2.
 	$$
 	
-	对$\mathcal{L}_{\zeta,i}$求时间导数。并结合$\zeta_i\,\mathrm{sig}(\zeta_i)^\alpha=|\zeta_i|^{\alpha+1}$ 得
+	对$\mathcal{L}_{\zeta,i}$求时间导数。并结合$\zeta_i\,\mathrm{sgn}(\zeta_i)^\alpha=|\zeta_i|^{\alpha+1}$ 得
 	
 	$$
 	\dot{\mathcal{L}}_{\zeta,i}= -\frac{\pi}{2\gamma T_\zeta}\Big((\mathcal{L}_{\zeta,i})^{1-\frac{\gamma}{2}}+(\mathcal{L}_{\zeta,i})^{1+\frac{\gamma}{2}}\Big)\ -\ \mu\zeta_i^2\ -\  g_i\zeta_i\Delta u_i.

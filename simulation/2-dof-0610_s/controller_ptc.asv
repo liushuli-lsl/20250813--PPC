@@ -1,6 +1,6 @@
 
 
-function  [dx,tau,rho1,d_true] = controller_ptc(t, x)
+function  [dx,tau,rho1] = controller_ptc(t, x)
 % t
 
 n = 2;
@@ -119,9 +119,7 @@ ddq = f + M\tau + omegahat+nu+w;
     omegahat_dot = -Lambda*omegahat + Lambda*( x2hat_dot - f - g*tau );
  
 % 回灌 Δu/d 到 G-PPF 的 LPF（只更新内部状态，不重算本步 rho）
-u_d_abs = min(max(abs(u_d), 0), 15);        % |Δu| 逐通道，上限按实际设
-d_abs   = min(max(abs(omegahat), 0), 20);   % |扰动估计|；验证时也可用 abs(d_true)
-cfg1.feed_only = true;  gppf(t, n,z1,u_d_abs, d_abs, cfg1);
+cfg1.feed_only = true;  gppf(t, n,z1, abs(u_d), d_est1, cfg1);
 dzeta = delta - mu*zeta - g*u_d;
 dx = [dq; ddq; dzeta;z1;dalpha_bar;theta_dot;omegahat_dot];
 end
@@ -132,7 +130,7 @@ function [P,Q,V] = blf_terms(z, rho)
 epsd = 1e-6;
 a=0.02;
 % den  = max(rho.^2 - z.^2, epsd);
-den = max(rho.^2 - z.^2, a*rho.^2 + epsd);
+den = max(rho1.^2 - z1.^2, a*rho1.^2 + eps0);
 P = (rho.^4) ./ max(den.^2, epsd);
 Q = (z.^4)   ./ max(den.^2, epsd);
 V = 0.5 * (rho.^2 .* z.^2) ./ den;
