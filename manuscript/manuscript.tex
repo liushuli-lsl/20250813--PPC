@@ -682,34 +682,34 @@ where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s
 
 
 
-% ************************带约束的V2
-% \begin{equation}\label{eq:25}
-% 	V_2= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}. 
-% \end{equation}
+************************带约束的V2
+\begin{equation}\label{eq:25}
+	V_2= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}. 
+\end{equation}
 
 
-% Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain the time derivative of $V_2$ is as
+Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain the time derivative of $V_2$ is as
 
-% \begin{equation}
-% 	\begin{aligned}
-% 		\dot V_2& = \sum_{i=1}^n \Big[\,P_{2,i}z_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{2,i}\rho_{2,i}\,\dot\rho_{2,i}\,\Big]\\
-% 		&
-% 		 = \sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+\omega_i(x,t)+g_i(u^{\prime}_i-\Delta u_i)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
-% 	\end{aligned}
-% \end{equation}
+\begin{equation}
+	\begin{aligned}
+		\dot V_2& = \sum_{i=1}^n \Big[\,P_{2,i}z_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{2,i}\rho_{2,i}\,\dot\rho_{2,i}\,\Big]\\
+		&
+		 = \sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+\omega_i(x,t)+g_i(u^{\prime}_i-\Delta u_i)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
+	\end{aligned}
+\end{equation}
 
-% Let $Q_2=\mathrm{col}\{Q_{2,i}\}$,
-% $P_1=\mathrm{col}\{P_{1,i}\}$,
-% $\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
-% \begin{equation}\label{eq:tau-cmd}
-% \begin{aligned}
-% 	u^{\prime} =&C(q,\dot{q})x_2 + G(q)\\
-% &+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2}^{3}}\dot\rho_{2}-\mathcal{K}_{2}(z_{2},\rho_{2}) \Phi_{2}
-% -\hat \omega
-% -k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2}^2 \Phi_{2}\right]
-% \end{aligned}
-% \end{equation}
-% where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s>0$.
+Let $Q_2=\mathrm{col}\{Q_{2,i}\}$,
+$P_1=\mathrm{col}\{P_{1,i}\}$,
+$\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
+\begin{equation}\label{eq:tau-cmd}
+\begin{aligned}
+	u^{\prime} =&C(q,\dot{q})x_2 + G(q)\\
+&+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2}^{3}}\dot\rho_{2}-\mathcal{K}_{2}(z_{2},\rho_{2}) \Phi_{2}
+-\hat \omega
+-k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2}^2 \Phi_{2}\right]
+\end{aligned}
+\end{equation}
+where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s>0$.
 
 
 

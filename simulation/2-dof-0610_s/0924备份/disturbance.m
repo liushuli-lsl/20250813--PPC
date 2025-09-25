@@ -88,7 +88,7 @@ if strcmpi(gate_type,'smooth')
     win = 1 - (1 - w23).*(1 - w57);  % 软并集
 else
     % 硬门
-    win = double( (t>=2 && t<=3) || (t>=5 && t<=5) );
+    win = double( (t>=4 && t<=6) || (t>=12 && t<=15) );
 end
 end
 

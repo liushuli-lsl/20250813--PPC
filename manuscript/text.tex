@@ -252,480 +252,131 @@ g(t)=1-\exp!\bigl(-\iota (t-T_p)^2\bigr),\quad \iota>0,\ \ g(T_p)=0,\ g'(T_p)=0,
 
 
 
+\subsubsection*{(二) $t\ge T_p$ 段的灵敏动态缩放设计（无门控）}
 
-\subsection{System description}
-
-
-
-求$V_1$ 的时间导数为
-\begin{equation}\label{eq:25}
-	\begin{aligned}
-\dot V_1
-&=\sum_{i=1}^{n}\left[
-\frac{\rho_{1,i}^4\,z_{1,i}}{\big(\rho_{1,i}^{2}-z_{1,i}^{2}\big)^{2}}\dot z_{1,i}
--
-\frac{\rho_{1,i}\,z_{1,i}^{4}}{\big(\rho_{1,i}^{2}-z_{1,i}^{2}\big)^{2}}\dot \rho_{1,i}
-\right]\\
-% &=\sum_{i=1}^{n}\left[
-% \frac{\rho_{1,i}^4\,z_{1,i}}{\big(\rho_{1,i}^{2}-z_{1,i}^{2}\big)^{2}}(z_{2,i}-\dot q_{d,i}+\alpha^{f}_i+\zeta_i)-
-% \frac{\rho_{1,i}\,z_{1,i}^{4}}{\big(\rho_{1,i}^{2}-z_{1,i}^{2}\big)^{2}}\dot \rho_{1,i}
-% \right]
-\end{aligned}
+为在 $t\ge T_p$ 阶段对饱和与扰动做出更灵敏的“即刻放宽—快速回落”的自适应调节，
+本文用无门控的自适应放宽变量 $\Sigma_i(t)\ge 0$ 替换原先的时间门控函数 $g(t)$。
+令
+\begin{equation}\label{eq:rho-post-def}
+  \rho_i(t)=a\bigl(1+\Sigma_i(t)\bigr),\qquad t\ge T_p,
 \end{equation}
-
-记
-$
-P_{j,i}=\frac{\rho_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2}>0,
-Q_{j,i}=\frac{ z_{j,i}^4}{(\rho_{j,i}^2-z_{j,i}^2)^2}>0,
-\Phi_{j,i}=\frac{z_{j,i}\left(\rho_{j,i}^{2}-z_{j,i}^{2}\right)}{\rho_{j,i}^{4}}=\frac{z_{j,i}(\rho_{j,i}^2-z_{j,i}^2)}{P_{j,i}}, j\in\{1,2\}
-$,
-$\dot z_{1,i}= z_{2,i}-\dot q_{d,i}+\alpha^{f}_i+\zeta_i$, 将它们代入 BLF 导数后，并根据公式（），得到
-$$
-\dot V_1=\sum_{i=1}^n\!\Big[P_{1,i} z_{1,i}z_{2,i}+P_{1,i}z_{1,i}(\alpha_i+\zeta_i-\dot q_{d,i})-P_{1,i}z_{1,i}\tilde\alpha_i-Q_{1,i}\rho_{1,i} \dot\rho_{1,i}\Big]
-$$
-
-Let ${V_{j,i}}=\frac{1}{2}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}, \Psi(V_{j,i})=\frac{\pi}{ \eta T_p}\Big((V_{j,i})^{\,1-\eta/2}+n^{-\frac{\eta}{2} }(V_{j,i})^{\,1+\eta/2}\Big)$, 我们设计
-$$
-\mathcal{K}_{1,i}(z_{j,i},\rho_{j,i})
-=\frac{\rho_{j,i}^2}{2}\frac{\Psi(V_{j,i})}{V_{j,i}}
-=\frac{\pi\,\rho_{j,i}^2}{2\eta T_p}\Big((V_{j,i})^{-\eta/2}+n^{-\frac{\eta}{2} }(V_{j,i})^{\eta/2}\Big).
-$$
-
-把它代回，可设计虚拟控制律为：
-\begin{equation}\label{eq:25}
-\alpha_i = \dot q_{d,i}-\zeta_i+\frac{z_{1,i}^3}{\rho_{1,i}^3}\,\dot\rho_{1,i}
--\mathcal{K}_{1,i}(z_{1,i},\rho_{1,i})\Phi_{1,i}
--k_{1,i} \rho_{1,i}^2 \Phi_{1,i},
+并取初值
+\begin{equation}\label{eq:C1-conditions}
+  \Sigma_i(T_p)=0,\qquad \dot\Sigma_i(T_p)=0,
 \end{equation}
-where $k_1=\mathrm{diag}\{k_{1,1},k_{1,i},\cdots,k_{1,n}\}>0$, $k_{1,i}>0$,
+由此与 $t<T_p$ 段的设计满足 $\rho_i(T_p^-)=a,\ \dot\rho_i(T_p^-)=0$ 共同保证
+\[
+  \rho_i(T_p^+)=a\bigl(1+\Sigma_i(T_p)\bigr)=a,\qquad
+  \dot\rho_i(T_p^+)=a\,\dot\Sigma_i(T_p)=0,
+\]
+从而在 $t=T_p$ 处实现函数值与一阶导数的 $C^1$ 平滑衔接。
 
-则一步 Lyapunov 导数化简为
-
-$$
-\dot V_1
-\le \sum_{i=1}^n \Big[ P_{1,i}z_{1,i} z_{2,i}
--\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i- k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2} 
-\Big].
-$$
-
-
-In the second step, a BLF is used as an energy function for the error dynamics. We choose:
-\begin{equation}\label{eq:25}
-	V_2= \frac{1}{2}\sum_{i=1}^{n} \frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}. 
+\paragraph{平滑指标与回滞触发。}
+为刻画输入饱和、外扰强度、误差逼近度以及输入速率带来的“难度”，
+定义平滑 ReLU 与平滑开关如下：
+\begin{align}
+  &\mathrm{ReLU}_\varepsilon(x)
+  \triangleq \tfrac12\!\bigl(x+\sqrt{x^2+\varepsilon^2}\bigr),\quad \varepsilon>0, \label{eq:smooth-relu}\\
+  &H_\varepsilon(x)\triangleq \tfrac12\!\left(1+\tanh\!\frac{x}{\varepsilon}\right). \label{eq:smooth-switch}
+\end{align}
+对第 $i$ 通道，构造归一化指标
+\begin{align}
+  &\bar s_i=\frac{\mathrm{ReLU}_\varepsilon(|v_i|-u_d)}{u_d},\quad
+   \bar w_i=\frac{\mathrm{ReLU}_\varepsilon(|d_i|-d_{\mathrm{th}})}{d_{\mathrm{scale}}},\nonumber\\
+  &\bar q_i=\frac{\mathrm{ReLU}_\varepsilon(|e_i|-q_{\mathrm{th}})}{e_{\mathrm{scale}}},\quad
+   \bar j_i=\frac{\mathrm{ReLU}_\varepsilon(|\dot v_i|-j_{\mathrm{th}})}{j_{\mathrm{scale}}},\label{eq:normalized-indicators}
+\end{align}
+并引入具有回滞的开/关权函数
+\begin{equation}\label{eq:hysteresis}
+  \chi_i = H_\varepsilon(\bar s_i-\theta_{\mathrm{on}}),\qquad
+  \zeta_i = H_\varepsilon(\theta_{\mathrm{off}}-\bar s_i),\qquad
+  \theta_{\mathrm{on}}>\theta_{\mathrm{off}}\ge 0,
 \end{equation}
+其中 $\chi_i$ 在“真超阈”时迅速接近 $1$（触发放宽），$\zeta_i$ 在“远离阈值”时迅速接近 $1$（触发泄放）。
 
+\paragraph{自适应“放宽—泄放”动力学。}
+为获得灵敏且平滑的后段调节，设计一阶 ODE（带积分记忆）驱动 $\Sigma_i$：
+\begin{align}
+  \dot\Sigma_i
+  &= -\lambda_\Sigma\,\Sigma_i \;-\; k_r\,\zeta_i\,\Sigma_i
+     \;+\;\chi_i\!\left(k_u\bar s_i+k_d\bar w_i+k_e\bar q_i+k_j\bar j_i\right)
+     \;+\;k_I\,\xi_i, \label{eq:sigma-ode}\\
+  \dot\xi_i
+  &= -\alpha\,\xi_i \;+\; \chi_i\!\left(k_u\bar s_i+k_d\bar w_i+k_e\bar q_i+k_j\bar j_i\right),\qquad
+     \xi_i(T_p)=0, \label{eq:xi-ode}\\
+  \Sigma_i(t)&\leftarrow \operatorname{Proj}_{[\,0,\,\Sigma_{\max}\,]}\bigl(\Sigma_i(t)\bigr),
+  \label{eq:sigma-proj}
+\end{align}
+其中 $\lambda_\Sigma,k_r,k_u,k_d,k_e,k_j,k_I,\alpha>0$ 为设计参数，$\Sigma_{\max}>0$ 为上界投影。
+式 \eqref{eq:sigma-ode}--\eqref{eq:sigma-proj} 的机理为：
+(i) $-\lambda_\Sigma\Sigma_i$ 提供常规回落；(ii) $-k_r\zeta_i\Sigma_i$ 在安全域内增强泄放、加速收紧；
+(iii) $\chi_i(\cdot)$ 在触发时按指标强度即时放宽；(iv) $k_I\xi_i$ 为积分记忆，
+保证“持续轻度超限”亦能累积形成显著放宽，从而提升灵敏度且不过度依赖瞬时峰值。
 
-Using $\dot z_{2,i}=\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i$, we obtain the time derivative of $V_2$ is as
-\begin{equation}
-	\begin{aligned}
-		\dot V_2& = \sum_{i=1}^n \Big[\,P_{2,i}z_{2,i}\,(\dot x_{2,i}-\dot\alpha_i^{f}-\dot\zeta_i)-Q_{2,i}\rho_{2,i}\,\dot\rho_{2,i}\,\Big]\\
-		&
-		 = \sum_{i=1}^n \left[\,P_{2,i}z_{2,i}\,\left(f_i(x)+h_i(x,t)+g_i(u_i-\Delta u_i)+d'(t)-\dot\alpha_i^{f}-\delta_i\ +\ \mu_2\,\zeta_i\ +\ g_i\,\Delta u_i-\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i} \right)\right]
-	\end{aligned}
+\paragraph{导数与 BLF 友好性。}
+由 \eqref{eq:rho-post-def} 可得
+\begin{equation}\label{eq:rho-dot}
+  \dot\rho_i = a\,\dot\Sigma_i,\qquad
+  \frac{\dot\rho_i}{\rho_i}=\frac{a\,\dot\Sigma_i}{a(1+\Sigma_i)}=\frac{\dot\Sigma_i}{1+\Sigma_i},
 \end{equation}
+可直接用于屏障 Lyapunov 函数（BLF）导数中的边界补偿项，无需时间门控，从而避免额外时滞。
 
-Let $Q_2=\mathrm{col}\{Q_{2,i}\}$,
-$P_1=\mathrm{col}\{P_{1,i}\}$,
-$\Phi_2=\mathrm{col}\{\Phi_{2,i}\}$. The control input torque is designed as
-\begin{equation}\label{eq:tau-cmd}
-\begin{aligned}
-u =&C(q,\dot{q})x_2 + G(q)\\
-&+M(q)\left[\dot\alpha^{f}+\delta -\mu_2\,\zeta-\frac{P_1}{P_2}z_1+\tfrac{z_{2}^{3}}{\rho_{2,i}^{3}}\dot\rho_{2,i}-\mathcal{K}_{2}(z_{2},\rho_{2,i}) \Phi_{2}
--\hat{h}(\chi)
--\hat \omega
--k_s\,\mathrm{sgn}(z_{2})-k_{2}\rho_{2,i}^2 \Phi_{2,i}\right]
-\end{aligned}
+\paragraph{完整时间导数（用于严格性分析）。}
+若需对 \eqref{eq:sigma-ode} 做进一步上界估计，可给出光滑构件的时间导数。
+记 $R(x)=\mathrm{ReLU}_\varepsilon(x)$，则
+\begin{equation}\label{eq:relu-deriv}
+  R'(x)=\tfrac12\!\left(1+\frac{x}{\sqrt{x^2+\varepsilon^2}}\right)\in(0,1),
 \end{equation}
-
-
-where $k_2=\mathrm{diag}\{k_{2,1},k_{2,i},\cdots,k_{2,n}\}>0$, $k_{2,i}>0$, $k_s>0$.
-
-Let $\chi=\{q,\dot{q}\}\in\mathbb{R}^m$ be the regressor and $\psi(\chi)\in\mathbb{R}^{N}$ the normalized basis. Approximate the structured uncertainty by 
-\( \hat h_i(\chi)=\hat \theta_i^\top \psi_i(\chi)\),
-with $\theta_i\in\mathbb{R}^{N}  $ adapted online by
-\begin{equation}\label{eq:theta-law}
-\dot{\hat{\theta}}_i = \varrho_i\,P_{2,i} z_{2,i}\psi(\chi) - \kappa_i\,\hat{\theta}_i,\qquad
-\varrho_i,\kappa_i>0.
+故对 $x(t)=|z(t)|-z_{\mathrm{th}}$ 有
+\begin{equation}\label{eq:relu-time}
+  \frac{\mathrm{d}}{\mathrm{d}t}R\bigl(|z|-z_{\mathrm{th}}\bigr)
+  = R'(x)\,\frac{\mathrm{d}}{\mathrm{d}t}|z|
+  = \tfrac12\!\left(1+\frac{x}{\sqrt{x^2+\varepsilon^2}}\right)\frac{z}{|z|+\delta}\,\dot z,
 \end{equation}
+其中在 $z\approx 0$ 处以 $|z|+\delta$（极小 $\delta>0$）作平滑近似以避免不可导点。
+据此，\eqref{eq:normalized-indicators} 的各归一化指标导数均可按链式法则得到；
+而 \eqref{eq:smooth-switch} 的平滑开关导数满足
+\begin{align}
+  \dot\chi_i &= \tfrac12\,\mathrm{sech}^2\!\Bigl(\tfrac{\bar s_i-\theta_{\mathrm{on}}}{\varepsilon}\Bigr)\,
+               \frac{\dot{\bar s}_i}{\varepsilon},\label{eq:chi-dot}\\
+  \dot\zeta_i &= -\tfrac12\,\mathrm{sech}^2\!\Bigl(\tfrac{\theta_{\mathrm{off}}-\bar s_i}{\varepsilon}\Bigr)\,
+               \frac{\dot{\bar s}_i}{\varepsilon},\label{eq:zeta-dot}
+\end{align}
+从而 $\dot\Sigma_i$ 与 $\ddot\Sigma_i$ 在未触及投影边界处均有界连续；在投影饱和瞬间由投影算子截断，仍不影响“几乎处处”的稳定性分析与工程实现。
 
-% 将外扰的项定义为
-% $\omega(x,t)= M^{-1}(q) d(t)$。
-将结构不确定估计误差和外扰的剩余项定义为
-$\omega(x,t)=h(x)-\hat h(\chi)+ M^{-1}(q) d(t)$。
+\paragraph{性质与讨论。}
+\begin{properties}\label{prop:post}
+  对于 \eqref{eq:rho-post-def}--\eqref{eq:sigma-proj}，有：
+  \begin{enumerate}
+    \item[(v)] 非负性与下界：$\Sigma_i\in[0,\Sigma_{\max}]$，故 $\rho_i(t)=a(1+\Sigma_i(t))\ge a$。
+    \item[(vi)] $C^1$ 衔接：由 \eqref{eq:C1-conditions} 与 $t<T_p$ 段的边界条件可得
+      $\rho_i,\dot\rho_i$ 在 $t=T_p$ 处连续。
+    \item[(vii)] 灵敏放宽与快速回落：当 $\bar s_i\gg\theta_{\mathrm{on}}$ 时，$\chi_i\!\to\!1$ 且
+      $\dot\Sigma_i$ 受 $k_u\bar s_i+k_d\bar w_i+k_e\bar q_i+k_j\bar j_i$ 与积分 $k_I\xi_i$ 推动而迅速增大，
+      $\rho_i$ 即刻放宽；当 $\bar s_i\ll\theta_{\mathrm{off}}$ 时，$\zeta_i\!\to\!1$ 且
+      $\dot\Sigma_i\!\approx\!-(\lambda_\Sigma+k_r)\Sigma_i-k_I\alpha^{-1}(\alpha\xi_i)$，从而快速回落。
+    \item[(viii)] BLF 友好：比例项 $\dot\rho_i/\rho_i=\dot\Sigma_i/(1+\Sigma_i)$ 有界连续，可直接纳入 BLF 导数以抵消边界变化项。
+  \end{enumerate}
+\end{properties}
 
-为避免直接微分速度，采用一阶跟踪微分器作为观测器
-\begin{equation}
-	\begin{cases}
-\dot\vartheta =-\omega_d\,\vartheta+\omega_d\,x_2,  \\
-\hat{\dot x}_2=\omega_d(x_2-\vartheta),   \\
-\dot{\hat \omega}= -\Lambda_o\,\hat \omega
-+\Lambda_o\left(\hat{\dot x}_2 - f(x) - M^{-1}(q)\,\mathrm{sat}(u) - \hat h(\chi)\right),
-\end{cases}
-\end{equation}
-where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, \omega_d>0, \vartheta(0)=x_2(0), \hat \omega(0)=0$,
-设观测误差为 $\tilde \omega=\omega-\hat\omega$. 其动力学为
+\paragraph{实现与调参建议（示例）。}
+为在图示上获得“变化更明显”的效果，可取
+\[
+  \theta_{\mathrm{on}}=0.05,\ \theta_{\mathrm{off}}=0.02,\ \varepsilon=10^{-3},\ 
+  \lambda_\Sigma=3,\ k_r=5,\ k_u=2.0,\ k_d=1.0,\ k_e=0.5,\ k_j=0.3,\ 
+  k_I=0.8,\ \alpha=6,\ \Sigma_{\max}\in[1.5,3].
+\]
+若需更“猛”的响应，优先增大 $k_u\!\to\!k_I\!\to\!k_r$ 并小幅降低 $\theta_{\mathrm{on}}$；
+若边缘抖动，适当增大 $\varepsilon$ 或 $\alpha$。
 
-$$
-\dot{\tilde\omega}
-= -\Lambda_o\,\tilde\omega\;+\;\Delta_\omega,\qquad
-\Delta_\omega:=\dot\omega-\Lambda_o\,\varepsilon_d,
-$$
-where $\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0, w_d>0, \vartheta(0)=x_2(0)$,$\varepsilon_d:=\hat{\dot x}_2-\dot x_2$ 为跟踪微分器误差。
 
 
-根据公式可得到
-\begin{equation}
-	\begin{aligned}
-	\dot V_2
-\le&+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right) -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert
-\end{aligned}
-\end{equation}
 
 
 
 
 
 
-
-
-\begin{equation}\label{eq:45}
-	\begin{aligned}
-		\dot{V} \le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})-P_{1,i}z_{1,i}\tilde\alpha_i\right)
-		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})-P_{2,i}z_{2,i}\tilde{\omega}_i  \right)\\
-		& -k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert +\tilde\alpha^\top \dot{\tilde \alpha}+\tilde \omega^\top \dot{\tilde \omega}+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i \\
-		\le&\sum_{i=1}^n \left( - k_{1,i}\frac{\rho_{1,i}^2 z_{1,i}^2}{\rho_{1,i}^2-z_{1,i}^2}-\Psi(V_{1,i})\right)
-		+\sum_{i=1}^n \left( - k_{2,i}\frac{\rho_{2,i}^2 z_{2,i}^2}{\rho_{2,i}^2-z_{2,i}^2}-\Psi(V_{2,i})  \right)\\
-		& -\sum_{i=1}^nP_{2,i}z_{2,i}\tilde{\omega}_i +\tilde \omega^\top \dot{\tilde \omega}-k_s\sum_{i=1}^n P_{2,i} \left\lvert z_{2,i}\right\rvert+\tilde\alpha^\top \dot{\tilde \alpha}-\sum_{i=1}^n P_{1,i}z_{1,i}\tilde\alpha_i+\sum_{i=1}^n\tfrac{1}{\varrho_i}\tilde \theta_i^\top \dot{\tilde \theta}_i 
-	\end{aligned}
-\end{equation}
-
-$$
-\rho_{2,i}^2 - z_{2,i}^2 \le \rho_{2,i}^2
-$$
-
-
-
-Let 
-$$
-\mathcal{L} =-\sum_{i=1}^nP_{2,i}z_{2,i}\tilde{\omega}_i\;+\;\tilde \omega^\top \dot{\tilde \omega}\;-\;k_s\sum_{i=1}^n P_{2,i} | z_{2,i} |
-$$
-
-
-利用不等式 $ab\le k\,a+\frac{b^2}{4k}$（$(\sqrt{k\,a}-\frac{b}{2\sqrt{k}})^2\ge0$）并取
-$a=P_{2,i}|z_{2,i}|,\ b=|\tilde\omega_i|,\ k=k_s$，对每个通道有
-
-$$
--\,P_{2,i}z_{2,i}\tilde\omega_i
-\ \le\
-P_{2,i}|z_{2,i}|\,|\tilde\omega_i|
-\ \le\
-k_s P_{2,i}|z_{2,i}|+\frac{1}{4k_s}\tilde\omega_i^{\,2}.
-$$
-
-于是
-
-$$
--\,k_s\!\sum_{i=1}^n\! P_{2,i}|z_{2,i}|
--\sum_{i=1}^n P_{2,i}z_{2,i}\tilde\omega_i
-\ \le\
-\frac{1}{4k_s}\,\|\tilde\omega\|^2
-$$
-
-
-由观测器误差$
-\dot{\tilde\omega}= -\Lambda_o\,\tilde\omega+\Delta_\omega,
-\Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0$, 并根据Young不等式得
-
-$$
-\tilde\omega^\top\dot{\tilde\omega}
-= -\tilde\omega^\top\Lambda_o\tilde\omega+\tilde\omega^\top\Delta_\omega
-\ \le\
--\tilde\omega^\top\Lambda_o\tilde\omega
-+\frac{\varepsilon}{2}\tilde\omega^\top\Lambda_o\tilde\omega
-+\frac{1}{2\varepsilon}\Delta_\omega^\top\Lambda_o^{-1}\Delta_\omega \le\
--\Big(1-\tfrac{\varepsilon}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
-+\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2,
-$$
-
-
-
-把（A）与（B）相加：
-
-$$
-\begin{aligned}
-	\mathcal{L}
-&\le
--\Big(1-\tfrac{\varepsilon}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
-+\frac{1}{4k_s}\|\tilde\omega\|^2
-+\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2.
-\end{aligned}
-$$
-
-利用 $\tilde\omega^\top\Lambda_o\tilde\omega\ge \lambda_{o,\min}\|\tilde\omega\|^2$，得到
-
-$$
-\mathcal{L} \le\
--\Big(\big(1-\tfrac{\varepsilon}{2}\big)\lambda_{o,\min}-\tfrac{1}{4k_s}\Big)\|\tilde\omega\|^2
-+\frac{1}{2\varepsilon}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2.
-$$
-
-令 $\varepsilon=\tfrac12$（简洁且常用），净负系数为 $\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}$。
-只要$
-\boxed{ \ k_s\;>\;\frac{1}{3\,\lambda_{o,\min}}\ }$
-
- $\frac{1}{2\varepsilon}\|\Lambda_o^{-1/2}\Delta_\omega\|^2$ 作为输入项（由 $\Delta_\omega=\dot\omega-\Lambda_o\varepsilon_d$ 决定）并入 $\sigma(\|r(t)\|)$。
-
-% ---
-
-%  融入总 Lyapunov 导数与 PTS–ISS
-
-% 将（C）代入总 $\dot V$，并与一步/二步 BLF 的主衰减项
-% $-\Psi(S_{j,i})$、$-k_{j,i}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}$ 合并，再用幂和不等式把 $\sum_i\Psi(S_{j,i})$ 下界为 $V$ 的函数，可得
-
-% $$
-% \dot V
-% \ \le\
-% -\frac{\pi}{\eta T_p^\star}\big(V^{1-\eta/2}+V^{1+\eta/2}\big)
-% \ -\ c_\omega\|\tilde\omega\|^2
-% \ +\ \sigma(\|r(t)\|),
-% $$
-
-% 其中 $c_\omega=\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}>0$。这正是你需要的 **PTS–ISS** 标准形式。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% 其中 $\odot$ 表示Hadamard积。
-% % 特别地，取 $\varepsilon_1=\varepsilon_2=\tfrac12$ 时，
-
-% % \begin{equation}\label{eq:45}
-% % 	\begin{aligned}
-% % \mathcal T
-% % \le 
-% % &-\tfrac12\,\tilde\omega^\top\Lambda_o\tilde\omega
-% % \;+\;\big\|\Lambda_o^{-1/2}(P_2\!\odot z_2)\big\|^2
-% % \;+\;\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2 .
-% % \end{aligned}
-% % \end{equation}
-
-% Let
-% \begin{equation}\label{eq:45}
-% 	\begin{aligned}
-% \mathcal T =& -\sum_{i=1}^n P_{2,i}z_{2,i}\tilde\omega_i\;+\;\tilde\omega^\top\dot{\tilde\omega}\\
-% = &-\sum_{i=1}^n P_{2,i}z_{2,i}\tilde\omega_i\;+\;\tilde\omega^\top(-\Lambda_o\tilde\omega+\Delta_\omega)
-% = -\tilde\omega^\top\Lambda_o\tilde\omega\;-\;\sum_i P_{2,i}z_{2,i}\tilde\omega_i\;+\;\tilde\omega^\top\Delta_\omega .
-% \end{aligned}
-% \end{equation}
-
-
-% 对第$i$个通道展开
-
-% $$
-% \mathcal T_i
-% = -\lambda_{o,i}\tilde\omega_i^2 \;-\;P_{2,i}z_{2,i}\tilde\omega_i \;+\; \tilde\omega_i\Delta_{\omega,i}.
-% $$
-
-% 根据加权Young不等式（配权 $\lambda_{o,i}$ 以便与前述二次负项合并）：
-
-% \begin{equation}\label{eq:45}
-% 	\begin{aligned}
-% 		&
-% -\;P_{2,i}z_{2,i}\tilde\omega_i
-% \le \frac{\varepsilon_1}{2}\lambda_{o,i}\tilde\omega_i^2
-% +\frac{1}{2\varepsilon_1}\frac{(P_{2,i}z_{2,i})^2}{\lambda_{o,i}},
-% \\
-% &
-% \tilde\omega_i\Delta_{\omega,i}
-% \le \frac{\varepsilon_2}{2}\lambda_{o,i}\tilde\omega_i^2
-% +\frac{1}{2\varepsilon_2}\frac{\Delta_{\omega,i}^2}{\lambda_{o,i}}.
-% \end{aligned}
-% \end{equation}
-
-% 其中，定义任意 $\varepsilon_1,\varepsilon_2\in(0,1)$
-% 代回并整理得到
-
-% $$
-% \mathcal T_i
-% \le
-% -\Big(1-\tfrac{\varepsilon_1+\varepsilon_2}{2}\Big)\lambda_{o,i}\tilde\omega_i^2
-% +\frac{1}{2\varepsilon_1}\frac{(P_{2,i}z_{2,i})^2}{\lambda_{o,i}}
-% +\frac{1}{2\varepsilon_2}\frac{\Delta_{\omega,i}^2}{\lambda_{o,i}}.
-% $$
-
-% 对 $i=1,\dots,n$ 求和，并以矩阵范式写作
-
-% $$
-% \sum_i \lambda_{o,i}\tilde\omega_i^2=\tilde\omega^\top\Lambda_o\tilde\omega,\quad
-% \sum_i \frac{(P_{2,i}z_{2,i})^2}{\lambda_{o,i}}
-% =\big\|\Lambda_o^{-1/2}(P_2\!\odot z_2)\big\|^2,\quad
-% \sum_i \frac{\Delta_{\omega,i}^2}{\lambda_{o,i}}
-% =\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2,
-% $$
-
-% $$
-% \boxed{\;
-% \mathcal T
-% := -\sum_{i=1}^n P_{2,i}z_{2,i}\tilde\omega_i\;+\;\tilde\omega^\top\dot{\tilde\omega}
-% \ \le\
-% -\Big(1-\tfrac{\varepsilon_1+\varepsilon_2}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
-% \;+\;\frac{1}{2\varepsilon_1}\big\|\Lambda_o^{-1/2}(P_2\!\odot z_2)\big\|^2
-% \;+\;\frac{1}{2\varepsilon_2}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2,}
-% $$
-
-% 由上式第一项
-% $$
-% -\Big(1-\tfrac{\varepsilon_1+\varepsilon_2}{2}\Big)\tilde\omega^\top\Lambda_o\tilde\omega
-% $$
-
-% 给出关于 $\tilde\omega$ 的确定负耗散（取 $\varepsilon_1+\varepsilon_2<2$ 即可）。
-
-% 2. **输入相关项.** 其余两项
-
-% $$
-% \frac{1}{2\varepsilon_1}\big\|\Lambda_o^{-1/2}(P_2\!\odot z_2)\big\|^2,\qquad
-% \frac{1}{2\varepsilon_2}\big\|\Lambda_o^{-1/2}\Delta_\omega\big\|^2
-% $$
-
-% 分别由 BLF 管道内 $z_2$ 与性能边界/外扰/微分器误差（$\Delta_\omega=\dot\omega-\Lambda_o\varepsilon_d$）所确定。它们可与实际控制律中的鲁棒项
-% $-k_s\sum_i P_{2,i}|z_{2,i}|$ 通过Young不等式进一步配平（部分吸收），余项并入输入函数 $\sigma(\|r(t)\|)$。
-
-% 3. **并入总导数.** 将上述不等式嵌入复合Lyapunov导数（叠加一步/二步的 $-\Psi(S_{j,i})$、$-k_{j,i}\tfrac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}$、滤波误差与参数泄露项的负定耗散），并利用幂和不等式把 $\sum_i\Psi(S_{j,i})$ 下界为 $V$ 的函数，可得
-
-% $$
-% \dot V
-% \;\le\;
-% -\frac{\pi}{\eta T_p^\star}\Big(V^{1-\eta/2}+V^{1+\eta/2}\Big)
-% \;+\;\sigma\big(\|r(t)\|\big),
-% $$
-
-% 从而满足预定义时间—输入到状态稳定（PTS–ISS）的标准格式。上述推导中参数 $\varepsilon_1,\varepsilon_2$ 可选为 $\tfrac12$ 以简化表达；$\Lambda_o$ 的对角元则由观测器带宽与噪声鲁棒性综合权衡给定。
-
-
-
-
-
-
-% 利用不等式$ab\ \le\ k\,a\;+\;\frac{b^2}{4k}\qquad(\text{由 }(\sqrt{k\,a}-\tfrac{b}{2\sqrt{k}})^2\ge0)$,
-% 并取$a=P_{2,i}|z_{2,i}|,\qquad b=|\tilde\omega_i|,\qquad k=k_s$
-
-% 得到
-% $$
-% -P_{2,i}z_{2,i}\tilde\omega_i
-% \ \le\ 
-% P_{2,i}|z_{2,i}|\,|\tilde\omega_i|
-% \ \le\ 
-% k_s P_{2,i}|z_{2,i}|\;+\;\frac{1}{4k_s}\,\tilde\omega_i^{\,2}.
-% $$
-
-% $$
-
-% -\,k_s\sum_i P_{2,i}|z_{2,i}|\;-\;\sum_i P_{2,i}z_{2,i}\tilde\omega_i
-% \;\le\;
-% \frac{1}{4k_s}\,\|\tilde\omega\|^2.
-% $$
-
-%  与观测器负项合并，给出净耗散，观测误差满足
-
-% $$
-% \dot{\tilde\omega}=-\Lambda_o\tilde\omega+\Delta_\omega,
-% \quad \Lambda_o=\mathrm{diag}\{\lambda_{o,i}\}>0,
-% $$
-
-% 取 $\gamma_o=1$，则
-
-% $$
-% \tilde\omega^\top\dot{\tilde\omega}
-% \le
-% -\lambda_{o,\min}\|\tilde\omega\|^2
-% +\frac{\varepsilon}{2}\|\tilde\omega\|^2
-% +\frac{1}{2\varepsilon}\|\Delta_\omega\|^2
-% $$
-
-% （Young 不等式，任意 $\varepsilon>0$）。
-
-% 把这条与上面的配平结果相加：
-
-% $$
-% \begin{aligned}
-% &\underbrace{-\,k_s\sum_i P_{2,i}|z_{2,i}|}_{\text{鲁棒项}}
-% \;+\;
-% \underbrace{\Big(-\sum_i P_{2,i}z_{2,i}\tilde\omega_i\Big)}_{\text{交叉项}}
-% \;+\;
-% \underbrace{\tilde\omega^\top\dot{\tilde\omega}}_{\text{观测器项}}\\[2pt]
-% &\le
-% -\Big(\lambda_{o,\min}-\tfrac{\varepsilon}{2}-\tfrac{1}{4k_s}\Big)\,\|\tilde\omega\|^2
-% \;+\;\frac{1}{2\varepsilon}\,\|\Delta_\omega\|^2.
-% \end{aligned}
-% $$
-
-% 令 $\varepsilon=\tfrac{\lambda_{o,\min}}{2}$，得
-
-% $$
-% -\Big(\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}\Big)\,\|\tilde\omega\|^2
-% \;+\;\frac{1}{\lambda_{o,\min}}\,\|\Delta_\omega\|^2.
-% $$
-
-% 只要满足
-
-% $$
-% \boxed{\ k_s\;>\;\frac{1}{3\,\lambda_{o,\min}}\ }
-% $$
-
-% 则系数 $\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}>0$，于是得到关于 $\tilde\omega$ 的**净负耗散**，而 $\|\Delta_\omega\|^2$（由 $\dot\omega$ 和微分器误差等决定）可并入 ISS 的输入函数 $\sigma(\|r(t)\|)$。
-
-
-% 将上述结论与一步/二步 BLF 的项（$-\Psi(\cdot)$、$-k_{j,i}\frac{\rho_{j,i}^2 z_{j,i}^2}{\rho_{j,i}^2-z_{j,i}^2}$ 等）合并，有
-
-% $$
-% \dot V
-% \;\le\;
-% -\frac{\pi}{\eta T_p^\star}\Big(V^{1-\eta/2}+V^{1+\eta/2}\Big)
-% -\underbrace{c_\omega\|\tilde\omega\|^2}_{\text{净耗散}}
-% +\underbrace{\sigma(\|r(t)\|)}_{\text{输入项}},
-% $$
-
-% 其中 $c_\omega=\tfrac{3}{4}\lambda_{o,\min}-\tfrac{1}{4k_s}>0$，从而满足 **PTS–ISS** 的标准格式。
-% 这就是与鲁棒项 $-k_s\sum_i P_{2,i}|z_{2,i}|$ 的“配平吸收”全过程。
 
 
 

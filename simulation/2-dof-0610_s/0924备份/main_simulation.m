@@ -6,8 +6,8 @@ clc;                % 清空命令窗口
 
 %% 1) 仿真设置
 n=2;  %自由度
-T_total = 5; 
-N       = 5000;            % 点数
+T_total = 20; 
+N       = 20000;            % 点数
 tspan   = linspace(0, T_total, N);
 dt      = tspan(2) - tspan(1);
 
@@ -80,7 +80,7 @@ dqd = [0.05*cos(0.5*t)-0.5*sin(0.5*t); 0.1*cos(t)-sin(t)];
      zeta_mat(k+1,:) = zeta.';
  rho_mat(k+1,:) = rho1.';
    omegahat_mat(k+1,:) =  omegahat.';
-     d_mat(k+1,:) =  omegahat.';
+     d_mat(k+1,:) =  d_true.';
 % if mod(round(t,2),1)==0      % 每 0.5 s 打一次
 %     fprintf('t=%.1f  alpha=%+.2f   u=%+.2f\n',...
 %         t, alpha, tau1);
@@ -101,13 +101,14 @@ figure;
 for i = 1:n
     subplot(2,1,i);
     plot(tspan, e_q(:,i), 'b', 'LineWidth', 1.5); hold on;
-    plot(tspan, rho_mat(:,i), 'k--', 'LineWidth',1.5);hold on;
-      plot(tspan, - rho_mat(:,i), 'k--', 'LineWidth',1.5);
+    plot(tspan, rho_mat(:,i), 'k-', 'LineWidth',1.5);hold on;
+      plot(tspan, - rho_mat(:,i), 'k-', 'LineWidth',1.5);
     yline(0, 'k--');
     xline(3, 'r--', 'LineWidth', 1.2);
     title(['Tracking Error e_' num2str(i)]);
     xlabel('Time (s)'); ylabel('e_i (rad)');
     legend('Error', 'Zero Line', 'T_p');
+    ylim([-0.5,0.5]);
 end
 
 
@@ -123,6 +124,7 @@ for i = 1:n
     title(['Tracking Error e_' num2str(i)]);
     xlabel('Time (s)'); ylabel('e_i (rad)');
     legend('Error', 'Zero Line', 'T_p');
+    ylim([-0.5,0.5]);
 end
 
 
@@ -179,13 +181,13 @@ for i = 1:n
     xlabel('Time (s)'); ylabel('Torque (Nm)');
 end
 % % 
-% figure;
-% for i = 1:n
-%     subplot(2,1,i);
-%     plot(tspan, zeta_mat(:,i), 'k', 'LineWidth', 1.5);
-%     title(['Joint \zeta_1' num2str(i)]);
-%     xlabel('Time (s)'); ylabel('Torque (Nm)');
-% end
+figure;
+for i = 1:n
+    subplot(2,1,i);
+    plot(tspan, d_mat(:,i), 'k', 'LineWidth', 1.5);
+    title(['Joint d' num2str(i)]);
+    xlabel('Time (s)'); ylabel('d');
+end
 
 
 function [rho] = performance_poly1(t)

@@ -21,20 +21,6 @@ Si = S(id);
 % 估计 dt（适配可变步长 ODE 求解器）
 dt = max(t - Si.t_prev, 0);
 
-% % ---- 驱动信号：低通或直接使用（由 cfg.use_lpf 决定）----
-% if isfield(cfg,'use_lpf') && cfg.use_lpf
-%     if dt > 0
-%         Si.ru = Si.ru + dt*( -Si.ru + abs(DeltaU) )/cfg.tau_u;
-%         Si.rd = Si.rd + dt*( -Si.rd + abs(d)      )/cfg.tau_d;
-%         Si.re = Si.re + dt*( -Si.re + abs(e)      )/cfg.tau_e;
-%     end
-% else
-%     Si.ru = abs(DeltaU);
-%     Si.rd = abs(d);          % 修正原来的 Sim.rd
-%     Si.re = abs(e);
-% end
-% ---- parse optional inputs (robust) ----
-% 1) DeltaU: [] => do not update ru this step
 do_feed_u = true;
 if nargin < 3 || isempty(DeltaU)
     do_feed_u = false; 
@@ -86,7 +72,7 @@ sp    = -6*b + 6*b^2;                         % ds/db
 b_dot = (cfg.p/cfg.Tp) * (t_eff/cfg.Tp)^(cfg.p-1);
 
 % ---- sigma (pre-phase) 与 g, Sigma (post-phase) ----
-sigma = proj(cfg.sigma0 + cfg.k_u*Si.ru + cfg.k_d*Si.rd+cfg.k_e*Si.re, cfg.sigma_min, cfg.sigma_max);
+sigma = proj(cfg.sigma0 + cfg.k_u*Si.ru + cfg.k_d*Si.rd, cfg.sigma_min, cfg.sigma_max);
 
 if t < cfg.Tp
     g = 0;

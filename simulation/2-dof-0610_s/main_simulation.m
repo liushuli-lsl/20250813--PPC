@@ -6,8 +6,8 @@ clc;                % 清空命令窗口
 
 %% 1) 仿真设置
 n=2;  %自由度
-T_total = 5; 
-N       = 5000;            % 点数
+T_total = 7; 
+N       = 7000;            % 点数
 tspan   = linspace(0, T_total, N);
 dt      = tspan(2) - tspan(1);
 
@@ -39,7 +39,8 @@ dq_use  = zeros(N,n);
 qd_mat  = zeros(N,n);
 dqd_mat = zeros(N,n);
 tau_mat = zeros(N,n);
-rho_mat = zeros(N,n);
+rho1_mat = zeros(N,n);
+rho2_mat = zeros(N,n);
 alpha_mat = zeros(N,n);
 zeta_mat= zeros(N,n);
 omegahat_mat = zeros(N,n);
@@ -54,10 +55,10 @@ dq_use(1,:) = dq0.';
 for k = 1:N-1
     t = tspan(k)
     % 解算一次 RK4
-  [k1, tau1,rho1,d_true] = controller_ptc(t,           x(:,k));
-[k2, tau2,rho2,~] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k1);
-[k3, tau3,rho3,~] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k2);
-[k4, tau4,rho4,~] = controller_ptc(t+dt,        x(:,k)+dt*k3);
+  [k1, tau1,rho1,rho2,d_true] = controller_ptc(t,           x(:,k));
+[k2, tau2,~,~,~] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k1);
+[k3, tau3,~,~,~] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k2);
+[k4, tau4,~,~,~] = controller_ptc(t+dt,        x(:,k)+dt*k3);
 
     x(:,k+1) = x(:,k) + dt*(k1 + 2*k2 + 2*k3 + k4)/6;
 
@@ -78,7 +79,8 @@ dqd = [0.05*cos(0.5*t)-0.5*sin(0.5*t); 0.1*cos(t)-sin(t)];
     tau_mat(k+1,:) = tau1.';
      alpha_mat(k+1,:) = alpha.';
      zeta_mat(k+1,:) = zeta.';
- rho_mat(k+1,:) = rho1.';
+ rho1_mat(k+1,:) = rho1.';
+  rho2_mat(k+1,:) = rho2.';
    omegahat_mat(k+1,:) =  omegahat.';
      d_mat(k+1,:) =  d_true.';
 % if mod(round(t,2),1)==0      % 每 0.5 s 打一次
@@ -93,21 +95,22 @@ e_dq = dq_use  - dqd_mat;
 
 
 
-[rho1] = arrayfun(@(tt) performance_poly1(tt),tspan);
-[rho2] = arrayfun(@(tt) performance_poly2(tt),tspan);
+% [rho1] = arrayfun(@(tt) performance_poly1(tt),tspan);
+% [rho2] = arrayfun(@(tt) performance_poly2(tt),tspan);
 
 save('x2.mat', 'tspan', 'e_q', 'e_dq', 'tau_mat', 'qd_mat', 'q_use','dqd_mat', 'dq_use','rho1','rho2',"zeta_mat","alpha_mat",'omegahat_mat');
 figure;
 for i = 1:n
     subplot(2,1,i);
     plot(tspan, e_q(:,i), 'b', 'LineWidth', 1.5); hold on;
-    plot(tspan, rho_mat(:,i), 'k--', 'LineWidth',1.5);hold on;
-      plot(tspan, - rho_mat(:,i), 'k--', 'LineWidth',1.5);
+    plot(tspan, rho1_mat(:,i), 'k-', 'LineWidth',1.5);hold on;
+      plot(tspan, - rho1_mat(:,i), 'k-', 'LineWidth',1.5);
     yline(0, 'k--');
     xline(3, 'r--', 'LineWidth', 1.2);
     title(['Tracking Error e_' num2str(i)]);
     xlabel('Time (s)'); ylabel('e_i (rad)');
     legend('Error', 'Zero Line', 'T_p');
+    ylim([-0.5,0.5]);
 end
 
 
@@ -116,13 +119,14 @@ figure;
 for i = 1:n
     subplot(2,1,i);
     plot(tspan, e_dq(:,i), 'b', 'LineWidth', 1.5); hold on;
-      plot(tspan, rho2, 'k--', 'LineWidth',1.5);hold on;
-      plot(tspan, -rho2, 'k--', 'LineWidth',1.5);
+      plot(tspan,rho2_mat(:,i), 'k--', 'LineWidth',1.5);hold on;
+      plot(tspan, -rho2_mat(:,i), 'k--', 'LineWidth',1.5);
     yline(0, 'k--');
     xline(3, 'r--', 'LineWidth', 1.2);
     title(['Tracking Error e_' num2str(i)]);
     xlabel('Time (s)'); ylabel('e_i (rad)');
     legend('Error', 'Zero Line', 'T_p');
+    ylim([-0.5,0.5]);
 end
 
 
