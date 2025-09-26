@@ -1,6 +1,6 @@
 %% BioMed_Central_Bib_Style_v1.01
 
-\begin{thebibliography}{6}
+\begin{thebibliography}{4}
 % BibTex style file: bmc-mathphys.bst (version 2.1), 2014-07-24
 \ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
 \ifx \binits  \undefined \def \binits#1{#1}\fi
@@ -97,36 +97,6 @@
 (\byear{2022-12})
 \doiurl{10.1109/TFUZZ.2022.3169852}
 \end{barticle}
-\endbibitem
-
-%%% 5
-\bibitem[\protect\citeauthoryear{Tee et~al.}{2009-04}]{TeeEtAl_2009_Barrierlyapunova}
-\begin{barticle}
-\bauthor{\bsnm{Tee}, \binits{K.P.}},
-\bauthor{\bsnm{Ge}, \binits{S.S.}},
-\bauthor{\bsnm{Tay}, \binits{E.H.}}:
-\batitle{Barrier lyapunov functions for the control of output-constrained nonlinear systems}.
-\bjtitle{Automatica}
-\bvolume{45}(\bissue{4}),
-\bfpage{918}--\blpage{927}
-(\byear{2009-04})
-\doiurl{10.1016/j.automatica.2008.11.017}
-\end{barticle}
-\endbibitem
-
-%%% 6
-\bibitem[\protect\citeauthoryear{Hardy et~al.}{1952}]{HardyLittlewoodPolya_1952_Inequalities}
-\begin{bbook}
-\bauthor{\bsnm{Hardy}, \binits{G.H.}},
-\bauthor{\bsnm{Littlewood}, \binits{J.E.}},
-\bauthor{\bsnm{P{\'o}lya}, \binits{G.}}:
-\bbtitle{Inequalities},
-\bedition{2nd} edn.
-\bpublisher{Cambridge University Press},
-\blocation{Cambridge}
-(\byear{1952}).
-\burl{https://www.cambridge.org/core/books/inequalities/228DDF75333B210F6A7E8D02C2DD62F5}
-\end{bbook}
 \endbibitem
 
 \end{thebibliography}

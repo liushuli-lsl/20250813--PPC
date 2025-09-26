@@ -6,8 +6,8 @@ clc;                % 清空命令窗口
 
 %% 1) 仿真设置
 n=2;  %自由度
-T_total = 7; 
-N       = 7000;            % 点数
+T_total = 10; 
+N       = 10000;            % 点数
 tspan   = linspace(0, T_total, N);
 dt      = tspan(2) - tspan(1);
 
@@ -21,7 +21,7 @@ q00 = [
        -3*pi/4,     -3*pi/4;      % 偏离参考较大
           0,        0;          % 折叠（近奇异）
 ];
-q0 = q00(3, :)';   % q0 = [0; 0]  2,3,4,5
+q0 = q00(2, :)';   % q0 = [0; 0]  2,3,4,5
 dq0 = [0;0];                  %初始誤差不能爲0，否則會產生歧義
 zeta   = zeros(n,1);
 e1_int  = zeros(n,1);
@@ -39,12 +39,12 @@ dq_use  = zeros(N,n);
 qd_mat  = zeros(N,n);
 dqd_mat = zeros(N,n);
 tau_mat = zeros(N,n);
-rho1_mat = zeros(N,n);
-rho2_mat = zeros(N,n);
+rho_mat = zeros(N,n);
 alpha_mat = zeros(N,n);
 zeta_mat= zeros(N,n);
 omegahat_mat = zeros(N,n);
 d_mat = zeros(N,n);
+u_mat = zeros(N,n);
 
 
 x(:,1) = x0;
@@ -55,7 +55,7 @@ dq_use(1,:) = dq0.';
 for k = 1:N-1
     t = tspan(k)
     % 解算一次 RK4
-  [k1, tau1,rho1,rho2,d_true] = controller_ptc(t,           x(:,k));
+  [k1, tau1,rho1,d_true,u1] = controller_ptc(t,           x(:,k));
 [k2, tau2,~,~,~] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k1);
 [k3, tau3,~,~,~] = controller_ptc(t+dt/2,      x(:,k)+dt/2*k2);
 [k4, tau4,~,~,~] = controller_ptc(t+dt,        x(:,k)+dt*k3);
@@ -68,8 +68,19 @@ for k = 1:N-1
     zeta= x(5:6,k+1);
      alpha= x(9:10,k+1);
 omegahat=x(13:14,k+1);
-qd = [0.1*sin(0.5*t) + cos(0.5*t);0.1*sin(t) + cos(t)];
-dqd = [0.05*cos(0.5*t)-0.5*sin(0.5*t); 0.1*cos(t)-sin(t)];
+% qd = [0.1*sin(0.5*t) + cos(0.5*t);0.1*sin(t) + cos(t)];
+% dqd = [0.05*cos(0.5*t)-0.5*sin(0.5*t); 0.1*cos(t)-sin(t)];
+% ===== 提高参考轨迹频率：用统一缩放系数 s (>1) =====
+s = 2.0;                 % 频率放大倍数：2=加倍，3=三倍... 可自行调整
+w1 = 1.5*s;              % 关节1的新角频率
+w2 = 1.5*s;              % 关节2的新角频率
+
+qd   = [ 0.1*sin(w1*t) + cos(w1*t);
+         0.1*sin(w2*t) + cos(w2*t) ];
+
+% 一阶导（速度）：d/dt[sin(wt)]=w*cos(wt), d/dt[cos(wt)]=-w*sin(wt)
+dqd  = [ w1*( 0.1*cos(w1*t) - sin(w1*t) );
+         w2*( 0.1*cos(w2*t) - sin(w2*t) ) ];
 
     q_use(k+1,:)   = q.';
     dq_use(k+1,:)  = dq.';
@@ -79,15 +90,10 @@ dqd = [0.05*cos(0.5*t)-0.5*sin(0.5*t); 0.1*cos(t)-sin(t)];
     tau_mat(k+1,:) = tau1.';
      alpha_mat(k+1,:) = alpha.';
      zeta_mat(k+1,:) = zeta.';
- rho1_mat(k+1,:) = rho1.';
-  rho2_mat(k+1,:) = rho2.';
+ rho_mat(k+1,:) = rho1.';
    omegahat_mat(k+1,:) =  omegahat.';
      d_mat(k+1,:) =  d_true.';
-% if mod(round(t,2),1)==0      % 每 0.5 s 打一次
-%     fprintf('t=%.1f  alpha=%+.2f   u=%+.2f\n',...
-%         t, alpha, tau1);
-% end
-
+       u_mat(k+1,:) = u1.';
 end
 
 e_q  = q_use   - qd_mat;
@@ -95,16 +101,16 @@ e_dq = dq_use  - dqd_mat;
 
 
 
-% [rho1] = arrayfun(@(tt) performance_poly1(tt),tspan);
-% [rho2] = arrayfun(@(tt) performance_poly2(tt),tspan);
+[rho1] = arrayfun(@(tt) performance_poly1(tt),tspan);
+[rho2] = arrayfun(@(tt) performance_poly2(tt),tspan);
 
 save('x2.mat', 'tspan', 'e_q', 'e_dq', 'tau_mat', 'qd_mat', 'q_use','dqd_mat', 'dq_use','rho1','rho2',"zeta_mat","alpha_mat",'omegahat_mat');
 figure;
 for i = 1:n
     subplot(2,1,i);
     plot(tspan, e_q(:,i), 'b', 'LineWidth', 1.5); hold on;
-    plot(tspan, rho1_mat(:,i), 'k-', 'LineWidth',1.5);hold on;
-      plot(tspan, - rho1_mat(:,i), 'k-', 'LineWidth',1.5);
+    plot(tspan, rho_mat(:,i), 'k-', 'LineWidth',1.5);hold on;
+      plot(tspan, - rho_mat(:,i), 'k-', 'LineWidth',1.5);
     yline(0, 'k--');
     xline(3, 'r--', 'LineWidth', 1.2);
     title(['Tracking Error e_' num2str(i)]);
@@ -119,8 +125,8 @@ figure;
 for i = 1:n
     subplot(2,1,i);
     plot(tspan, e_dq(:,i), 'b', 'LineWidth', 1.5); hold on;
-      plot(tspan,rho2_mat(:,i), 'k--', 'LineWidth',1.5);hold on;
-      plot(tspan, -rho2_mat(:,i), 'k--', 'LineWidth',1.5);
+      plot(tspan, rho2, 'k--', 'LineWidth',1.5);hold on;
+      plot(tspan, -rho2, 'k--', 'LineWidth',1.5);
     yline(0, 'k--');
     xline(3, 'r--', 'LineWidth', 1.2);
     title(['Tracking Error e_' num2str(i)]);
@@ -150,31 +156,33 @@ end
 
 
 % Plot joint velocity vs reference
-figure;
-for i = 1:n
-    subplot(2,1,i);
-    plot(tspan, dq_use(:,i), 'b', 'LineWidth', 1.5); hold on;
-    plot(tspan, dqd_mat(:,i), 'r--', 'LineWidth', 1.2);
-    title(['Joint dq_' num2str(i)]);
-    legend('Actual', 'Reference');
-    xlabel('Time (s)'); ylabel('Velocity (rad/s)');
-end
+% figure;
+% for i = 1:n
+%     subplot(2,1,i);
+%     plot(tspan, dq_use(:,i), 'b', 'LineWidth', 1.5); hold on;
+%     plot(tspan, dqd_mat(:,i), 'r--', 'LineWidth', 1.2);
+%     title(['Joint dq_' num2str(i)]);
+%     legend('Actual', 'Reference');
+%     xlabel('Time (s)'); ylabel('Velocity (rad/s)');
+% end
 % % 
 % % Plot control torques
 figure;
 for i = 1:n
     subplot(2,1,i);
-    plot(tspan, tau_mat(:,i), 'k', 'LineWidth', 1.5);
+    plot(tspan, tau_mat(:,i), 'b', 'LineWidth', 1.5); hold on;
+    plot(tspan, u_mat(:,i), 'k--', 'LineWidth', 1.5);
     title(['Joint \tau_' num2str(i)]);
     xlabel('Time (s)'); ylabel('Torque (Nm)');
+    ylim([-10,10]);
 end
-figure;
-for i = 1:n
-    subplot(2,1,i);
-    plot(tspan, alpha_mat(:,i), 'k', 'LineWidth', 1.5);
-    title(['Joint \alpha_' num2str(i)]);
-    xlabel('Time (s)'); ylabel('Torque (Nm)');
-end
+% figure;
+% for i = 1:n
+%     subplot(2,1,i);
+%     plot(tspan, alpha_mat(:,i), 'b', 'LineWidth', 1.5);
+%     title(['Joint \alpha_' num2str(i)]);
+%     xlabel('Time (s)'); ylabel('Torque (Nm)');
+% end
 figure;
 for i = 1:n
     subplot(2,1,i);
@@ -183,13 +191,13 @@ for i = 1:n
     xlabel('Time (s)'); ylabel('Torque (Nm)');
 end
 % % 
-figure;
-for i = 1:n
-    subplot(2,1,i);
-    plot(tspan, d_mat(:,i), 'k', 'LineWidth', 1.5);
-    title(['Joint d' num2str(i)]);
-    xlabel('Time (s)'); ylabel('d');
-end
+% figure;
+% for i = 1:n
+%     subplot(2,1,i);
+%     plot(tspan, d_mat(:,i), 'k', 'LineWidth', 1.5);
+%     title(['Joint d' num2str(i)]);
+%     xlabel('Time (s)'); ylabel('d');
+% end
 
 
 function [rho] = performance_poly1(t)
