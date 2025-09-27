@@ -2,12 +2,13 @@ clearvars;          % 清除工作区变量
 clear functions;    % 清除所有函数的 persistent 缓存
 close all;          % 关闭所有图窗
 clc;                % 清空命令窗口
+clear all;
 
 
 %% 1) 仿真设置
 n=2;  %自由度
-T_total = 10; 
-N       = 10000;            % 点数
+T_total = 20; 
+N       = 20000;            % 点数
 tspan   = linspace(0, T_total, N);
 dt      = tspan(2) - tspan(1);
 
@@ -71,7 +72,7 @@ omegahat=x(13:14,k+1);
 % qd = [0.1*sin(0.5*t) + cos(0.5*t);0.1*sin(t) + cos(t)];
 % dqd = [0.05*cos(0.5*t)-0.5*sin(0.5*t); 0.1*cos(t)-sin(t)];
 % ===== 提高参考轨迹频率：用统一缩放系数 s (>1) =====
-s = 2.0;                 % 频率放大倍数：2=加倍，3=三倍... 可自行调整
+s = 3.0;                 % 频率放大倍数：2=加倍，3=三倍... 可自行调整
 w1 = 1.5*s;              % 关节1的新角频率
 w2 = 1.5*s;              % 关节2的新角频率
 
@@ -100,11 +101,19 @@ e_q  = q_use   - qd_mat;
 e_dq = dq_use  - dqd_mat;
 
 
+% 配置不同通道的 G-PPF 参数（可按需微调）
+cfg = struct('id',1,'Tp',T_p,'p',p,'a',a, ...   % 位置误差通道下界 a1
+    'sigma0',1.0,'sigma_min',1.2,'sigma_max',2, ...
+    'iota',3,'Sigma_max',20, ...
+    'k_u',1.8,'k_d',0.3,'k_e',0.8, ...
+    'use_lpf',true,'tau_u',0.05,'tau_d',0.1,'tau_e',0.08);
+% 计算 G-PPF 及其导数（用于 BLF 精确补偿）
+[rho2, drho2] = gppf(t,n, e_q, [], [],cfg);
 
-[rho1] = arrayfun(@(tt) performance_poly1(tt),tspan);
-[rho2] = arrayfun(@(tt) performance_poly2(tt),tspan);
+% [rho1] = arrayfun(@(tt) performance_poly1(tt),tspan);
+% [rho2] = arrayfun(@(tt) performance_poly2(tt),tspan);
 
-save('x2.mat', 'tspan', 'e_q', 'e_dq', 'tau_mat', 'qd_mat', 'q_use','dqd_mat', 'dq_use','rho1','rho2',"zeta_mat","alpha_mat",'omegahat_mat');
+save('method1.mat', 'tspan', 'e_q', 'e_dq',  'qd_mat', 'q_use','dqd_mat', 'dq_use','rho1','rho2','tau_mat','u_mat',"alpha_mat",'omegahat_mat');
 figure;
 for i = 1:n
     subplot(2,1,i);
@@ -125,8 +134,8 @@ figure;
 for i = 1:n
     subplot(2,1,i);
     plot(tspan, e_dq(:,i), 'b', 'LineWidth', 1.5); hold on;
-      plot(tspan, rho2, 'k--', 'LineWidth',1.5);hold on;
-      plot(tspan, -rho2, 'k--', 'LineWidth',1.5);
+%       plot(tspan, rho2, 'k--', 'LineWidth',1.5);hold on;
+%       plot(tspan, -rho2, 'k--', 'LineWidth',1.5);
     yline(0, 'k--');
     xline(3, 'r--', 'LineWidth', 1.2);
     title(['Tracking Error e_' num2str(i)]);
@@ -170,34 +179,35 @@ end
 figure;
 for i = 1:n
     subplot(2,1,i);
-    plot(tspan, tau_mat(:,i), 'b', 'LineWidth', 1.5); hold on;
-    plot(tspan, u_mat(:,i), 'k--', 'LineWidth', 1.5);
+      plot(tspan, u_mat(:,i), 'r-', 'LineWidth', 1.5); hold on;
+  
+    plot(tspan, tau_mat(:,i), 'b--', 'LineWidth', 1.5);
     title(['Joint \tau_' num2str(i)]);
     xlabel('Time (s)'); ylabel('Torque (Nm)');
     ylim([-10,10]);
 end
 % figure;
 % for i = 1:n
-%     subplot(2,1,i);
+%     subplot(2,1,i);0
 %     plot(tspan, alpha_mat(:,i), 'b', 'LineWidth', 1.5);
 %     title(['Joint \alpha_' num2str(i)]);
 %     xlabel('Time (s)'); ylabel('Torque (Nm)');
 % end
-figure;
-for i = 1:n
-    subplot(2,1,i);
-    plot(tspan, omegahat_mat(:,i), 'k', 'LineWidth', 1.5);
-    title(['Joint \alpha_' num2str(i)]);
-    xlabel('Time (s)'); ylabel('Torque (Nm)');
-end
-% % 
 % figure;
 % for i = 1:n
 %     subplot(2,1,i);
-%     plot(tspan, d_mat(:,i), 'k', 'LineWidth', 1.5);
-%     title(['Joint d' num2str(i)]);
-%     xlabel('Time (s)'); ylabel('d');
+%     plot(tspan, omegahat_mat(:,i), 'k', 'LineWidth', 1.5);
+%     title(['Joint \alpha_' num2str(i)]);
+%     xlabel('Time (s)'); ylabel('Torque (Nm)');
 % end
+% % 
+figure;
+for i = 1:n
+    subplot(2,1,i);
+    plot(tspan, d_mat(:,i), 'k', 'LineWidth', 1.5);
+    title(['Joint d' num2str(i)]);
+    xlabel('Time (s)'); ylabel('d');
+end
 
 
 function [rho] = performance_poly1(t)

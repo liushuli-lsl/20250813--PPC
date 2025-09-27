@@ -437,7 +437,12 @@ V(t)\ \le\ V^\star(\|u\|_\infty).
 
 为在预定义时间内实现全局可行的误差约束，并兼顾稳态阶段对饱和与扰动的友好性，本文构造一类全局性能函数（G-PPF）.
 
-Let $T_p>0$ be the predefined convergence time and $0<p<1$. Define the normalized time $b(t)=(t/T_p)^p\in(0,1]$, a $C^1$ window
+Let $T_p>0$ be the predefined convergence time and $0<p<1$. Define 
+
+ $$
+ b(t)=\left(\frac{\max\{t,t_\varepsilon\}}{T_p}\right)^p \in [b_{\min},1],
+ $$
+
 \begin{equation}\label{eq:gppf-window}
 s(b)=1-3b^2+2b^3,\quad s(0)=1,\ s(1)=0,\ s'(1)=0,
 \end{equation}

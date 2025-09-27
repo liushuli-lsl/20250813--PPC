@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.30)  26 SEP 2025 22:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.30)  27 SEP 2025 23:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1148,7 +1148,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [3]
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 508.
+(hyperref)                than one, level fixed on input line 513.
 
 Package epstopdf Info: Source file: <fig1.eps>
 (epstopdf)                    date: 2025-09-03 10:05:44
@@ -1157,20 +1157,20 @@ Package epstopdf Info: Source file: <fig1.eps>
 (epstopdf)                    date: 2025-09-03 10:10:14
 (epstopdf)                    size: 144884 bytes
 (epstopdf)             Command: <repstopdf --outfile=./fig1-eps-converted-to.pdf fig1.eps>
-(epstopdf)             \includegraphics on input line 514.
+(epstopdf)             \includegraphics on input line 519.
 Package epstopdf Info: Output file is already uptodate.
-<./fig1-eps-converted-to.pdf, id=269, 355.3275pt x 270.00874pt>
+<./fig1-eps-converted-to.pdf, id=268, 355.3275pt x 270.00874pt>
 File: ./fig1-eps-converted-to.pdf Graphic file (type pdf)
 <use ./fig1-eps-converted-to.pdf>
-Package pdftex.def Info: ./fig1-eps-converted-to.pdf  used on input line 514.
+Package pdftex.def Info: ./fig1-eps-converted-to.pdf  used on input line 519.
 (pdftex.def)             Requested size: 258.92009pt x 196.75453pt.
 
 
 pdfTeX warning: pdflatex.exe (file ./fig2.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<fig2.pdf, id=271, 606.83414pt x 216.06923pt>
+<fig2.pdf, id=270, 606.83414pt x 216.06923pt>
 File: fig2.pdf Graphic file (type pdf)
 <use fig2.pdf>
-Package pdftex.def Info: fig2.pdf  used on input line 548.
+Package pdftex.def Info: fig2.pdf  used on input line 553.
 (pdftex.def)             Requested size: 466.053pt x 165.9452pt.
 
 
@@ -1181,7 +1181,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.551 \end{figure}
+l.556 \end{figure}
                    <./fig1-eps-converted-to.pdf>]
 
 
@@ -1191,25 +1191,25 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.623 $$
+l.628 $$
          <./fig2.pdf>]
 
-LaTeX Warning: Reference `assumption:3' on page 1 undefined on input line 808.
+LaTeX Warning: Reference `assumption:3' on page 1 undefined on input line 813.
 
 
-LaTeX Warning: Reference `eq:40' on page 1 undefined on input line 808.
+LaTeX Warning: Reference `eq:40' on page 1 undefined on input line 813.
 
 
-LaTeX Warning: Reference `eq:30' on page 1 undefined on input line 808.
+LaTeX Warning: Reference `eq:30' on page 1 undefined on input line 813.
 
 
-LaTeX Warning: Reference `eq:41' on page 1 undefined on input line 808.
+LaTeX Warning: Reference `eq:41' on page 1 undefined on input line 813.
 
 
-LaTeX Warning: Reference `eq:32' on page 1 undefined on input line 808.
+LaTeX Warning: Reference `eq:32' on page 1 undefined on input line 813.
 
 
-LaTeX Warning: Reference `eq:42' on page 1 undefined on input line 808.
+LaTeX Warning: Reference `eq:42' on page 1 undefined on input line 813.
 
 
 
@@ -1223,16 +1223,16 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [7]
 
-LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 1071.
+LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 1076.
 
 
-LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 1088.
+LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 1093.
 
 
-LaTeX Warning: Reference `eq:46' on page 1 undefined on input line 1094.
+LaTeX Warning: Reference `eq:46' on page 1 undefined on input line 1099.
 
 
-LaTeX Warning: Reference `lemma:3' on page 1 undefined on input line 1094.
+LaTeX Warning: Reference `lemma:3' on page 1 undefined on input line 1099.
 
 
 
@@ -1283,7 +1283,7 @@ Here is how much of TeX's memory you used:
  1151 hyphenation exceptions out of 8191
  90i,13n,93p,2631b,740s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><g:/software/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on manuscript.pdf (10 pages, 1071469 bytes).
+Output written on manuscript.pdf (10 pages, 1072176 bytes).
 PDF statistics:
  927 PDF objects out of 1000 (max. 8388607)
  639 compressed objects within 7 object streams

@@ -169,7 +169,7 @@ if ~isKey(S,id)
                    're', zeros(size(e)));
 end
 Si = S(id);
-
+DeltaU
 % 估计 dt（适配可变步长 ODE 求解器）
 dt = max(t - Si.t_prev, 0);
 
@@ -191,8 +191,7 @@ else
     d = d(:);
     if numel(d)==1, d = repmat(d,n,1); end
 end
-DeltaU
-d
+
 % ---- LPF updates (only when we actually feed) ----
 if do_feed_u
     Si.ru = Si.ru + dt*( -Si.ru + abs(DeltaU) )/cfg.tau_u;

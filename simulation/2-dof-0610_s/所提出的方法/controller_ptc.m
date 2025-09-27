@@ -19,7 +19,7 @@ omegahat=x(13:14);
 %     -0.1*sin(   t)-   cos(   t)];
 
 % ===== 提高参考轨迹频率：用统一缩放系数 s (>1) =====
-s = 2.0;                 % 频率放大倍数：2=加倍，3=三倍... 可自行调整
+s = 3;                 % 频率放大倍数：2=加倍，3=三倍... 可自行调整
 w1 = 1.5*s;              % 关节1的新角频率
 w2 = 1.50*s;              % 关节2的新角频率
 
@@ -48,25 +48,31 @@ p=0.3;
 % [rho2, drho2] = performance_poly(t, T_p, 4, 0.01,p);
 a=0.01;
 
-DeltaU_now = zeros(n,1);    % 当前步尚未知饱和残差，先占位
+% DeltaU_now = zeros(n,1);    % 当前步尚未知饱和残差，先占位
 d_est1     = abs(omegahat);       % 你已有的 theta 自适应估计
 % d_est2     = abs(d2);
 
 % 配置不同通道的 G-PPF 参数（可按需微调）
 cfg = struct('id',1,'Tp',T_p,'p',p,'a',a, ...   % 位置误差通道下界 a1
-    'sigma0',1.0,'sigma_min',1.2,'sigma_max',4, ...
-    'iota',20,'Sigma_max',50, ...
-    'k_u',10,'k_d',5,'k_e',20, ...
+    'sigma0',1.0,'sigma_min',1.2,'sigma_max',2, ...
+    'iota',3,'Sigma_max',20, ...
+    'k_u',1.8,'k_d',0.3,'k_e',0.8, ...
     'use_lpf',true,'tau_u',0.05,'tau_d',0.1,'tau_e',0.08);
 
+persistent Ud_prev d_prev init
+if isempty(init), Ud_prev = zeros(n,1); d_prev = zeros(n,1); init = true; end
+
+cfg.feed_only = true;
+gppf(t, n, z1, Ud_prev, d_prev, cfg);  % 只更新LPF，不取rho
+cfg = rmfield(cfg, 'feed_only');       % 避免污染后续
 
 % 计算 G-PPF 及其导数（用于 BLF 精确补偿）
-[rho1, drho1] = gppf(t,n, z1, [], d_est1,cfg);
+[rho1, drho1] = gppf(t,n, z1, Ud_prev, d_prev,cfg);
 
 eps0 = 1e-6;
 eta  = 0.1;
 % Control parameters
-k1 = diag([12, 12])*3;
+k1 = diag([12, 10])*3;
 k2 = diag([6, 6])*2;
 Lambda=diag([5, 5])*0.1;
 beta = 0.2; 
@@ -112,15 +118,15 @@ u = C*dq + G + M*( dalpha_bar + delta - mu*zeta ...
 %         t, alpha, u);
 % end
 % u_s =  tanh_saturation(u,U_max);
-U_max2 = [5; 5];
+U_max2 = [10;4];
 tau=max( min(u, U_max2), -U_max2 );
-u_d=u-tau
+u_d=u-tau;
 
 
 % ===== 调用扰动模块 =====
 mode  = 'both';                 % 'none' | 'matched' | 'unmatched' | 'both'
-level = [43;43];                  % 扰动幅值
-band  = [8; 8];                  % 基波频率
+level = [60;150];                  % 扰动幅值
+band  = [4; 4];                  % 基波频率
 seed  = 0;                       % 随机种子
 [w, nu, d_true,tau_d] = disturbance(t, q, dq, mode, level, band, seed);
   
@@ -130,23 +136,16 @@ ddq = f + g*(tau) +w;
     theta_dot   = -omega_d*theta + omega_d*dq;
     x2hat_dot   =  omega_d*(dq - theta);
     omegahat_dot = -Lambda*omegahat + Lambda*( x2hat_dot - f - g*tau );
- z1
-% 回灌 Δu/d 到 G-PPF 的 LPF（只更新内部状态，不重算本步 rho）
-u_d_abs = min(max(abs(u_d), 0), 200);      % |Δu| 逐通道，上限按实际设
-d_abs   = min(max(abs(omegahat), 0), 200);   % |扰动估计|；验证时也可用 abs(d_true)
-cfg.feed_only = true;  gppf(t, n,z1,u_d_abs,d_abs, cfg);
+
+ Ud_prev = abs(u_d);           % 本步的 |ΔU|
+d_prev  = abs(omegahat);          % 或 abs(d_true)
+
+% % 回灌 Δu/d 到 G-PPF 的 LPF（只更新内部状态，不重算本步 rho）
+% u_d_abs = min(max(abs(u_d), 0), 200);      % |Δu| 逐通道，上限按实际设
+% d_abs   = min(max(abs(omegahat), 0), 200);   % |扰动估计|；验证时也可用 abs(d_true)
+% cfg.feed_only = true;  gppf(t, n,z1,u_d_abs,d_abs, cfg);
 
 % ddq = f + M\tau +omegahat+nu+w;
-% 
-% %     一阶跟踪微分器（避免直接微分dq）
-%     theta_dot   = -omega_d*theta + omega_d*dq;
-%     x2hat_dot   =  omega_d*(dq - theta);
-%     omegahat_dot = -Lambda*omegahat + Lambda*( x2hat_dot - f - g*tau );
-%  
-% % 回灌 Δu/d 到 G-PPF 的 LPF（只更新内部状态，不重算本步 rho）
-% u_d_abs = min(max(abs(u_d), 0), 15)        % |Δu| 逐通道，上限按实际设
-% d_abs   = min(max(abs(omegahat), 0), 20)   % |扰动估计|；验证时也可用 abs(d_true)
-% cfg.feed_only = true;  gppf(t, n,z1,u_d_abs, d_abs, cfg);
 
 dzeta = delta - mu*zeta - g*u_d;
 dx = [dq; ddq; dzeta;z1;dalpha_bar;theta_dot;omegahat_dot];
