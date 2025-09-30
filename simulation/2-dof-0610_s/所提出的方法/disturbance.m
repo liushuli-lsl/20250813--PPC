@@ -29,10 +29,10 @@ end
 gate_type = 'hard';                         % 'hard' | 'smooth'
 win = time_gate(t, gate_type)  ;            % 标量 ∈ {0,1} 或 (0,1)
 
- if t>=11 && t<=13
-     level=level*0.15;
-%  else
-%      level=level;
+ if t>=8 && t<=10
+     level=level*0.55;
+ elseif t>=14 && t<=16
+    level=level*0.43;
  end
 % ---- 组成：阶跃 + 低频正弦 (+ 少量噪声，可为 0) ----
 step_gain = 1.00;                            % 阶跃系数（=level的倍数）
@@ -93,7 +93,7 @@ if strcmpi(gate_type,'smooth')
     win = 1 - (1 - w23).*(1 - w57);  % 软并集
 else
     % 硬门
-    win = double( (t>=4 && t<=5) || (t>=11 && t<=13) );
+    win = double( (t>=4 && t<=5.5) || (t>=8 && t<=8.8)|| (t>=14 && t<=16) );
 end
 end
 

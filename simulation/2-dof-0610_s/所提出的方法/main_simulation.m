@@ -95,20 +95,24 @@ dqd  = [ w1*( 0.1*cos(w1*t) - sin(w1*t) );
    omegahat_mat(k+1,:) =  omegahat.';
      d_mat(k+1,:) =  d_true.';
        u_mat(k+1,:) = u1.';
+
+       e=zeros(n,1);  
+uu = zeros(n,1);    % 当前步尚未知饱和残差，先占位
+d     = zeros(n,1);       % 你已有的 theta 自适应估计
+% 配置不同通道的 G-PPF 参数（可按需微调）
+cfg2 = struct('id',1,'Tp',3,'p',0.3,'a',0.01, ...   % 位置误差通道下界 a1
+    'sigma0',1.0,'sigma_min',1.2,'sigma_max',2, ...
+    'iota',3,'Sigma_max',20, ...
+    'k_u',1.8,'k_d',0.3,'k_e',0.8, ...
+    'use_lpf',true,'tau_u',0.05,'tau_d',0.1,'tau_e',0.08);
+% % 计算 G-PPF 及其导数（用于 BLF 精确补偿）
+[rho2, drho2] =   gppf2(t,n, e, uu, d,cfg2);
 end
 
 e_q  = q_use   - qd_mat;
 e_dq = dq_use  - dqd_mat;
 
 
-% 配置不同通道的 G-PPF 参数（可按需微调）
-cfg = struct('id',1,'Tp',T_p,'p',p,'a',a, ...   % 位置误差通道下界 a1
-    'sigma0',1.0,'sigma_min',1.2,'sigma_max',2, ...
-    'iota',3,'Sigma_max',20, ...
-    'k_u',1.8,'k_d',0.3,'k_e',0.8, ...
-    'use_lpf',true,'tau_u',0.05,'tau_d',0.1,'tau_e',0.08);
-% 计算 G-PPF 及其导数（用于 BLF 精确补偿）
-[rho2, drho2] = gppf(t,n, e_q, [], [],cfg);
 
 % [rho1] = arrayfun(@(tt) performance_poly1(tt),tspan);
 % [rho2] = arrayfun(@(tt) performance_poly2(tt),tspan);

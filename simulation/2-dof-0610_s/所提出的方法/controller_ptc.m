@@ -84,8 +84,8 @@ r1 = min(0.98, max(-0.98, z1./rho1_safe));
 % 相对下界：den >= 0.02*rho^2
 den1 = max(rho1.^2 - z1.^2, a*rho1.^2 + eps0);
 [P1,~,V1] = blf_terms(z1, rho1);
-K1   = (2*pi/(eta*T_p)) * ( max(V1,eps0).^( - eta/2) + (n^(-eta/2)) * max(V1,eps0).^(eta/2) );         % \mathcal{K}_{1}
-% 虚拟控制器
+K1   = (pi/(2*eta*T_p)) * ( max(V1,eps0).^( - eta/2) + (n^(-eta/2)) * max(V1,eps0).^(eta/2) ).*rho1.^2;         % \mathcal{K}_{1}
+% 虚拟控制器*
 
 Phi =(den1).*z1./rho1.^4;
 alpha = dqd - zeta ...
