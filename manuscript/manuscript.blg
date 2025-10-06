@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2023)
+This is BibTeX, Version 0.99d (TeX Live 2024)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: manuscript.aux
 The style file: sn-mathphys-num.bst
@@ -26,44 +26,44 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 4 entries,
+You've used 5 entries,
             7485 wiz_defined-function locations,
-            1219 strings with 10697 characters,
-and the built_in function-call counts, 39679 in all, are:
-= -- 7099
-> -- 127
-< -- 64
-+ -- 4153
-- -- 44
-* -- 1054
-:= -- 7039
-add.period$ -- 5
-call.type$ -- 4
-change.case$ -- 28
-chr.to.int$ -- 163
-cite$ -- 4
-duplicate$ -- 172
-empty$ -- 696
-format.name$ -- 79
-if$ -- 10158
+            1228 strings with 11065 characters,
+and the built_in function-call counts, 43726 in all, are:
+= -- 7575
+> -- 175
+< -- 90
++ -- 4245
+- -- 55
+* -- 1324
+:= -- 7828
+add.period$ -- 6
+call.type$ -- 5
+change.case$ -- 33
+chr.to.int$ -- 239
+cite$ -- 5
+duplicate$ -- 235
+empty$ -- 945
+format.name$ -- 107
+if$ -- 11113
 int.to.chr$ -- 1
-int.to.str$ -- 10
+int.to.str$ -- 11
 missing$ -- 0
-newline$ -- 102
-num.names$ -- 20
-pop$ -- 73
+newline$ -- 118
+num.names$ -- 25
+pop$ -- 98
 preamble$ -- 1
-purify$ -- 21
+purify$ -- 25
 quote$ -- 0
-skip$ -- 4368
+skip$ -- 4653
 stack$ -- 0
-substring$ -- 3616
-swap$ -- 98
-text.length$ -- 61
+substring$ -- 4082
+swap$ -- 139
+text.length$ -- 73
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 177
+type$ -- 222
 warning$ -- 0
-while$ -- 117
+while$ -- 151
 width$ -- 0
-write$ -- 124
+write$ -- 146

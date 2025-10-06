@@ -158,216 +158,107 @@
 
 \section{Global prescribed–performance function}
 
-为同时实现“\emph{初值全局可行}、\emph{预定义时间内平滑收紧}”与“\emph{收敛后对饱和/扰动的自适应友好}”，构造一类全局预设性能函数（G-PPF），系统性解决传统 PPC/BLF-PPF 的三类痛点：(\emph{i}) 初值越界诱发进入阶段奇异，常需投影/重置/非对称缩放等权宜处理；(\emph{ii}) 在 $T_p$ 处边界多为仅连续非 $C^1$，易在控制律中产生尖峰项并放大噪声；(\emph{iii}) 收敛后采用固定且过窄管径，面对执行器饱和与外扰时保守与抖振并存。所提 G-PPF 以核函数 $\phi(b)=-\ln b$ 与光滑窗 $s(b)$ 协同保证 $\rho(0^+)=+\infty$ 与 $\dot\rho(T_p^-)=0$，实现“\emph{预定义时间内平滑收紧而初值全局合法}”。进一步，引入\emph{前段缩放} $\sigma(t)$（调速收紧）与\emph{后段“呼吸式”缩放} $\Sigma(t)$（稳态放宽）两级解耦调节，并按饱和残差与扰动强度低通自适应调整约束，避免长期保守。与此同时，给出 $\dot\rho(t)$ 的显式解析式，使 BLF 导数中的边界变化项可被严格抵消，不遗留常数残差，从而将闭环 Lyapunov 不等式自然规范为 PTS-ISS 形态。该构造与反步、饱和补偿、RBFNN 等模块无缝兼容，可在严格保证预定义时间稳定的同时提升稳态精度与执行器友好性。
 
-\subsection{Definition}
-
-令 $T_p>0$ 为预定义收敛时间、$0<p<1$，定义归一化时间
-
-$$
-b(t)=\bigl(t/T_p\bigr)^p\in(0,1],\qquad \dot b=\tfrac{p}{T_p}\bigl(t/T_p\bigr)^{p-1}>0,
-$$
-
-取 $C^1$ 光滑窗
-\begin{equation}\label{eq\:gppf-window}
-s(b)=1-3b^2+2b^3,\quad s(0)=1,\ s(1)=0,\ s'(1)=0,
+\section{Global prescribed--performance tunnel with asymmetric boundaries (Scheme A)}
+Let $T_p>0$ be the predefined convergence time and $0<p\le 1$. Define the normalized time
+\begin{equation}\label{eq:b-def}
+    b(t)=\Bigl(\tfrac{t}{T_p}\Bigr)^{p}\in(0,1],\qquad
+    s(b)=1-3b^2+2b^3,\quad s(0)=1,\ s(1)=0,\ s'(1)=0,
 \end{equation}
-以及全局核函数
-\begin{equation}\label{eq\:gppf-kernel}
-\phi(b)=-\ln b,\qquad \phi(b)\to+\infty\ (b\to0^+),\ \ \phi(1)=0.
-\end{equation}
-对每个通道 $i=1,\dots,n$，定义全局性能函数
-\begin{equation}\label{eq\:gppf-def}
+and the kernel $\phi(b)=-\ln b$ so that $\phi(b)\to+\infty$ as $b\to0^+$ and $\phi(1)=0$.
+
+For each channel $i=1,\dots,n$, define the \emph{symmetric base performance radius}
+\begin{equation}\label{eq:gppf-base}
 \rho_i(t)=
 \begin{cases}
-\displaystyle a+\sigma_i(t),\phi!\left(b(t)\right),s!\left(b(t)\right), & 0<t<T_p,\\
-\displaystyle a\bigl[1+g(t),\Sigma_i(t)\bigr], & t\ge T_p,
+\displaystyle a + \sigma_i(t)\,\phi\!\bigl(b(t)\bigr)\,s\!\bigl(b(t)\bigr), & 0<t<T_p,\\[6pt]
+\displaystyle a\Bigl[1 + g(t)\,\Sigma_i(t)\Bigr], & t\ge T_p,
 \end{cases}
 \end{equation}
-其中 $a>0$ 表示稳态精度下界。$\sigma_i(t)$ 调节 $t<T_p$ 阶段的\emph{收紧速率}，$\Sigma_i(t)$ 则在 $t\ge T_p$ 阶段实现\emph{呼吸式放宽}以顺应饱和与扰动：
+where $a>0$ is the steady-state accuracy, and
 \begin{align}
-&\sigma_i(t)=\operatorname{Proj}*{[\sigma*{\min},,\sigma_{\max}]}!\Bigl(\sigma_{i0}+k_u r_{u,i}+k_d r_{d,i}\Bigr),\label{eq\:gppf-sigma}\\
-&\tau_u \dot r_{u,i}=-r_{u,i}+|\Delta u_i|,\qquad
-\tau_d \dot r_{d,i}=-r_{d,i}+|d_i|,\nonumber
+&\sigma_i(t)=\Proj_{[\sigma_{\min},\,\sigma_{\max}]}\!\Bigl(\sigma_{0}+k_u r_{u,i}+k_d r_{d,i}+k_e r_{e,i}\Bigr),\label{eq:gppf-sigmaA}\\
+&\tau_u \dot r_{u,i}=-r_{u,i}+|\Delta u_i|,\quad
+  \tau_d \dot r_{d,i}=-r_{d,i}+|d_i|,\quad
+  \tau_e \dot r_{e,i}=-r_{e,i}+|e_i|,\label{eq:gppf-rfiltersA}\\
+&g(t)=1-\exp\!\bigl(-\kappa (t-T_p)^2\bigr),\qquad \kappa>0,\; g(T_p)=g'(T_p)=0,\label{eq:gppf-gateA}\\
+&\Sigma_i(t)=\Proj_{[0,\,\Sigma_{\max}]}\!\Bigl(k_u r_{u,i}+k_d r_{d,i}+k_e r_{e,i}\Bigr).\label{eq:gppf-SigmaA}
 \end{align}
-其中 $\sigma_{i0},k_u,k_d,\tau_u,\tau_d>0$，$\Delta u_i=u_i-\operatorname{sat}(u_i)$ 为饱和残差。$t\ge T_p$ 时，以 $C^1$ 门控函数确保光滑拼接：
-\begin{equation}\label{eq\:gppf-gate}
-g(t)=1-\exp!\bigl(-\iota (t-T_p)^2\bigr),\quad \iota>0,\ \ g(T_p)=0,\ g'(T_p)=0,
+
+\subsection*{Asymmetric/tunnel envelopes}
+On top of the base radius $\rho_i(t)$, define the \emph{asymmetric} upper/lower envelopes
+\begin{equation}\label{eq:tunnel-def}
+\rho_i^+(t) \;=\; \rho_i(t)\Bigl(1+\delta_i(t)\Bigr)+\beta_i(t),\qquad
+\rho_i^-(t) \;=\; \rho_i(t)\Bigl(1-\delta_i(t)\Bigr)-\beta_i(t),
 \end{equation}
-并设呼吸幅值
+with $0\le \delta_i(t)<1$ and a signed offset $\beta_i(t)$. The tracking error constraint is enforced as
+\begin{equation}\label{eq:tunnel-constraint}
+-\rho_i^-(t)\;<\; e_i(t)\;<\;\rho_i^+(t),\qquad \forall\, t\ge0.
+\end{equation}
+The \emph{relative widening} $\delta_i(t)$ and the \emph{directional bias} $\beta_i(t)$ are chosen as
 \begin{align}
-&\Sigma_i(t)=\operatorname{Proj}*{[,0,,\Sigma*{\max},]}!\Bigl(k_u r_{u,i}+k_d r_{d,i}+k_e r_{e,i}\Bigr),\label{eq\:gppf-Sigma}\\
-&\tau_e \dot r_{e,i}=-r_{e,i}+|e_i|,\qquad k_e,\tau_e>0.\nonumber
+&\delta_i(t)=\Proj_{[\,0,\,\delta_{\max}\,]}\!\Bigl(\delta_0+c_u r_{u,i}+c_d r_{d,i}+c_e r_{e,i}\Bigr), \label{eq:delta-def}\\
+&\beta_i(t)=\beta_0\, g(t)\,\tanh\!\bigl(\gamma_\beta\, e_i(t)\bigr), \qquad \beta_0>0,\;\gamma_\beta>0. \label{eq:beta-def}
 \end{align}
+Here $\delta_i(t)$ provides tunnel opening/shaping according to saturation/disturbance/error levels; $\beta_i(t)$ yields a one-sided widening aligned with the error direction. The gate $g(t)$ guarantees a $C^1$ activation around $t=T_p$.
 
-\subsection{Derivatives for exact compensation}
+\paragraph{Remark (one-sided safety widening).}
+If the actuator saturates predominantly in one direction, replace $\beta_i(t)$ by $\beta_i(t)\cdot \tfrac{1+\sgn(e_i)}{2}$ (or its negative) to widen only the impacted side.
 
-由 $\phi'(b)=-1/b$、$s'(b)=-6b+6b^2$ 与 \cref{eq:gppf-window}–\cref{eq:gppf-def}，在 $0<t<T_p$ 有
-\begin{equation}\label{eq\:gppf-drho-pre}
+\subsection*{Derivatives (for BLF cancellation)}
+Let $\dot b=\tfrac{p}{T_p}(t/T_p)^{p-1}$, $\phi'(b)=-1/b$, $s'(b)=-6b+6b^2$. For $0<t<T_p$,
+\begin{equation}\label{eq:drho-pre-final}
 \dot\rho_i
-= \dot\sigma_i,\phi(b),s(b)
-* \sigma_i\Bigl[\phi'(b),s(b)+\phi(b),s'(b)\Bigr]\dot b .
-  \end{equation}
-  在 $t\ge T_p$，
-  \begin{equation}\label{eq:gppf-drho-post}
-  \dot\rho_i
-  = a\Bigl[g'(t),\Sigma_i(t)+g(t),\dot\Sigma_i(t)\Bigr],\qquad
-  \dot\Sigma_i=\text{Proj-grad}\Bigl(k_u\dot r_{u,i}+k_d\dot r_{d,i}+k_e\dot r_{e,i}\Bigr).
-  \end{equation}
-  在 BLF 框架中，诸如 $\dot V_{\mathrm{BLF}}\ni (\dot\rho_i \rho_i)\cdot(\cdot)$ 的边界变化项可用 \cref{eq:gppf-drho-pre,eq:gppf-drho-post} 精确抵消，避免残余常数项，便于将闭环不等式规范为 PTS-ISS 形式。
+= \dot\sigma_i\,\phi(b)\,s(b)
++ \sigma_i\Bigl[\phi'(b)\,s(b)+\phi(b)\,s'(b)\Bigr]\dot b.
+\end{equation}
+For $t\ge T_p$,
+\begin{equation}\label{eq:drho-post-final}
+\dot\rho_i
+= a\Bigl[g'(t)\,\Sigma_i(t)+g(t)\,\dot\Sigma_i(t)\Bigr],\qquad
+\dot\Sigma_i=\ProjGrad\!\Bigl(k_u\dot r_{u,i}+k_d\dot r_{d,i}+k_e\dot r_{e,i}\Bigr).
+\end{equation}
+Thus,
+\begin{equation}\label{eq:drho-plusminus}
+\dot\rho_i^\pm
+= \dot\rho_i\bigl(1\pm\delta_i\bigr)\;\pm\;\rho_i\,\dot\delta_i\;\pm\;\dot\beta_i,
+\end{equation}
+with
+\begin{align}
+&\dot\delta_i=\ProjGrad\!\bigl(c_u\dot r_{u,i}+c_d\dot r_{d,i}+c_e\dot r_{e,i}\bigr),\label{eq:ddelta}\\
+&\dot\beta_i=\beta_0\Bigl[g'(t)\tanh(\gamma_\beta e_i)+g(t)\,\gamma_\beta\,\sech^2(\gamma_\beta e_i)\,\dot e_i\Bigr].\label{eq:dbeta}
+\end{align}
+In the BLF derivative, include the terms $+\dot\rho_i^\pm/\rho_i^\pm$ to cancel boundary variation.
 
-\subsection{Properties}
+\subsection*{NMF mapping under tunnel envelopes}
+Define the normalized error $s_i(t)\in(0,1)$ by the affine normalization to the asymmetric interval:
+\begin{equation}\label{eq:tunnel-normalization}
+s_i(t)=\frac{e_i(t)+\rho_i^-(t)}{\rho_i^+(t)+\rho_i^-(t)}\in(0,1),\qquad
+\zeta_i(t)=\ln\!\frac{s_i(t)}{1-s_i(t)}.
+\end{equation}
+Its derivative is
+\begin{equation}\label{eq:dot-s-tunnel}
+\dot s_i=\frac{\dot e_i+\dot\rho_i^-}{\rho_i^++\rho_i^-}
+-\frac{(e_i+\rho_i^-)\,(\dot\rho_i^++\dot\rho_i^-)}{(\rho_i^++\rho_i^-)^2},
+\end{equation}
+where $\dot\rho_i^\pm$ are given by \eqref{eq:drho-plusminus}. Boundedness of $\zeta_i$ implies $e_i\in(-\rho_i^-,\rho_i^+)$.
 
-% \begin{properties}
-对 $\rho_i(t)$ 于 \cref{eq:gppf-def}–\cref{eq:gppf-Sigma}，成立：
-\begin{enumerate}
-\item \textbf{全局初值合法性：} $\displaystyle\lim_{t\to0^+}\rho_i(t)=+\infty$，故任意有限 $e_i(0)$ 均满足 $|e_i(0)|<\rho_i(0^+)$。
-\item \textbf{预定义时间收紧与 $C^1$ 拼接：} 由 $\phi(1)=0$、$s(1)=0$ 得 $\rho_i(T_p^-)=a$；由 $s'(1)=0$ 与 $g(T_p)=g'(T_p)=0$ 得 $\dot\rho_i(T_p^-)=\dot\rho_i(T_p^+)=0$，实现 $C^1$ 级平滑衔接。
-\item \textbf{单调与平滑（$0<t\le T_p$）：} 在 $\dot\sigma_i\le 0$（或 $\dot\sigma_i$ 由低通滤波器充分抑制）时，\cref{eq:gppf-drho-pre} 第二项严格为负，且第一项不为正，故 $\rho_i(t)$ 在 $(0,T_p]$ 上严格递减且 $C^1$。更一般地，只要 $|\dot\sigma_i|$ 足够小，单调性仍保持。
-\item \textbf{$t\ge T_p$ 的自适应稳态友好性：} $\rho_i(t)=a,[1+g(t)\Sigma_i(t)]\ge a$，其中 $g$、$\Sigma_i$ 有界且经低通滤波，保证边界正性与缓变性；$\Sigma_i$ 随饱和残差与扰动强度自适应调整，可在不破坏约束的前提下降低保守性。
-\item \textbf{实现友好的导数：} \cref{eq:gppf-drho-pre}–\cref{eq:gppf-drho-post} 给出闭式导数，便于在 BLF 导数中做\emph{精确补偿}，避免由未知边界变化引入的保守加项。
+\subsection*{Properties}
+The functions $\rho_i^\pm(t)$ in \eqref{eq:tunnel-def} have the following properties.
+\begin{enumerate}[label=(\roman*)]
+\item (\emph{Feasible at $t=0^+$.}) Since $\phi(b)\to+\infty$ as $b\to0^+$, $\rho_i(0^+)=+\infty$, hence any finite $e_i(0)$ satisfies $|e_i(0)|<\rho_i(0^+)$. With $\delta_i,\beta_i$ bounded, $\rho_i^\pm(0^+)=+\infty$.
+\item (\emph{$C^1$ connection at $T_p$.}) Because $s(1)=0$ and $\phi(1)=0$, we have $\rho_i(T_p^-)=a$. Moreover, $s'(1)=0$ and $g(T_p)=g'(T_p)=0$ yield $\dot\rho_i(T_p^-)=\dot\rho_i(T_p^+)=0$. Since $\delta_i,\beta_i$ are driven by $r_{\cdot,i}$ and $g(t)$, we also have $\dot\rho_i^\pm(T_p^-)=\dot\rho_i^\pm(T_p^+)=0$.
+\item (\emph{Monotone shrinking on $(0,T_p)$.}) For $0<t<T_p$, $\rho_i(t)$ is strictly decreasing and $C^1$ provided $\sigma_i>0$; $\rho_i^\pm$ inherit this monotonicity modulo bounded $\delta_i,\beta_i$.
+\item (\emph{Slowly varying post-$T_p$.}) For $t\ge T_p$, $\rho_i^\pm(t)=a\,[1+g(t)\Sigma_i(t)](1\pm\delta_i)\pm\beta_i$ remain positive by design; low-pass filters in \eqref{eq:gppf-rfiltersA} ensure slow variation.
 \end{enumerate}
-% \end{properties}
 
-\begin{remark}[Parameter guidelines and compatibility]
-\emph{参数选取与实现建议：} 令 $\sigma_{\min}\le\sigma_{i0}\le\sigma_{\max}$，并取 $0\le\Sigma_{\max}\le 0.5$ 将收敛后最大放宽幅度限制在 $50%$ 以内；选 $\tau_u,\tau_d,\tau_e$ 相对较大以平缓 $\rho_i(t)$ 变化，避免激发闭环；优先设置 $k_u,k_d\gg k_e$，使“呼吸”主要由饱和/扰动而非瞬态误差驱动；$p\in(0,1)$ 决定早期收紧速率，$p\to 1$ 较温和、$p\to 0$ 较迅猛，可与 $\sigma_{i0}$ 联合整定。实现上，$\operatorname{Proj}$ 与其“Proj-grad”在投影边界处按 Carathéodory/几乎处处可导理解，常规数值实现取“饱和即停”的次梯度即可稳定工作。\emph{兼容性：} 该 G-PPF 为控制器无关的上层约束构件，可与反步、非线性抗饱和补偿、RBFNN 动态补偿及滑模/积分增强等模块直接耦合，且保持 PTS-ISS 证法的闭式推导。
-\end{remark}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{fig1.eps}
-\caption{全局动态 G-PPF：预定义时间内平滑收紧与收敛后“呼吸式”放宽。}
-\label{fig:1}
-\end{figure}
-
----
-
-\noindent\textbf{与原稿相比的关键改进要点：}（1）动机与三类痛点更聚焦，建立到设计要素的“一一对应”；（2）显式强调 $C^1$ 拼接与 BLF 导数的“精确补偿”关系，服务于后续 PTS-ISS 证明链；（3）单调性给出可操作的充分条件（$\dot\sigma_i\le 0$ 或“足够小”）；（4）参数整定与实现细节（Proj-grad、$p$ 的物理含义）前置，降低读者复现实践门槛；（5）行文删繁就简，保留必要数学细节与工程语义。
+\subsection*{Default parameters (for a visible tunnel effect)}
+A practical choice is $\delta_0=0.1$, $\delta_{\max}=0.5$, $\beta_0=0.3a$, $\gamma_\beta=3$, $\kappa=10/T_p^2$, and $\tau_u=\tau_d=\tau_e\in[0.05,0.1]$. Gains $k_\cdot,c_\cdot$ reflect actuator saturation severity; $\Sigma_{\max}$ and $\sigma_{\max}$ serve as safety caps.
 
 
 
 
 
-
-
-
-
-\subsubsection*{(二) $t\ge T_p$ 段的灵敏动态缩放设计（无门控）}
-
-为在 $t\ge T_p$ 阶段对饱和与扰动做出更灵敏的“即刻放宽—快速回落”的自适应调节，
-本文用无门控的自适应放宽变量 $\Sigma_i(t)\ge 0$ 替换原先的时间门控函数 $g(t)$。
-令
-\begin{equation}\label{eq:rho-post-def}
-  \rho_i(t)=a\bigl(1+\Sigma_i(t)\bigr),\qquad t\ge T_p,
-\end{equation}
-并取初值
-\begin{equation}\label{eq:C1-conditions}
-  \Sigma_i(T_p)=0,\qquad \dot\Sigma_i(T_p)=0,
-\end{equation}
-由此与 $t<T_p$ 段的设计满足 $\rho_i(T_p^-)=a,\ \dot\rho_i(T_p^-)=0$ 共同保证
-\[
-  \rho_i(T_p^+)=a\bigl(1+\Sigma_i(T_p)\bigr)=a,\qquad
-  \dot\rho_i(T_p^+)=a\,\dot\Sigma_i(T_p)=0,
-\]
-从而在 $t=T_p$ 处实现函数值与一阶导数的 $C^1$ 平滑衔接。
-
-\paragraph{平滑指标与回滞触发。}
-为刻画输入饱和、外扰强度、误差逼近度以及输入速率带来的“难度”，
-定义平滑 ReLU 与平滑开关如下：
-\begin{align}
-  &\mathrm{ReLU}_\varepsilon(x)
-  \triangleq \tfrac12\!\bigl(x+\sqrt{x^2+\varepsilon^2}\bigr),\quad \varepsilon>0, \label{eq:smooth-relu}\\
-  &H_\varepsilon(x)\triangleq \tfrac12\!\left(1+\tanh\!\frac{x}{\varepsilon}\right). \label{eq:smooth-switch}
-\end{align}
-对第 $i$ 通道，构造归一化指标
-\begin{align}
-  &\bar s_i=\frac{\mathrm{ReLU}_\varepsilon(|v_i|-u_d)}{u_d},\quad
-   \bar w_i=\frac{\mathrm{ReLU}_\varepsilon(|d_i|-d_{\mathrm{th}})}{d_{\mathrm{scale}}},\nonumber\\
-  &\bar q_i=\frac{\mathrm{ReLU}_\varepsilon(|e_i|-q_{\mathrm{th}})}{e_{\mathrm{scale}}},\quad
-   \bar j_i=\frac{\mathrm{ReLU}_\varepsilon(|\dot v_i|-j_{\mathrm{th}})}{j_{\mathrm{scale}}},\label{eq:normalized-indicators}
-\end{align}
-并引入具有回滞的开/关权函数
-\begin{equation}\label{eq:hysteresis}
-  \chi_i = H_\varepsilon(\bar s_i-\theta_{\mathrm{on}}),\qquad
-  \zeta_i = H_\varepsilon(\theta_{\mathrm{off}}-\bar s_i),\qquad
-  \theta_{\mathrm{on}}>\theta_{\mathrm{off}}\ge 0,
-\end{equation}
-其中 $\chi_i$ 在“真超阈”时迅速接近 $1$（触发放宽），$\zeta_i$ 在“远离阈值”时迅速接近 $1$（触发泄放）。
-
-\paragraph{自适应“放宽—泄放”动力学。}
-为获得灵敏且平滑的后段调节，设计一阶 ODE（带积分记忆）驱动 $\Sigma_i$：
-\begin{align}
-  \dot\Sigma_i
-  &= -\lambda_\Sigma\,\Sigma_i \;-\; k_r\,\zeta_i\,\Sigma_i
-     \;+\;\chi_i\!\left(k_u\bar s_i+k_d\bar w_i+k_e\bar q_i+k_j\bar j_i\right)
-     \;+\;k_I\,\xi_i, \label{eq:sigma-ode}\\
-  \dot\xi_i
-  &= -\alpha\,\xi_i \;+\; \chi_i\!\left(k_u\bar s_i+k_d\bar w_i+k_e\bar q_i+k_j\bar j_i\right),\qquad
-     \xi_i(T_p)=0, \label{eq:xi-ode}\\
-  \Sigma_i(t)&\leftarrow \operatorname{Proj}_{[\,0,\,\Sigma_{\max}\,]}\bigl(\Sigma_i(t)\bigr),
-  \label{eq:sigma-proj}
-\end{align}
-其中 $\lambda_\Sigma,k_r,k_u,k_d,k_e,k_j,k_I,\alpha>0$ 为设计参数，$\Sigma_{\max}>0$ 为上界投影。
-式 \eqref{eq:sigma-ode}--\eqref{eq:sigma-proj} 的机理为：
-(i) $-\lambda_\Sigma\Sigma_i$ 提供常规回落；(ii) $-k_r\zeta_i\Sigma_i$ 在安全域内增强泄放、加速收紧；
-(iii) $\chi_i(\cdot)$ 在触发时按指标强度即时放宽；(iv) $k_I\xi_i$ 为积分记忆，
-保证“持续轻度超限”亦能累积形成显著放宽，从而提升灵敏度且不过度依赖瞬时峰值。
-
-\paragraph{导数与 BLF 友好性。}
-由 \eqref{eq:rho-post-def} 可得
-\begin{equation}\label{eq:rho-dot}
-  \dot\rho_i = a\,\dot\Sigma_i,\qquad
-  \frac{\dot\rho_i}{\rho_i}=\frac{a\,\dot\Sigma_i}{a(1+\Sigma_i)}=\frac{\dot\Sigma_i}{1+\Sigma_i},
-\end{equation}
-可直接用于屏障 Lyapunov 函数（BLF）导数中的边界补偿项，无需时间门控，从而避免额外时滞。
-
-\paragraph{完整时间导数（用于严格性分析）。}
-若需对 \eqref{eq:sigma-ode} 做进一步上界估计，可给出光滑构件的时间导数。
-记 $R(x)=\mathrm{ReLU}_\varepsilon(x)$，则
-\begin{equation}\label{eq:relu-deriv}
-  R'(x)=\tfrac12\!\left(1+\frac{x}{\sqrt{x^2+\varepsilon^2}}\right)\in(0,1),
-\end{equation}
-故对 $x(t)=|z(t)|-z_{\mathrm{th}}$ 有
-\begin{equation}\label{eq:relu-time}
-  \frac{\mathrm{d}}{\mathrm{d}t}R\bigl(|z|-z_{\mathrm{th}}\bigr)
-  = R'(x)\,\frac{\mathrm{d}}{\mathrm{d}t}|z|
-  = \tfrac12\!\left(1+\frac{x}{\sqrt{x^2+\varepsilon^2}}\right)\frac{z}{|z|+\delta}\,\dot z,
-\end{equation}
-其中在 $z\approx 0$ 处以 $|z|+\delta$（极小 $\delta>0$）作平滑近似以避免不可导点。
-据此，\eqref{eq:normalized-indicators} 的各归一化指标导数均可按链式法则得到；
-而 \eqref{eq:smooth-switch} 的平滑开关导数满足
-\begin{align}
-  \dot\chi_i &= \tfrac12\,\mathrm{sech}^2\!\Bigl(\tfrac{\bar s_i-\theta_{\mathrm{on}}}{\varepsilon}\Bigr)\,
-               \frac{\dot{\bar s}_i}{\varepsilon},\label{eq:chi-dot}\\
-  \dot\zeta_i &= -\tfrac12\,\mathrm{sech}^2\!\Bigl(\tfrac{\theta_{\mathrm{off}}-\bar s_i}{\varepsilon}\Bigr)\,
-               \frac{\dot{\bar s}_i}{\varepsilon},\label{eq:zeta-dot}
-\end{align}
-从而 $\dot\Sigma_i$ 与 $\ddot\Sigma_i$ 在未触及投影边界处均有界连续；在投影饱和瞬间由投影算子截断，仍不影响“几乎处处”的稳定性分析与工程实现。
-
-\paragraph{性质与讨论。}
-\begin{properties}\label{prop:post}
-  对于 \eqref{eq:rho-post-def}--\eqref{eq:sigma-proj}，有：
-  \begin{enumerate}
-    \item[(v)] 非负性与下界：$\Sigma_i\in[0,\Sigma_{\max}]$，故 $\rho_i(t)=a(1+\Sigma_i(t))\ge a$。
-    \item[(vi)] $C^1$ 衔接：由 \eqref{eq:C1-conditions} 与 $t<T_p$ 段的边界条件可得
-      $\rho_i,\dot\rho_i$ 在 $t=T_p$ 处连续。
-    \item[(vii)] 灵敏放宽与快速回落：当 $\bar s_i\gg\theta_{\mathrm{on}}$ 时，$\chi_i\!\to\!1$ 且
-      $\dot\Sigma_i$ 受 $k_u\bar s_i+k_d\bar w_i+k_e\bar q_i+k_j\bar j_i$ 与积分 $k_I\xi_i$ 推动而迅速增大，
-      $\rho_i$ 即刻放宽；当 $\bar s_i\ll\theta_{\mathrm{off}}$ 时，$\zeta_i\!\to\!1$ 且
-      $\dot\Sigma_i\!\approx\!-(\lambda_\Sigma+k_r)\Sigma_i-k_I\alpha^{-1}(\alpha\xi_i)$，从而快速回落。
-    \item[(viii)] BLF 友好：比例项 $\dot\rho_i/\rho_i=\dot\Sigma_i/(1+\Sigma_i)$ 有界连续，可直接纳入 BLF 导数以抵消边界变化项。
-  \end{enumerate}
-\end{properties}
-
-\paragraph{实现与调参建议（示例）。}
-为在图示上获得“变化更明显”的效果，可取
-\[
-  \theta_{\mathrm{on}}=0.05,\ \theta_{\mathrm{off}}=0.02,\ \varepsilon=10^{-3},\ 
-  \lambda_\Sigma=3,\ k_r=5,\ k_u=2.0,\ k_d=1.0,\ k_e=0.5,\ k_j=0.3,\ 
-  k_I=0.8,\ \alpha=6,\ \Sigma_{\max}\in[1.5,3].
-\]
-若需更“猛”的响应，优先增大 $k_u\!\to\!k_I\!\to\!k_r$ 并小幅降低 $\theta_{\mathrm{on}}$；
-若边缘抖动，适当增大 $\varepsilon$ 或 $\alpha$。
 
 
 
