@@ -14,15 +14,15 @@ dt      = tspan(2) - tspan(1);
 
 %% 2) 初始状态
 q00 = [
-          pi,     pi;         % 偏离参考较大
+          -pi,     -pi;         % 偏离参考较大
     pi/2,     pi/2;        % 中等伸展                     T=3.5,kI=[12, 6]*10;
 0,    pi/2;        % 十字形对称
  pi/4,     pi/4;        % 十字形对称
       -pi/2,    -pi/2;        % 十字形对称
        -3*pi/4,     -3*pi/4;      % 偏离参考较大
-          0,        0;          % 折叠（近奇异）
+          1,        1;          % 折叠（近奇异）
 ];
-q0 = q00(4, :)';   % q0 = [0; 0]  2,3,4,5
+q0 = q00(1, :)';   % q0 = [0; 0]  2,7,6
 dq0 = [0;0];                  %初始誤差不能爲0，否則會產生歧義
 zeta   = zeros(n,1);
 e1_int  = zeros(n,1);
@@ -40,6 +40,7 @@ dq_use  = zeros(N,n);
 qd_mat  = zeros(N,n);
 dqd_mat = zeros(N,n);
 tau_mat = zeros(N,n);
+% rho_mat = zeros(N,n);
 rho_mat = inf(N, n);      % 全部初始化为 +Inf
 alpha_mat = zeros(N,n);
 zeta_mat= zeros(N,n);
@@ -120,7 +121,7 @@ e_dq = dq_use  - dqd_mat;
 % [rho1] = arrayfun(@(tt) performance_poly1(tt),tspan);
 % [rho2] = arrayfun(@(tt) performance_poly2(tt),tspan);
 
-save('method1.mat', 'tspan', 'e_q', 'e_dq',  'qd_mat', 'q_use','dqd_mat', 'dq_use','rho_mat','tau_mat','u_mat',"alpha_mat",'omegahat_mat');
+save('method3.mat', 'tspan', 'e_q', 'e_dq',  'qd_mat', 'q_use','dqd_mat', 'dq_use','rho_mat','tau_mat','u_mat',"alpha_mat",'omegahat_mat');
 figure;
 for i = 1:n
     subplot(2,1,i);
@@ -132,7 +133,7 @@ for i = 1:n
     title(['Tracking Error e_' num2str(i)]);
     xlabel('Time (s)'); ylabel('e_i (rad)');
     legend('Error', 'Zero Line', 'T_p');
-    ylim([-0.5,0.5]);
+%     ylim([-0.5,0.5]);
 end
 
 
@@ -148,7 +149,7 @@ for i = 1:n
     title(['Tracking Error e_' num2str(i)]);
     xlabel('Time (s)'); ylabel('e_i (rad)');
     legend('Error', 'Zero Line', 'T_p');
-    ylim([-0.5,0.5]);
+%     ylim([-0.5,0.5]);
 end
 
 

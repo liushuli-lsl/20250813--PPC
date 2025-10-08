@@ -82,7 +82,7 @@ h2=plot(t, -rho1,  '--', 'Color', colors(1,:), 'LineWidth', 1);
    for k = 1:num_cases
     h3=plot(all_tspan{k}, all_e_q{k}(:,i), 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(2,:));
    end
-   ylim([-0.8,0.8]);
+   ylim([-1.6,1.2]);
  xlabel(ax,'Time (s)');
 ylabel(sprintf('$e_{%d}$ (rad)', i),'Interpreter','latex');
 title('');

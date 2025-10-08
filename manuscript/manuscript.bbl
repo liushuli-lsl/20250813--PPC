@@ -1,6 +1,6 @@
 %% BioMed_Central_Bib_Style_v1.01
 
-\begin{thebibliography}{5}
+\begin{thebibliography}{4}
 % BibTex style file: bmc-mathphys.bst (version 2.1), 2014-07-24
 \ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
 \ifx \binits  \undefined \def \binits#1{#1}\fi
@@ -96,22 +96,6 @@
 \bfpage{5152}--\blpage{5165}
 (\byear{2022-12})
 \doiurl{10.1109/TFUZZ.2022.3169852}
-\end{barticle}
-\endbibitem
-
-%%% 5
-\bibitem[\protect\citeauthoryear{Cao et~al.}{2023-08}]{CaoEtAl_2023_ReinforcementLearningBased}
-\begin{barticle}
-\bauthor{\bsnm{Cao}, \binits{S.}},
-\bauthor{\bsnm{Sun}, \binits{L.}},
-\bauthor{\bsnm{Jiang}, \binits{J.}},
-\bauthor{\bsnm{Zuo}, \binits{Z.}}:
-\batitle{Reinforcement learning-based fixed-time trajectory tracking control for uncertain robotic manipulators with input saturation}.
-\bjtitle{IEEE Transactions on Neural Networks and Learning Systems}
-\bvolume{34}(\bissue{8}),
-\bfpage{4584}--\blpage{4595}
-(\byear{2023-08})
-\doiurl{10.1109/TNNLS.2021.3116713}
 \end{barticle}
 \endbibitem
 
