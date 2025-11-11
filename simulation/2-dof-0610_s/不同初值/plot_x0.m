@@ -51,18 +51,18 @@ idx    = t_full <= 5;        % 逻辑索引
 
 end
 labels1 = { ...
-    '$x_1(0) = [\pi,\pi]$', ...
-    '$x_1(0) = [\pi/2,\;\pi/2]$', ...
-    '$x_1(0) = [0,\;\pi/2]$', ...
-      '$x_1(0) = [\pi/4,\;\pi/4]$', ...
-    '$x_1(0) = [-\pi/2,\;-\pi/2]$',  '$x_1(0) = [-3\pi/4,\;-3\pi/4]$',  'Error boundaries'  ...
+    '$q(0) = [\pi,\pi]$', ...
+    '$q(0) = [\pi/2,\pi/2]$', ...
+    '$q(0) = [0,q\pi/2]$', ...
+      '$q(0) = [\pi/4,\pi/4]$', ...
+    '$q(0) = [-\pi/2,-\pi/2]$',  '$q(0) = [-3\pi/4,q-3\pi/4]$',  '误差边界'  ...
 };
 labels2 = { ...
-    '$x_1(0) = [\pi,\pi]$', ...
-    '$x_1(0) = [\pi/2,\;\pi/2]$', ...
-    '$x_1(0) = [0,\;\pi/2]$', ...
-      '$x_1(0) = [\pi/4,\;\pi/4]$', ...
-    '$x_1(0) = [-\pi/2,\;-\pi/2]$',  '$x_1(0) = [-3\pi/4,\;-3\pi/4]$',  'Desired trajectory '  ...
+    '$q(0) = [\pi,\pi]$', ...
+    '$q(0) = [\pi/2,\pi/2]$', ...
+    '$q(0) = [0,\pi/2]$', ...
+      '$q(0) = [\pi/4,\pi/4]$', ...
+    '$q(0) = [-\pi/2,-\pi/2]$',  '$q(0) = [-3\pi/4,-3\pi/4]$',  '参考轨迹'  ...
 };
 
 %% 画：位置跟踪误差 1
@@ -96,8 +96,8 @@ end
 % plot(all_tspan{1}, rho1_mat(:,2),  'LineWidth',1.5,'LineStyle', line_styles{6},'Color', colors(6,:));
 % h_all = [h_err; h_bound];
 % ylim([-0.25,0.1])
-xlabel('Time (s)');
-ylabel('$e_{1}$ (rad)', 'Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('$z_{1,1}$ (rad)', 'Interpreter','latex');
 title('');
 
 grid off;
@@ -130,17 +130,17 @@ end
 % h_bound=plot(all_tspan{1}, rho1_mat(:,1), '--', 'LineWidth',1.5,'LineStyle', line_styles{6},'Color', colors(6,:));
 % plot(all_tspan{1}, rho1_mat(:,2), '--', 'LineWidth',1.5,'LineStyle', line_styles{6},'Color', colors(6,:));
 % h_all = [h_err; h_bound];
-xlabel('Time (s)');
-ylabel('$e_{2}$ (rad)', 'Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('$z_{1,2}$ (rad)', 'Interpreter','latex');
 title('');
 % legend(h_all,labels1,'Location', 'southeast', 'Interpreter','latex');
 grid off;
 box on;
 legend(h_err,labels1,'Location', 'southeast', 'Interpreter','latex');
 % === 导出 EPS 图像 ===
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 2.5]);
+set(gcf, 'Units', 'inches', 'Position', [1 1 10 3]);
 set(gca, 'FontName', 'Times New Roman');
-exportgraphics(gcf, 'fig6.eps', ...
+exportgraphics(gcf, 'fig6.pdf', ...
     'ContentType','vector', ...
     'BackgroundColor','none', ...
     'Resolution',600);
@@ -178,8 +178,8 @@ end
 % plot(all_tspan{1}, rho2_mat(:,2), '--', 'LineWidth',1.5,'LineStyle', line_styles{6},'Color', colors(6,:));
 % h_all = [h_err; h_bound];
 % ylim([-60,60]);
-xlabel('Time (s)');
-ylabel('$\dot{e}_{1}$ (rad)','Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('${z}_{2,1}$ (rad)','Interpreter','latex');
 title('');
 
 grid off;box on;
@@ -213,16 +213,16 @@ end
 % plot(all_tspan{1}, rho2_mat(:,2), '--', 'LineWidth',1.5,'LineStyle', line_styles{6},'Color', colors(6,:));
 % h_all = [h_err; h_bound];
 % ylim([-60,60]);
-xlabel('Time (s)');
-ylabel('$\dot{e}_{2}$ (rad)','Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('${z}_{2,2}$ (rad)','Interpreter','latex');
 title('');
 legend(h_err,labels1,'Location', 'northeast', 'Interpreter','latex');
 % legend( h_all,labels1,'Location', 'northeast', 'Interpreter','latex');
 grid off;box on;
 % === 导出 EPS 图像 ===
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 2.5]);
+set(gcf, 'Units', 'inches', 'Position', [1 1 10 3]);
 set(gca, 'FontName', 'Times New Roman');
-exportgraphics(gcf, 'fig7.eps', ...
+exportgraphics(gcf, 'fig7.pdf', ...
     'ContentType','vector', ...
     'BackgroundColor','none', ...
     'Resolution',600);
@@ -238,7 +238,7 @@ for k = 1:num_cases
   plot(all_tspan{k}, all_q1{k}, '-', 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 end
 plot(all_tspan{1}, all_qd1{1}, '--', 'LineWidth',1.2, 'LineStyle', line_styles{5},'Color',colors(7,:));
-xlabel('Time (s)');
+xlabel('$t$(s)', 'Interpreter','latex');
 ylabel('$q_1$ (rad)','Interpreter','latex');
 title('');
 
@@ -252,7 +252,7 @@ for k = 1:num_cases
   plot(all_tspan{k}, all_q2{k}, '-', 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 end
 plot(all_tspan{1}, all_qd2{2}, '--', 'LineWidth',1.2, 'LineStyle', line_styles{5},'Color',colors(7,:));
-xlabel('Time (s)');
+xlabel('$t$(s)', 'Interpreter','latex');
 ylabel('$q_2$ (rad)','Interpreter','latex');
 title('');
 % legend(labels2, 'Location', 'northeast', 'Interpreter','latex');
@@ -270,7 +270,7 @@ for k = 1:num_cases
   plot(all_tspan{k}, all_dq1{k}, '-', 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 end
 plot(all_tspan{1}, all_dqd1{1}, '--', 'LineWidth',1.2, 'LineStyle', line_styles{5},'Color',colors(7,:));
-xlabel('Time (s)');
+xlabel('$t$(s)', 'Interpreter','latex');
 ylabel('$\dot{q}_1$ (rad/s)','Interpreter','latex');
 title('');
 
@@ -284,7 +284,7 @@ for k = 1:num_cases
   plot(all_tspan{k}, all_q2{k}, '-', 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 end
 plot(all_tspan{1}, all_qd2{2}, '--', 'LineWidth',1.2, 'LineStyle', line_styles{5},'Color',colors(7,:));
-xlabel('Time (s)');
+xlabel('$t$(s)', 'Interpreter','latex');
 ylabel('$\dot{q}_2$ (rad/s)','Interpreter','latex');
 title('');
 
@@ -304,7 +304,7 @@ for k = 1:num_cases
     plot(all_tspan{k}, all_tau1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 end
 ylim([-12,12])
-xlabel('Time (s)');
+xlabel('$t$(s)', 'Interpreter','latex');
 ylabel('$u_1$ (Nm)', 'Interpreter','latex');
 title('');
 
@@ -318,7 +318,7 @@ for k = 1:num_cases
     plot(all_tspan{k}, all_tau2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 end
 ylim([-12,12])
-xlabel('Time (s)');
+xlabel('$t$(s)', 'Interpreter','latex');
 ylabel('$u_2$ (Nm)', 'Interpreter','latex');
 title('');
 % legend(labels1,'Location', 'northeast', 'Interpreter','latex');
@@ -327,9 +327,9 @@ legend(labels1,'Location', 'northeast', 'Interpreter','latex');
 title('', 'Interpreter','latex');
 
 % === 导出 EPS 图像 ===
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 2.5]);
+set(gcf, 'Units', 'inches', 'Position', [1 1 10 3]);
 set(gca, 'FontName', 'Times New Roman');
-exportgraphics(gcf, 'fig8.eps', ...
+exportgraphics(gcf, 'fig8.pdf', ...
     'ContentType','vector', ...
     'BackgroundColor','none', ...
     'Resolution',600);

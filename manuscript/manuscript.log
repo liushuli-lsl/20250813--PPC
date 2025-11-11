@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.27)  29 SEP 2025 16:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.27)  9 OCT 2025 13:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1116,20 +1116,20 @@ Package microtype Info: No adjustment of character kerning.
  (e:/texlive/2023/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 165.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 167.
  (e:/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (e:/texlive/2023/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 165.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 167.
  (e:/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (e:/texlive/2023/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 165.
-LaTeX Font Info:    Trying to load font information for C70+rm on input line 165.
+LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 167.
+LaTeX Font Info:    Trying to load font information for C70+rm on input line 167.
  (e:/texlive/2023/texmf-dist/tex/latex/ctex/fd/c70rm.fd
 File: c70rm.fd 2022/07/14 v2.5.10 Chinese font definition (CTEX)
 )
@@ -1140,14 +1140,14 @@ File: ctex-zhmap-windows.tex 2022/07/14 v2.5.10 Windows font map loader for pdfT
 {e:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{UGBK.sfd}{Unicode.sfd}) [1
 
 ]
-Package CJKpunct Info: use punctuation spaces for family 'rm' with punctstyle (quanjiao) on input line 324.
-Package CJKpunct Info: use punctuation spaces for family 'zhkai' with punctstyle (quanjiao) on input line 336.
+Package CJKpunct Info: use punctuation spaces for family 'rm' with punctstyle (quanjiao) on input line 326.
+Package CJKpunct Info: use punctuation spaces for family 'zhkai' with punctstyle (quanjiao) on input line 338.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
 
-LaTeX Warning: Reference `Lemma:1' on page 1 undefined on input line 377.
+LaTeX Warning: Reference `Lemma:1' on page 1 undefined on input line 379.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1158,7 +1158,7 @@ pdfTeX warning: pdflatex.exe (file ./fig2.pdf): PDF inclusion: found PDF version
 <fig2.pdf, id=265, 606.83414pt x 216.06923pt>
 File: fig2.pdf Graphic file (type pdf)
 <use fig2.pdf>
-Package pdftex.def Info: fig2.pdf  used on input line 558.
+Package pdftex.def Info: fig2.pdf  used on input line 560.
 (pdftex.def)             Requested size: 466.053pt x 165.9452pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1170,45 +1170,45 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.646 则
+l.648 则
          一步 Lyapunov 导数化简为 <./fig2.pdf>]
 
-LaTeX Warning: Reference `assumption:3' on page 1 undefined on input line 812.
+LaTeX Warning: Reference `assumption:3' on page 1 undefined on input line 814.
 
 
-LaTeX Warning: Reference `eq:40' on page 1 undefined on input line 812.
+LaTeX Warning: Reference `eq:40' on page 1 undefined on input line 814.
 
 
-LaTeX Warning: Reference `eq:30' on page 1 undefined on input line 812.
+LaTeX Warning: Reference `eq:30' on page 1 undefined on input line 814.
 
 
-LaTeX Warning: Reference `eq:41' on page 1 undefined on input line 812.
+LaTeX Warning: Reference `eq:41' on page 1 undefined on input line 814.
 
 
-LaTeX Warning: Reference `eq:32' on page 1 undefined on input line 812.
+LaTeX Warning: Reference `eq:32' on page 1 undefined on input line 814.
 
 
-LaTeX Warning: Reference `eq:42' on page 1 undefined on input line 812.
+LaTeX Warning: Reference `eq:42' on page 1 undefined on input line 814.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6]
 
-LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 1005.
+LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 1007.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [7]
 
-LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 1022.
+LaTeX Warning: Reference `eq:53' on page 1 undefined on input line 1024.
 
 
-LaTeX Warning: Reference `eq:46' on page 1 undefined on input line 1028.
+LaTeX Warning: Reference `eq:46' on page 1 undefined on input line 1030.
 
 
-LaTeX Warning: Reference `lemma:3' on page 1 undefined on input line 1028.
+LaTeX Warning: Reference `lemma:3' on page 1 undefined on input line 1030.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1248,7 +1248,7 @@ Here is how much of TeX's memory you used:
  1151 hyphenation exceptions out of 8191
  90i,13n,91p,2635b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><e:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on manuscript.pdf (10 pages, 918001 bytes).
+Output written on manuscript.pdf (10 pages, 918889 bytes).
 PDF statistics:
  911 PDF objects out of 1000 (max. 8388607)
  626 compressed objects within 7 object streams

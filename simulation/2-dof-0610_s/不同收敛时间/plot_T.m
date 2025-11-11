@@ -110,8 +110,8 @@ end
 % yline(0.01,  'Label', '0.01', 'LabelHorizontalAlignment', 'right',  'LineStyle', line_styles{5},'Color',colors(6,:), 'LineWidth', 1.2);  % 标签靠右
 % yline(-0.01, 'Label', '-0.01', 'LabelHorizontalAlignment', 'right', 'LabelVerticalAlignment', 'bottom', 'LineStyle', line_styles{5},'Color',colors(6,:), 'LineWidth', 1.2);  % 标签靠右
 ylim([-0.2,0.8])
-xlabel('Time (s)');
-ylabel('$e_{1}$ (rad)', 'Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('$z_{1,1}$ (rad)', 'Interpreter','latex');
 title('');
 grid off;box on;
 
@@ -152,19 +152,19 @@ end
 % yline(0.01,  'Label', '0.01', 'LabelHorizontalAlignment', 'right',  'LineStyle', line_styles{5},'Color',colors(6,:), 'LineWidth', 1.2);  % 标签靠右
 % yline(-0.01, 'Label', '-0.01', 'LabelHorizontalAlignment', 'right', 'LabelVerticalAlignment', 'bottom', 'LineStyle', line_styles{5},'Color',colors(6,:), 'LineWidth', 1.2);  % 标签靠右
 ylim([-0.5,0.8])
-xlabel('Time (s)');
-ylabel('$e_{2}$ (rad)', 'Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('$z_{1,2}$ (rad)', 'Interpreter','latex');
 title('');
 % legend(h_err, labels1, 'Location', 'northeast', 'Interpreter','latex');
 grid off;box on;
 legend(h_err, labels1, 'Location', 'southeast', 'Interpreter','latex');
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 2.5]);
+set(gcf, 'Units', 'inches', 'Position', [1 1 10 3]);
 set(gca, 'FontName', 'Times New Roman');
-% exportgraphics(gcf, 'fig3.eps', ...
+% exportgraphics(gcf, 'fig3.pdf', ...
 %     'ContentType','vector', ...
 %      'BackgroundColor','white', ...
 %     'Resolution',600);
-exportgraphics(gcf, 'fig3.eps', 'Resolution', 1200);
+exportgraphics(gcf, 'fig3.pdf', 'Resolution', 1200);
 
 
 
@@ -200,8 +200,8 @@ end
 % yline(-0.1, 'Label', '-0.1', 'LabelHorizontalAlignment', 'right', 'LabelVerticalAlignment', 'bottom', 'LineStyle', line_styles{5},'Color',colors(6,:), 'LineWidth', 1.2);  % 标签靠右
 
 ylim([-3,1.5])
-xlabel('Time (s)');
-ylabel('$\dot{e}_{1}$ (rad/s)','Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('${z}_{2,1}$ (rad/s)','Interpreter','latex');
 title('');
 grid off;box on;
 
@@ -236,19 +236,19 @@ end
 % yline(0.1,  'Label', '0.1', 'LabelHorizontalAlignment', 'right',  'LineStyle', line_styles{5},'Color',colors(6,:), 'LineWidth', 1.2);  % 标签靠右
 % yline(-0.1, 'Label', '-0.1', 'LabelHorizontalAlignment', 'right', 'LabelVerticalAlignment', 'bottom', 'LineStyle', line_styles{5},'Color',colors(6,:), 'LineWidth', 1.2);  % 标签靠右
 ylim([-3,1.5])
-xlabel('Time (s)');
-ylabel('$\dot{e}_{2}$ (rad/s)','Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('$z_{2,2}$ (rad/s)','Interpreter','latex');
 title('');
 % legend( labels1,'Location', 'northeast', 'Interpreter','latex');
 grid off;box on;
 legend(h_err, labels1, 'Location', 'southeast', 'Interpreter','latex');
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 2.5]);
+set(gcf, 'Units', 'inches', 'Position', [1 1 10 3]);
 set(gca, 'FontName', 'Times New Roman');
-% exportgraphics(gcf, 'fig4.eps', ...
+% exportgraphics(gcf, 'fig4.pdf', ...
 %     'ContentType','vector', ...
 %     'BackgroundColor','none', ...
 %     'Resolution',600);
-exportgraphics(gcf, 'fig4.eps', 'Resolution', 1200);
+exportgraphics(gcf, 'fig4.pdf', 'Resolution', 1200);
 
 
 
@@ -260,7 +260,7 @@ exportgraphics(gcf, 'fig4.eps', 'Resolution', 1200);
 %   plot(all_tspan{k}, all_q1{k}, '-', 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 % end
 % plot(all_tspan{1}, all_qd1{1}, '--', 'LineWidth',1.2, 'LineStyle', line_styles{5},'Color',colors(6,:));
-% xlabel('Time (s)');
+% xlabel('$t$(s)', 'Interpreter','latex');
 % ylabel('$q_1$ (rad)','Interpreter','latex');
 % title('');
 % legend(labels2, 'Location', 'northeast', 'Interpreter','latex');
@@ -273,7 +273,7 @@ exportgraphics(gcf, 'fig4.eps', 'Resolution', 1200);
 %   plot(all_tspan{k}, all_q2{k}, '-', 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 % end
 % plot(all_tspan{1}, all_qd2{2}, '--', 'LineWidth',1.2, 'LineStyle', line_styles{5},'Color',colors(6,:));
-% xlabel('Time (s)');
+% xlabel('$t$(s)', 'Interpreter','latex');
 % ylabel('$q_2$ (rad)','Interpreter','latex');
 % title('');
 % legend(labels2, 'Location', 'northeast', 'Interpreter','latex');
@@ -291,7 +291,7 @@ exportgraphics(gcf, 'fig4.eps', 'Resolution', 1200);
 %   plot(all_tspan{k}, all_dq1{k}, '-', 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 % end
 % plot(all_tspan{1}, all_dqd1{1}, '--', 'LineWidth',1.2, 'LineStyle', line_styles{5},'Color',colors(6,:));
-% xlabel('Time (s)');
+% xlabel('$t$(s)', 'Interpreter','latex');
 % ylabel('$\dot{q}_1$ (rad/s)','Interpreter','latex');
 % title('');
 % 
@@ -305,7 +305,7 @@ exportgraphics(gcf, 'fig4.eps', 'Resolution', 1200);
 %   plot(all_tspan{k}, all_q2{k}, '-', 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 % end
 % plot(all_tspan{1}, all_qd2{2}, '--', 'LineWidth',1.2, 'LineStyle', line_styles{5},'Color',colors(6,:));
-% xlabel('Time (s)');
+% xlabel('$t$(s)', 'Interpreter','latex');
 % ylabel('$\dot{q}_2$ (rad/s)','Interpreter','latex');
 % title('');
 % 
@@ -325,7 +325,7 @@ for k = 1:num_cases
     plot(all_tspan{k}, all_tau1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 end
 % ylim([-12,12])
-xlabel('Time (s)');
+xlabel('$t$(s)', 'Interpreter','latex');
 ylabel('$u_1$ (Nm)', 'Interpreter','latex');
 title('');
 
@@ -339,18 +339,18 @@ for k = 1:num_cases
     plot(all_tspan{k}, all_tau2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(k,:));
 end
 % ylim([-12,12])
-xlabel('Time (s)');
+xlabel('$t$(s)', 'Interpreter','latex');
 ylabel('$u_2$ (Nm)', 'Interpreter','latex');
 title('');
 legend(labels1,'Location', 'southeast', 'Interpreter','latex');
 % legend(labels1,'Location', 'northeast', 'Interpreter','latex');
 grid off;box on;
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 2.5]);
+set(gcf, 'Units', 'inches', 'Position', [1 1 10 3]);
 set(gca, 'FontName', 'Times New Roman');
-% print(gcf, '-depsc2', '-r600', 'fig5.eps');
-% exportgraphics(gcf, 'fig5.eps', ...
+% print(gcf, '-depsc2', '-r600', 'fig5.pdf');
+% exportgraphics(gcf, 'fig5.pdf', ...
 %     'ContentType','vector', ...
 %     'BackgroundColor','none', ...
 %     'Resolution',600);
-exportgraphics(gcf, 'fig5.eps', 'Resolution', 1200);
+exportgraphics(gcf, 'fig5.pdf', 'Resolution', 1200);
 
