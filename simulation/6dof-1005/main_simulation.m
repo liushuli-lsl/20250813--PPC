@@ -133,20 +133,19 @@ for i = 1:n
 %     legend('Error', 'Zero Line', 'T_p');
 end
 
-% 
-% % Plot error curves with T_p marker
-% figure;
-% for i = 1:n
-%     subplot(3,2,i);
-%     plot(tspan, e_dq(:,i), 'b', 'LineWidth', 1.5); hold on;
-%       plot(tspan, rho2, 'k--', 'LineWidth',1.5);hold on;
-%       plot(tspan, -rho2, 'k--', 'LineWidth',1.5);
-%     yline(0, 'k--');
-%     xline(3, 'r--', 'LineWidth', 1.2);
-%     title(['Tracking Error e_' num2str(i)]);
-%     xlabel('Time (s)'); ylabel('e_i (rad)');
-% %     legend('Error', 'Zero Line', 'T_p');
-% end
+
+% Plot error curves with T_p marker
+figure;
+for i = 1:n
+    subplot(3,2,i);
+    plot(tspan, e_dq(:,i), 'b', 'LineWidth', 1.5); hold on;
+ 
+    yline(0, 'k--');
+    xline(3, 'r--', 'LineWidth', 1.2);
+    title(['Tracking Error e_' num2str(i)]);
+    xlabel('Time (s)'); ylabel('e_i (rad)');
+%     legend('Error', 'Zero Line', 'T_p');
+end
 
 
 

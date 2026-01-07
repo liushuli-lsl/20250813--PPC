@@ -44,20 +44,22 @@ for k = 1:num_cases
 end
 %  t = all_tspan{1}(:);
 % labels1 = { 'Error',  'Error boundaries' };
-labels1 = { ...
-  'PTC', ...
-    'PPC', ...
-     'PTPPC', ...
-    'Proposed', 
-%     'Desired trajectory '  ...
-};
-labels2 = { 'PTC', ...
-    'PPC', ...
-     'PTPPC', ...
-    'Proposed',  'Desired trajectory ' };
+% labels1 = { ...
+%   'PTC', ...
+%     'PPC', ...
+%      'PTPPC', ...
+%     'Proposed', 
+% %     'Desired trajectory '  ...
+% };
+% labels2 = { 'PTC', ...
+%     'PPC', ...
+%      'PTPPC', ...
+%     'Proposed',  'Desired trajectory ' };
 
 
-
+labels1 = { '误差',  '性能边界' };
+labels2 = { '\tau^{\prime}','\tau' };
+labels3 = { '实际曲线',  '参考曲线 ' };
 
 
 %% 3) 示例：画第 1 案例的 6 自由度位置误差
@@ -83,55 +85,91 @@ h2=plot(t, -rho1,  '--', 'Color', colors(1,:), 'LineWidth', 1);
     h3=plot(all_tspan{k}, all_e_q{k}(:,i), 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(2,:));
    end
    ylim([-1.6,1.2]);
- xlabel(ax,'Time (s)');
-ylabel(sprintf('$e_{%d}$ (rad)', i),'Interpreter','latex');
+ xlabel(ax,'$t$(s)','Interpreter','latex');
+ylabel(sprintf('$e_{1,%d}$ (rad)', i),'Interpreter','latex');
 title('');
 grid off;
 box on;
-% 生成当前 i 的标签
-lbl = { sprintf('$\\rho_{%d}$', i), ...
-        sprintf('$-\\rho_{%d}$', i), ...
-        sprintf('$z_{%d}$', i) };
-legend( [h1 h2 h3], lbl,'Location', 'northeast', 'Interpreter','latex');
-
+% % 生成当前 i 的标签
+% lbl = { sprintf('$\\rho_{%d}$', i), ...
+%         sprintf('$-\\rho_{%d}$', i), ...
+%         sprintf('$z_{%d}$', i) };
+% legend( [h1 h2 h3], lbl,'Location', 'northeast', 'Interpreter','latex');
+set(gca,'FontSize', 12);
 end
-
+legend( labels1, 'Position', [0.47 0.938 0.1 0.05],  'Orientation','horizontal','FontSize', 12, 'FontName', 'SimSun');
 % legend(h_err, labels1, 'Location', 'southeast', 'Interpreter', 'latex');
 
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 6]);
+set(gcf,'Renderer','painters', 'Units', 'inches', 'Position', [1 1 8 5]);
+set(gca,'FontSize', 12);
 set(gca, 'FontName', 'Times New Roman');
-exportgraphics(gcf, 'fig13.eps', ...
+exportgraphics(gcf, 'fig9.pdf', ...
     'ContentType','vector', ...
     'BackgroundColor','none', ...
     'Resolution',600);
 
-%% 3) 示例：画第 1 案例的 6 自由度位置跟踪
+%% 3) 示例：画第 1 案例的 6 自由度位置误差
 figure('Position',[200 200 800 450]);
 h_legend = [];
 for i = 1:6
-    ax = subplot(3,2,i); hold(ax,'on');
-          for k = 1:num_cases
-    h_err=plot(all_tspan{k}, all_q_use{k}(:,i), 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(2,:));
-          end
-   h_bound=plot(all_tspan{1},  all_qd{1}(:,i), 'LineWidth',1.5,'LineStyle', line_styles{2},'Color', colors(1,:));
-h_all = [h_err; h_bound];
-% ylim([-0.25,0.1])
- xlabel(ax,'Time (s)');
-ylabel(sprintf('$q_{%d}$ (rad)', i),'Interpreter','latex');
+  ax = subplot(3,2,i); hold(ax,'on');
+  h_err = gobjects(num_cases,1);
+   hold on;
+%      t = all_tspan{k}(:,1);
+%        rho1 = all_rho{k}(:,i) % 提取列向量
+        t = all_tspan{1}(:);
+   for k = 1:num_cases
+    h3=plot(all_tspan{k}, all_e_dq{k}(:,i), 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(1,:));
+   end
+%    ylim([-1.6,1.2]);
+ xlabel(ax,'$t$(s)','Interpreter','latex');
+ylabel(sprintf('$e_{2,%d}$ (rad/s)', i),'Interpreter','latex');
 title('');
-% legend(h_all,labels2,'Location', 'southeast', 'Interpreter','latex');grid off
 grid off;
 box on;
-legend("Actual trajectory","Desired trajectory", 'Location', 'northeast', 'Interpreter','latex');
+% % 生成当前 i 的标签
+% lbl = { sprintf('$\\rho_{%d}$', i), ...
+%         sprintf('$-\\rho_{%d}$', i), ...
+%         sprintf('$z_{%d}$', i) };
+% legend( [h1 h2 h3], lbl,'Location', 'northeast', 'Interpreter','latex');
+set(gca,'FontSize', 12);
 end
-% legend(h_legend, labels2, 'Location', 'southeast', 'Interpreter', 'latex');
-
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 6]);
-set(gca, 'FontName', 'Times New Roman');
-exportgraphics(gcf, 'fig12.eps', ...
+% legend( labels1, 'Position', [0.48 0.938 0.1 0.05],  'Orientation','horizontal','FontSize', 12, 'FontName', 'SimSun');
+% legend(h_err, labels1, 'Location', 'southeast', 'Interpreter', 'latex');
+set(gcf,'Renderer','painters', 'Units', 'inches', 'Position', [1 1 8 5]);
+set(gca,'FontSize', 12);
+exportgraphics(gcf, 'fig10.pdf', ...
     'ContentType','vector', ...
     'BackgroundColor','none', ...
     'Resolution',600);
+
+% %% 3) 示例：画第 1 案例的 6 自由度位置跟踪
+% figure('Position',[200 200 800 450]);
+% h_legend = [];
+% for i = 1:6
+%     ax = subplot(3,2,i); hold(ax,'on');
+%           for k = 1:num_cases
+%     h_err=plot(all_tspan{k}, all_q_use{k}(:,i), 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(2,:));
+%           end
+%    h_bound=plot(all_tspan{1},  all_qd{1}(:,i), 'LineWidth',1.5,'LineStyle', line_styles{2},'Color', colors(1,:));
+% h_all = [h_err; h_bound];
+% % ylim([-0.25,0.1])
+%  xlabel(ax,'$t$(s)','Interpreter','latex');
+% ylabel(sprintf('$q_{%d}$ (rad)', i),'Interpreter','latex');
+% title('');
+% % legend(h_all,labels2,'Location', 'southeast', 'Interpreter','latex');grid off
+% grid off;
+% box on;
+% legend("Actual trajectory","Desired trajectory", 'Location', 'northeast', 'Interpreter','latex');
+% end
+% legend( labels1, 'Position', [0.48 0.938 0.1 0.05],  'Orientation','horizontal','FontSize', 12, 'FontName', 'SimSun');
+% 
+% set(gcf, 'Units', 'inches', 'Position', [1 1 10 6]);
+% set(gca, 'FontName', 'Times New Roman');
+% exportgraphics(gcf, 'fig12.eps', ...
+%     'ContentType','vector', ...
+%     'BackgroundColor','none', ...
+%     'Resolution',600);
 
 %% 3) 示例：画第 1 案例的 6 自由力矩
 figure('Position',[200 200 800 450]);
@@ -143,20 +181,22 @@ for i = 1:6
             hold on;
    h2=plot(all_tspan{k}, all_tau{k}(:,i), 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(1,:));
      end
- xlabel(ax,'Time (s)');
+ xlabel(ax,'$t$(s)','Interpreter','latex');
 %      ylim([-200,200]);
-ylabel(sprintf('$u_{%d}$ (Nm)', i), 'Interpreter','latex');
+ylabel(sprintf('$\\tau_{%d}$ (Nm)', i), 'Interpreter','latex');
 title('');
 grid off;
 box on;
-lb2 = { sprintf('$u_{%d}$', i), ...
-        sprintf('$u_{%d}^\\prime$', i)};
-legend([h1 h2], lb2,'Location', 'northeast', 'Interpreter','latex');
+% lb2 = { sprintf('$\tau_{%d}$', i), ...
+%         sprintf('$\tau_{%d}^\\prime$', i)};
+% legend([h1 h2], lb2,'Location', 'northeast', 'Interpreter','latex');
+set(gca,'FontSize', 12);
 end
+legend( labels2, 'Position', [0.47 0.938 0.1 0.05],  'Orientation','horizontal','FontSize', 12, 'FontName', 'SimSun');
 % legend(labels1,'Location', 'southeast', 'Interpreter','latex');
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 6]);
-set(gca, 'FontName', 'Times New Roman');
-exportgraphics(gcf, 'fig14.eps', ...
+set(gcf,'Renderer','painters', 'Units', 'inches', 'Position', [1 1 8 5]);
+set(gca,'FontSize', 12);
+exportgraphics(gcf, 'fig11.pdf', ...
     'ContentType','vector', ...
     'BackgroundColor','none', ...
     'Resolution',600);
@@ -243,7 +283,7 @@ exportgraphics(gcf, 'fig14.eps', ...
 %     hold on;
 % % ylim([-10,10]);
 % %    ylim([-5,0.5]);
-%  xlabel(ax,'Time (s)');
+%  xlabel(ax,'$t$(s)','Interpreter','latex');
 % ylabel(sprintf('$\\dot{e}_{%d}$ (rad/s)', i),'Interpreter','latex');
 % title('');
 % grid off;
@@ -272,7 +312,7 @@ exportgraphics(gcf, 'fig14.eps', ...
 % % plot(all_tspan{1},  -all_rho1{1}, 'LineWidth',1.5,'LineStyle', line_styles{2},'Color', colors(2,:));
 % h_all = [h_err; h_bound];
 % % ylim([-0.25,0.1])
-%  xlabel(ax,'Time (s)');
+%  xlabel(ax,'$t$(s)','Interpreter','latex');
 % ylabel(sprintf('$\\dot{q}_{%d}$ (rad/s)', i),'Interpreter','latex');
 % title('');
 % grid off;

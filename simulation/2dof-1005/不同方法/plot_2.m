@@ -32,7 +32,7 @@ for k = 1:num_cases
     S = load(fname, ...
         'tspan','e_q','e_dq','tau_mat','u_mat','q_use','qd_mat','dq_use','dqd_mat','rho_mat');
     t_full = S.tspan(1:end-1);
-idx    = t_full <=9;        % 逻辑索引
+idx    = t_full <=10;        % 逻辑索引
     all_tspan{k} = S.tspan(idx);           % 1×N
     all_e_q1{k}  = S.e_q(idx,1);        % N×1
     all_e_q2{k}  = S.e_q(idx,2);        % N×1
@@ -92,11 +92,11 @@ fill(x_fill, y_fill,colors(1,:), ...  % 灰色
     'FaceAlpha', 0.1, ...
     'EdgeColor', 'none', ...
     'HandleVisibility', 'off');
-plot(t,  rho1,  '--', 'Color',colors(1,:), 'LineWidth', 1)
-plot(t, -rho1,  '--', 'Color', colors(1,:), 'LineWidth', 1)
+plot(t,  rho1,  '--', 'Color',colors(1,:), 'LineWidth', 1.5)
+plot(t, -rho1,  '--', 'Color', colors(1,:), 'LineWidth', 1.5)
 % % 绘制四条竖线
 
-%     xline(3, 'LineStyle', line_styles{1},'Color',colors(7,:), 'LineWidth', 1.2, ...
+%     xline(3, 'LineStyle', line_styles{1},'Color',colors(7,:), 'LineWidth', 1.5.2, ...
 %         'Label', 'T=3s', 'LabelOrientation', 'horizontal', ...
 %         'Interpreter', 'latex');
 
@@ -121,29 +121,30 @@ end
 % plot(all_tspan{1}, rho1_mat(:,2),  'LineWidth',1.5,'LineStyle', line_styles{6},'Color', colors(6,:));
 % h_all = [h_err; h_bound];
 ylim([-4.5,1])
-xlabel('Time (s)');
-ylabel('$z_{1}$ (rad)', 'Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('$e_{1,1}$ (rad)', 'Interpreter','latex');
 title('');
-legend( '$\rho_1$','$-\rho_1$','$z_1$','Location', 'southeast', 'Interpreter','latex'); 
+legend( '$\rho_1$','$-\rho_1$','$e_{1,1}$','Location', 'southeast', 'Interpreter','latex'); 
 grid off;
 box on;
+set(gca, 'FontSize', 12);
 
 % 插图
 ax1 = gca; 
 pos = get(ax1,'Position');
 % ax2 = axes('Position',[0.5 0.75 0.35 0.15]); 
-ax2 = axes('Position', [pos(1)+0.55*pos(3), pos(2)+0.44*pos(4), 0.25*pos(3), 0.35*pos(4)], ...   左下宽高
+ax2 = axes('Position', [pos(1)+0.45*pos(3), pos(2)+0.4*pos(4), 0.25*pos(3), 0.35*pos(4)], ...   左下宽高
            'Color','none', 'Box','on');
 uistack(ax2,'top'); hold(ax2,'on');
 hold(ax2,'on');
-plot(t,  rho1,  '--', 'Color',colors(1,:), 'LineWidth', 1)
-plot(t, -rho1,  '--', 'Color', colors(1,:), 'LineWidth', 1)
+plot(t,  rho1,  '--', 'Color',colors(1,:), 'LineWidth', 1.5)
+plot(t, -rho1,  '--', 'Color', colors(1,:), 'LineWidth', 1.5)
 for k = 1:num_cases
     plot(ax2, all_tspan{k}, all_e_q1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(2,:));
 end
 
-% yline(ax2,  0.01,'--','Color',colors(6,:), 'LineWidth', 1.2); yline(ax2, -0.01,'--','Color',colors(6,:), 'LineWidth', 1.2);
-xlim(ax2,[8.5,9]); ylim(ax2,[-0.08,0.02]);
+% yline(ax2,  0.01,'--','Color',colors(6,:), 'LineWidth', 1.5.2); yline(ax2, -0.01,'--','Color',colors(6,:), 'LineWidth', 1.5.2);
+xlim(ax2,[8.5,9]); ylim(ax2,[-0.1,0.02]);
 box(ax2,'on'); grid(ax2,'off');
 title(ax2,'');
 grid off;box on;
@@ -165,12 +166,12 @@ fill(x_fill, y_fill, colors(1,:), ...  % 灰色
     'FaceAlpha', 0.1, ...
     'EdgeColor', 'none', ...
     'HandleVisibility', 'off');
-plot(t,  rho2,  '--', 'Color', colors(1,:), 'LineWidth', 1)
-plot(t, -rho2,  '--', 'Color', colors(1,:), 'LineWidth', 1)
+plot(t,  rho2,  '--', 'Color', colors(1,:), 'LineWidth', 1.5)
+plot(t, -rho2,  '--', 'Color', colors(1,:), 'LineWidth', 1.5)
 
 % % 绘制四条竖线
 
-%     xline(3, 'LineStyle', line_styles{1},'Color',colors(7,:), 'LineWidth', 1.2, ...
+%     xline(3, 'LineStyle', line_styles{1},'Color',colors(7,:), 'LineWidth', 1.5.2, ...
 %         'Label', 'T=3s', 'LabelOrientation', 'horizontal', ...
 %         'Interpreter', 'latex');
 for k = 1:num_cases
@@ -193,37 +194,37 @@ end
 % plot(all_tspan{1}, rho1_mat(:,2), '--', 'LineWidth',1.5,'LineStyle', line_styles{6},'Color', colors(6,:));
 % h_all = [h_err; h_bound];
 ylim([-4.5,1])
-xlabel('Time (s)');
-ylabel('$z_{2}$ (rad)', 'Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('$e_{1,2}$ (rad)', 'Interpreter','latex');
 title('');
 % legend(h_all,labels1,'Location', 'northeast', 'Interpreter','latex');
 grid off;
 box on;
-legend( '$\rho_2$','$-\rho_2$','$z_2$','Location', 'southeast', 'Interpreter','latex');
-
+legend( '$\rho_2$','$-\rho_2$','$e_{1,2}$','Location', 'southeast', 'Interpreter','latex');
+set(gca, 'FontSize', 12);
 % 插图
 ax1 = gca; 
 pos = get(ax1,'Position');
 % ax2 = axes('Position',[0.5 0.75 0.35 0.15]); 
-ax2 = axes('Position', [pos(1)+0.55*pos(3), pos(2)+0.44*pos(4), 0.25*pos(3), 0.35*pos(4)], ...   左下宽高
+ax2 = axes('Position', [pos(1)+0.45*pos(3), pos(2)+0.4*pos(4), 0.25*pos(3), 0.35*pos(4)], ...   左下宽高
            'Color','none', 'Box','on');
 uistack(ax2,'top'); hold(ax2,'on');
 hold(ax2,'on');
-plot(t,  rho2,  '--', 'Color',colors(1,:), 'LineWidth', 1)
-plot(t, -rho2,  '--', 'Color', colors(1,:), 'LineWidth', 1)
+plot(t,  rho2,  '--', 'Color',colors(1,:), 'LineWidth', 1.5)
+plot(t, -rho2,  '--', 'Color', colors(1,:), 'LineWidth', 1.5)
 for k = 1:num_cases
     plot(ax2, all_tspan{k}, all_e_q2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{k},'Color',colors(2,:));
 end
-
-% yline(ax2,  0.01,'--','Color',colors(6,:), 'LineWidth', 1.2); yline(ax2, -0.01,'--','Color',colors(6,:), 'LineWidth', 1.2);
-xlim(ax2,[8.5,9]); ylim(ax2,[-0.08,0.15]);
+% yline(ax2,  0.01,'--','Color',colors(6,:), 'LineWidth', 1.5.2); yline(ax2, -0.01,'--','Color',colors(6,:), 'LineWidth', 1.5.2);
+xlim(ax2,[8.5,9]); ylim(ax2,[-0.1,0.15]);
 box(ax2,'on'); grid(ax2,'off');
 title(ax2,'');
+set(gca, 'FontSize', 8);
 grid off;box on;
 % === 导出 EPS 图像 ===
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 2.5]);
-set(gca, 'FontName', 'Times New Roman');
-exportgraphics(gcf, 'fig9.eps', ...
+set(gcf, 'Units', 'inches', 'Position', [1 1 10 3]);
+
+exportgraphics(gcf, 'fig7.pdf', ...
     'ContentType','vector', ...
     'BackgroundColor','none', ...
     'Resolution',600);
@@ -231,33 +232,34 @@ exportgraphics(gcf, 'fig9.eps', ...
 
 
 
-%% 画：关节 1 位置 vs 参考 q1 vs qd1
-figure('Position', [100 100 1000 250]); % 设置整个figure的大小
-subplot(1,2,1);
-hold on;
-for k = 1:num_cases
-  plot(all_tspan{k}, all_q1{k},  'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
-end
-plot(all_tspan{1}, all_qd1{1},  'LineWidth',1.2, 'LineStyle', line_styles{2},'Color',colors(2,:));
-xlabel('Time (s)');
-ylabel('$q_1$ (rad)','Interpreter','latex');
-title('');
-legend("Actual trajectory","Desired trajectory", 'Location', 'northeast', 'Interpreter','latex');
-grid off;box on;
-
-%% 画：关节 2 位置 vs 参考 q1 vs qd1
-subplot(1,2,2);
-hold on;
-for k = 1:num_cases
-  plot(all_tspan{k}, all_q2{k},  'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
-end
-plot(all_tspan{1}, all_qd2{1},  'LineWidth',1.2, 'LineStyle', line_styles{2},'Color',colors(2,:));
-xlabel('Time (s)');
-ylabel('$q_2$ (rad)','Interpreter','latex');
-title('');
-% legend(labels2, 'Location', 'northeast', 'Interpreter','latex');
-legend("Actual trajectory","Desired trajectory", 'Location', 'northeast', 'Interpreter','latex');
-grid off;box on;
+% 
+% %% 画：关节 1 位置 vs 参考 q1 vs qd1
+% figure('Position', [100 100 1000 250]); % 设置整个figure的大小
+% subplot(1,2,1);
+% hold on;
+% for k = 1:num_cases
+%   plot(all_tspan{k}, all_q1{k},  'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
+% end
+% plot(all_tspan{1}, all_qd1{1},  'LineWidth',1.2, 'LineStyle', line_styles{2},'Color',colors(2,:));
+% xlabel('$t$(s)', 'Interpreter','latex');
+% ylabel('$q_1$ (rad)','Interpreter','latex');
+% title('');
+% legend("Actual trajectory","Desired trajectory", 'Location', 'northeast', 'Interpreter','latex');
+% grid off;box on;
+% 
+% %% 画：关节 2 位置 vs 参考 q1 vs qd1
+% subplot(1,2,2);
+% hold on;
+% for k = 1:num_cases
+%   plot(all_tspan{k}, all_q2{k},  'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
+% end
+% plot(all_tspan{1}, all_qd2{1},  'LineWidth',1.2, 'LineStyle', line_styles{2},'Color',colors(2,:));
+% xlabel('$t$(s)', 'Interpreter','latex');
+% ylabel('$q_2$ (rad)','Interpreter','latex');
+% title('');
+% % legend(labels2, 'Location', 'northeast', 'Interpreter','latex');
+% legend("Actual trajectory","Desired trajectory", 'Location', 'northeast', 'Interpreter','latex');
+% grid off;box on;
 
 % % === 导出 EPS 图像 ===
 % set(gcf, 'Units', 'inches', 'Position', [1 1 10 2.5]);
@@ -271,41 +273,46 @@ grid off;box on;
 
 %% 画：关节 1 控制扭矩 tau1
 figure('Position', [100 100 1000 250]); % 设置整个figure的大小
-subplot(1,2,1);
+subplot(2,1,1);
 hold on;
 for k = 1:num_cases
-    plot(all_tspan{k}, all_u1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(2,:));
-   hold  on ;
-     plot(all_tspan{k}, all_tau1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(1,:));
+         plot(all_tspan{k}, all_tau1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
+            hold  on ;
+    plot(all_tspan{k}, all_u1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(2,:));
 end
 ylim([-20,32])
-xlabel('Time (s)');
-ylabel('$u_1$ (Nm)', 'Interpreter','latex');
-legend('$u_1$', '$u_1^\prime$','Location', 'northeast', 'Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('$\tau_1$ (Nm)', 'Interpreter','latex');
+legend('$\tau_1^\prime$','$\tau_1$', 'Location', 'northeast', 'Interpreter','latex');
 title('');
-
+set(gca, 'FontSize', 12);
 grid off;box on;
 
 
 %% 画：关节 2 控制扭矩 tau1
-subplot(1,2,2);
+subplot(2,1,2);
 hold on;
 for k = 1:num_cases
-    
-     
-    plot(all_tspan{k}, all_u2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(2,:));
-      hold on;
-    plot(all_tspan{k}, all_tau2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(1,:));
+     plot(all_tspan{k}, all_tau2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
+           hold on;
+    plot(all_tspan{k}, all_u2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(2,:)); 
 end
 ylim([-10,12])
-xlabel('Time (s)');
-ylabel('$u_2$ (Nm)', 'Interpreter','latex');
+xlabel('$t$(s)', 'Interpreter','latex');
+ylabel('$\tau_2$ (Nm)', 'Interpreter','latex');
 title('');
 % legend(labels1,'Location', 'northeast', 'Interpreter','latex');
 grid off; box on;
-legend('$u_2$', '$u_2^\prime$','Location', 'northeast', 'Interpreter','latex');
+legend('$\tau_2^\prime$','$\tau_2$', 'Location', 'northeast', 'Interpreter','latex');
 % legend(labels1,'Location', 'northeast', 'Interpreter','latex');
 title('', 'Interpreter','latex');
+set(gcf, 'Units', 'inches', 'Position', [1 1 8 5]);
+set(gca, 'FontSize', 12);
+exportgraphics(gcf, 'fig8.pdf', ...
+    'ContentType','vector', ...
+    'BackgroundColor','none', ...
+    'Resolution',600);
+
 
 % % === 导出 EPS 图像 ===
 % set(gcf, 'Units', 'inches', 'Position', [1 1 10 2.5]);
