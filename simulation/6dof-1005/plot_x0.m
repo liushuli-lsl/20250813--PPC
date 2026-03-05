@@ -58,7 +58,7 @@ end
 
 
 labels1 = { '误差',  '性能边界' };
-labels2 = { '\tau^{\prime}','\tau' };
+labels2 = { '\tau_{c}','\tau' };
 labels3 = { '实际曲线',  '参考曲线 ' };
 
 
@@ -183,7 +183,8 @@ for i = 1:6
      end
  xlabel(ax,'$t$(s)','Interpreter','latex');
 %      ylim([-200,200]);
-ylabel(sprintf('$\\tau_{%d}$ (Nm)', i), 'Interpreter','latex');
+% ylabel(sprintf(' $\\tau_{c,%d},\\tau_{%d}$ (Nm)', i), 'Interpreter','latex');
+ylabel(sprintf('$\\tau_{c,%d},\\tau_{%d}$ (Nm)', i, i), 'Interpreter','latex');
 title('');
 grid off;
 box on;

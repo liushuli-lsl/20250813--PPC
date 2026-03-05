@@ -80,7 +80,7 @@ T_cutoff = 3;          % 只在 3 s 之后启用阈值
 th = 2; 
 %% 画：位置跟踪误差 1
 figure('Position', [100 100 1000 250]); % 设置整个figure的大小
-subplot(1,2,1);
+subplot(2,1,1);
 hold on;
 h_err = gobjects(num_cases,1);
 
@@ -155,7 +155,7 @@ grid off;box on;
 
 
 %% 画：位置跟踪误差2
-subplot(1,2,2);
+subplot(2,1 ,2);
 hold on;
 h_err = gobjects(num_cases,1);
     t = all_tspan{1}(:);
@@ -222,7 +222,7 @@ title(ax2,'');
 set(gca, 'FontSize', 8);
 grid off;box on;
 % === 导出 EPS 图像 ===
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 3]);
+set(gcf, 'Units', 'inches', 'Position', [1 1 8 5]);
 
 exportgraphics(gcf, 'fig7.pdf', ...
     'ContentType','vector', ...
@@ -282,8 +282,8 @@ for k = 1:num_cases
 end
 ylim([-20,32])
 xlabel('$t$(s)', 'Interpreter','latex');
-ylabel('$\tau_1$ (Nm)', 'Interpreter','latex');
-legend('$\tau_1^\prime$','$\tau_1$', 'Location', 'northeast', 'Interpreter','latex');
+ylabel('$\tau_{c,1}$,$\tau_1$ (Nm)', 'Interpreter','latex');
+legend('$\tau_{c,1}$','$\tau_1$', 'Location', 'northeast', 'Interpreter','latex');
 title('');
 set(gca, 'FontSize', 12);
 grid off;box on;
@@ -299,11 +299,11 @@ for k = 1:num_cases
 end
 ylim([-10,12])
 xlabel('$t$(s)', 'Interpreter','latex');
-ylabel('$\tau_2$ (Nm)', 'Interpreter','latex');
+ylabel('$\tau_{c,2}$,$\tau_2$ (Nm)', 'Interpreter','latex');
 title('');
 % legend(labels1,'Location', 'northeast', 'Interpreter','latex');
 grid off; box on;
-legend('$\tau_2^\prime$','$\tau_2$', 'Location', 'northeast', 'Interpreter','latex');
+legend('$\tau_{c,2}$','$\tau_2$', 'Location', 'northeast', 'Interpreter','latex');
 % legend(labels1,'Location', 'northeast', 'Interpreter','latex');
 title('', 'Interpreter','latex');
 set(gcf, 'Units', 'inches', 'Position', [1 1 8 5]);

@@ -79,7 +79,7 @@ labels2 = { ...
 
 %% 画：位置跟踪误差 1
 figure('Position', [100 100 1000 250]); % 设置整个figure的大小
-subplot(1,2,1);
+subplot(2,1,1);
 hold on;grid off;box on;
 h_err = gobjects(num_cases,1);
     t = all_tspan{1}(:);
@@ -107,13 +107,13 @@ ylim([-6,1])
 xlabel('$t$(s)', 'Interpreter','latex');
 ylabel('$e_{1,1}$ (rad)', 'Interpreter','latex');
 title('');
-legend( '$\rho_1$','$-\rho_1$','$e_{1,2}$','Location', 'southeast', 'Interpreter','latex');
+legend( '$\rho_1$','$-\rho_1$','$e_{1,1}$','Location', 'southeast', 'Interpreter','latex');
 set(gca, 'FontSize', 12);
 
 axMain = gca;
 pos = axMain.Position;
 % 插图
-ax1 = axes('Position',[pos(1)+0.2*pos(3), pos(2)+0.42*pos(4), 0.3*pos(3), 0.40*pos(4)]);
+ax1 = axes('Position',[pos(1)+0.2*pos(3), pos(2)+0.4*pos(4), 0.3*pos(3), 0.40*pos(4)]);
 box(ax1,'on'); hold(ax1,'on'); grid(ax1,'off');
 plot(ax1, t,  rho1,'--','Color',colors(1,:),'LineWidth',1.5);
 plot(ax1, t, -rho1,'--','Color',colors(1,:),'LineWidth',1.5);
@@ -123,7 +123,7 @@ end
 xlim(ax1,[0 2]); ylim(ax1,[-4.5 1.2]);
 set(ax1,'FontSize',8); xlabel(ax1,''); ylabel(ax1,'');
 
-ax2 = axes('Position',[pos(1)+0.6*pos(3), pos(2)+0.42*pos(4), 0.30*pos(3), 0.4*pos(4)]);
+ax2 = axes('Position',[pos(1)+0.55*pos(3), pos(2)+0.4*pos(4), 0.30*pos(3), 0.4*pos(4)]);
 box(ax2,'on'); hold(ax2,'on'); grid(ax2,'off');
 plot(ax2, t,  rho1,'--','Color',colors(1,:),'LineWidth',1.5);
 plot(ax2, t, -rho1,'--','Color',colors(1,:),'LineWidth',1.5);
@@ -162,7 +162,7 @@ set(ax2,'Layer','top');
 
 
 %% 画：位置跟踪误差2
-subplot(1,2,2);
+subplot(2,1,2);
 hold on;
 h_err = gobjects(num_cases,1);
     t = all_tspan{1}(:);
@@ -198,7 +198,7 @@ set(gca, 'FontSize', 12);
 axMain = gca;
 pos = axMain.Position;
 % 插图
-ax3 = axes('Position',[pos(1)+0.2*pos(3), pos(2)+0.42*pos(4), 0.3*pos(3), 0.40*pos(4)]);
+ax3 = axes('Position',[pos(1)+0.2*pos(3), pos(2)+0.4*pos(4), 0.3*pos(3), 0.40*pos(4)]);
 box(ax3,'on'); hold(ax3,'on'); grid(ax3,'off');
 plot(ax3, t,  rho2,'--','Color',colors(1,:),'LineWidth',1.5);
 plot(ax3, t, -rho2,'--','Color',colors(1,:),'LineWidth',1.5);
@@ -208,7 +208,7 @@ end
 xlim(ax3,[0 2]); ylim(ax3,[-4.5 1.2]);
 set(ax3,'FontSize',8); xlabel(ax3,''); ylabel(ax3,'');
 
-ax4 = axes('Position',[pos(1)+0.6*pos(3), pos(2)+0.42*pos(4), 0.30*pos(3), 0.4*pos(4)]);
+ax4 = axes('Position',[pos(1)+0.55*pos(3), pos(2)+0.4*pos(4), 0.30*pos(3), 0.4*pos(4)]);
 box(ax4,'on'); hold(ax4,'on'); grid(ax4,'off');
 plot(ax4, t,  rho2,'--','Color',colors(1,:),'LineWidth',1.5);
 plot(ax4, t, -rho2,'--','Color',colors(1,:),'LineWidth',1.5);
@@ -221,7 +221,7 @@ set(ax4,'FontSize',8);
 set(ax4,'Layer','top');
 
 % === 导出 EPS 图像 ===
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 3]);
+set(gcf, 'Units', 'inches', 'Position', [1 1 8 5]);
 
 exportgraphics(gcf, 'fig5.pdf', ...
     'ContentType','vector', ...
@@ -242,8 +242,8 @@ for k = 1:num_cases
 end
 ylim([-32,70])
 xlabel('$t$(s)', 'Interpreter','latex');
-ylabel('$\tau_1$ (Nm)', 'Interpreter','latex');
-legend('$\tau_1^\prime$','$\tau_1$', 'Location', 'northeast', 'Interpreter','latex');
+ylabel('$\tau_{c,1}$,$\tau_1$ (Nm)', 'Interpreter','latex');
+legend('$\tau_{c,1}$','$\tau_1$', 'Location', 'northeast', 'Interpreter','latex');
 title('');
 set(gca, 'FontSize', 12);
 grid off;box on;
@@ -275,11 +275,11 @@ for k = 1:num_cases
 end
 ylim([-12,28])
 xlabel('$t$(s)', 'Interpreter','latex');
-ylabel('$\tau_2$ (Nm)', 'Interpreter','latex');
+ylabel('$\tau_{c,2}$,$\tau_2$ (Nm)', 'Interpreter','latex');
 title('');
 % legend(labels1,'Location', 'northeast', 'Interpreter','latex');
 grid off; box on;
-legend('$\tau_2^\prime$','$\tau_2$', 'Location', 'northeast', 'Interpreter','latex');
+legend('$\tau_{c,2}$','$\tau_2$', 'Location', 'northeast', 'Interpreter','latex');
 % legend(labels1,'Location', 'northeast', 'Interpreter','latex');
 title('', 'Interpreter','latex');
 

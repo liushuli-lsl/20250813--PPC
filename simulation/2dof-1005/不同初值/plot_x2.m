@@ -78,7 +78,7 @@ labels2 = { ...
 
 %% 画：位置跟踪误差 1
 figure('Position', [100 100 1000 250]); % 设置整个figure的大小
-subplot(1,2,1);
+subplot(2,1,1);
 hold on;
 h_err = gobjects(num_cases,1);
 
@@ -107,12 +107,12 @@ ylim([-0.4,0.4])
 xlabel('$t$(s)', 'Interpreter','latex');
 ylabel('$e_{1,1}$ (rad)', 'Interpreter','latex');
 title('');
-legend( '$\rho_1$','$-\rho_1$','$e_{1,2}$','Location', 'northeast', 'Interpreter','latex');
+legend( '$\rho_1$','$-\rho_1$','$e_{1,1}$','Location', 'northeast', 'Interpreter','latex');
 grid off;set(gca, 'FontSize', 12);
 box on;
 
 %% 画：位置跟踪误差2
-subplot(1,2,2);
+subplot(2,1,2);
 hold on;
 h_err = gobjects(num_cases,1);
     t = all_tspan{1}(:);
@@ -145,7 +145,7 @@ grid off;
 box on;
 legend( '$\rho_2$','$-\rho_2$','$e_{1,2}$','Location', 'northeast', 'Interpreter','latex');
 % === 导出 EPS 图像 ===
-set(gcf, 'Units', 'inches', 'Position', [1 1 10 3]);
+set(gcf, 'Units', 'inches', 'Position', [1 1 8 5]);
 set(gca, 'FontSize', 12);
 exportgraphics(gcf, 'fig3.pdf', ...
     'ContentType','vector', ...
@@ -156,75 +156,75 @@ exportgraphics(gcf, 'fig3.pdf', ...
 axMain = gca;
 pos = axMain.Position;
 
-%% 画：关节 1 控制扭矩 tau1
-figure('Position', [100 100 1000 250]); % 设置整个figure的大小
-subplot(2,1,1);
-hold on;
-for k = 1:num_cases
-     plot(all_tspan{k}, all_u1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
-     hold on;
-    plot(all_tspan{k}, all_tau1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(2,:));
-end
-ylim([-20,60])
-xlabel('$t$(s)', 'Interpreter','latex');
-ylabel('$\tau_1$ (Nm)', 'Interpreter','latex');
-legend('$\tau_1^\prime$','$\tau_1$', 'Location', 'northeast', 'Interpreter','latex');
-title('');
-set(gca, 'FontSize', 12);
-grid off;box on;
-ax5 = axes('Position',[pos(1)-0.2*pos(3), pos(2)+0.8*pos(4), 0.50*pos(3), 0.18*pos(4)]);
-box(ax5,'on'); hold(ax5,'on'); grid(ax5,'off');
-for k = 1:num_cases
-    plot(all_tspan{k},all_u1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
-    hold on;
-    plot(all_tspan{k},  all_tau1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(2,:));
-end
-xlim(ax5,[8.2 9]); ylim(ax5,[-14,23]);
-xlabel(ax5,''); ylabel(ax5,'');
-set(ax5,'FontSize',8); 
-set(ax5,'Layer','top');
-set(gcf, 'Units', 'inches', 'Position', [1 1 8 5]);
-
-%% 画：关节 2 控制扭矩 tau1
-subplot(2,1,2);
-hold on;
-for k = 1:num_cases
-    plot(all_tspan{k},all_u2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
-    hold on;
-    plot(all_tspan{k},  all_tau2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(2,:));
-end
-ylim([-8,20])
-xlabel('$t$(s)', 'Interpreter','latex');
-ylabel('$\tau_2$ (Nm)', 'Interpreter','latex');
-title('');
-% legend(labels1,'Location', 'northeast', 'Interpreter','latex');
-grid off; box on;
-legend('$\tau_2^\prime$','$\tau_2$', 'Location', 'northeast', 'Interpreter','latex');
-% legend(labels1,'Location', 'northeast', 'Interpreter','latex');
-title('', 'Interpreter','latex');
-set(gcf, 'Units', 'inches', 'Position', [1 1 8 5]);
-set(gca, 'FontSize', 12);
-
-
-% 插图
-
-ax6 = axes('Position',[pos(1)-0.2*pos(3), pos(2)+0.18*pos(4), 0.50*pos(3), 0.18*pos(4)]);
-box(ax6,'on'); hold(ax6,'on'); grid(ax6,'off');
-for k = 1:num_cases
-    plot(all_tspan{k},all_u2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
-    hold on;
-    plot(all_tspan{k},  all_tau2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(2,:));
-end
-xlim(ax6,[8.2 9]); ylim(ax6,[-8,5]);
-xlabel(ax6,''); ylabel(ax6,'');
-set(ax6,'FontSize',8); 
-set(ax6,'Layer','top');
-set(gcf, 'Units', 'inches', 'Position', [1 1 8 5]);
-
-exportgraphics(gcf, 'fig4.pdf', ...
-    'ContentType','vector', ...
-    'BackgroundColor','none', ...
-    'Resolution',600);
-
+% %% 画：关节 1 控制扭矩 tau1
+% figure('Position', [100 100 1000 250]); % 设置整个figure的大小
+% subplot(2,1,1);
+% hold on;
+% for k = 1:num_cases
+%      plot(all_tspan{k}, all_u1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
+%      hold on;
+%     plot(all_tspan{k}, all_tau1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(2,:));
+% end
+% ylim([-20,60])
+% xlabel('$t$(s)', 'Interpreter','latex');
+% ylabel('$\tau_{c,1}$,$\tau_1$ (Nm)', 'Interpreter','latex');
+% legend('$\tau_{c,1}$','$\tau_1$', 'Location', 'northeast', 'Interpreter','latex');
+% title('');
+% set(gca, 'FontSize', 12);
+% grid off;box on;
+% ax5 = axes('Position',[pos(1)-0.2*pos(3), pos(2)+0.8*pos(4), 0.50*pos(3), 0.18*pos(4)]);
+% box(ax5,'on'); hold(ax5,'on'); grid(ax5,'off');
+% for k = 1:num_cases
+%     plot(all_tspan{k},all_u1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
+%     hold on;
+%     plot(all_tspan{k},  all_tau1{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(2,:));
+% end
+% xlim(ax5,[8.2 9]); ylim(ax5,[-14,23]);
+% xlabel(ax5,''); ylabel(ax5,'');
+% set(ax5,'FontSize',8); 
+% set(ax5,'Layer','top');
+% set(gcf, 'Units', 'inches', 'Position', [1 1 8 5]);
+% 
+% %% 画：关节 2 控制扭矩 tau1
+% subplot(2,1,2);
+% hold on;
+% for k = 1:num_cases
+%     plot(all_tspan{k},all_u2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
+%     hold on;
+%     plot(all_tspan{k},  all_tau2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(2,:));
+% end
+% ylim([-8,20])
+% xlabel('$t$(s)', 'Interpreter','latex');
+% ylabel('$\tau_{c,2}$,$\tau_2$ (Nm)', 'Interpreter','latex');
+% title('');
+% % legend(labels1,'Location', 'northeast', 'Interpreter','latex');
+% grid off; box on;
+% legend('$\tau_{c,2}$','$\tau_2$', 'Location', 'northeast', 'Interpreter','latex');
+% % legend(labels1,'Location', 'northeast', 'Interpreter','latex');
+% title('', 'Interpreter','latex');
+% set(gcf, 'Units', 'inches', 'Position', [1 1 8 5]);
+% set(gca, 'FontSize', 12);
+% 
+% 
+% % 插图
+% 
+% ax6 = axes('Position',[pos(1)-0.2*pos(3), pos(2)+0.18*pos(4), 0.50*pos(3), 0.18*pos(4)]);
+% box(ax6,'on'); hold(ax6,'on'); grid(ax6,'off');
+% for k = 1:num_cases
+%     plot(all_tspan{k},all_u2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{1},'Color',colors(1,:));
+%     hold on;
+%     plot(all_tspan{k},  all_tau2{k}, 'LineWidth',1.5, 'LineStyle', line_styles{2},'Color',colors(2,:));
+% end
+% xlim(ax6,[8.2 9]); ylim(ax6,[-8,5]);
+% xlabel(ax6,''); ylabel(ax6,'');
+% set(ax6,'FontSize',8); 
+% set(ax6,'Layer','top');
+% set(gcf, 'Units', 'inches', 'Position', [1 1 8 5]);
+% 
+% exportgraphics(gcf, 'fig4.pdf', ...
+%     'ContentType','vector', ...
+%     'BackgroundColor','none', ...
+%     'Resolution',600);
+% 
 
 
